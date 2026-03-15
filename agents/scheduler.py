@@ -11,6 +11,22 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Callable, Dict
+import os
+
+# optional observability hooks
+try:  # pragma: no cover - exercised in integration
+    from agents.observability import init_metrics_server, record_job_start, record_job_end
+except Exception:  # pragma: no cover - import-time resilience for tests
+    def init_metrics_server(port: int = 8000) -> None:  # type: ignore
+        return
+
+    def record_job_start(job_name: str) -> float:  # type: ignore
+        import time
+
+        return time.time()
+
+    def record_job_end(job_name: str, start_ts: float, success: bool = True) -> None:  # type: ignore
+        return
 import json
 from pathlib import Path
 
@@ -71,8 +87,14 @@ def _job_runner(poll_interval: float = 1.0) -> None:
 def _run_job_safe(job: Job) -> None:
     try:
         print(f"[{datetime.utcnow().isoformat()}] Running job: {job.name}")
+        start_ts = record_job_start(job.name)
         job.func()
+        record_job_end(job.name, start_ts, success=True)
     except Exception as exc:  # pragma: no cover - defensive
+        try:
+            record_job_end(job.name, start_ts, success=False)
+        except Exception:
+            pass
         print(f"Job {job.name} failed: {exc}")
 
 
@@ -88,6 +110,13 @@ def start(poll_interval: float = 1.0) -> None:
         _load_state()
     except Exception:
         print("No persisted scheduler state loaded")
+    # Optionally start metrics server if env var set
+    try:
+        port = int(os.environ.get("SCHEDULER_METRICS_PORT", "0") or 0)
+        if port:
+            init_metrics_server(port)
+    except Exception:
+        pass
     _runner_thread.start()
 
 
