@@ -53,8 +53,8 @@ def start_drive_watcher(
                 name = f.get("name")
                 if fid in seen:
                     continue
-                seen.add(fid)
-                # persist seen set
+                seen[fid] = {"id": fid, "name": name, "modifiedTime": f.get("modifiedTime")}
+                # persist seen map
                 try:
                     _save_seen(state_fp, seen)
                 except Exception:
@@ -81,23 +81,28 @@ def _state_file_path(state_path: Optional[str]) -> Path:
     return Path("out") / "drive_seen.json"
 
 
-def _load_seen(fp: Path | str) -> set:
+def _load_seen(fp: Path | str) -> dict:
     p = Path(fp)
     try:
         if p.exists():
             data = json.loads(p.read_text(encoding="utf-8"))
-            return set(data or [])
+            # data expected as list of dicts
+            d = {}
+            for item in data or []:
+                if isinstance(item, dict) and item.get("id"):
+                    d[item["id"]] = item
+            return d
     except Exception:
         pass
-    return set()
+    return {}
 
 
-def _save_seen(fp: Path | str, s: set) -> None:
+def _save_seen(fp: Path | str, seen_map: dict) -> None:
     p = Path(fp)
     try:
         p.parent.mkdir(parents=True, exist_ok=True)
         tmp = p.with_suffix(".tmp")
-        tmp.write_text(json.dumps(list(s)), encoding="utf-8")
+        tmp.write_text(json.dumps(list(seen_map.values())), encoding="utf-8")
         tmp.replace(p)
     except Exception:
         pass
