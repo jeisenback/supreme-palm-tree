@@ -111,6 +111,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_watch_drive.add_argument("--credentials", required=False, help="Path to credentials JSON (service account or client secrets)")
     p_watch_drive.add_argument("--credential-type", required=False, choices=["service_account", "oauth"], default="service_account")
     p_watch_drive.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
+    p_watch_drive.add_argument("--state-path", required=False, help="Path to persist seen Drive file ids (default: out/drive_seen.json)")
 
     p_approve = sub.add_parser("approve", help="Manage approvals for scraper sources")
     p_approve_sub = p_approve.add_subparsers(dest="approve_cmd")
