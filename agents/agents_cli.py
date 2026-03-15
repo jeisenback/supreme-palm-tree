@@ -21,6 +21,7 @@ from agents.skills import (
     generate_membership_insights,
     draft_announcement,
     generate_email_campaign,
+    generate_profdev_plan,
 )
 from integrations.gdrive.drive_client import DriveClient
 import json
@@ -165,6 +166,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_role_comm.add_argument("--json-file", required=False, help="Path to JSON file for context")
     p_role_comm.add_argument("--subject", required=False, help="Subject for email campaign (communications only)")
     p_role_comm.add_argument("--audience", required=False, help="Audience summary for email campaign")
+
+    p_role_prof = p_role_sub.add_parser("professional_development", help="Run professional development agent")
+    p_role_prof.add_argument("--json", required=False, help="JSON string for member skill mapping")
+    p_role_prof.add_argument("--json-file", required=False, help="Path to JSON file for member skill mapping")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -428,6 +433,30 @@ def main(argv: Optional[list[str]] = None) -> int:
             except Exception as e:
                 print(f"Communications draft failed: {e}", file=sys.stderr)
                 return 36
+
+        # Professional development
+        if args.role_cmd == "professional_development":
+            mapping = None
+            if getattr(args, "json", None):
+                import json
+
+                mapping = json.loads(args.json)
+            elif getattr(args, "json_file", None):
+                import pathlib, json
+
+                p = pathlib.Path(args.json_file)
+                mapping = json.loads(p.read_text(encoding="utf-8"))
+            else:
+                print("Provide --json or --json-file", file=sys.stderr)
+                return 37
+
+            try:
+                out = generate_profdev_plan(mapping)
+                print(out)
+                return 0
+            except Exception as e:
+                print(f"Professional development agent failed: {e}", file=sys.stderr)
+                return 38
 
     parser.print_help()
     return 1
