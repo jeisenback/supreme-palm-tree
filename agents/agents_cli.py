@@ -117,6 +117,11 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     p_approve_list = p_approve_sub.add_parser("list", help="List approved sources")
 
+    p_weekly = sub.add_parser("weekly-update", help="Generate weekly board update from notes")
+    p_weekly.add_argument("--title", required=False, help="Update title (default: Weekly Board Update)")
+    p_weekly.add_argument("--out", required=False, help="Output markdown path (default: out/weekly_update.md)")
+    p_weekly.add_argument("--no-llm", action="store_true", help="Do not use LLM for summarization")
+
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
         return cmd_ingest(args.src, args.out)
@@ -223,6 +228,19 @@ def main(argv: Optional[list[str]] = None) -> int:
             return cmd_approve_revoke(args.source_id)
         if args.approve_cmd == "list":
             return cmd_approve_list()
+    if args.cmd == "weekly-update":
+        title = args.title or "Weekly Board Update"
+        out = args.out or "out/weekly_update.md"
+        use_llm = not getattr(args, "no_llm", False)
+        from agents.weekly_update import write_weekly_update
+
+        try:
+            p = write_weekly_update(out, title=title, notes_dir="notes", use_llm=use_llm)
+            print(f"Wrote weekly update to {p}")
+            return 0
+        except Exception as e:
+            print(f"Failed to generate weekly update: {e}", file=sys.stderr)
+            return 20
 
     parser.print_help()
     return 1
