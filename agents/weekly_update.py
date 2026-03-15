@@ -10,6 +10,9 @@ from __future__ import annotations
 import os
 from pathlib import Path
 from typing import List, Optional
+import json
+import uuid
+from datetime import datetime
 
 try:
     # optional: adapter provides summarize(text) -> str
@@ -64,9 +67,73 @@ def compose_weekly_update(title: str = "Weekly Board Update", notes_dir: str = "
     return md
 
 
-def write_weekly_update(out_path: str, title: str = "Weekly Board Update", notes_dir: str = "notes", use_llm: bool = True) -> Path:
+PENDING_DIR = Path("out") / "pending"
+PENDING_META = PENDING_DIR / "pending.json"
+PUBLISHED_DIR = Path("out") / "published"
+
+
+def _ensure_pending() -> None:
+    PENDING_DIR.mkdir(parents=True, exist_ok=True)
+    if not PENDING_META.exists():
+        PENDING_META.write_text("[]", encoding="utf-8")
+
+
+def _read_pending() -> List[dict]:
+    _ensure_pending()
+    try:
+        return json.loads(PENDING_META.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+
+
+def _write_pending(items: List[dict]) -> None:
+    _ensure_pending()
+    PENDING_META.write_text(json.dumps(items, indent=2), encoding="utf-8")
+
+
+def create_draft(title: str = "Weekly Board Update", notes_dir: str = "notes", use_llm: bool = True) -> dict:
     md = compose_weekly_update(title=title, notes_dir=notes_dir, use_llm=use_llm)
-    p = Path(out_path)
-    p.parent.mkdir(parents=True, exist_ok=True)
+    _ensure_pending()
+    uid = str(uuid.uuid4())
+    fname = f"{datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')}-{uid}.md"
+    p = PENDING_DIR / fname
     p.write_text(md, encoding="utf-8")
-    return p
+    meta = {
+        "id": uid,
+        "title": title,
+        "path": str(p.as_posix()),
+        "created_at": datetime.utcnow().isoformat() + "Z",
+    }
+    items = _read_pending()
+    items.append(meta)
+    _write_pending(items)
+    return meta
+
+
+def list_pending() -> List[dict]:
+    return _read_pending()
+
+
+def publish_update(update_id: str) -> Optional[Path]:
+    items = _read_pending()
+    match = None
+    for it in items:
+        if it.get("id") == update_id:
+            match = it
+            break
+    if not match:
+        return None
+    src = Path(match["path"])
+    if not src.exists():
+        # remove stale entry
+        items = [i for i in items if i.get("id") != update_id]
+        _write_pending(items)
+        return None
+    PUBLISHED_DIR.mkdir(parents=True, exist_ok=True)
+    dest = PUBLISHED_DIR / src.name
+    src.replace(dest)
+    # remove from pending
+    items = [i for i in items if i.get("id") != update_id]
+    _write_pending(items)
+    return dest
+
