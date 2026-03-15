@@ -14,7 +14,8 @@ def test_integrate_scraped_item_calls_store(monkeypatch):
         called['out_dir'] = out_dir
         return ('out/sample.md', 'out/sample.json')
 
-    monkeypatch.setattr('ingest.storage.store_conversion', fake_store)
+    # Patch the symbol imported into the integrate module
+    monkeypatch.setattr('ingest.scrapers.integrate.store_conversion', fake_store)
 
     sample = {
         'title': 'Sample Event',

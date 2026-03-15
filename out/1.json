@@ -1,0 +1,8 @@
+{
+  "title": "Sample Event",
+  "summary": "This is a sample event.",
+  "date": "2026-04-01",
+  "location": "Online",
+  "source_url": "https://example.org/events/1",
+  "source": "external"
+}
