@@ -9,9 +9,10 @@ from __future__ import annotations
 import os
 import time
 import threading
-from typing import Callable
+from typing import Callable, Optional
 import threading
-from typing import Optional
+import json
+from pathlib import Path
 
 def start_drive_watcher(
     folder_id: str,
@@ -21,6 +22,7 @@ def start_drive_watcher(
     credentials_json: Optional[str] = None,
     credential_type: str = "service_account",
     oauth_token_path: Optional[str] = None,
+    state_path: Optional[str] = None,
 ):
     """Poll a Google Drive folder for new files and call `callback(local_path)`.
 
@@ -35,7 +37,8 @@ def start_drive_watcher(
 
     import tempfile
 
-    seen = set()
+    state_fp = _state_file_path(state_path)
+    seen = _load_seen(state_fp)
 
     def _loop():
         client = DriveClient(credentials_json=credentials_json, folder_id=folder_id, credential_type=credential_type, oauth_token_path=oauth_token_path)
@@ -51,6 +54,11 @@ def start_drive_watcher(
                 if fid in seen:
                     continue
                 seen.add(fid)
+                # persist seen set
+                try:
+                    _save_seen(state_fp, seen)
+                except Exception:
+                    pass
                 # download file
                 local = None
                 try:
@@ -65,6 +73,34 @@ def start_drive_watcher(
     thread = threading.Thread(target=_loop, daemon=True)
     thread.start()
     return thread
+
+
+def _state_file_path(state_path: Optional[str]) -> Path:
+    if state_path:
+        return Path(state_path)
+    return Path("out") / "drive_seen.json"
+
+
+def _load_seen(fp: Path | str) -> set:
+    p = Path(fp)
+    try:
+        if p.exists():
+            data = json.loads(p.read_text(encoding="utf-8"))
+            return set(data or [])
+    except Exception:
+        pass
+    return set()
+
+
+def _save_seen(fp: Path | str, s: set) -> None:
+    p = Path(fp)
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        tmp = p.with_suffix(".tmp")
+        tmp.write_text(json.dumps(list(s)), encoding="utf-8")
+        tmp.replace(p)
+    except Exception:
+        pass
 
 
 def _polling_watcher(path: str, callback: Callable[[str], None], poll_interval: float = 2.0):
