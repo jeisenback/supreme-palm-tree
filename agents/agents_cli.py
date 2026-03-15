@@ -63,6 +63,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_sched_sub.add_parser("start", help="Start the background scheduler")
     p_sched_sub.add_parser("stop", help="Stop the background scheduler")
     p_sched_sub.add_parser("run-once", help="Run each registered job once synchronously")
+    p_watch = sub.add_parser("watch", help="Start folder watcher to trigger ingestion on new files")
+    p_watch.add_argument("--path", required=True, help="Directory to watch")
+    p_watch.add_argument("--background", action="store_true", help="Run watcher in background (default behavior for CLI is to run until Ctrl-C)")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -125,6 +128,43 @@ def main(argv: Optional[list[str]] = None) -> int:
             except Exception as e:
                 print(f"Failed to run jobs once: {e}", file=sys.stderr)
                 return 6
+    if args.cmd == "watch":
+        from agents.watcher import start_watcher
+
+        def _on_new_file(path: str) -> None:
+            print(f"Detected new file: {path}")
+            # best-effort ingestion; we ignore return codes here
+            try:
+                cmd_ingest(path)
+            except Exception as e:
+                print(f"Watcher ingestion failed for {path}: {e}")
+
+        try:
+            thread = start_watcher(args.path, _on_new_file, background=args.background)
+            if args.background:
+                print("Watcher started in background.")
+                return 0
+            else:
+                print("Watcher running. Press Ctrl-C to stop.")
+                try:
+                    while True:
+                        import time
+
+                        time.sleep(1)
+                except KeyboardInterrupt:
+                    print("Stopping watcher...")
+                    # best-effort stop for observer if provided
+                    try:
+                        if hasattr(thread, "stop"):
+                            thread.stop()
+                        if hasattr(thread, "join"):
+                            thread.join(timeout=2.0)
+                    except Exception:
+                        pass
+                    return 0
+        except Exception as e:
+            print(f"Failed to start watcher: {e}", file=sys.stderr)
+            return 7
 
     parser.print_help()
     return 1
