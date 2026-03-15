@@ -8,6 +8,11 @@
   notes: Primary chapter site — approved for event and news scraping (public pages only)
   approved_by: board
   approved_at: 2026-03-15
+  allowed_paths:
+    - "/events"
+    - "/news"
+  rate_limit: 1/s
+  contact: webadmin@iibaeasttn.org
 
 - id: local_news_events
   name: Local Business Events Aggregator
@@ -15,6 +20,10 @@
   notes: Public events listing; only scrape event listings and dates (no member-only pages)
   approved_by: volunteer_scraper
   approved_at: 2026-03-15
+  allowed_paths:
+    - "/events"
+  rate_limit: 0.5/s
+  contact: ops@example-local-events.org
 
 - id: partner_blog
   name: Partner Organization Blog
@@ -22,6 +31,10 @@
   notes: Approved for summaries of public blog posts and announcements.
   approved_by: communications
   approved_at: 2026-03-15
+  allowed_paths:
+    - "/blog"
+  rate_limit: 0.2/s
+  contact: comms@partner.example.org
 
 - id: iiba_website
   name: International Institute of Business Analysis (IIBA)
@@ -29,6 +42,11 @@
   notes: Official IIBA site — approved for public news, standards, and resources scraping.
   approved_by: board
   approved_at: 2026-03-15
+  allowed_paths:
+    - "/news"
+    - "/resources"
+  rate_limit: 0.5/s
+  contact: info@iiba.org
 
 - id: iiba_linkedin
   name: IIBA LinkedIn Company Page
@@ -36,3 +54,7 @@
   notes: LinkedIn company updates — scrape only public posts and announcements, respect LinkedIn terms.
   approved_by: communications
   approved_at: 2026-03-15
+  allowed_paths:
+    - "/company/iiba"
+  rate_limit: 0.1/s
+  contact: comms@iiba.org
