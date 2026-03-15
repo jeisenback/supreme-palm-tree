@@ -118,9 +118,17 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_approve_list = p_approve_sub.add_parser("list", help="List approved sources")
 
     p_weekly = sub.add_parser("weekly-update", help="Generate weekly board update from notes")
-    p_weekly.add_argument("--title", required=False, help="Update title (default: Weekly Board Update)")
-    p_weekly.add_argument("--out", required=False, help="Output markdown path (default: out/weekly_update.md)")
-    p_weekly.add_argument("--no-llm", action="store_true", help="Do not use LLM for summarization")
+    p_weekly_sub = p_weekly.add_subparsers(dest="weekly_cmd")
+
+    p_weekly_generate = p_weekly_sub.add_parser("generate", help="Generate a draft weekly update (requires publish to send)")
+    p_weekly_generate.add_argument("--title", required=False, help="Update title (default: Weekly Board Update)")
+    p_weekly_generate.add_argument("--out", required=False, help="Output markdown path (if saving outside pending)")
+    p_weekly_generate.add_argument("--no-llm", action="store_true", help="Do not use LLM for summarization")
+
+    p_weekly_list = p_weekly_sub.add_parser("list-pending", help="List pending drafts awaiting review")
+
+    p_weekly_publish = p_weekly_sub.add_parser("publish", help="Publish a pending draft (human approval)")
+    p_weekly_publish.add_argument("id", help="ID of the pending draft to publish")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -229,18 +237,45 @@ def main(argv: Optional[list[str]] = None) -> int:
         if args.approve_cmd == "list":
             return cmd_approve_list()
     if args.cmd == "weekly-update":
-        title = args.title or "Weekly Board Update"
-        out = args.out or "out/weekly_update.md"
-        use_llm = not getattr(args, "no_llm", False)
-        from agents.weekly_update import write_weekly_update
+        from agents.weekly_update import create_draft, list_pending, publish_update
 
-        try:
-            p = write_weekly_update(out, title=title, notes_dir="notes", use_llm=use_llm)
-            print(f"Wrote weekly update to {p}")
-            return 0
-        except Exception as e:
-            print(f"Failed to generate weekly update: {e}", file=sys.stderr)
-            return 20
+        if args.weekly_cmd == "generate":
+            title = args.title or "Weekly Board Update"
+            use_llm = not getattr(args, "no_llm", False)
+            try:
+                meta = create_draft(title=title, notes_dir="notes", use_llm=use_llm)
+                print(f"Draft created: id={meta['id']} path={meta['path']}")
+                print("Run 'agents-cli weekly-update list-pending' to view drafts, and 'agents-cli weekly-update publish <id>' to publish.")
+                return 0
+            except Exception as e:
+                print(f"Failed to create draft: {e}", file=sys.stderr)
+                return 21
+        if args.weekly_cmd == "list-pending":
+            try:
+                items = list_pending()
+                if not items:
+                    print("No pending drafts.")
+                    return 0
+                import json
+
+                for it in items:
+                    print(json.dumps(it, ensure_ascii=False))
+                return 0
+            except Exception as e:
+                print(f"Failed to list pending drafts: {e}", file=sys.stderr)
+                return 22
+        if args.weekly_cmd == "publish":
+            uid = args.id
+            try:
+                dest = publish_update(uid)
+                if not dest:
+                    print(f"No pending draft with id {uid} found.")
+                    return 23
+                print(f"Published draft to {dest}")
+                return 0
+            except Exception as e:
+                print(f"Failed to publish draft {uid}: {e}", file=sys.stderr)
+                return 24
 
     parser.print_help()
     return 1
