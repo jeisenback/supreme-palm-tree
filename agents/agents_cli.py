@@ -16,6 +16,12 @@ from typing import Optional
 from ingest.converters import convert_file_to_md_context
 from ingest.storage import store_conversion
 from agents.skills.president import generate_agenda_with_llm
+from agents.skills import (
+    generate_fundraising_plan,
+    generate_membership_insights,
+    draft_announcement,
+    generate_email_campaign,
+)
 from integrations.gdrive.drive_client import DriveClient
 import json
 from agents import scheduler
@@ -141,6 +147,24 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_weekly_publish.add_argument("--credentials", required=False, help="Path to credentials JSON (service account or client secrets)")
     p_weekly_publish.add_argument("--credential-type", required=False, choices=["service_account", "oauth"], default="service_account")
     p_weekly_publish.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
+
+    # Role agents: fundraising, membership, communications
+    p_role = sub.add_parser("role", help="Invoke role agents (fundraising, membership, communications)")
+    p_role_sub = p_role.add_subparsers(dest="role_cmd")
+
+    p_role_fund = p_role_sub.add_parser("fundraising", help="Run fundraising role agent on CSV input")
+    p_role_fund.add_argument("--csv", required=False, help="CSV text inline")
+    p_role_fund.add_argument("--csv-file", required=False, help="Path to CSV file")
+
+    p_role_mem = p_role_sub.add_parser("membership", help="Run membership role agent on CSV input")
+    p_role_mem.add_argument("--csv", required=False, help="CSV text inline")
+    p_role_mem.add_argument("--csv-file", required=False, help="Path to CSV file")
+
+    p_role_comm = p_role_sub.add_parser("communications", help="Run communications agent to draft announcement")
+    p_role_comm.add_argument("--json", required=False, help="JSON string for context")
+    p_role_comm.add_argument("--json-file", required=False, help="Path to JSON file for context")
+    p_role_comm.add_argument("--subject", required=False, help="Subject for email campaign (communications only)")
+    p_role_comm.add_argument("--audience", required=False, help="Audience summary for email campaign")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -324,6 +348,86 @@ def main(argv: Optional[list[str]] = None) -> int:
             except Exception as e:
                 print(f"Failed to publish draft {uid}: {e}", file=sys.stderr)
                 return 24
+
+    # Role command handlers
+    if args.cmd == "role":
+        # Fundraising
+        if args.role_cmd == "fundraising":
+            csv_text = None
+            if getattr(args, "csv", None):
+                csv_text = args.csv
+            elif getattr(args, "csv_file", None):
+                import pathlib
+
+                p = pathlib.Path(args.csv_file)
+                csv_text = p.read_text(encoding="utf-8")
+            else:
+                print("Provide --csv or --csv-file", file=sys.stderr)
+                return 30
+            try:
+                out = generate_fundraising_plan(csv_text)
+                print(out)
+                return 0
+            except Exception as e:
+                print(f"Fundraising agent failed: {e}", file=sys.stderr)
+                return 31
+
+        # Membership
+        if args.role_cmd == "membership":
+            csv_text = None
+            if getattr(args, "csv", None):
+                csv_text = args.csv
+            elif getattr(args, "csv_file", None):
+                import pathlib
+
+                p = pathlib.Path(args.csv_file)
+                csv_text = p.read_text(encoding="utf-8")
+            else:
+                print("Provide --csv or --csv-file", file=sys.stderr)
+                return 32
+            try:
+                out = generate_membership_insights(csv_text)
+                print(out)
+                return 0
+            except Exception as e:
+                print(f"Membership agent failed: {e}", file=sys.stderr)
+                return 33
+
+        # Communications
+        if args.role_cmd == "communications":
+            ctx = None
+            if getattr(args, "json", None):
+                import json
+
+                ctx = json.loads(args.json)
+            elif getattr(args, "json_file", None):
+                import pathlib, json
+
+                p = pathlib.Path(args.json_file)
+                ctx = json.loads(p.read_text(encoding="utf-8"))
+            else:
+                print("Provide --json or --json-file", file=sys.stderr)
+                return 34
+
+            # If subject+audience provided, produce an email campaign
+            if getattr(args, "subject", None) and getattr(args, "audience", None):
+                try:
+                    camp = generate_email_campaign(args.subject, args.audience)
+                    import json
+
+                    print(json.dumps(camp, ensure_ascii=False, indent=2))
+                    return 0
+                except Exception as e:
+                    print(f"Communications email campaign failed: {e}", file=sys.stderr)
+                    return 35
+            # Otherwise draft announcement
+            try:
+                out = draft_announcement(ctx)
+                print(out)
+                return 0
+            except Exception as e:
+                print(f"Communications draft failed: {e}", file=sys.stderr)
+                return 36
 
     parser.print_help()
     return 1

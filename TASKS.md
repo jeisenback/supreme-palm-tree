@@ -91,6 +91,8 @@ Guiding rules: each task includes a short acceptance criteria (AC) and dependenc
 - Scheduler PoC, CLI controls, runner script, and tests added — PRs merged into `main`.
 - GitHub Actions CI is active and recent runs for scheduler/CLI succeeded.
 
+- Role agents added: Fundraising, Membership, Communications (PoC implementations with unit tests).
+
 ## Next actions (recommended)
 - Harden scheduler for production: add persistence (APScheduler or Celery) and retry logic.
 - Improve scheduler observability: add metrics/log forwarding and health endpoints.
