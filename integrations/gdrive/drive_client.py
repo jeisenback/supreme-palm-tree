@@ -1,14 +1,15 @@
 from __future__ import annotations
 
+import os
 from typing import Optional
 
 
 class DriveClient:
-    """Minimal Google Drive client scaffold (PoC).
+    """Google Drive client that can upload files using a service account.
 
-    This client does not perform network calls. It documents the expected
-    initialization parameters and provides stub methods to be implemented
-    once credentials are available.
+    This implementation uses `google-auth` and `google-api-python-client`.
+    It intentionally guards against missing dependencies and missing
+    credentials so the rest of the codebase can import this module safely.
     """
 
     def __init__(self, credentials_json: Optional[str] = None, folder_id: Optional[str] = None) -> None:
@@ -16,12 +17,34 @@ class DriveClient:
         self.folder_id = folder_id
 
     def upload_file(self, path: str, mime_type: Optional[str] = None) -> dict:
-        """Stub for uploading a file to Drive.
+        """Upload `path` to Google Drive and return the file metadata.
 
-        Returns a dict with basic metadata on success. Raises RuntimeError
-        if credentials are not provided.
+        Expects `credentials_json` to be a path to a service account JSON file.
+        Raises `RuntimeError` with a clear message if dependencies or
+        credentials are missing.
         """
-        if not self.credentials_json:
-            raise RuntimeError("Google Drive credentials not configured")
-        # Placeholder: real implementation would use googleapiclient or similar
-        return {"id": "stub-file-id", "path": path, "mime_type": mime_type}
+        try:
+            from google.oauth2 import service_account
+            from googleapiclient.discovery import build
+            from googleapiclient.http import MediaFileUpload
+        except Exception as e:  # pragma: no cover - environment dependent
+            raise RuntimeError(
+                "Missing Google Drive dependencies. Install `google-api-python-client` and `google-auth` to enable Drive uploads"
+            ) from e
+
+        if not self.credentials_json or not os.path.exists(self.credentials_json):
+            raise RuntimeError("Google Drive credentials file not found or not configured")
+
+        creds = service_account.Credentials.from_service_account_file(
+            self.credentials_json, scopes=["https://www.googleapis.com/auth/drive.file"]
+        )
+
+        service = build("drive", "v3", credentials=creds, cache_discovery=False)
+
+        file_metadata = {"name": os.path.basename(path)}
+        if self.folder_id:
+            file_metadata["parents"] = [self.folder_id]
+
+        media = MediaFileUpload(path, mimetype=mime_type)
+        created = service.files().create(body=file_metadata, media_body=media, fields="id,name,mimeType,parents").execute()
+        return created
