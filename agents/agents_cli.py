@@ -129,6 +129,10 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     p_weekly_publish = p_weekly_sub.add_parser("publish", help="Publish a pending draft (human approval)")
     p_weekly_publish.add_argument("id", help="ID of the pending draft to publish")
+    p_weekly_publish.add_argument("--drive-folder", required=False, help="Drive folder id to upload published update into")
+    p_weekly_publish.add_argument("--credentials", required=False, help="Path to credentials JSON (service account or client secrets)")
+    p_weekly_publish.add_argument("--credential-type", required=False, choices=["service_account", "oauth"], default="service_account")
+    p_weekly_publish.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -266,8 +270,12 @@ def main(argv: Optional[list[str]] = None) -> int:
                 return 22
         if args.weekly_cmd == "publish":
             uid = args.id
+            drive_folder = getattr(args, "drive_folder", None)
+            creds = getattr(args, "credentials", None)
+            credential_type = getattr(args, "credential_type", "service_account")
+            oauth_token = getattr(args, "oauth_token", None)
             try:
-                dest = publish_update(uid)
+                dest = publish_update(uid, drive_folder=drive_folder, credentials_json=creds, credential_type=credential_type, oauth_token_path=oauth_token)
                 if not dest:
                     print(f"No pending draft with id {uid} found.")
                     return 23

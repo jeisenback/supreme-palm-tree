@@ -67,6 +67,18 @@ def compose_weekly_update(title: str = "Weekly Board Update", notes_dir: str = "
     return md
 
 
+def write_weekly_update(out_path: str, title: str = "Weekly Board Update", notes_dir: str = "notes", use_llm: bool = True) -> Path:
+    """Write a weekly update directly to `out_path` (non-draft).
+
+    This function preserves the original helper used by the CLI pre-review flow.
+    """
+    md = compose_weekly_update(title=title, notes_dir=notes_dir, use_llm=use_llm)
+    p = Path(out_path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(md, encoding="utf-8")
+    return p
+
+
 PENDING_DIR = Path("out") / "pending"
 PENDING_META = PENDING_DIR / "pending.json"
 PUBLISHED_DIR = Path("out") / "published"
@@ -114,7 +126,7 @@ def list_pending() -> List[dict]:
     return _read_pending()
 
 
-def publish_update(update_id: str) -> Optional[Path]:
+def publish_update(update_id: str, drive_folder: Optional[str] = None, credentials_json: Optional[str] = None, credential_type: str = "service_account", oauth_token_path: Optional[str] = None) -> Optional[Path]:
     items = _read_pending()
     match = None
     for it in items:
@@ -135,5 +147,21 @@ def publish_update(update_id: str) -> Optional[Path]:
     # remove from pending
     items = [i for i in items if i.get("id") != update_id]
     _write_pending(items)
+
+    # Optionally upload to Google Drive if folder or credentials provided
+    if drive_folder or credentials_json or oauth_token_path:
+        try:
+            from integrations.gdrive.drive_client import DriveClient
+
+            client = DriveClient(credentials_json=credentials_json, folder_id=drive_folder, credential_type=credential_type, oauth_token_path=oauth_token_path)
+            try:
+                client.upload_file(str(dest), mime_type="text/markdown")
+            except Exception:
+                # best-effort upload; do not fail publish if upload fails
+                pass
+        except Exception:
+            # integrations may be unavailable in test env; ignore
+            pass
+
     return dest
 
