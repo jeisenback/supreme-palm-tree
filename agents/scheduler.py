@@ -57,6 +57,23 @@ def register_job(name: str, func: Callable[[], None], interval_seconds: int) -> 
         # best-effort persistence; do not break registration on failure
         pass
 
+
+def schedule_one_off(name: str, func: Callable[[], None], delay_seconds: int) -> None:
+    """Schedule a one-off job that runs after `delay_seconds` and then unregisters itself.
+
+    The job name should be unique. The wrapper will unregister the job after running.
+    """
+    def _wrapper() -> None:
+        try:
+            func()
+        finally:
+            try:
+                unregister_job(name)
+            except Exception:
+                pass
+
+    register_job(name, _wrapper, interval_seconds=delay_seconds)
+
 def unregister_job(name: str) -> None:
     _JOBS.pop(name, None)
     try:

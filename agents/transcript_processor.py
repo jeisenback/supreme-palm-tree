@@ -84,4 +84,25 @@ def process_transcript_file(path: str, out_dir: str = "out/transcripts", use_llm
         parts.append("_No research items found._\n")
 
     dest.write_text("\n".join(parts), encoding="utf-8")
+    # Wire action items into tasks and schedule reminders
+    try:
+        from agents import tasks as _tasks
+        from agents import scheduler as _scheduler
+
+        for ai in parsed.get("action_items", []):
+            t = _tasks.add_task(title=ai if len(ai) < 120 else ai[:120], description=ai, due_days=7)
+            # schedule a one-off reminder in 7 days (604800 seconds)
+            try:
+                job_name = f"reminder-{t['id']}"
+                def _make_reminder(task_id: str, title: str):
+                    def _remind():
+                        print(f"Reminder for task {task_id}: {title}")
+                    return _remind
+
+                _scheduler.schedule_one_off(job_name, _make_reminder(t["id"], t["title"]), delay_seconds=7 * 24 * 60 * 60)
+            except Exception:
+                pass
+    except Exception:
+        # best-effort wiring; if tasks or scheduler are unavailable, skip
+        pass
     return dest
