@@ -18,6 +18,7 @@ from ingest.storage import store_conversion
 from agents.skills.president import generate_agenda_with_llm
 from integrations.gdrive.drive_client import DriveClient
 import json
+from agents import scheduler
 
 
 def cmd_ingest(src: str, out_dir: Optional[str] = None) -> int:
@@ -56,6 +57,13 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_drive_agenda.add_argument("--credential-type", required=False, choices=["service_account","oauth"], default="service_account")
     p_drive_agenda.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
 
+    p_sched = sub.add_parser("scheduler", help="Scheduler control commands")
+    p_sched_sub = p_sched.add_subparsers(dest="sched_cmd")
+
+    p_sched_sub.add_parser("start", help="Start the background scheduler")
+    p_sched_sub.add_parser("stop", help="Stop the background scheduler")
+    p_sched_sub.add_parser("run-once", help="Run each registered job once synchronously")
+
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
         return cmd_ingest(args.src, args.out)
@@ -90,6 +98,33 @@ def main(argv: Optional[list[str]] = None) -> int:
             except Exception as e:
                 print(f"Drive upload failed: {e}", file=sys.stderr)
                 return 3
+    if args.cmd == "scheduler":
+        if args.sched_cmd == "start":
+            try:
+                scheduler.register_default_jobs()
+                scheduler.start()
+                print("Scheduler started (background).")
+                return 0
+            except Exception as e:
+                print(f"Failed to start scheduler: {e}", file=sys.stderr)
+                return 4
+        if args.sched_cmd == "stop":
+            try:
+                scheduler.stop()
+                print("Scheduler stopped.")
+                return 0
+            except Exception as e:
+                print(f"Failed to stop scheduler: {e}", file=sys.stderr)
+                return 5
+        if args.sched_cmd == "run-once":
+            try:
+                scheduler.register_default_jobs()
+                scheduler.run_once()
+                print("Ran registered jobs once.")
+                return 0
+            except Exception as e:
+                print(f"Failed to run jobs once: {e}", file=sys.stderr)
+                return 6
 
     parser.print_help()
     return 1
