@@ -1,0 +1,2010 @@
+{
+  "title": "Career Accelerator Program (Future State) - DRAFT (1)",
+  "headings": [
+    {
+      "level": 1,
+      "text": "Career Accelerator Program (Future State)"
+    },
+    {
+      "level": 2,
+      "text": "High-Level Master Outline (Updated with Mentorship Component)"
+    },
+    {
+      "level": 1,
+      "text": "1. Program Vision & Purpose"
+    },
+    {
+      "level": 1,
+      "text": "2. Program Structure"
+    },
+    {
+      "level": 3,
+      "text": "Core Components"
+    },
+    {
+      "level": 3,
+      "text": "Support Pillars"
+    },
+    {
+      "level": 1,
+      "text": "3. Component A: Core Career Sessions (6 Sessions)"
+    },
+    {
+      "level": 3,
+      "text": "SESSION 1 — Career Mapping (Persona + Grid Framework)"
+    },
+    {
+      "level": 3,
+      "text": "SESSION 2 — Resume & LinkedIn Lab"
+    },
+    {
+      "level": 3,
+      "text": "SESSION 3 — Mock Interviews"
+    },
+    {
+      "level": 3,
+      "text": "SESSION 4 — Problem-Solving Challenge"
+    },
+    {
+      "level": 3,
+      "text": "SESSION 5 — Requirements Elicitation Workshop"
+    },
+    {
+      "level": 3,
+      "text": "SESSION 6 — Capstone Networking Mixer"
+    },
+    {
+      "level": 1,
+      "text": "4. Component B: Optional ECBA Certification Track (5–6 Weeks)"
+    },
+    {
+      "level": 1,
+      "text": "5. Component C: Optional Leadership Track (6 Sessions)"
+    },
+    {
+      "level": 1,
+      "text": "6. Component D: Optional Mentorship Component (8–12 Weeks)"
+    },
+    {
+      "level": 2,
+      "text": "Purpose of the Mentorship Track"
+    },
+    {
+      "level": 2,
+      "text": "Mentorship Structure"
+    },
+    {
+      "level": 3,
+      "text": "Format Options"
+    },
+    {
+      "level": 3,
+      "text": "Length"
+    },
+    {
+      "level": 3,
+      "text": "Cadence"
+    },
+    {
+      "level": 3,
+      "text": "Mentor Profiles"
+    },
+    {
+      "level": 2,
+      "text": "Mentorship Deliverables"
+    },
+    {
+      "level": 3,
+      "text": "For Mentees"
+    },
+    {
+      "level": 3,
+      "text": "For Mentors"
+    },
+    {
+      "level": 2,
+      "text": "Mentorship Events"
+    },
+    {
+      "level": 2,
+      "text": "Mentorship KPIs"
+    },
+    {
+      "level": 1,
+      "text": "7. Component E: Marketing & Outreach"
+    },
+    {
+      "level": 3,
+      "text": "Goals"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables"
+    },
+    {
+      "level": 3,
+      "text": "Marketing Metrics"
+    },
+    {
+      "level": 1,
+      "text": "8. Component F: Sponsorship & Events"
+    },
+    {
+      "level": 3,
+      "text": "Sponsorship Roles"
+    },
+    {
+      "level": 3,
+      "text": "Event Portfolio"
+    },
+    {
+      "level": 1,
+      "text": "9. Participation Models"
+    },
+    {
+      "level": 3,
+      "text": "Full Track"
+    },
+    {
+      "level": 3,
+      "text": "Drop-In"
+    },
+    {
+      "level": 3,
+      "text": "Mentorship Add-On"
+    },
+    {
+      "level": 1,
+      "text": "10. Annual Cadence & Phases"
+    },
+    {
+      "level": 3,
+      "text": "Q1 — Prep"
+    },
+    {
+      "level": 3,
+      "text": "Q2–Q3 — Delivery"
+    },
+    {
+      "level": 3,
+      "text": "Q3–Q4 — Evaluation"
+    },
+    {
+      "level": 1,
+      "text": "11. Unified Success Metrics"
+    },
+    {
+      "level": 2,
+      "text": "Primary KPIs"
+    },
+    {
+      "level": 2,
+      "text": "Secondary KPIs"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 1 — Program Vision, Purpose, and Strategic Alignment (Detailed)"
+    },
+    {
+      "level": 2,
+      "text": "1.1 Program Vision"
+    },
+    {
+      "level": 2,
+      "text": "1.2 Program Purpose"
+    },
+    {
+      "level": 3,
+      "text": "1. Skill Gaps & Limited Practical Experience"
+    },
+    {
+      "level": 3,
+      "text": "2. Lack of Clear Professional Pathways"
+    },
+    {
+      "level": 3,
+      "text": "3. Limited Networking and Employer Access"
+    },
+    {
+      "level": 2,
+      "text": "1.3 Strategic Alignment"
+    },
+    {
+      "level": 3,
+      "text": "Grow engagement and membership through high-value programming"
+    },
+    {
+      "level": 3,
+      "text": "Improve career readiness and certification pathways"
+    },
+    {
+      "level": 3,
+      "text": "Build partnerships with employers, recruiters, and professional associations"
+    },
+    {
+      "level": 3,
+      "text": "Increase accessibility and inclusion"
+    },
+    {
+      "level": 3,
+      "text": "Lead the region in AI-enabled professional development"
+    },
+    {
+      "level": 2,
+      "text": "1.4 Program Principles"
+    },
+    {
+      "level": 3,
+      "text": "1. Practical First"
+    },
+    {
+      "level": 3,
+      "text": "2. Highly Personalized"
+    },
+    {
+      "level": 3,
+      "text": "3. Accessible and Inclusive"
+    },
+    {
+      "level": 3,
+      "text": "4. Community-Centered"
+    },
+    {
+      "level": 3,
+      "text": "5. AI-Integrated"
+    },
+    {
+      "level": 3,
+      "text": "6. Measurable Impact"
+    },
+    {
+      "level": 2,
+      "text": "1.5 Outcomes & Impact Targets"
+    },
+    {
+      "level": 3,
+      "text": "Participant-Level Outcomes"
+    },
+    {
+      "level": 3,
+      "text": "Chapter-Level Outcomes"
+    },
+    {
+      "level": 2,
+      "text": "1.6 What’s Unique About This Program"
+    },
+    {
+      "level": 3,
+      "text": "SECTION 2 — Program Structure & Participation Models (Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 2 — Program Structure & Participation Models (Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "2.1 Program Architecture Overview"
+    },
+    {
+      "level": 3,
+      "text": "A. Core Career Sessions (6 sessions)"
+    },
+    {
+      "level": 3,
+      "text": "B. Optional ECBA Certification Track (5–6 weeks)"
+    },
+    {
+      "level": 3,
+      "text": "C. Optional Leadership Track (6 sessions)"
+    },
+    {
+      "level": 3,
+      "text": "D. Optional Mentorship Component (8–12 weeks)"
+    },
+    {
+      "level": 3,
+      "text": "Supported by two critical pillars:"
+    },
+    {
+      "level": 1,
+      "text": "2.2 How the Components Fit Together"
+    },
+    {
+      "level": 3,
+      "text": "Flexible Not Concurrent Model"
+    },
+    {
+      "level": 1,
+      "text": "2.3 Participation Models"
+    },
+    {
+      "level": 2,
+      "text": "Model 1 — Full Track (Flagship Experience)"
+    },
+    {
+      "level": 3,
+      "text": "Career Accelerator Completion Badge"
+    },
+    {
+      "level": 2,
+      "text": "Model 2 — Drop-In Participation"
+    },
+    {
+      "level": 2,
+      "text": "Model 3 — Certification Track Participant (Optional Track)"
+    },
+    {
+      "level": 3,
+      "text": "ECBA Prep Completion Badge"
+    },
+    {
+      "level": 2,
+      "text": "Model 4 — Leadership Track Participant (Optional Track)"
+    },
+    {
+      "level": 3,
+      "text": "Leadership Foundations Badge"
+    },
+    {
+      "level": 2,
+      "text": "Model 5 — Mentorship Add-On Participant (Optional Layer)"
+    },
+    {
+      "level": 1,
+      "text": "2.4 Participant Journey Overview"
+    },
+    {
+      "level": 3,
+      "text": "Step 1 — Registration"
+    },
+    {
+      "level": 3,
+      "text": "Step 2 — Career Mapping"
+    },
+    {
+      "level": 3,
+      "text": "Step 3 — Core Sessions"
+    },
+    {
+      "level": 3,
+      "text": "Step 4 — Optional Path(s)"
+    },
+    {
+      "level": 3,
+      "text": "Step 5 — Mentorship (Optional)"
+    },
+    {
+      "level": 3,
+      "text": "Step 6 — Capstone Networking Mixer"
+    },
+    {
+      "level": 3,
+      "text": "Step 7 — Badges + LinkedIn Visibility"
+    },
+    {
+      "level": 3,
+      "text": "Step 8 — Post-Program Impact"
+    },
+    {
+      "level": 1,
+      "text": "2.5 Expected Annual Volume"
+    },
+    {
+      "level": 3,
+      "text": "Target Enrollment for Pilot Year"
+    },
+    {
+      "level": 1,
+      "text": "2.6 Accessibility & Inclusion Focus"
+    },
+    {
+      "level": 1,
+      "text": "2.7 How This Structure Supports KPIs"
+    },
+    {
+      "level": 3,
+      "text": "SECTION 3 — Core Career Sessions (6 Sessions, Fully Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 3 — Core Career Sessions (6 Sessions, Fully Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "SESSION 1 — Career Mapping (Persona-Based + Grid Framework)"
+    },
+    {
+      "level": 2,
+      "text": "Session Components"
+    },
+    {
+      "level": 3,
+      "text": "1. Career Mapping Grid Introduction"
+    },
+    {
+      "level": 3,
+      "text": "2. Persona Selection"
+    },
+    {
+      "level": 3,
+      "text": "3. Role Exploration Exercise"
+    },
+    {
+      "level": 3,
+      "text": "4. AI-Assisted Career Roadmap"
+    },
+    {
+      "level": 2,
+      "text": "Deliverables"
+    },
+    {
+      "level": 2,
+      "text": "Guest or Facilitator Role"
+    },
+    {
+      "level": 1,
+      "text": "SESSION 2 — Resume & LinkedIn Lab"
+    },
+    {
+      "level": 2,
+      "text": "Session Components"
+    },
+    {
+      "level": 3,
+      "text": "1. Role-Aligned Resume Structure"
+    },
+    {
+      "level": 3,
+      "text": "2. Targeted Resume Editing"
+    },
+    {
+      "level": 3,
+      "text": "3. LinkedIn Optimization"
+    },
+    {
+      "level": 3,
+      "text": "4. AI Assistance"
+    },
+    {
+      "level": 2,
+      "text": "Deliverables"
+    },
+    {
+      "level": 2,
+      "text": "Guest Contributors"
+    },
+    {
+      "level": 1,
+      "text": "SESSION 3 — Mock Interviews (Behavioral + Technical)"
+    },
+    {
+      "level": 2,
+      "text": "Session Components"
+    },
+    {
+      "level": 3,
+      "text": "1. Behavioral Interview Frameworks"
+    },
+    {
+      "level": 3,
+      "text": "2. Technical / Role-Specific Interviews"
+    },
+    {
+      "level": 3,
+      "text": "3. Live Interview Rotations"
+    },
+    {
+      "level": 3,
+      "text": "4. AI Question Bank"
+    },
+    {
+      "level": 2,
+      "text": "Deliverables"
+    },
+    {
+      "level": 2,
+      "text": "Guest Contributors"
+    },
+    {
+      "level": 1,
+      "text": "SESSION 4 — Problem-Solving Challenge"
+    },
+    {
+      "level": 2,
+      "text": "Session Components"
+    },
+    {
+      "level": 3,
+      "text": "1. Case Study Challenge"
+    },
+    {
+      "level": 3,
+      "text": "2. Team Problem-Solving Framework"
+    },
+    {
+      "level": 3,
+      "text": "3. Presentation Development"
+    },
+    {
+      "level": 3,
+      "text": "4. AI Support"
+    },
+    {
+      "level": 2,
+      "text": "Deliverables"
+    },
+    {
+      "level": 2,
+      "text": "Guest Contributors"
+    },
+    {
+      "level": 1,
+      "text": "SESSION 5 — Requirements Elicitation & Documentation Workshop"
+    },
+    {
+      "level": 2,
+      "text": "Session Components"
+    },
+    {
+      "level": 3,
+      "text": "1. Elicitation Simulation"
+    },
+    {
+      "level": 3,
+      "text": "2. Requirements Documentation"
+    },
+    {
+      "level": 3,
+      "text": "3. Requirements Quality Check"
+    },
+    {
+      "level": 3,
+      "text": "4. AI Assistance"
+    },
+    {
+      "level": 2,
+      "text": "Deliverables"
+    },
+    {
+      "level": 2,
+      "text": "Guest Contributor"
+    },
+    {
+      "level": 1,
+      "text": "SESSION 6 — Capstone Networking Mixer"
+    },
+    {
+      "level": 2,
+      "text": "Event Components"
+    },
+    {
+      "level": 3,
+      "text": "1. Pitch Practice"
+    },
+    {
+      "level": 3,
+      "text": "2. Networking Circles"
+    },
+    {
+      "level": 3,
+      "text": "3. Mentor–Mentee Introductions"
+    },
+    {
+      "level": 3,
+      "text": "4. AI Assistance"
+    },
+    {
+      "level": 2,
+      "text": "Deliverables"
+    },
+    {
+      "level": 2,
+      "text": "Hosting"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 4 — Optional ECBA Certification Track (Fully Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 4 — Optional ECBA Certification Track (Fully Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "4.1 Track Objectives"
+    },
+    {
+      "level": 3,
+      "text": "Badge Awarded:"
+    },
+    {
+      "level": 1,
+      "text": "4.2 Structure & Cadence"
+    },
+    {
+      "level": 1,
+      "text": "4.3 Session-by-Session Curriculum (Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "ECBA Week 1 — BA Foundations & BACCM"
+    },
+    {
+      "level": 3,
+      "text": "Pre-Work:"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "ECBA Week 2 — Business Analysis Planning & Elicitation"
+    },
+    {
+      "level": 3,
+      "text": "Pre-Work:"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "ECBA Week 3 — Requirements Life Cycle + Strategy (Light)"
+    },
+    {
+      "level": 3,
+      "text": "Pre-Work:"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "ECBA Week 4 — Requirements Analysis & Design Definition"
+    },
+    {
+      "level": 3,
+      "text": "Pre-Work:"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "ECBA Week 5 — Solution Evaluation + Exam Prep Review"
+    },
+    {
+      "level": 3,
+      "text": "Pre-Work:"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "ECBA Week 6 (Optional) — Full Practice Exam + Strategy Lab"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "4.4 AI Integration Across the ECBA Track"
+    },
+    {
+      "level": 1,
+      "text": "4.5 Mentorship Alignment"
+    },
+    {
+      "level": 1,
+      "text": "4.6 ECBA Track Success Metrics"
+    },
+    {
+      "level": 3,
+      "text": "Primary Indicators"
+    },
+    {
+      "level": 3,
+      "text": "Secondary Indicators"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 5 — Optional Leadership Track (Fully Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 5 — Optional Leadership Track (Fully Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "5.1 Track Objectives"
+    },
+    {
+      "level": 3,
+      "text": "Badge Awarded:"
+    },
+    {
+      "level": 1,
+      "text": "5.2 Structure & Cadence"
+    },
+    {
+      "level": 1,
+      "text": "5.3 Session-by-Session Curriculum (Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "Leadership Session 1 — Leader Identity & Professional Presence"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "Leadership Session 2 — Communication Clarity & Meeting Facilitation"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "Leadership Session 3 — Leading Through Questions (Critical Thinking)"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "Leadership Session 4 — Stakeholder Influence & Conflict Navigation"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "Leadership Session 5 — Decision-Making, Prioritization & Value Thinking"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "Leadership Session 6 — Leadership Storytelling & Career Influence"
+    },
+    {
+      "level": 3,
+      "text": "In-Session Activities:"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables:"
+    },
+    {
+      "level": 1,
+      "text": "5.4 AI Integration Throughout the Track"
+    },
+    {
+      "level": 1,
+      "text": "5.5 Mentorship Alignment"
+    },
+    {
+      "level": 1,
+      "text": "5.6 Leadership Track Success Metrics"
+    },
+    {
+      "level": 3,
+      "text": "Primary KPIs"
+    },
+    {
+      "level": 3,
+      "text": "Secondary KPIs"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 6 — Optional Mentorship Component (Fully Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 6 — Optional Mentorship Component (Fully Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "6.1 Mentorship Purpose"
+    },
+    {
+      "level": 1,
+      "text": "6.2 Mentorship Formats"
+    },
+    {
+      "level": 3,
+      "text": "1. One-to-One Mentorship (Recommended for Scholarships)"
+    },
+    {
+      "level": 3,
+      "text": "2. Micro-Pods (2–3 Mentees per Mentor)"
+    },
+    {
+      "level": 3,
+      "text": "3. Hybrid Model (Pod + Optional 1:1)"
+    },
+    {
+      "level": 1,
+      "text": "6.3 Mentor Profiles"
+    },
+    {
+      "level": 1,
+      "text": "6.4 Mentorship Timeline (8–12 Weeks)"
+    },
+    {
+      "level": 3,
+      "text": "Week 0 — Matching"
+    },
+    {
+      "level": 3,
+      "text": "Week 1 — Orientation"
+    },
+    {
+      "level": 3,
+      "text": "Weeks 2–10 — Bi-Weekly Meetings (4–5 Sessions)"
+    },
+    {
+      "level": 3,
+      "text": "Week 5 / Midpoint Check-In"
+    },
+    {
+      "level": 3,
+      "text": "Week 10–12 — Wrap-Up"
+    },
+    {
+      "level": 1,
+      "text": "6.5 Mentorship Deliverables"
+    },
+    {
+      "level": 3,
+      "text": "For Mentees"
+    },
+    {
+      "level": 3,
+      "text": "For Mentors"
+    },
+    {
+      "level": 1,
+      "text": "6.6 Mentor & Mentee Guides"
+    },
+    {
+      "level": 3,
+      "text": "Mentor Guide Includes:"
+    },
+    {
+      "level": 3,
+      "text": "Mentee Guide Includes:"
+    },
+    {
+      "level": 1,
+      "text": "6.7 AI Integration in Mentorship"
+    },
+    {
+      "level": 1,
+      "text": "6.8 Touchpoints with Other Tracks"
+    },
+    {
+      "level": 3,
+      "text": "Core Sessions"
+    },
+    {
+      "level": 3,
+      "text": "ECBA Track"
+    },
+    {
+      "level": 3,
+      "text": "Leadership Track"
+    },
+    {
+      "level": 3,
+      "text": "Sponsorship & Events"
+    },
+    {
+      "level": 1,
+      "text": "6.9 Mentorship KPIs"
+    },
+    {
+      "level": 3,
+      "text": "Primary"
+    },
+    {
+      "level": 3,
+      "text": "Secondary"
+    },
+    {
+      "level": 1,
+      "text": "6.10 Risk Mitigation"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Mentor–Mentee Mismatch"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Low Mentor Capacity"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Mentee Drop-Off"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Mentor Overload"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 7 — Marketing & Outreach (Fully Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 7 — Marketing & Outreach (Fully Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "7.1 Marketing Goals"
+    },
+    {
+      "level": 3,
+      "text": "Primary Goals"
+    },
+    {
+      "level": 3,
+      "text": "Secondary Goals"
+    },
+    {
+      "level": 1,
+      "text": "7.2 Key Audiences"
+    },
+    {
+      "level": 3,
+      "text": "Primary Target Audiences"
+    },
+    {
+      "level": 3,
+      "text": "Secondary Audiences"
+    },
+    {
+      "level": 1,
+      "text": "7.3 Branding & Messaging"
+    },
+    {
+      "level": 3,
+      "text": "Program Name:"
+    },
+    {
+      "level": 3,
+      "text": "Brand Tagline:"
+    },
+    {
+      "level": 3,
+      "text": "Brand Identity Components"
+    },
+    {
+      "level": 3,
+      "text": "Messaging Themes"
+    },
+    {
+      "level": 1,
+      "text": "7.4 Campaign Timeline & Phases"
+    },
+    {
+      "level": 2,
+      "text": "Phase A — Pre-Launch (Q1 2026)"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables"
+    },
+    {
+      "level": 3,
+      "text": "Key Messages"
+    },
+    {
+      "level": 2,
+      "text": "Phase B — Enrollment Campaign (Q1–Q2 2026)"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables"
+    },
+    {
+      "level": 3,
+      "text": "Call-to-Action"
+    },
+    {
+      "level": 2,
+      "text": "Phase C — Engagement During Program (Q2–Q3 2026)"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables"
+    },
+    {
+      "level": 3,
+      "text": "Messaging"
+    },
+    {
+      "level": 2,
+      "text": "Phase D — Post-Program Amplification (Q3–Q4 2026)"
+    },
+    {
+      "level": 3,
+      "text": "Deliverables"
+    },
+    {
+      "level": 1,
+      "text": "7.5 Marketing Channels & Tools"
+    },
+    {
+      "level": 3,
+      "text": "Primary Channels"
+    },
+    {
+      "level": 3,
+      "text": "Secondary Channels"
+    },
+    {
+      "level": 3,
+      "text": "Content Repository"
+    },
+    {
+      "level": 1,
+      "text": "7.6 Marketing Deliverables by Component"
+    },
+    {
+      "level": 3,
+      "text": "For Core Career Sessions"
+    },
+    {
+      "level": 3,
+      "text": "For ECBA Track"
+    },
+    {
+      "level": 3,
+      "text": "For Leadership Track"
+    },
+    {
+      "level": 3,
+      "text": "For Mentorship"
+    },
+    {
+      "level": 1,
+      "text": "7.7 Accessibility & Inclusion Considerations"
+    },
+    {
+      "level": 1,
+      "text": "7.8 Marketing KPIs"
+    },
+    {
+      "level": 3,
+      "text": "Primary KPIs"
+    },
+    {
+      "level": 3,
+      "text": "Secondary KPIs"
+    },
+    {
+      "level": 1,
+      "text": "7.9 Risk Mitigation"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Low Enrollment"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Limited Visibility"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Scholarships not reaching intended audiences"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 8 — Sponsorship & Events (Fully Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 8 — Sponsorship & Events (Fully Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "8.1 Sponsorship Goals"
+    },
+    {
+      "level": 3,
+      "text": "Primary Goals"
+    },
+    {
+      "level": 3,
+      "text": "Secondary Goals"
+    },
+    {
+      "level": 1,
+      "text": "8.2 Sponsorship Tiers & Value Propositions"
+    },
+    {
+      "level": 3,
+      "text": "Tier 1 — Anchor Sponsor (Primary Employer Partner)"
+    },
+    {
+      "level": 3,
+      "text": "Tier 2 — Professional Development Partner"
+    },
+    {
+      "level": 3,
+      "text": "Tier 3 — Scholarship Sponsor"
+    },
+    {
+      "level": 3,
+      "text": "Tier 4 — Community Partner"
+    },
+    {
+      "level": 1,
+      "text": "8.3 Sponsor-Facing Messaging"
+    },
+    {
+      "level": 3,
+      "text": "Value Proposition for Employers"
+    },
+    {
+      "level": 3,
+      "text": "Value Proposition for Staffing Firms"
+    },
+    {
+      "level": 3,
+      "text": "Value Proposition for Higher Education"
+    },
+    {
+      "level": 1,
+      "text": "8.4 Events Portfolio (All Detailed)"
+    },
+    {
+      "level": 2,
+      "text": "Event 1 — Program Kickoff (Virtual)"
+    },
+    {
+      "level": 2,
+      "text": "Event 2 — Mid-Program Networking Hour (Virtual or In-Person)"
+    },
+    {
+      "level": 2,
+      "text": "Event 3 — Capstone Networking Mixer (Virtual or In-Person)"
+    },
+    {
+      "level": 2,
+      "text": "Event 4 — Mentor–Mentee Mixer (Optional, Hybrid)"
+    },
+    {
+      "level": 2,
+      "text": "Event 5 — Facilitator Appreciation Event"
+    },
+    {
+      "level": 2,
+      "text": "Event 6 — AGM Spotlight (Annual General Meeting)"
+    },
+    {
+      "level": 1,
+      "text": "8.5 Sponsor Engagement in Sessions"
+    },
+    {
+      "level": 1,
+      "text": "8.6 Sponsorship KPIs"
+    },
+    {
+      "level": 3,
+      "text": "Primary"
+    },
+    {
+      "level": 3,
+      "text": "Secondary"
+    },
+    {
+      "level": 1,
+      "text": "8.7 Risk Mitigation"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Sponsor Attrition or Insufficient Funding"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Low Sponsor Engagement"
+    },
+    {
+      "level": 3,
+      "text": "Risk: Scheduling Conflicts"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 9 — Program Phases & Timeline (Fully Detailed)"
+    },
+    {
+      "level": 5,
+      "text": "You said:"
+    },
+    {
+      "level": 6,
+      "text": "ChatGPT said:"
+    },
+    {
+      "level": 1,
+      "text": "SECTION 9 — Program Phases & Timeline (Fully Detailed)"
+    },
+    {
+      "level": 1,
+      "text": "9.1 Annual Program Overview Timeline"
+    },
+    {
+      "level": 1,
+      "text": "9.2 Phase 1 — PREP (Q1 2026)"
+    },
+    {
+      "level": 2,
+      "text": "9.2.1 Curriculum & Materials Development"
+    },
+    {
+      "level": 2,
+      "text": "9.2.2 Sponsorship & Facilitator Recruitment"
+    },
+    {
+      "level": 2,
+      "text": "9.2.3 Marketing Launch (Early Q1)"
+    }
+  ],
+  "headings_flat": [
+    "**Career Accelerator Program (Future State)**",
+    "**High-Level Master Outline (Updated with Mentorship Component)**",
+    "**1\\. Program Vision & Purpose**",
+    "**2\\. Program Structure**",
+    "**Core Components**",
+    "**Support Pillars**",
+    "**3\\. Component A: Core Career Sessions (6 Sessions)**",
+    "**SESSION 1 — Career Mapping (Persona + Grid Framework)**",
+    "**SESSION 2 — Resume & LinkedIn Lab**",
+    "**SESSION 3 — Mock Interviews**",
+    "**SESSION 4 — Problem-Solving Challenge**",
+    "**SESSION 5 — Requirements Elicitation Workshop**",
+    "**SESSION 6 — Capstone Networking Mixer**",
+    "**4\\. Component B: Optional ECBA Certification Track (5–6 Weeks)**",
+    "**5\\. Component C: Optional Leadership Track (6 Sessions)**",
+    "**6\\. Component D: Optional Mentorship Component (8–12 Weeks)**",
+    "**Purpose of the Mentorship Track**",
+    "**Mentorship Structure**",
+    "**Format Options**",
+    "**Length**",
+    "**Cadence**",
+    "**Mentor Profiles**",
+    "**Mentorship Deliverables**",
+    "**For Mentees**",
+    "**For Mentors**",
+    "**Mentorship Events**",
+    "**Mentorship KPIs**",
+    "**7\\. Component E: Marketing & Outreach**",
+    "**Goals**",
+    "**Deliverables**",
+    "**Marketing Metrics**",
+    "**8\\. Component F: Sponsorship & Events**",
+    "**Sponsorship Roles**",
+    "**Event Portfolio**",
+    "**9\\. Participation Models**",
+    "**Full Track**",
+    "**Drop-In**",
+    "**Mentorship Add-On**",
+    "**10\\. Annual Cadence & Phases**",
+    "**Q1 — Prep**",
+    "**Q2–Q3 — Delivery**",
+    "**Q3–Q4 — Evaluation**",
+    "**11\\. Unified Success Metrics**",
+    "**Primary KPIs**",
+    "**Secondary KPIs**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 1 — Program Vision, Purpose, and Strategic Alignment (Detailed)**",
+    "**1.1 Program Vision**",
+    "**1.2 Program Purpose**",
+    "**1\\. Skill Gaps & Limited Practical Experience**",
+    "**2\\. Lack of Clear Professional Pathways**",
+    "**3\\. Limited Networking and Employer Access**",
+    "**1.3 Strategic Alignment**",
+    "**Grow engagement and membership through high-value programming**",
+    "**Improve career readiness and certification pathways**",
+    "**Build partnerships with employers, recruiters, and professional associations**",
+    "**Increase accessibility and inclusion**",
+    "**Lead the region in AI-enabled professional development**",
+    "**1.4 Program Principles**",
+    "**1\\. Practical First**",
+    "**2\\. Highly Personalized**",
+    "**3\\. Accessible and Inclusive**",
+    "**4\\. Community-Centered**",
+    "**5\\. AI-Integrated**",
+    "**6\\. Measurable Impact**",
+    "**1.5 Outcomes & Impact Targets**",
+    "**Participant-Level Outcomes**",
+    "**Chapter-Level Outcomes**",
+    "**1.6 What’s Unique About This Program**",
+    "**SECTION 2 — Program Structure & Participation Models (Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 2 — Program Structure & Participation Models (Detailed)**",
+    "**2.1 Program Architecture Overview**",
+    "**A. Core Career Sessions (6 sessions)**",
+    "**B. Optional ECBA Certification Track (5–6 weeks)**",
+    "**C. Optional Leadership Track (6 sessions)**",
+    "**D. Optional Mentorship Component (8–12 weeks)**",
+    "**Supported by two critical pillars:**",
+    "**2.2 How the Components Fit Together**",
+    "**Flexible Not Concurrent Model**",
+    "**2.3 Participation Models**",
+    "**Model 1 — Full Track (Flagship Experience)**",
+    "**Career Accelerator Completion Badge**",
+    "**Model 2 — Drop-In Participation**",
+    "**Model 3 — Certification Track Participant (Optional Track)**",
+    "**ECBA Prep Completion Badge**",
+    "**Model 4 — Leadership Track Participant (Optional Track)**",
+    "**Leadership Foundations Badge**",
+    "**Model 5 — Mentorship Add-On Participant (Optional Layer)**",
+    "**2.4 Participant Journey Overview**",
+    "**Step 1 — Registration**",
+    "**Step 2 — Career Mapping**",
+    "**Step 3 — Core Sessions**",
+    "**Step 4 — Optional Path(s)**",
+    "**Step 5 — Mentorship (Optional)**",
+    "**Step 6 — Capstone Networking Mixer**",
+    "**Step 7 — Badges + LinkedIn Visibility**",
+    "**Step 8 — Post-Program Impact**",
+    "**2.5 Expected Annual Volume**",
+    "**Target Enrollment for Pilot Year**",
+    "**2.6 Accessibility & Inclusion Focus**",
+    "**2.7 How This Structure Supports KPIs**",
+    "**SECTION 3 — Core Career Sessions (6 Sessions, Fully Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 3 — Core Career Sessions (6 Sessions, Fully Detailed)**",
+    "**SESSION 1 — Career Mapping (Persona-Based + Grid Framework)**",
+    "**Session Components**",
+    "**1\\. Career Mapping Grid Introduction**",
+    "**2\\. Persona Selection**",
+    "**3\\. Role Exploration Exercise**",
+    "**4\\. AI-Assisted Career Roadmap**",
+    "**Deliverables**",
+    "**Guest or Facilitator Role**",
+    "**SESSION 2 — Resume & LinkedIn Lab**",
+    "**Session Components**",
+    "**1\\. Role-Aligned Resume Structure**",
+    "**2\\. Targeted Resume Editing**",
+    "**3\\. LinkedIn Optimization**",
+    "**4\\. AI Assistance**",
+    "**Deliverables**",
+    "**Guest Contributors**",
+    "**SESSION 3 — Mock Interviews (Behavioral + Technical)**",
+    "**Session Components**",
+    "**1\\. Behavioral Interview Frameworks**",
+    "**2\\. Technical / Role-Specific Interviews**",
+    "**3\\. Live Interview Rotations**",
+    "**4\\. AI Question Bank**",
+    "**Deliverables**",
+    "**Guest Contributors**",
+    "**SESSION 4 — Problem-Solving Challenge**",
+    "**Session Components**",
+    "**1\\. Case Study Challenge**",
+    "**2\\. Team Problem-Solving Framework**",
+    "**3\\. Presentation Development**",
+    "**4\\. AI Support**",
+    "**Deliverables**",
+    "**Guest Contributors**",
+    "**SESSION 5 — Requirements Elicitation & Documentation Workshop**",
+    "**Session Components**",
+    "**1\\. Elicitation Simulation**",
+    "**2\\. Requirements Documentation**",
+    "**3\\. Requirements Quality Check**",
+    "**4\\. AI Assistance**",
+    "**Deliverables**",
+    "**Guest Contributor**",
+    "**SESSION 6 — Capstone Networking Mixer**",
+    "**Event Components**",
+    "**1\\. Pitch Practice**",
+    "**2\\. Networking Circles**",
+    "**3\\. Mentor–Mentee Introductions**",
+    "**4\\. AI Assistance**",
+    "**Deliverables**",
+    "**Hosting**",
+    "**SECTION 4 — Optional ECBA Certification Track (Fully Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 4 — Optional ECBA Certification Track (Fully Detailed)**",
+    "**4.1 Track Objectives**",
+    "**Badge Awarded:**",
+    "**4.2 Structure & Cadence**",
+    "**4.3 Session-by-Session Curriculum (Detailed)**",
+    "**ECBA Week 1 — BA Foundations & BACCM**",
+    "**Pre-Work:**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**ECBA Week 2 — Business Analysis Planning & Elicitation**",
+    "**Pre-Work:**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**ECBA Week 3 — Requirements Life Cycle + Strategy (Light)**",
+    "**Pre-Work:**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**ECBA Week 4 — Requirements Analysis & Design Definition**",
+    "**Pre-Work:**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**ECBA Week 5 — Solution Evaluation + Exam Prep Review**",
+    "**Pre-Work:**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**ECBA Week 6 (Optional) — Full Practice Exam + Strategy Lab**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**4.4 AI Integration Across the ECBA Track**",
+    "**4.5 Mentorship Alignment**",
+    "**4.6 ECBA Track Success Metrics**",
+    "**Primary Indicators**",
+    "**Secondary Indicators**",
+    "**SECTION 5 — Optional Leadership Track (Fully Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 5 — Optional Leadership Track (Fully Detailed)**",
+    "**5.1 Track Objectives**",
+    "**Badge Awarded:**",
+    "**5.2 Structure & Cadence**",
+    "**5.3 Session-by-Session Curriculum (Detailed)**",
+    "**Leadership Session 1 — Leader Identity & Professional Presence**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**Leadership Session 2 — Communication Clarity & Meeting Facilitation**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**Leadership Session 3 — Leading Through Questions (Critical Thinking)**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**Leadership Session 4 — Stakeholder Influence & Conflict Navigation**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**Leadership Session 5 — Decision-Making, Prioritization & Value Thinking**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**Leadership Session 6 — Leadership Storytelling & Career Influence**",
+    "**In-Session Activities:**",
+    "**Deliverables:**",
+    "**5.4 AI Integration Throughout the Track**",
+    "**5.5 Mentorship Alignment**",
+    "**5.6 Leadership Track Success Metrics**",
+    "**Primary KPIs**",
+    "**Secondary KPIs**",
+    "**SECTION 6 — Optional Mentorship Component (Fully Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 6 — Optional Mentorship Component (Fully Detailed)**",
+    "**6.1 Mentorship Purpose**",
+    "**6.2 Mentorship Formats**",
+    "**1\\. One-to-One Mentorship (Recommended for Scholarships)**",
+    "**2\\. Micro-Pods (2–3 Mentees per Mentor)**",
+    "**3\\. Hybrid Model (Pod + Optional 1:1)**",
+    "**6.3 Mentor Profiles**",
+    "**6.4 Mentorship Timeline (8–12 Weeks)**",
+    "**Week 0 — Matching**",
+    "**Week 1 — Orientation**",
+    "**Weeks 2–10 — Bi-Weekly Meetings (4–5 Sessions)**",
+    "**Week 5 / Midpoint Check-In**",
+    "**Week 10–12 — Wrap-Up**",
+    "**6.5 Mentorship Deliverables**",
+    "**For Mentees**",
+    "**For Mentors**",
+    "**6.6 Mentor & Mentee Guides**",
+    "**Mentor Guide Includes:**",
+    "**Mentee Guide Includes:**",
+    "**6.7 AI Integration in Mentorship**",
+    "**6.8 Touchpoints with Other Tracks**",
+    "**Core Sessions**",
+    "**ECBA Track**",
+    "**Leadership Track**",
+    "**Sponsorship & Events**",
+    "**6.9 Mentorship KPIs**",
+    "**Primary**",
+    "**Secondary**",
+    "**6.10 Risk Mitigation**",
+    "**Risk: Mentor–Mentee Mismatch**",
+    "**Risk: Low Mentor Capacity**",
+    "**Risk: Mentee Drop-Off**",
+    "**Risk: Mentor Overload**",
+    "**SECTION 7 — Marketing & Outreach (Fully Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 7 — Marketing & Outreach (Fully Detailed)**",
+    "**7.1 Marketing Goals**",
+    "**Primary Goals**",
+    "**Secondary Goals**",
+    "**7.2 Key Audiences**",
+    "**Primary Target Audiences**",
+    "**Secondary Audiences**",
+    "**7.3 Branding & Messaging**",
+    "**Program Name:**",
+    "**Brand Tagline:**",
+    "**Brand Identity Components**",
+    "**Messaging Themes**",
+    "**7.4 Campaign Timeline & Phases**",
+    "**Phase A — Pre-Launch (Q1 2026)**",
+    "**Deliverables**",
+    "**Key Messages**",
+    "**Phase B — Enrollment Campaign (Q1–Q2 2026)**",
+    "**Deliverables**",
+    "**Call-to-Action**",
+    "**Phase C — Engagement During Program (Q2–Q3 2026)**",
+    "**Deliverables**",
+    "**Messaging**",
+    "**Phase D — Post-Program Amplification (Q3–Q4 2026)**",
+    "**Deliverables**",
+    "**7.5 Marketing Channels & Tools**",
+    "**Primary Channels**",
+    "**Secondary Channels**",
+    "**Content Repository**",
+    "**7.6 Marketing Deliverables by Component**",
+    "**For Core Career Sessions**",
+    "**For ECBA Track**",
+    "**For Leadership Track**",
+    "**For Mentorship**",
+    "**7.7 Accessibility & Inclusion Considerations**",
+    "**7.8 Marketing KPIs**",
+    "**Primary KPIs**",
+    "**Secondary KPIs**",
+    "**7.9 Risk Mitigation**",
+    "**Risk: Low Enrollment**",
+    "**Risk: Limited Visibility**",
+    "**Risk: Scholarships not reaching intended audiences**",
+    "**SECTION 8 — Sponsorship & Events (Fully Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 8 — Sponsorship & Events (Fully Detailed)**",
+    "**8.1 Sponsorship Goals**",
+    "**Primary Goals**",
+    "**Secondary Goals**",
+    "**8.2 Sponsorship Tiers & Value Propositions**",
+    "**Tier 1 — Anchor Sponsor (Primary Employer Partner)**",
+    "**Tier 2 — Professional Development Partner**",
+    "**Tier 3 — Scholarship Sponsor**",
+    "**Tier 4 — Community Partner**",
+    "**8.3 Sponsor-Facing Messaging**",
+    "**Value Proposition for Employers**",
+    "**Value Proposition for Staffing Firms**",
+    "**Value Proposition for Higher Education**",
+    "**8.4 Events Portfolio (All Detailed)**",
+    "**Event 1 — Program Kickoff (Virtual)**",
+    "**Event 2 — Mid-Program Networking Hour (Virtual or In-Person)**",
+    "**Event 3 — Capstone Networking Mixer (Virtual or In-Person)**",
+    "**Event 4 — Mentor–Mentee Mixer (Optional, Hybrid)**",
+    "**Event 5 — Facilitator Appreciation Event**",
+    "**Event 6 — AGM Spotlight (Annual General Meeting)**",
+    "**8.5 Sponsor Engagement in Sessions**",
+    "**8.6 Sponsorship KPIs**",
+    "**Primary**",
+    "**Secondary**",
+    "**8.7 Risk Mitigation**",
+    "**Risk: Sponsor Attrition or Insufficient Funding**",
+    "**Risk: Low Sponsor Engagement**",
+    "**Risk: Scheduling Conflicts**",
+    "**SECTION 9 — Program Phases & Timeline (Fully Detailed)**",
+    "**You said:**",
+    "**ChatGPT said:**",
+    "**SECTION 9 — Program Phases & Timeline (Fully Detailed)**",
+    "**9.1 Annual Program Overview Timeline**",
+    "**9.2 Phase 1 — PREP (Q1 2026)**",
+    "**9.2.1 Curriculum & Materials Development**",
+    "**9.2.2 Sponsorship & Facilitator Recruitment**",
+    "**9.2.3 Marketing Launch (Early Q1)**"
+  ],
+  "sections_html": {
+    "Career Accelerator Program (Future State)": "",
+    "High-Level Master Outline (Updated with Mentorship Component)": "",
+    "1. Program Vision & Purpose": "<p>The Career Accelerator is the chapter’s flagship, multi-track development program designed to:</p><ul><li>Strengthen career readiness for analysts and analyst-adjacent professionals</li><li>Provide practical learning, certification, and leadership pathways</li><li>Integrate AI tools into professional development</li><li>Expand access and community through mentorship and scholarships</li><li>Connect participants with senior professionals, recruiters, and employers</li><li>Position the chapter as the region’s innovation leader in “Skills Not Titles” programming</li></ul>",
+    "2. Program Structure": "<p>The program now consists of <strong>four program components</strong> supported by <strong>marketing, sponsorship, and events</strong>:</p>",
+    "Core Components": "<p>A. <strong>Core Career Sessions (6 sessions)<br/></strong>B. <strong>Optional ECBA Certification Track (5–6 weeks)<br/></strong>C. <strong>Optional Leadership Track (6 sessions)<br/></strong>D. <strong>Optional Mentorship Component (8–12 weeks)</strong> ← <strong>NEW</strong></p>",
+    "Support Pillars": "<p>E. <strong>Marketing &amp; Outreach<br/></strong>F. <strong>Sponsorship &amp; Events</strong></p><p>Components run <strong>sequentially, staggered, or independently</strong> based on volunteer capacity.</p>",
+    "3. Component A: Core Career Sessions (6 Sessions)": "<p>These sessions build foundational career development skills.</p>",
+    "SESSION 1 — Career Mapping (Persona + Grid Framework)": "<p><strong>Career Mapping Grid:</strong></p><ul><li><strong>X-axis:</strong> Functional → Technical → Management</li><li><strong>Y-axis:</strong> Industry/Vertical (Retail, Healthcare, Logistics, Finance, Nonprofit, Tech, etc.)</li></ul><p>Participants identify:</p><ul><li>Current quadrant</li><li>Target quadrant</li><li>Target industries</li><li>Skills roadmap</li><li>Personas (first job, career changer, mid-career, late career)</li></ul><p><strong>Outputs:</strong> Career Development Plan, AI-generated pathways, study track selection.</p>",
+    "SESSION 2 — Resume & LinkedIn Lab": "<p><strong>Purpose:<br/></strong>Equip participants with a job-ready resume and strong LinkedIn presence aligned to their grid position and target industry.</p>",
+    "SESSION 3 — Mock Interviews": "<p>Behavioral + technical interviews tailored to grid quadrants.</p>",
+    "SESSION 4 — Problem-Solving Challenge": "<p><strong>Purpose:<br/></strong>Allow participants to demonstrate critical thinking, teamwork, facilitation, and solution framing skills.</p>",
+    "SESSION 5 — Requirements Elicitation Workshop": "<p>Hands-on user stories, acceptance criteria, process mapping, and elicitation practice.</p>",
+    "SESSION 6 — Capstone Networking Mixer": "<p><strong>Purpose:<br/></strong>Expand professional networks, strengthen community bonds, and celebrate program milestones.</p>",
+    "4. Component B: Optional ECBA Certification Track (5–6 Weeks)": "<p>Weekly exam-prep cohort covering BABOK® foundations.</p><p><strong>Outputs:</strong></p><ul><li>ECBA Roadmap</li><li>BABOK-aligned scenarios</li><li>Weekly quizzes</li><li>Practice questions</li><li>ECBA Prep Completion Badge</li></ul>",
+    "5. Component C: Optional Leadership Track (6 Sessions)": "<p>Micro-course for communication, facilitation, influence, and conflict navigation.</p><p><strong>Outputs:</strong></p><ul><li>Leadership profile</li><li>Influence map</li><li>Facilitation framework</li><li>Leadership storytelling portfolio</li><li>Leadership Foundations Badge</li></ul>",
+    "6. Component D: Optional Mentorship Component (8–12 Weeks)": "<p>This optional layer strengthens networking, accountability, and role modeling across the program.</p>",
+    "Purpose of the Mentorship Track": "<ul><li>Provide sustained, personalized development</li><li>Improve confidence and professional identity</li><li>Strengthen application of skills between sessions</li><li>Support underrepresented / scholarship recipients</li><li>Extend the chapter’s community impact</li></ul>",
+    "Mentorship Structure": "",
+    "Format Options": "<ul><li><strong>1:1 Mentor Pairing</strong> (recommended for scholarship recipients)</li><li><strong>2:1 or 3:1 Pods</strong> (for broader scalability)</li></ul>",
+    "Length": "<ul><li>8–12 weeks (runs in parallel with or directly after the Core Sessions)</li></ul>",
+    "Cadence": "<ul><li>Bi-weekly 30–45 minute check-ins</li><li>Optional monthly “Mentor Huddles” with all participants</li></ul>",
+    "Mentor Profiles": "<ul><li>Senior BAs</li><li>PMs / Product Managers</li><li>Data/Technical Leads</li><li>HR / Talent Partners</li><li>Industry-specific mentors (Retail, Healthcare, Logistics, Finance)</li></ul><p>Mentors drawn from partner organizations and sponsor networks.</p>",
+    "Mentorship Deliverables": "",
+    "For Mentees": "<ul><li>Personalized Career Action Plan (refined across meetings)</li><li>Updated resume or portfolio</li><li>1–2 completed mock interviews</li><li>Refined leadership stories or requirements samples</li><li>Industry/role-specific insights</li><li>Expanded professional network</li><li>Optional: ECBA readiness or leadership growth summary</li></ul>",
+    "For Mentors": "<ul><li>Impact documentation (for employer/sponsor visibility)</li><li>Clear expectations and topic guides</li><li>Opportunities to support the chapter and strengthen the profession</li></ul>",
+    "Mentorship Events": "<ul><li>Mentor Orientation (before start)</li><li>Mid-Program Mentor Meetup</li><li>Mentor–Mentee Mixer (aligned with Capstone Networking event)</li><li>Recognition at AGM</li></ul>",
+    "Mentorship KPIs": "<ul><li>Mentor participation (≥10 mentors)</li><li>Mentee satisfaction (≥4/5)</li><li><strong>of meetings attended</strong></li><li>Demonstrated skill growth (pre vs post self-assessment)</li><li><strong>of mentor-driven referrals or introductions</strong></li><li><strong>of mentees who complete optional tracks (Leadership, ECBA)</strong></li></ul>",
+    "7. Component E: Marketing & Outreach": "",
+    "Goals": "<ul><li>Recruit Full Track and Drop-In attendees</li><li>Highlight mentorship &amp; scholarship pathways</li><li>Promote sponsor involvement</li><li>Increase chapter visibility across LinkedIn, newsletters, and partner networks</li></ul>",
+    "Deliverables": "<ul><li>Badge visibility campaign</li><li>Participant success stories (written + video)</li><li>Sponsor appreciation posts</li><li>“Career Accelerator by the Numbers” infographic</li><li>Newsletter recap</li><li>Promote the Pilot Report</li><li>AGM highlight reel</li><li>Launch 2027 interest form</li></ul>",
+    "Marketing Metrics": "<ul><li>LinkedIn CTR ≥10%</li><li>Newsletter open rate uplift</li><li>Badge visibility within 30 days</li><li>Sponsorship mentions and engagement</li></ul>",
+    "8. Component F: Sponsorship & Events": "",
+    "Sponsorship Roles": "<ul><li>Anchor Sponsor:<ul><li>Financial support</li><li>Senior facilitator participation</li><li>Host in-person mixer</li><li>Brand placement</li></ul></li><li>Professional Partners:<ul><li>Recruiters</li><li>Hiring managers</li><li>HR business partners</li></ul></li><li>Scholarship Sponsors:<ul><li>Fund 5–10 scholarships</li><li>Provide targeted support for underrepresented participants</li></ul></li></ul>",
+    "Event Portfolio": "<ul><li>Virtual Kickoff</li><li>Mid-Program Networking Hour</li><li>Capstone Mixer (virtual or in-person)</li><li>Mentor–Mentee Mixer</li><li>Facilitator Appreciation</li><li>AGM Recap Spotlight</li></ul>",
+    "9. Participation Models": "",
+    "Full Track": "<p>Includes:</p><ul><li>All 6 Core Sessions<ul><li>At least one optional track (ECBA or Leadership)</li><li>Mentorship (optional add-on)</li></ul></li><li>Earns: <strong>Career Accelerator Badge</strong></li></ul>",
+    "Drop-In": "<p>Attend any individual Core Session; no main badge.<br/>Badges earned only for ECBA or Leadership Tracks.</p>",
+    "Mentorship Add-On": "<p>Available to:</p><ul><li>Full Track participants</li><li>Scholarship recipients</li><li>ECBA + Leadership participants (if capacity allows)</li></ul>",
+    "10. Annual Cadence & Phases": "",
+    "Q1 — Prep": "<ul><li>Finalize curriculum</li><li>Mentor recruitment</li><li>Sponsor recruitment</li><li>Marketing campaign</li><li>Registration + scholarships open</li><li>Build AI prompt libraries</li><li>Prepare facilitator scripts</li></ul>",
+    "Q2–Q3 — Delivery": "<ul><li>Run Core Sessions</li><li>ECBA Track</li><li>Leadership Track</li><li>Mentorship Component</li><li>Mid-Program Pulse Survey</li><li>Networking events</li></ul>",
+    "Q3–Q4 — Evaluation": "<ul><li>End-of-program survey</li><li>Mentor/Mentee feedback</li><li>KPI analysis</li><li>Pilot Report</li><li>Sponsor recognition</li><li>AGM presentation</li><li>2027 roadmap creation</li></ul>",
+    "11. Unified Success Metrics": "",
+    "Primary KPIs": "<ul><li>Marketing CTR ≥ 10%</li><li>Registration numbers (Full Track + Drop-In)</li><li>Scholarship applications (5–10 recipients)</li><li>Post visibility and reactions</li></ul>",
+    "Secondary KPIs": "<ul><li>Badge visibility on LinkedIn within 30 days</li><li>Newsletter open rate uplift</li><li>Increase in chapter LinkedIn followers</li><li>Sponsor post engagement</li><li>Cross-association engagement (PMI, SHRM, etc.)</li></ul>",
+    "You said:": "<p>next</p>",
+    "ChatGPT said:": "<p>Below is <strong>SECTION 9 — Program Phases &amp; Timeline (Fully Detailed).<br/></strong>When you're ready, say <strong>“Next Section”</strong> for Section 10 (Unified Success Metrics).</p>",
+    "SECTION 1 — Program Vision, Purpose, and Strategic Alignment (Detailed)": "",
+    "1.1 Program Vision": "<p>The Career Accelerator is designed to be the region’s <strong>premier career mobility program</strong> for professionals in business analysis and adjacent roles. It aligns with IIBA’s “Skills Not Titles” philosophy by focusing on <strong>practical skills, employability, and community building</strong> rather than job titles or seniority.</p><p>The vision is to create a <strong>sustainable, repeatable, high-impact development pipeline</strong> that:</p><ul><li>Connects early-career and transitioning professionals with real opportunities.</li><li>Provides clear pathways into BA, PM, Product, Data, and Leadership roles.</li><li>Integrates AI skills as a core element of modern professional competence.</li><li>Builds a vibrant, inclusive professional community across East Tennessee.</li></ul>",
+    "1.2 Program Purpose": "<p>The Career Accelerator exists to solve three problems observed across members, employers, and the regional talent market:</p>",
+    "1. Skill Gaps & Limited Practical Experience": "<p>Many aspiring analysts and career changers struggle to demonstrate the practical competencies employers look for—requirements analysis, facilitation, communication, and problem-solving.</p><p>The program provides <strong>hands-on sessions</strong>, <strong>scenario-based workshops</strong>, <strong>mentorship</strong>, and <strong>resume/interview support</strong> to close these gaps.</p>",
+    "2. Lack of Clear Professional Pathways": "<p>Participants often do not know:</p><ul><li>What roles exist</li><li>How to move between functional, technical, and managerial tracks</li><li>How to transition across industries (verticals)</li></ul><p>The <strong>Career Mapping Grid</strong> (Functional → Technical → Management × Industry) gives participants a clear, structured lens for career planning.</p>",
+    "3. Limited Networking and Employer Access": "<p>Without a professional network, job mobility suffers.<br/>The Career Accelerator brings in:</p><ul><li>Recruiters</li><li>Senior BAs, PMs, POs</li><li>Employers and sponsors</li></ul><p>…and gives participants <strong>direct, repeated access</strong> to decision-makers.</p>",
+    "1.3 Strategic Alignment": "<p>The Career Accelerator directly supports key chapter priorities:</p>",
+    "Grow engagement and membership through high-value programming": "<ul><li>Structured program with multi-track options (Core, ECBA, Leadership, Mentorship)</li><li>Targeted networking opportunities</li><li>High-visibility events and mixers</li></ul>",
+    "Improve career readiness and certification pathways": "<ul><li>Dedicated ECBA prep track</li><li>Practical application across all sessions</li><li>Resume, LinkedIn, mock interviews, and portfolio deliverables</li></ul>",
+    "Build partnerships with employers, recruiters, and professional associations": "<ul><li>Facilitator participation from senior professionals</li><li>Recruiter-led resume and interview labs</li><li>PMI / employer / university cross-promotion</li></ul>",
+    "Increase accessibility and inclusion": "<ul><li>Scholarships (5–10)</li><li>Optional mentorship expansion</li><li>Persona-based marketing (first job, career changer, mid-career, late-career)</li></ul>",
+    "Lead the region in AI-enabled professional development": "<ul><li>AI tools integrated into every session</li><li>AI prompt libraries for career, ECBA, and leadership exercises</li><li>Measurable AI adoption KPI (≥70%)</li></ul>",
+    "1.4 Program Principles": "<p>The Career Accelerator operates on six core principles:</p>",
+    "1. Practical First": "<p>Every session produces a real deliverable (resume, requirements document, interview feedback).</p>",
+    "2. Highly Personalized": "<p>Persona-based approach + Career Mapping Grid + Mentorship (optional).</p>",
+    "3. Accessible and Inclusive": "<p>Drop-in sessions, scholarships, mentorship, flexible cadence.</p>",
+    "4. Community-Centered": "<p>Built around senior professional engagement, partnerships, and mixers.</p>",
+    "5. AI-Integrated": "<p>Participants use AI tools for resumes, interview prep, requirements, career mapping, and learning tasks.</p>",
+    "6. Measurable Impact": "<p>Success is defined by KPIs:</p><ul><li>Completion</li><li>Engagement</li><li>Networking</li><li>AI adoption</li><li>Badge visibility</li><li>Scholarship impact</li></ul>",
+    "1.5 Outcomes & Impact Targets": "<p>By the end of 2026, the program aims to produce:</p>",
+    "Participant-Level Outcomes": "<ul><li>Clarified career direction</li><li>Updated resume and LinkedIn profile</li><li>Improved interviewing skills</li><li>Basic requirements and documentation competency</li><li>Expanded professional network</li><li>ECBA/Leadership track readiness</li><li>Long-term mentor relationships</li></ul>",
+    "Chapter-Level Outcomes": "<ul><li>Increased membership engagement</li><li>Stronger employer partnerships</li><li>Increased visibility and reputation</li><li>Documented pilot outcomes to scale in 2027</li></ul>",
+    "1.6 What’s Unique About This Program": "<ul><li><strong>Multi-track flexibility:</strong> Full Track, ECBA, Leadership, Mentorship, Drop-In</li><li><strong>Career Mapping Grid:</strong> Functional–Technical–Management × Industry</li><li><strong>AI-powered learning:</strong> Prompts embedded in every module</li><li><strong>Mentorship Option:</strong> Structured 8–12 week add-on</li><li><strong>Sponsor-Integrated:</strong> Employers engage directly with participants</li><li><strong>Practical deliverables:</strong> Not theory—skill-building with outputs</li></ul><p>If this captures the intended direction, say <strong>“Next Section”</strong> and I will generate:</p>",
+    "SECTION 2 — Program Structure & Participation Models (Detailed)": "<p>The Career Accelerator is designed as a <strong>flexible, modular, multi-track</strong> program that can support participants with different goals, levels of experience, schedules, and learning preferences. Tracks may run <strong>sequentially or independently</strong>, depending on volunteer capacity and sponsorship commitments.</p>",
+    "2.1 Program Architecture Overview": "<p>The Career Accelerator includes four core components:</p>",
+    "A. Core Career Sessions (6 sessions)": "<p>A foundational set of practical career development workshops delivered virtually.</p>",
+    "B. Optional ECBA Certification Track (5–6 weeks)": "<p>Exam-aligned learning for participants pursuing a recognized BA certification.</p>",
+    "C. Optional Leadership Track (6 sessions)": "<p>A micro-course for early-career professionals developing communication, influence, and facilitation skills.</p>",
+    "D. Optional Mentorship Component (8–12 weeks)": "<p>Structured 1:1 or small-pod mentorship layered on top of any track.</p>",
+    "Supported by two critical pillars:": "<ul><li><strong>E. Marketing &amp; Outreach</strong></li><li><strong>F. Sponsorship &amp; Events</strong></li></ul>",
+    "2.2 How the Components Fit Together": "",
+    "Flexible Not Concurrent Model": "<ul><li>Tracks do <strong>not</strong> need to run at the same time.</li><li>Core Sessions serve as the <strong>anchor</strong> for each cohort.</li><li>ECBA and Leadership Tracks may run <strong>before, after, or between</strong> core sessions.</li><li>Mentorship can run <strong>parallel</strong> to any track or extend after it.</li></ul><p>This structure reduces volunteer load and improves long-term sustainability.</p>",
+    "2.3 Participation Models": "<p>Participants may choose their level of involvement:</p>",
+    "Model 1 — Full Track (Flagship Experience)": "<p>Designed for participants seeking a complete, structured development arc.</p><p><strong>Includes:</strong></p><ul><li>All 6 Core Sessions<ul><li>One Optional Track (ECBA OR Leadership)</li><li>Capstone Networking Mixer</li><li>Access to Mentorship Track (optional)</li></ul></li></ul><p><strong>Deliverables:</strong></p><ul><li>Career Development Plan</li><li>Updated Resume &amp; LinkedIn</li><li>Mock Interview Feedback</li><li>Requirements Documentation Sample</li><li>Networking Contacts</li><li>Optional: ECBA or Leadership Badge</li></ul><p><strong>Credential Earned:</strong></p>",
+    "Career Accelerator Completion Badge": "<p><strong>Ideal for:</strong></p><ul><li>Early career professionals</li><li>Career changers</li><li>Professionals targeting promotions or role transitions</li><li>Scholarship recipients</li></ul>",
+    "Model 2 — Drop-In Participation": "<p>Participants attend any of the six core sessions without commitment.</p><p><strong>Includes:</strong></p><ul><li>Access to any single Core Session</li><li>Access to associated templates and worksheets</li><li>Access to Career Mapping tools</li></ul><p><strong>Deliverables:</strong></p><ul><li>Session-specific exercises only</li></ul><p><strong>Credential Earned:</strong></p><ul><li>None (unless the participant completes an optional track)</li></ul><p><strong>Ideal for:</strong></p><ul><li>Members with limited time</li><li>Experienced professionals seeking refreshers</li><li>Those exploring whether to pursue the Full Track next year</li></ul>",
+    "Model 3 — Certification Track Participant (Optional Track)": "<p>Participants enroll in the ECBA Track only.</p><p><strong>Includes:</strong></p><ul><li>All ECBA sessions</li><li>Study roadmap</li><li>Weekly quizzes</li><li>Practice exam</li><li>Optional mentorship pairing</li><li>Access to Career Mapping outputs when attending Session 1 (recommended)</li></ul><p><strong>Credential Earned:</strong></p>",
+    "ECBA Prep Completion Badge": "<p><strong>Ideal for:</strong></p><ul><li>Entry-level analysts</li><li>Career changers</li><li>Students</li><li>Professionals wanting structured exam prep</li></ul>",
+    "Model 4 — Leadership Track Participant (Optional Track)": "<p>Participants enroll solely in the Leadership Track.</p><p><strong>Includes:</strong></p><ul><li>All 6 leadership sessions</li><li>Leader profile assessment</li><li>Influence maps</li><li>Facilitated communication practice</li><li>Optional mentorship pairing</li></ul><p><strong>Credential Earned:</strong></p>",
+    "Leadership Foundations Badge": "<p><strong>Ideal for:</strong></p><ul><li>Aspiring managers</li><li>Analysts transitioning to lead roles</li><li>PM/PO professionals building influence and clarity</li><li>Mid-career professionals seeking advancement</li></ul>",
+    "Model 5 — Mentorship Add-On Participant (Optional Layer)": "<p>Participants opt into the 8–12 week Mentorship Component.</p><p><strong>Format Options:</strong></p><ul><li>1:1 pairing</li><li>2–3 person mentorship pods</li></ul><p><strong>Includes:</strong></p><ul><li>Personalized guidance</li><li>Accountability to goals</li><li>Review of resumes, stories, examples</li><li>Role-specific advice (based on career mapping quadrant)</li><li>Industry-specific insights (based on vertical selection)</li></ul><p><strong>Credential Earned:</strong></p><ul><li>None (mentorship is an enhancement, not a credential)</li></ul><p><strong>Ideal for:</strong></p><ul><li>Full Track participants</li><li>Scholarship recipients</li><li>ECBA or Leadership participants seeking extra support</li></ul>",
+    "2.4 Participant Journey Overview": "<p>A typical participant pathway:</p>",
+    "Step 1 — Registration": "<p>Choose Full Track, optional tracks, or Drop-In.</p>",
+    "Step 2 — Career Mapping": "<p>All Full Track participants start with Session 1 (Career Mapping Grid).</p>",
+    "Step 3 — Core Sessions": "<p>Attend Sessions 2–6 at bi-weekly cadence.</p>",
+    "Step 4 — Optional Path(s)": "<p>Choose ECBA Track or Leadership Track.</p>",
+    "Step 5 — Mentorship (Optional)": "<p>Pairing begins mid-program and continues into the post-program window.</p>",
+    "Step 6 — Capstone Networking Mixer": "<p>Make employer and peer connections.</p>",
+    "Step 7 — Badges + LinkedIn Visibility": "<p>Full Track, ECBA, and Leadership badges awarded.</p>",
+    "Step 8 — Post-Program Impact": "<p>Participants build career momentum, schedule ECBA exams, pursue roles, or advance internally.</p>",
+    "2.5 Expected Annual Volume": "",
+    "Target Enrollment for Pilot Year": "<ul><li><strong>Full Track:</strong> ≥ 10 participants</li><li><strong>Drop-In:</strong> 20–40 participants across sessions</li><li><strong>ECBA Track:</strong> 10–20 participants</li><li><strong>Leadership Track:</strong> 10–15 participants</li><li><strong>Mentorship Component:</strong> 10–15 mentees, 10+ mentors</li></ul><p>Over time, these targets can scale as sponsorship and volunteer capacity grow.</p>",
+    "2.6 Accessibility & Inclusion Focus": "<p>The program is deliberately designed to minimize barriers:</p><ul><li>Scholarships for 5–10 participants</li><li>Flexible attendance</li><li>Virtual-first delivery</li><li>Accessible formats (slides, templates, transcripts)</li><li>Clear pathways for career changers</li><li>AI tools to assist participants with neurodivergence, ESL, or limited experience</li></ul>",
+    "2.7 How This Structure Supports KPIs": "<ul><li><strong>Participant Completion ≥ 80%:<br/></strong>Modular structure with reminders and mentorship improves retention.</li><li><strong>Engagement Score ≥ 4/5:<br/></strong>Applied learning and hands-on deliverables improve perceived value.</li><li><strong>Enrollment ≥ 10 Full Track:<br/></strong>Multiple pathways + scholarships widen appeal.</li><li><strong>Facilitator Participation:<br/></strong>Tracks bring in senior professionals, recruiters, and sponsors naturally.</li><li><strong>Networking Outcomes:<br/></strong>Mentorship + mixers + group work create repeat connection points.</li><li><strong>AI Adoption ≥ 70%:<br/></strong>AI prompts embedded across every track.</li><li><strong>Badge Visibility:<br/></strong>Clear track badges encourage LinkedIn posting.</li></ul><p>If this section looks correct, say <strong>“Next Section”</strong> and I will generate:</p>",
+    "SECTION 3 — Core Career Sessions (6 Sessions, Fully Detailed)": "<p>The Core Career Sessions are the anchor of the Career Accelerator.<br/>They provide the <strong>hands-on, practical career development foundation</strong> that supports every optional track, mentorship component, and networking event.</p><p>All sessions are designed for <strong>virtual delivery</strong>, include <strong>AI integration</strong>, and result in <strong>tangible take-home deliverables</strong>.</p>",
+    "SESSION 1 — Career Mapping (Persona-Based + Grid Framework)": "<p><strong>Purpose:<br/></strong>Give participants a structured, personalized understanding of where they are now, where they want to go, and which roles/industries best align with their interests and skills.</p>",
+    "Session Components": "",
+    "1. Career Mapping Grid Introduction": "<p>Participants learn the 2-axis system:</p><p><strong>X-Axis: Functional → Technical → Management</strong></p><ul><li>Functional examples: BA, PO, Ops Analyst, UX Research (lite)</li><li>Technical examples: Systems Analyst, Data Analyst, QA, Technical BA</li><li>Management examples: PM, Product Manager, Team Lead, Scrum Master</li></ul><p><strong>Y-Axis: Industry / Vertical</strong></p><ul><li>Retail, Healthcare, Insurance, Logistics, Finance, Education, Manufacturing</li><li>Public Sector, Nonprofit, Tech/SaaS, Hospitality, Energy, etc.</li></ul><p>Participants place themselves on the grid <strong>today</strong> and identify where they want to be <strong>in 1–2 years</strong>.</p>",
+    "2. Persona Selection": "<p>Participants choose the persona that fits their journey:</p><ul><li>First Job / Student</li><li>Career Changer</li><li>Mid-Career Upskiller</li><li>Late-Career Pivot</li></ul><p>Each persona has unique AI prompt paths and skill recommendations.</p>",
+    "3. Role Exploration Exercise": "<p>Participants identify:</p><ul><li>2–3 target roles on their chosen X-axis</li><li>2–3 industries on the Y-axis</li><li>One short-term and one long-term role goal</li></ul>",
+    "4. AI-Assisted Career Roadmap": "<p>Participants use AI to generate:</p><ul><li>A personalized 90-day skill plan</li><li>Resume alignment suggestions</li><li>Recommended certifications / skills based on quadrant and industry</li><li>Sample job titles aligned with their grid placement</li></ul>",
+    "Guest or Facilitator Role": "<p>A senior BA/PM/PO leader shares:</p><ul><li>Role evolution in their career</li><li>How grid-based thinking applied to their transitions</li></ul>",
+    "1. Role-Aligned Resume Structure": "<p>Functional, technical, and managerial resumes differ:</p><ul><li>Functional: requirements, stakeholders, facilitation</li><li>Technical: systems, data, tools, integrations</li><li>Management: planning, prioritization, conflict handling</li></ul><p>Participants tailor their resume accordingly.</p>",
+    "2. Targeted Resume Editing": "<p>Breakouts with recruiters and senior professionals to refine:</p><ul><li>Summary</li><li>Bullet points</li><li>Skills section</li><li>Achievements aligned with target quadrant</li></ul>",
+    "3. LinkedIn Optimization": "<p>Participants rewrite:</p><ul><li>Headline</li><li>About section</li><li>First 3 experience bullets</li><li>“Open to Work” role settings aligned to their grid quadrant</li></ul>",
+    "4. AI Assistance": "<p>AI rewrites participants’ pitches:</p><ul><li>Into professional tone</li><li>Into conversational tone</li><li>Tailored to a specific employer or industry</li></ul>",
+    "Guest Contributors": "<ul><li>PM/PO leaders</li><li>Strategy/operations professionals</li></ul>",
+    "SESSION 3 — Mock Interviews (Behavioral + Technical)": "<p><strong>Purpose:<br/></strong>Develop confidence and fluency in answering interview questions tailored to their grid quadrant.</p>",
+    "1. Behavioral Interview Frameworks": "<p>Participants practice:</p><ul><li>STAR (Situation–Task–Action–Result)</li><li>CAR (Challenge–Action–Result)</li><li>CHO (Context–Hurdle–Outcome)</li></ul>",
+    "2. Technical / Role-Specific Interviews": "<p>Questions vary by quadrant:</p><ul><li><strong>Functional:</strong> requirements clarity, BA task questions</li><li><strong>Technical:</strong> SQL basics, APIs, data analysis, test strategy</li><li><strong>Management:</strong> conflict, prioritization, tradeoffs</li></ul>",
+    "3. Live Interview Rotations": "<p>Breakout groups rotate:</p><ul><li>Interviewer</li><li>Interviewee</li><li>Observer</li></ul><p>Each rotation includes a short debrief.</p>",
+    "4. AI Question Bank": "<p>AI generates:</p><ul><li>10 behavioral questions</li><li>10 technical/depth questions</li><li>5 industry-aligned questions</li></ul>",
+    "1. Case Study Challenge": "<p>Examples:</p><ul><li>“Membership Portal Redesign”</li><li>“Customer Service Process Improvement”</li><li>“Inventory Outage Analysis”</li><li>“Healthcare Intake Bottleneck”</li></ul>",
+    "2. Team Problem-Solving Framework": "<p>Teams work through:</p><ul><li>Problem definition</li><li>Root cause analysis</li><li>Options analysis</li><li>Recommendation</li></ul>",
+    "3. Presentation Development": "<p>Teams prepare a quick:</p><ul><li>3–5 slide deck</li><li>Solution summary</li><li>Risk / impact analysis</li></ul>",
+    "4. AI Support": "<p>AI used to:</p><ul><li>Generate alternative ideas</li><li>Identify risks and dependencies</li><li>Suggest metrics to evaluate solutions</li></ul>",
+    "SESSION 5 — Requirements Elicitation & Documentation Workshop": "<p><strong>Purpose:<br/></strong>Teach participants core analysis skills needed across BA, PM, PO, and operations roles.</p>",
+    "1. Elicitation Simulation": "<p>Participants practice a mock stakeholder interview:</p><ul><li>Asking clarifying questions</li><li>Identifying assumptions</li><li>Extracting requirements</li></ul>",
+    "2. Requirements Documentation": "<p>Participants create:</p><ul><li>User stories</li><li>Acceptance criteria</li><li>Process maps (optional)</li><li>Lo-fi use case descriptions</li></ul>",
+    "3. Requirements Quality Check": "<p>Teams evaluate requirements for:</p><ul><li>Testability</li><li>Clarity</li><li>Feasibility</li><li>Value alignment</li></ul>",
+    "Guest Contributor": "<ul><li>Senior BA</li><li>Product Owner</li></ul>",
+    "Event Components": "",
+    "1. Pitch Practice": "<p>Participants craft:</p><ul><li>30-second elevator pitch</li><li>Grid-aligned career summary</li><li>Industry-specific value statement</li></ul>",
+    "2. Networking Circles": "<p>Sponsor-led or facilitated breakout rotations based on:</p><ul><li>Quadrant (Functional/Technical/Management)</li><li>Industry interest</li><li>Job-seeking status</li></ul>",
+    "3. Mentor–Mentee Introductions": "<p>Participants meet mentors as part of the optional track.</p>",
+    "Hosting": "<ul><li>Anchor Sponsor HQ (preferred)</li><li>Virtual platform if required</li></ul><p>If this matches your expectations, say <strong>“Next Section”</strong> and I’ll generate:</p>",
+    "SECTION 4 — Optional ECBA Certification Track (Fully Detailed)": "<p>The ECBA Certification Track is an optional, <strong>5–6 week cohort-based</strong> learning experience designed for early-career analysts, career changers, and students seeking the <strong>Entry Certificate in Business Analysis (ECBA)</strong>.<br/>This track emphasizes <strong>applied learning</strong>, <strong>scenario-based exercises</strong>, and <strong>AI-powered study tools</strong>.</p><p>The track is aligned to BABOK® v3 and the Business Analysis Standard.</p>",
+    "4.1 Track Objectives": "<p>Participants will:</p><ul><li>Understand core BA concepts and tasks at the ECBA level</li><li>Learn structured approaches to elicitation, requirements, and analysis</li><li>Practice applying BABOK concepts to real scenarios</li><li>Build exam-taking skills through comprehension checks and a final practice test</li><li>Create a personal study and exam scheduling plan</li><li>Increase confidence in pursuing analyst roles or BA-adjacent jobs</li></ul>",
+    "Badge Awarded:": "<p><strong>Leadership Foundations for Analysts Badge</strong></p>",
+    "4.2 Structure & Cadence": "<ul><li><strong>5 core sessions</strong> + <strong>optional Week 6 practice exam</strong></li><li><strong>Weekly 60–90-minute virtual sessions</strong></li><li><strong>Weekly pre-work</strong> (light reading + quizzes)</li><li><strong>AI tool integration</strong> in every session</li><li><strong>Optional mentorship pairing</strong> for extra support</li></ul><p>This track can run:</p><ul><li><strong>After</strong> the Core Career Sessions</li><li><strong>Between</strong> Core Sessions</li><li><strong>As a stand-alone sprint</strong></li></ul>",
+    "4.3 Session-by-Session Curriculum (Detailed)": "",
+    "ECBA Week 1 — BA Foundations & BACCM": "<p><strong>Goal:</strong> Establish the conceptual foundation for the exam and real-world practice.</p>",
+    "Pre-Work:": "<ul><li>BABOK® Ch. 7</li><li>30-question practice test</li><li>AI prompt: “Explain solution limitations vs enterprise limitations.”</li></ul>",
+    "In-Session Activities:": "<ol><li><strong>Leadership Story Frameworks</strong><ul><li>STAR / CAR</li><li>Challenge–Action–Outcome storytelling</li><li>Vision messaging for future-focused stories</li></ul></li><li><strong>Story Refinement Workshop</strong><ul><li>Participants share real examples</li><li>Peers and facilitators provide refinement feedback</li></ul></li><li><strong>AI Exercise:</strong><ul><li>AI rewrites:<ul><li>Formal version</li><li>Casual version</li><li>Executive summary version</li></ul></li></ul></li></ol>",
+    "Deliverables:": "<ul><li>2–3 refined leadership stories</li><li>Improved leadership pitch</li><li>AI-enhanced story drafts</li></ul>",
+    "ECBA Week 2 — Business Analysis Planning & Elicitation": "<p><strong>Goal:</strong> Understand how BA work is planned and how elicitation is structured.</p>",
+    "ECBA Week 3 — Requirements Life Cycle + Strategy (Light)": "<p><strong>Goal:</strong> Learn how requirements evolve and understand strategy at a recognition level.</p>",
+    "ECBA Week 4 — Requirements Analysis & Design Definition": "<p><strong>Goal:</strong> Develop the skills to analyze requirements, create basic models, and ensure clarity.</p>",
+    "ECBA Week 5 — Solution Evaluation + Exam Prep Review": "<p><strong>Goal:</strong> Cover final BABOK content and prepare for the exam.</p>",
+    "ECBA Week 6 (Optional) — Full Practice Exam + Strategy Lab": "<p><strong>Goal:</strong> Build exam confidence and refine remaining knowledge gaps.</p>",
+    "4.4 AI Integration Across the ECBA Track": "<p>Every week includes targeted AI use, including:</p><ul><li>Flashcards</li><li>Requirement rewrites</li><li>Practice questions</li><li>Stakeholder mapping</li><li>Study plans</li><li>Current/Future state diagrams</li><li>Acceptance criteria generation</li></ul><p>This drives the <strong>≥70% AI adoption KPI</strong> for the overall program.</p>",
+    "4.5 Mentorship Alignment": "<p>Participants who opt into mentorship may receive:</p><ul><li>Weekly or biweekly study accountability</li><li>Review of requirements, story maps, or practice questions</li><li>Mock interviews focused on BA mindset</li><li>Help refining their exam timeline</li><li>Industry-specific BA guidance</li></ul><p>Mentorship increases completion and confidence rates.</p>",
+    "4.6 ECBA Track Success Metrics": "",
+    "Primary Indicators": "<ul><li>Completion ≥ 80%</li><li>Average session satisfaction ≥ 4/5</li><li>ECBA readiness score improvement</li><li>% scheduling exam within 3 months</li></ul>",
+    "Secondary Indicators": "<ul><li>AI adoption ≥ 70%</li><li>Mentor engagement</li><li>Scholarship recipient progress</li><li>Role-placement or job-transition stories</li></ul><p>If this matches your intent, say <strong>“Next Section”</strong> and I’ll generate:</p>",
+    "SECTION 5 — Optional Leadership Track (Fully Detailed)": "<p>The Leadership Track is a <strong>6-session micro-course</strong> that develops foundational leadership, communication, and influence skills for early-career analysts, career changers, and aspiring managers.<br/>It pairs especially well with the Core Sessions and offers a bridge between entry-level skill-building and long-term career progression.</p><p>The track is <strong>scenario-based, practice-heavy, and AI-integrated</strong>, with exercises grounded in real BA, PM, Product, and Data contexts.</p>",
+    "5.1 Track Objectives": "<p>Participants will learn to:</p><ul><li>Communicate clearly and professionally in meetings and documentation</li><li>Facilitate conversations and create psychological safety</li><li>Ask high-quality questions that uncover context and assumptions</li><li>Navigate conflict and collaborate across teams</li><li>Influence stakeholders without authority</li><li>Make structured decisions and communicate recommendations</li><li>Tell leadership stories that demonstrate impact</li></ul>",
+    "5.2 Structure & Cadence": "<ul><li><strong>6 sessions</strong>, each <strong>60–90 minutes</strong>, virtual</li><li>Delivered <strong>bi-weekly</strong> or <strong>monthly</strong></li><li>Follows or runs parallel to Core Sessions</li><li>AI exercises in each session</li><li>Optional mentorship support for deeper practice</li></ul>",
+    "5.3 Session-by-Session Curriculum (Detailed)": "",
+    "Leadership Session 1 — Leader Identity & Professional Presence": "<p><strong>Purpose:<br/></strong>Start with self-awareness: how you show up, how you’re perceived, and what leadership means in analyst roles.</p>",
+    "Leadership Session 2 — Communication Clarity & Meeting Facilitation": "<p><strong>Purpose:<br/></strong>Build practical facilitation skills and communication clarity for business settings.</p>",
+    "Leadership Session 3 — Leading Through Questions (Critical Thinking)": "<p><strong>Purpose:<br/></strong>Teach how to ask questions that improve understanding and reveal hidden assumptions.</p>",
+    "Leadership Session 4 — Stakeholder Influence & Conflict Navigation": "<p><strong>Purpose:<br/></strong>Develop influence skills and improve collaboration with difficult personalities.</p>",
+    "Leadership Session 5 — Decision-Making, Prioritization & Value Thinking": "<p><strong>Purpose:<br/></strong>Help analysts make structured recommendations and weigh trade-offs.</p>",
+    "Leadership Session 6 — Leadership Storytelling & Career Influence": "<p><strong>Purpose:<br/></strong>Teach participants how to articulate their impact—essential for interviews, promotions, and leadership roles.</p>",
+    "5.4 AI Integration Throughout the Track": "<p>AI is used to:</p><ul><li>Rewrite messages for clarity</li><li>Generate questions</li><li>Role-play difficult stakeholders</li><li>Build recommendation frameworks</li><li>Improve storytelling</li><li>Write leadership goal plans</li><li>Analyze strengths or communication patterns</li></ul><p>Every session contains a short, structured AI prompt to ensure <strong>≥70% AI adoption</strong>.</p>",
+    "5.5 Mentorship Alignment": "<p>Participants who choose mentorship receive:</p><ul><li>Leadership scenario guidance</li><li>Practice facilitation or conflict scenarios</li><li>Review of stories and communication drafts</li><li>Career navigation advice based on grid quadrant</li></ul><p>Mentorship accelerates applied skill growth.</p>",
+    "5.6 Leadership Track Success Metrics": "",
+    "SECTION 6 — Optional Mentorship Component (Fully Detailed)": "<p>The Mentorship Component is an <strong>8–12 week optional overlay</strong> that enhances participant experience, accelerates skill development, and strengthens community involvement.<br/>It is structured, supported, flexible, and aligned with Full Track, ECBA, and Leadership participants.</p><p>Mentorship is a key differentiator that increases program credibility, retention, and networking outcomes—directly supporting multiple KPIs.</p>",
+    "6.1 Mentorship Purpose": "<p>The mentorship offering exists to provide:</p><ul><li>Personalized guidance and accountability</li><li>Role modeling and leadership exposure</li><li>Support with resumes, interviews, requirements, and career decisions</li><li>Industry-specific insights aligned with the <strong>Career Mapping Grid</strong></li><li>An inclusive bridge for scholarship recipients and underrepresented groups</li><li>A long-term community-building structure within the chapter</li></ul><p>It reinforces the “Skills Not Titles” and career mobility mission.</p>",
+    "6.2 Mentorship Formats": "<p>Participants may choose from:</p>",
+    "1. One-to-One Mentorship (Recommended for Scholarships)": "<ul><li>Best for those with specific goals (ECBA, role transition, portfolio building)</li><li>Best match for high-support needs (students, career changers)</li></ul>",
+    "2. Micro-Pods (2–3 Mentees per Mentor)": "<ul><li>Encourages peer support</li><li>Scales more efficiently</li><li>Ideal for Leadership Track participants or groups with similar goals</li></ul>",
+    "3. Hybrid Model (Pod + Optional 1:1)": "<ul><li>Pods meet bi-weekly</li><li>1:1 as needed for mock interviews or personal challenges</li></ul><p>Flexibility allows you to adjust based on mentor availability.</p>",
+    "6.3 Mentor Profiles": "<p>Mentors are drawn from:</p><ul><li>Senior Business Analysts</li><li>Project Managers</li><li>Product Owners / Product Managers</li><li>Data Analysts / Systems Analysts</li><li>HR/Talent professionals</li><li>Sponsor organizations</li><li>Local PMI and IIBA senior members</li></ul><p>Ideal mentor profile:</p><ul><li>5–20+ years of experience</li><li>Comfortable guiding early-career professionals</li><li>Available 30–45 minutes bi-weekly</li></ul>",
+    "6.4 Mentorship Timeline (8–12 Weeks)": "",
+    "Week 0 — Matching": "<ul><li>Based on: career goals, quadrant selection (Functional/Technical/Management), industry interest</li><li>Secondary match factors: persona type, scheduling needs, optional ECBA/Leadership track</li></ul>",
+    "Week 1 — Orientation": "<ul><li>Mentor training (30 minutes)</li><li>Mentee orientation (30 minutes)</li><li>Overview of: expectations, boundaries, suggested topics, templates, and the Career Mapping Grid</li></ul>",
+    "Weeks 2–10 — Bi-Weekly Meetings (4–5 Sessions)": "<p>Meeting themes include:</p><ul><li>Career Mapping follow-up</li><li>Resume support and job search strategy</li><li>Mock interview practice</li><li>Requirements or BA skill development</li><li>Feedback on session deliverables (from Core, ECBA, Leadership tracks)</li><li>Role transitions and promotion planning</li><li>Industry-specific knowledge exchange</li></ul>",
+    "Week 5 / Midpoint Check-In": "<ul><li>Quick satisfaction/match survey</li><li>Adjust pairings if needed</li><li>Identify additional support</li></ul>",
+    "Week 10–12 — Wrap-Up": "<ul><li>Final reflection</li><li>Career plan refinement</li><li>Discuss next steps (certifications, job searching, leadership opportunities)</li><li>Request LinkedIn recommendations (optional)</li></ul>",
+    "6.5 Mentorship Deliverables": "",
+    "6.6 Mentor & Mentee Guides": "",
+    "Mentor Guide Includes:": "<ul><li>Conversation starters</li><li>Common early-career pitfalls</li><li>Coaching questions</li><li>Tips for supporting neurodivergent or career-changing mentees</li><li>Boundaries &amp; professionalism guidelines</li><li>Template for providing constructive feedback</li></ul>",
+    "Mentee Guide Includes:": "<ul><li>How to prepare for meetings</li><li>How to set goals and track progress</li><li>What to ask mentors</li><li>Guidance on professional etiquette</li><li>Template for Career Action Plan</li><li>Accountability habits</li></ul>",
+    "6.7 AI Integration in Mentorship": "<p>Mentors may use AI to help mentees with:</p><ul><li>Drafting or refining resumes</li><li>Creating interview questions</li><li>Analyzing stakeholder situations</li><li>Rewriting requirements, user stories, acceptance criteria</li><li>Summarizing career goals into actionable steps</li><li>Creating personalized study plans</li><li>Preparing industry/company research</li></ul><p>Mentees use AI to:</p><ul><li>Prepare questions for their mentor</li><li>Generate drafts for review</li><li>Reflect on strengths or blind spots</li></ul><p>This directly supports your <strong>≥70% AI adoption KPI</strong>.</p>",
+    "6.8 Touchpoints with Other Tracks": "",
+    "Core Sessions": "<ul><li>Mentors can review resume drafts, pitch practice scripts, and requirements documentation.</li></ul>",
+    "ECBA Track": "<ul><li>Mentors support weekly quizzes, study schedules, BABOK interpretation, and mock exam questions.</li></ul>",
+    "Leadership Track": "<ul><li>Mentors help with conflict navigation scenarios, leadership stories, and stakeholder influence maps.</li></ul>",
+    "Sponsorship & Events": "<ul><li>Mentors attend mixers, roundtables, and networking events to connect with broader participant groups.</li></ul>",
+    "6.9 Mentorship KPIs": "",
+    "Primary": "<ul><li>Number of sponsors involved (goal: 2–4)</li><li>Number of senior professionals engaged (≥3)</li><li>Number of recruiters engaged (≥2)</li><li>Scholarship funding achieved (5–10 recipients)</li></ul>",
+    "Secondary": "<ul><li>Sponsor satisfaction score</li><li>Returning sponsors for next cohort</li><li>Sponsor LinkedIn engagement</li><li>Attendance at sponsor-hosted events</li></ul>",
+    "6.10 Risk Mitigation": "",
+    "Risk: Mentor–Mentee Mismatch": "<p><strong>Mitigation:</strong></p><ul><li>Quick midpoint survey</li><li>Option to re-match discreetly</li><li>Provide a pool of backup mentors</li></ul>",
+    "Risk: Low Mentor Capacity": "<p><strong>Mitigation:</strong></p><ul><li>Use micro-pods</li><li>Recruit from sponsors</li><li>Tap PMI, BA managers, and local employers</li><li>Cap mentorship participation if necessary</li></ul>",
+    "Risk: Mentee Drop-Off": "<p><strong>Mitigation:</strong></p><ul><li>Integrate mentorship touchpoints with Core Sessions</li><li>Use automated reminders</li><li>Provide quick wins (resume review, interview prep)</li></ul>",
+    "Risk: Mentor Overload": "<p><strong>Mitigation:</strong></p><ul><li>Clear time expectations (4–5 meetings total)</li><li>Provide templates/prompts to reduce prep</li><li>Provide recognition and sponsor visibility</li></ul><p>If this section looks good, say <strong>“Next Section”</strong> and I’ll generate:</p>",
+    "SECTION 7 — Marketing & Outreach (Fully Detailed)": "<p>Marketing &amp; Outreach is a critical support pillar designed to drive enrollment, increase visibility, strengthen the chapter’s brand, and highlight the successes of participants, sponsors, and mentors.<br/>It includes <strong>branding, recruitment, participant engagement, storytelling, and post-program amplification</strong>.</p><p>This component directly supports KPIs such as <strong>Enrollment, Engagement, Marketing Reach, Badge Visibility, and Facilitator Participation</strong>.</p>",
+    "7.1 Marketing Goals": "",
+    "Primary Goals": "<ul><li>Secure financial support to fund 5–10 scholarships</li><li>Recruit senior facilitators, mentors, and guest speakers</li><li>Strengthen partnerships with regional employers</li><li>Host in-person or virtual mixers</li><li>Enhance the chapter’s credibility and community impact</li></ul>",
+    "Secondary Goals": "<ul><li>Provide employers with access to trained talent</li><li>Offer visibility in chapter marketing and events</li><li>Build a pipeline for recurring annual sponsorship</li><li>Promote long-term collaboration across the community</li></ul>",
+    "7.2 Key Audiences": "",
+    "Primary Target Audiences": "<ul><li>Early-career professionals (0–5 years)</li><li>Career changers</li><li>Students and young professionals</li><li>Underrepresented groups (for scholarships)</li><li>Professionals in analyst-adjacent roles (PM, PO, Ops, QA, Data)</li></ul>",
+    "Secondary Audiences": "<ul><li>Employers</li><li>Recruiters and staffing firms</li><li>Higher education institutions</li><li>Professional associations (PMI, SHRM, etc.)</li><li>Sponsors and partners</li></ul>",
+    "7.3 Branding & Messaging": "",
+    "Program Name:": "<p><strong>Career Accelerator (2026 Cohort)</strong></p>",
+    "Brand Tagline:": "<p><strong>“Accelerate Your Career — Hands-On Skills. AI-Powered Tools.”</strong></p>",
+    "Brand Identity Components": "<ul><li>Cohort-specific visual theme</li><li>Badge designs: Career Accelerator, ECBA Prep, Leadership Track</li><li>Social media graphics (posts, banners, reels)</li><li>Event banners for mixers</li><li>Participant quote cards</li><li>Sponsor recognition visuals</li></ul>",
+    "Messaging Themes": "<ul><li>Skills Not Titles</li><li>Career Transition–Friendly</li><li>Hands-On, Not Lecture-Based</li><li>AI-Integrated Professional Development</li><li>Community, Inclusion, Access</li></ul>",
+    "7.4 Campaign Timeline & Phases": "<p>Marketing runs across three phases: <strong>Pre-Launch</strong>, <strong>Enrollment</strong>, and <strong>Engagement</strong>.</p>",
+    "Phase A — Pre-Launch (Q1 2026)": "<p>Purpose: Build awareness, generate early interest, and position the program.</p>",
+    "Key Messages": "<ul><li>Accessible (virtual, flexible, layered tracks)</li><li>Inclusive (scholarships, mentorship)</li><li>Future-ready (AI-powered learning)</li><li>Direct employer involvement</li></ul>",
+    "Phase B — Enrollment Campaign (Q1–Q2 2026)": "<p>Purpose: Convert awareness into registrations.</p>",
+    "Call-to-Action": "<ul><li>Register for Full Track</li><li>Apply for scholarships</li><li>Attend Session 1 (Career Mapping)</li><li>Join upcoming info session (optional)</li></ul>",
+    "Phase C — Engagement During Program (Q2–Q3 2026)": "<p>Purpose: Maintain momentum, highlight participation, and promote community success.</p>",
+    "Messaging": "<ul><li>Celebrate small wins</li><li>Share participant outputs (resumes, stories, decks—with permission)</li><li>Reinforce community and sponsor appreciation</li></ul>",
+    "Phase D — Post-Program Amplification (Q3–Q4 2026)": "<p>Purpose: Showcase impact and encourage next cohort interest.</p>",
+    "7.5 Marketing Channels & Tools": "",
+    "Primary Channels": "<ul><li>LinkedIn (highest ROI)</li><li>Chapter newsletter</li><li>MemberNova platform</li><li>Email campaigns</li><li>Partner networks (PMI Knoxville, employer newsletters)</li></ul>",
+    "Secondary Channels": "<ul><li>Local universities</li><li>Slack/Teams (internal employer groups)</li><li>Community organizations</li><li>Eventbrite posting</li></ul>",
+    "Content Repository": "<ul><li>Google Drive shared folder</li><li>Canva templates</li><li>Linktree for mobile access</li></ul>",
+    "7.6 Marketing Deliverables by Component": "",
+    "For Core Career Sessions": "<ul><li>Individual session promotional posts</li><li>“What You Will Learn” flyers</li><li>Headshots/spotlights of senior professionals</li><li>Session recap cards (with quotes)</li></ul>",
+    "For ECBA Track": "<ul><li>ECBA informational explainer</li><li>BABOK-aligned prompt library (marketing + content tool)</li><li>“Is ECBA Right for You?” post</li><li>Progress markers participants share (“Week 2 complete!”)</li></ul>",
+    "For Leadership Track": "<ul><li>Leadership teaser post (“Want to build influence?”)</li><li>Leadership story examples</li><li>Leadership badge reveal</li></ul>",
+    "For Mentorship": "<ul><li>Mentor recruitment posts</li><li>Mentor welcome kit</li><li>Mentee spotlight posts</li><li>Mentor–mentee pairing announcements (optional)</li></ul>",
+    "7.7 Accessibility & Inclusion Considerations": "<p>Marketing content will emphasize:</p><ul><li>Virtual-first flexibility</li><li>Scholarships</li><li>Availability for all roles (BA, PM, PO, QA, Ops, Data)</li><li>Neurodivergence-friendly tools (AI frameworks, templates, reminders)</li><li>Clear expectations and low barriers to entry</li></ul>",
+    "7.8 Marketing KPIs": "",
+    "7.9 Risk Mitigation": "",
+    "Risk: Low Enrollment": "<ul><li>Run career-changer-heavy marketing</li><li>Cross-post in university and employer groups</li><li>Provide a single-session preview event</li><li>Offer early-bird incentives</li></ul>",
+    "Risk: Limited Visibility": "<ul><li>Increase frequency of posts</li><li>Use participant and facilitator amplification</li><li>Encourage cohort members to tag employers</li></ul>",
+    "Risk: Scholarships not reaching intended audiences": "<ul><li>Targeted outreach through community groups</li><li>Encourage nominations by mentors</li><li>Provide simplified scholarship application</li></ul><p>If this is correct, say <strong>“Next Section”</strong> and I’ll generate:</p>",
+    "SECTION 8 — Sponsorship & Events (Fully Detailed)": "<p>Sponsorship and Events form the <strong>engagement, credibility, and resourcing backbone</strong> of the Career Accelerator.<br/>This component strengthens relationships with employers, increases chapter visibility, funds scholarships, and ensures that participants gain real-world insight from senior professionals and recruiters.</p><p>The design emphasizes <strong>mutual value</strong>: sponsors gain talent exposure, thought leadership opportunities, and brand visibility—while participants gain practical insights, networking, and career access.</p>",
+    "8.1 Sponsorship Goals": "",
+    "8.2 Sponsorship Tiers & Value Propositions": "",
+    "Tier 1 — Anchor Sponsor (Primary Employer Partner)": "<p>Provides core program support.</p><p><strong>Benefits:</strong></p><ul><li>Exclusive brand placement on all program materials</li><li>Recognition at kickoff, mid-program, and capstone events</li><li>Opportunity to host the in-person networking mixer</li><li>Guaranteed speaker/facilitator slots</li><li>Option to nominate internal mentees or mentors</li><li>Feature in sponsor spotlight posts</li><li>Employer brand visibility as community talent partner</li></ul><p><strong>Responsibilities:</strong></p><ul><li>Provide 1–2 senior professionals as facilitators</li><li>Support funding for scholarships (partial or full)</li><li>Provide in-person event space (optional)</li></ul>",
+    "Tier 2 — Professional Development Partner": "<p>Typically includes additional employers, staffing firms, or universities.</p><p><strong>Benefits:</strong></p><ul><li>Guest facilitator or recruiter participation</li><li>Brand placement on select materials</li><li>Spotlight post on LinkedIn</li><li>Invitation to mixers</li><li>Priority table or breakout room at networking events</li></ul><p><strong>Responsibilities:</strong></p><ul><li>Provide 1 recruiter or hiring professional</li><li>Support mock interviews or resume reviews</li></ul>",
+    "Tier 3 — Scholarship Sponsor": "<p>Focused solely on funding participant access.</p><p><strong>Benefits:</strong></p><ul><li>Recognition in scholarship award announcements</li><li>Brand on scholarship marketing materials</li><li>Social media acknowledgments</li></ul><p><strong>Responsibilities:</strong></p><ul><li>Provide funding for 1–5 scholarship recipients</li></ul>",
+    "Tier 4 — Community Partner": "<p>Non-financial but provides value through expertise, promotion, or resources.</p><p>Examples:</p><ul><li>PMI Knoxville</li><li>Local universities</li><li>Community nonprofits</li><li>Workforce development alliances</li></ul><p><strong>Benefits:</strong></p><ul><li>Listed as community partner</li><li>Co-marketing opportunities</li></ul>",
+    "8.3 Sponsor-Facing Messaging": "",
+    "Value Proposition for Employers": "<ul><li>Access to early-career and transitioning talent</li><li>Strengthen employer brand in a professional community</li><li>Demonstrate commitment to workforce development</li><li>Low-cost way to contribute to regional talent pipelines</li><li>Employees gain leadership and facilitation experience as mentors/speakers</li><li>Builds goodwill with philanthropic positioning</li></ul>",
+    "Value Proposition for Staffing Firms": "<ul><li>Direct access to active job-seekers</li><li>Visibility during resume and interview sessions</li><li>Opportunity to connect talent to upcoming roles</li></ul>",
+    "Value Proposition for Higher Education": "<ul><li>Provide development support to students or recent graduates</li><li>Promote pathways into BA/PM/product careers</li></ul>",
+    "8.4 Events Portfolio (All Detailed)": "<p>Events are embedded throughout the program to build community and drive engagement.</p>",
+    "Event 1 — Program Kickoff (Virtual)": "<p><strong>Purpose:<br/></strong>Welcome participants, explain tracks, highlight sponsors, and outline the Career Mapping Framework.</p><p><strong>Components:</strong></p><ul><li>Welcome message</li><li>Sponsor spotlight</li><li>Program overview</li><li>Facilitation team introductions</li><li>Quick breakout for cohort bonding</li></ul>",
+    "Event 2 — Mid-Program Networking Hour (Virtual or In-Person)": "<p><strong>Purpose:<br/></strong>Boost retention, build connections, and identify early success stories.</p><p><strong>Components:</strong></p><ul><li>Short panel: “What Employers Look for in Analysts Today”</li><li>Grid-based networking rooms (Functional/Technical/Management)</li><li>Sponsor-hosted breakout room</li><li>Optional: speed networking rotation</li></ul>",
+    "Event 3 — Capstone Networking Mixer (Virtual or In-Person)": "<p>This is the signature event of the Career Accelerator.</p><p><strong>Purpose:<br/></strong>Connect participants directly with employers, recruiters, and senior professionals.</p><p><strong>Components:</strong></p><ul><li>Participant elevator pitches</li><li>Industry vertical breakout rooms</li><li>Recruiter Q&amp;A</li><li>Sponsor showcase table or virtual booth</li><li>Mentor–mentee introduction (if participating in mentorship track)</li><li>Badge award announcements</li></ul><p><strong>Ideal Venue:</strong></p><ul><li>Anchor Sponsor’s conference space</li><li>Or virtual event with multiple breakout channels</li></ul>",
+    "Event 4 — Mentor–Mentee Mixer (Optional, Hybrid)": "<p><strong>Purpose:<br/></strong>Build community among mentorship participants and align expectations.</p><p><strong>Components:</strong></p><ul><li>Pair introductions</li><li>Mentorship playbook walkthrough</li><li>Quick rapport-building breakout activities</li><li>Success stories from prior mentors</li></ul>",
+    "Event 5 — Facilitator Appreciation Event": "<p><strong>Purpose:<br/></strong>Recognize facilitators, recruiters, mentors, and sponsors for their contributions.</p><p><strong>Components:</strong></p><ul><li>Certificates</li><li>Public recognition at AGM</li><li>Optional sponsor gift</li></ul>",
+    "Event 6 — AGM Spotlight (Annual General Meeting)": "<p><strong>Purpose:<br/></strong>Report Career Accelerator results and promote next year’s cohort.</p><p><strong>Components:</strong></p><ul><li>Success stories</li><li>Scholarship highlights</li><li>Sponsor appreciation</li><li>Pilot Report presentation</li><li>Early sign-up interest form</li></ul>",
+    "8.5 Sponsor Engagement in Sessions": "<p>Sponsors or partner professionals may participate in:</p><ul><li>Resume reviews</li><li>Mock interviews</li><li>Problem-solving panels</li><li>Industry-specific breakout rooms</li><li>Leadership storytelling</li><li>Facilitator guest spots</li><li>ECBA strategy discussions (optional)</li></ul><p>This supports the KPI for <strong>≥2 recruiters + ≥3 senior professionals actively engaged</strong>.</p>",
+    "8.6 Sponsorship KPIs": "",
+    "8.7 Risk Mitigation": "",
+    "Risk: Sponsor Attrition or Insufficient Funding": "<p><strong>Mitigation:</strong></p><ul><li>Diversify sponsor pool</li><li>Seek multiple Scholarship Sponsors</li><li>Offer micro-sponsorship options</li></ul>",
+    "Risk: Low Sponsor Engagement": "<p><strong>Mitigation:</strong></p><ul><li>Clear scheduling and expectations</li><li>Easy-to-prepare facilitator templates</li><li>Backup senior professionals available</li></ul>",
+    "Risk: Scheduling Conflicts": "<p><strong>Mitigation:</strong></p><ul><li>Multiple date options for guest-led sessions</li><li>Pre-recorded sponsor messages if needed</li></ul><p>If this section looks right, say <strong>“Next Section”</strong> for:</p>",
+    "SECTION 9 — Program Phases & Timeline (Fully Detailed)": "<p>The Career Accelerator operates across <strong>three major phases</strong> throughout the year—Prep, Delivery, and Evaluation—to allow for structured planning, high-quality execution, and measurable impact. These phases also support staggered scheduling of Core Sessions, Optional Tracks, Mentorship, and Events.</p>",
+    "9.1 Annual Program Overview Timeline": "<p>A recommended annual pacing (adjustable as needed):</p><table><thead><tr><th><p><strong>Month</strong></p></th><th><p><strong>Activities</strong></p></th></tr><tr><th><p><strong>January–March (Q1)</strong></p></th><th><p>Phase 1: Prep — Curriculum, materials, mentors, sponsors, marketing, scholarships</p></th></tr><tr><th><p><strong>April–August (Q2–Q3)</strong></p></th><th><p>Phase 2: Delivery — Core Sessions + ECBA + Leadership + Mentorship + Events</p></th></tr><tr><th><p><strong>September–November (Q3–Q4)</strong></p></th><th><p>Phase 3: Evaluation — Surveys, KPIs, Pilot Report, AGM presentation</p></th></tr><tr><th><p><strong>December</strong></p></th><th><p>Planning for next cohort, sponsor renewals</p></th></tr></thead></table><p>This ensures an annual rhythm that chapters, sponsors, and volunteers can reliably plan around.</p>",
+    "9.2 Phase 1 — PREP (Q1 2026)": "<p>Goal: Build strong program foundations through deliberate design, recruitment, and early visibility.</p>",
+    "9.2.1 Curriculum & Materials Development": "<p><strong>Core Career Sessions</strong></p><ul><li>Finalize facilitator scripts</li><li>Build activity worksheets and templates</li><li>Create industry-tailored examples for Career Mapping</li><li>Prepare AI Prompt Libraries for each session</li></ul><p><strong>Optional ECBA Track</strong></p><ul><li>Finalize detailed weekly outlines</li><li>Build weekly quizzes + scenario exercises</li><li>Prepare practice exam materials</li><li>Create ECBA study roadmap template</li></ul><p><strong>Optional Leadership Track</strong></p><ul><li>Create leadership exercises and frameworks</li><li>Build stakeholder influence map templates</li><li>Prepare communication clarity examples</li><li>Create AI prompts for leadership storytelling</li></ul><p><strong>Mentorship Component</strong></p><ul><li>Finalize Mentorship Guidebooks (mentor + mentee versions)</li><li>Create Career Action Plan templates</li><li>Prepare mentor training slides</li></ul>",
+    "9.2.2 Sponsorship & Facilitator Recruitment": "<ul><li>Confirm <strong>Anchor Sponsor</strong> and Professional Development Partners</li><li>Secure scholarship funding commitments</li><li>Recruit facilitators (≥3 senior professionals + ≥2 recruiters)</li><li>Recruit mentors (≥10)</li><li>Define sponsor participation roles per session</li><li>Gather headshots, bios, and logos for marketing assets</li></ul>",
+    "9.2.3 Marketing Launch (Early Q1)": "<p><strong>Deliverables:</strong></p><ul><li>Program announcement post</li><li>Scholarship announcement</li><li>Persona-based flyers (career changer, student, mid-career)</li><li>Facilitator &amp; mentor spotlight posts</li><li>Event listings on LinkedIn and MemberNova</li><li>“What is the Career Accelerator?” video teaser</li></ul><p><strong>Registration opens:</strong></p><ul><li>Full Track</li><li>ECBA Track</li><li>Leadership Track</li><li>Scholarship applications</li></ul>"
+  },
+  "tables": [
+    [
+      [
+        "Month",
+        "Activities"
+      ],
+      [
+        "January–March (Q1)",
+        "Phase 1: Prep — Curriculum, materials, mentors, sponsors, marketing, scholarships"
+      ],
+      [
+        "April–August (Q2–Q3)",
+        "Phase 2: Delivery — Core Sessions + ECBA + Leadership + Mentorship + Events"
+      ],
+      [
+        "September–November (Q3–Q4)",
+        "Phase 3: Evaluation — Surveys, KPIs, Pilot Report, AGM presentation"
+      ],
+      [
+        "December",
+        "Planning for next cohort, sponsor renewals"
+      ]
+    ]
+  ],
+  "images": []
+}

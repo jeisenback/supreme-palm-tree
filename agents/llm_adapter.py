@@ -65,7 +65,8 @@ class AnthropicAdapter(LLMAdapter):
                         return data[key]
                 # Fallback: try nested
                 if "completion" in data and isinstance(data["completion"], dict):
-                    return str(data["completion"].get("response") or data["completion"].get("text") or data["completion")).strip()
+                    comp = data["completion"]
+                    return str(comp.get("response") or comp.get("text") or comp).strip()
             return str(data)
         except Exception as e:
             return f"[anthropic-error] {e}"
