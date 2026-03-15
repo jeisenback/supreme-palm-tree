@@ -93,6 +93,7 @@ Guiding rules: each task includes a short acceptance criteria (AC) and dependenc
 
 - Role agents added: Fundraising, Membership, Communications (PoC implementations with unit tests).
 - Role agents added: Fundraising, Membership, Communications, Professional Development (PoC implementations with unit tests and CLI hooks).
+- Role agents added: Fundraising, Membership, Communications, Professional Development, Operations, Accelerator (PoC implementations with unit tests and CLI hooks).
 
 ## Next actions (recommended)
 - Harden scheduler for production: add persistence (APScheduler or Celery) and retry logic.
