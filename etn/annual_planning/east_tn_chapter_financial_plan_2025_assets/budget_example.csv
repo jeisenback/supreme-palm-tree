@@ -1,0 +1,39 @@
+Unnamed: 0,FINANCIAL PLAN,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5
+,Annual Budget,,,Year Ending,2025-12-31 00:00:00
+,,,,,
+,SUMMARY,BUDGET,ACTUAL,UNDER/OVER,
+,Total Income,32030,0,32030,
+,Total Expenses,31270,0,31270,
+,Difference,760,0,760,
+,,,,,
+,INCOME,BUDGET,ACTUAL,UNDER/OVER,Comments
+,OPERATING INCOME,,,,
+,Membership revenue,1500,0,-1500,100 members
+,Event Registrations,480,0,-480,8 non members per event @ $5 each
+,Professional Development Days,20000,0,-20000,"10 non member, 100 member registrations"
+,Study Groups,5000,0,-5000,"2 study groups, 50 participants each"
+,Career Centre,0,0,0,Received $150 last year
+,Merchandise Sales,0,0,0,
+,Donations,0,0,0,
+,Sponsorship,5000,0,-5000,"1 gold, 2 silver packages"
+,Interest,50,0,-50,based on $5000 invested at 1% interest
+,Other,0,0,0,
+,,,,,
+,TOTAL INCOME,32030,0,-32030,0
+,,,,,
+,EXPENSES,BUDGET,ACTUAL,UNDER/OVER,Comments
+,OPERATING EXPENSES,,,,
+,Office Supplies,4500,0,4500,"Workbooks for PDD workshops, study materials for study groups"
+,Event Food & Beverage,10000,0,10000,"sandwich platters at monthly events, lunch and snacks at PDD"
+,Rental Space,13200,0,13200,"Meeting space for PDD at $12000, Montly meetings at $100 each"
+,Merchandise expenses,0,0,0,
+,Accounting Fees,1500,0,1500,Annual audit
+,PayPal fees,650,0,650,3% of event revenue
+,Banking Fees,120,0,120,$10 per month
+,Postal fees,100,0,100,Miscellaneous mailings
+,Software fees,1200,0,1200,Quickbooks subscription at $100/month
+,Other,0,0,0,
+,,,,,
+,TOTAL EXPENSES,31270,0,31270,
+,,,,,
+,TOTAL,760,0,-63300,

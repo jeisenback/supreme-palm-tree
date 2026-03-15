@@ -1,0 +1,7 @@
+Step,Task,Value,Comments
+1,Enter Year-end date,2025-12-31,This date will populate on the budget page
+4,Modify any of the existing lines to accommodate your needs,,Rename the headers in the income and expense sections to suit your needs
+3,"To add additional expense or income lines, insert a row in the appropriate section",,"This template was designed for a typical Chapter, but you may want to track at a different level of granularity. Feel free to modify this template to suit your needs."
+5,"In column 'C', enter what you expect to bring in and what you expect to spend in the upcoming year.  Enter information in white cells only.",,Determine what is realistic based on your operating plan. Overinflating budgeted revenue will cause financial issues
+6,"In column 'D', enter what you actually took in and spent. Only enter values into the white shaded cells.",,Be realistic in your budgeted expenses and do not undervalue them. 
+7,Discuss the difference as a Board at each meeting. Adjust operational plans based on any differences,,"If revenues or expenses are different than anticipated, you will need to decide whether other operational goals need to be adjusted.  More revenue or lower expenses may lead to funding of additional operational tasks. Less revenue or higher expenses could lead to operational tasks being reduced."
