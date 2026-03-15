@@ -1,0 +1,4 @@
+donor,amount,email
+Alice,100,alice@example.org
+Bob,50,bob@example.org
+Carol,25,carol@example.org
