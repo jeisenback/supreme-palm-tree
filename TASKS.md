@@ -84,3 +84,20 @@ Guiding rules: each task includes a short acceptance criteria (AC) and dependenc
 - M2: Core Role Agents (Tasks 11–13 complete)
 - M3: Tests & CI (Tasks 14–15 complete)
 - M4: Expanded Roles & Integrations (Tasks 17–19 complete)
+
+## Status (2026-03-15)
+- Most Phase 0–4 items implemented and unit-tested in PoC form.
+- Google Drive integration and OAuth helpers added (guarded imports; creds required).
+- Scheduler PoC, CLI controls, runner script, and tests added — PRs merged into `main`.
+- GitHub Actions CI is active and recent runs for scheduler/CLI succeeded.
+
+- Role agents added: Fundraising, Membership, Communications (PoC implementations with unit tests).
+
+## Next actions (recommended)
+- Harden scheduler for production: add persistence (APScheduler or Celery) and retry logic.
+- Improve scheduler observability: add metrics/log forwarding and health endpoints.
+- Add secrets handling guidance: document required env vars and recommend Vault or GitHub Secrets.
+- Expand role agents incrementally (Fundraising, Membership, Communications) with tests.
+- Optional: perform an end-to-end Drive export with real credentials (human step).
+
+If you want, I can open issues for the recommended next actions and start implementing the first one (scheduler persistence).
