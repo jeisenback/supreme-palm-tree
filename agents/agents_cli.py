@@ -19,6 +19,7 @@ from agents.skills.president import generate_agenda_with_llm
 from integrations.gdrive.drive_client import DriveClient
 import json
 from agents import scheduler
+from ingest.scrapers import approvals
 
 
 def cmd_ingest(src: str, out_dir: Optional[str] = None) -> int:
@@ -34,6 +35,43 @@ def cmd_ingest(src: str, out_dir: Optional[str] = None) -> int:
     except Exception as e:
         print(f"Error ingesting {src}: {e}", file=sys.stderr)
         return 2
+
+
+def cmd_approve_add(source_id: str, meta: Optional[str] = None) -> int:
+    try:
+        metadata = None
+        if meta:
+            metadata = json.loads(meta)
+        approvals.approve_source(source_id, metadata)
+        print(f"Approved source: {source_id}")
+        return 0
+    except Exception as e:
+        print(f"Failed to approve source {source_id}: {e}", file=sys.stderr)
+        return 10
+
+
+def cmd_approve_revoke(source_id: str) -> int:
+    try:
+        approvals.revoke_source(source_id)
+        print(f"Revoked approval: {source_id}")
+        return 0
+    except Exception as e:
+        print(f"Failed to revoke source {source_id}: {e}", file=sys.stderr)
+        return 11
+
+
+def cmd_approve_list() -> int:
+    try:
+        items = approvals.list_approved()
+        if not items:
+            print("No approved sources found.")
+            return 0
+        for it in items:
+            print(json.dumps(it, ensure_ascii=False))
+        return 0
+    except Exception as e:
+        print(f"Failed to list approvals: {e}", file=sys.stderr)
+        return 12
 
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -66,6 +104,18 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_watch = sub.add_parser("watch", help="Start folder watcher to trigger ingestion on new files")
     p_watch.add_argument("--path", required=True, help="Directory to watch")
     p_watch.add_argument("--background", action="store_true", help="Run watcher in background (default behavior for CLI is to run until Ctrl-C)")
+
+    p_approve = sub.add_parser("approve", help="Manage approvals for scraper sources")
+    p_approve_sub = p_approve.add_subparsers(dest="approve_cmd")
+
+    p_approve_add = p_approve_sub.add_parser("add", help="Approve a source id for scraping")
+    p_approve_add.add_argument("source_id", help="Unique source id to approve")
+    p_approve_add.add_argument("--meta", required=False, help="Optional JSON metadata for the source")
+
+    p_approve_revoke = p_approve_sub.add_parser("revoke", help="Revoke an approved source")
+    p_approve_revoke.add_argument("source_id", help="Unique source id to revoke")
+
+    p_approve_list = p_approve_sub.add_parser("list", help="List approved sources")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -165,6 +215,14 @@ def main(argv: Optional[list[str]] = None) -> int:
         except Exception as e:
             print(f"Failed to start watcher: {e}", file=sys.stderr)
             return 7
+
+    if args.cmd == "approve":
+        if args.approve_cmd == "add":
+            return cmd_approve_add(args.source_id, getattr(args, "meta", None))
+        if args.approve_cmd == "revoke":
+            return cmd_approve_revoke(args.source_id)
+        if args.approve_cmd == "list":
+            return cmd_approve_list()
 
     parser.print_help()
     return 1
