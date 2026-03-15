@@ -105,6 +105,13 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_watch.add_argument("--path", required=True, help="Directory to watch")
     p_watch.add_argument("--background", action="store_true", help="Run watcher in background (default behavior for CLI is to run until Ctrl-C)")
 
+    p_watch_drive = sub.add_parser("watch-drive", help="Watch a Google Drive folder for new files (downloads and processes transcripts)")
+    p_watch_drive.add_argument("--folder-id", required=True, help="Drive folder id to watch")
+    p_watch_drive.add_argument("--interval", required=False, type=int, default=30, help="Poll interval seconds (default: 30)")
+    p_watch_drive.add_argument("--credentials", required=False, help="Path to credentials JSON (service account or client secrets)")
+    p_watch_drive.add_argument("--credential-type", required=False, choices=["service_account", "oauth"], default="service_account")
+    p_watch_drive.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
+
     p_approve = sub.add_parser("approve", help="Manage approvals for scraper sources")
     p_approve_sub = p_approve.add_subparsers(dest="approve_cmd")
 
@@ -232,6 +239,38 @@ def main(argv: Optional[list[str]] = None) -> int:
         except Exception as e:
             print(f"Failed to start watcher: {e}", file=sys.stderr)
             return 7
+    if args.cmd == "watch-drive":
+        from agents.watcher import start_drive_watcher
+        from agents.transcript_processor import process_transcript_file
+
+        folder = args.folder_id
+        interval = args.interval
+        creds = getattr(args, "credentials", None)
+        credential_type = getattr(args, "credential_type", "service_account")
+        oauth_token = getattr(args, "oauth_token", None)
+
+        def _on_new(file_path: str) -> None:
+            print(f"Drive watcher detected new file: {file_path}")
+            try:
+                outp = process_transcript_file(file_path, out_dir="out/transcripts", use_llm=True)
+                print(f"Processed transcript -> {outp}")
+            except Exception as e:
+                print(f"Failed to process transcript {file_path}: {e}", file=sys.stderr)
+
+        try:
+            thread = start_drive_watcher(folder, _on_new, poll_interval=interval, credentials_json=creds, credential_type=credential_type, oauth_token_path=oauth_token)
+            print("Drive watcher started. Press Ctrl-C to stop.")
+            try:
+                while True:
+                    import time
+
+                    time.sleep(1)
+            except KeyboardInterrupt:
+                print("Stopping drive watcher...")
+                return 0
+        except Exception as e:
+            print(f"Failed to start drive watcher: {e}", file=sys.stderr)
+            return 8
 
     if args.cmd == "approve":
         if args.approve_cmd == "add":
