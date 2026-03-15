@@ -22,6 +22,8 @@ from agents.skills import (
     draft_announcement,
     generate_email_campaign,
     generate_profdev_plan,
+    generate_ops_plan,
+    generate_accelerator_plan,
 )
 from integrations.gdrive.drive_client import DriveClient
 import json
@@ -170,6 +172,14 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_role_prof = p_role_sub.add_parser("professional_development", help="Run professional development agent")
     p_role_prof.add_argument("--json", required=False, help="JSON string for member skill mapping")
     p_role_prof.add_argument("--json-file", required=False, help="Path to JSON file for member skill mapping")
+    
+    p_role_ops = p_role_sub.add_parser("operations", help="Run operations agent")
+    p_role_ops.add_argument("--json", required=False, help="JSON string for operations context")
+    p_role_ops.add_argument("--json-file", required=False, help="Path to JSON file for operations context")
+
+    p_role_acc = p_role_sub.add_parser("accelerator", help="Run accelerator agent")
+    p_role_acc.add_argument("--json", required=False, help="JSON string for applications mapping")
+    p_role_acc.add_argument("--json-file", required=False, help="Path to JSON file for applications mapping")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -457,6 +467,54 @@ def main(argv: Optional[list[str]] = None) -> int:
             except Exception as e:
                 print(f"Professional development agent failed: {e}", file=sys.stderr)
                 return 38
+
+        # Operations
+        if args.role_cmd == "operations":
+            ctx = None
+            if getattr(args, "json", None):
+                import json
+
+                ctx = json.loads(args.json)
+            elif getattr(args, "json_file", None):
+                import pathlib, json
+
+                p = pathlib.Path(args.json_file)
+                ctx = json.loads(p.read_text(encoding="utf-8"))
+            else:
+                print("Provide --json or --json-file", file=sys.stderr)
+                return 39
+
+            try:
+                out = generate_ops_plan(ctx)
+                print(out)
+                return 0
+            except Exception as e:
+                print(f"Operations agent failed: {e}", file=sys.stderr)
+                return 40
+
+        # Accelerator
+        if args.role_cmd == "accelerator":
+            apps = None
+            if getattr(args, "json", None):
+                import json
+
+                apps = json.loads(args.json)
+            elif getattr(args, "json_file", None):
+                import pathlib, json
+
+                p = pathlib.Path(args.json_file)
+                apps = json.loads(p.read_text(encoding="utf-8"))
+            else:
+                print("Provide --json or --json-file", file=sys.stderr)
+                return 41
+
+            try:
+                out = generate_accelerator_plan(apps)
+                print(out)
+                return 0
+            except Exception as e:
+                print(f"Accelerator agent failed: {e}", file=sys.stderr)
+                return 42
 
     parser.print_help()
     return 1

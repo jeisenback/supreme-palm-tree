@@ -5,6 +5,8 @@ from .fundraising import summarize_donors, generate_fundraising_plan
 from .membership import analyze_membership, generate_membership_insights, membership_summary_markdown
 from .communications import draft_announcement, generate_email_campaign
 from .professional_development import suggest_training_programs, generate_profdev_plan
+from .operations import operations_checklist, generate_ops_plan
+from .accelerator import accelerator_program_summary, generate_accelerator_plan
 
 __all__ = [
     "generate_agenda",
@@ -23,4 +25,8 @@ __all__ = [
     "generate_email_campaign",
     "suggest_training_programs",
     "generate_profdev_plan",
+    "operations_checklist",
+    "generate_ops_plan",
+    "accelerator_program_summary",
+    "generate_accelerator_plan",
 ]
