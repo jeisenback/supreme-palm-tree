@@ -22,3 +22,17 @@
   notes: Approved for summaries of public blog posts and announcements.
   approved_by: communications
   approved_at: 2026-03-15
+
+- id: iiba_website
+  name: International Institute of Business Analysis (IIBA)
+  url: https://www.iiba.org
+  notes: Official IIBA site — approved for public news, standards, and resources scraping.
+  approved_by: board
+  approved_at: 2026-03-15
+
+- id: iiba_linkedin
+  name: IIBA LinkedIn Company Page
+  url: https://www.linkedin.com/company/iiba
+  notes: LinkedIn company updates — scrape only public posts and announcements, respect LinkedIn terms.
+  approved_by: communications
+  approved_at: 2026-03-15
