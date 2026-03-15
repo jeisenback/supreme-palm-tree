@@ -10,6 +10,61 @@ import os
 import time
 import threading
 from typing import Callable
+import threading
+from typing import Optional
+
+def start_drive_watcher(
+    folder_id: str,
+    callback: Callable[[str], None],
+    poll_interval: float = 30.0,
+    background: bool = True,
+    credentials_json: Optional[str] = None,
+    credential_type: str = "service_account",
+    oauth_token_path: Optional[str] = None,
+):
+    """Poll a Google Drive folder for new files and call `callback(local_path)`.
+
+    This is a simple polling implementation that remembers seen file ids in
+    memory for the lifetime of the process. It downloads new files to a
+    temporary directory and invokes `callback` with the local path.
+    """
+    try:
+        from integrations.gdrive.drive_client import DriveClient
+    except Exception:
+        raise RuntimeError("Drive integration not available in this environment")
+
+    import tempfile
+
+    seen = set()
+
+    def _loop():
+        client = DriveClient(credentials_json=credentials_json, folder_id=folder_id, credential_type=credential_type, oauth_token_path=oauth_token_path)
+        tmpdir = tempfile.mkdtemp(prefix="drivewatch-")
+        while True:
+            try:
+                files = client.list_files(folder_id=folder_id)
+            except Exception:
+                files = []
+            for f in files:
+                fid = f.get("id")
+                name = f.get("name")
+                if fid in seen:
+                    continue
+                seen.add(fid)
+                # download file
+                local = None
+                try:
+                    local = Path(tmpdir) / name
+                    client.download_file(fid, str(local))
+                    callback(str(local))
+                except Exception:
+                    # ignore individual download failures
+                    continue
+            time.sleep(poll_interval)
+
+    thread = threading.Thread(target=_loop, daemon=True)
+    thread.start()
+    return thread
 
 
 def _polling_watcher(path: str, callback: Callable[[str], None], poll_interval: float = 2.0):
