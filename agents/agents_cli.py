@@ -184,6 +184,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_watch = sub.add_parser("watch", help="Start folder watcher to trigger ingestion on new files")
     p_watch.add_argument("--path", required=True, help="Directory to watch")
     p_watch.add_argument("--background", action="store_true", help="Run watcher in background (default behavior for CLI is to run until Ctrl-C)")
+    p_watch.add_argument("--approved-source-id", required=False, help="Optional approved source id to require before starting watcher")
 
     p_watch_drive = sub.add_parser("watch-drive", help="Watch a Google Drive folder for new files (downloads and processes transcripts)")
     p_watch_drive.add_argument("--folder-id", required=True, help="Drive folder id to watch")
@@ -192,6 +193,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_watch_drive.add_argument("--credential-type", required=False, choices=["service_account", "oauth"], default="service_account")
     p_watch_drive.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
     p_watch_drive.add_argument("--state-path", required=False, help="Path to persist seen Drive file ids (default: out/drive_seen.json)")
+    p_watch_drive.add_argument("--approved-source-id", required=False, help="Optional approved source id to require before starting drive watcher")
 
     p_scrape = sub.add_parser("scrape", help="Run a one-off scrape for a registered source id (enforces approvals)")
     p_scrape.add_argument("--source-id", required=True, help="Registered source id to scrape")
@@ -341,7 +343,25 @@ def main(argv: Optional[list[str]] = None) -> int:
                 print(f"Watcher ingestion failed for {path}: {e}")
 
         try:
-            thread = start_watcher(args.path, _on_new_file, background=args.background)
+            # persist watcher config for operational visibility
+            try:
+                root = Path(__file__).resolve().parents[1]
+                cfg = root / ".watcher_state.json"
+                cfg_data = []
+                if cfg.exists():
+                    try:
+                        cfg_data = json.loads(cfg.read_text(encoding="utf-8"))
+                    except Exception:
+                        cfg_data = []
+                cfg_data.append({"type": "folder", "path": args.path, "approved_source_id": getattr(args, "approved_source_id", None)})
+                try:
+                    cfg.write_text(json.dumps(cfg_data, indent=2), encoding="utf-8")
+                except Exception:
+                    pass
+            except Exception:
+                pass
+
+            thread = start_watcher(args.path, _on_new_file, background=args.background, approved_source_id=getattr(args, "approved_source_id", None))
             if args.background:
                 print("Watcher started in background.")
                 return 0
@@ -385,7 +405,25 @@ def main(argv: Optional[list[str]] = None) -> int:
                 print(f"Failed to process transcript {file_path}: {e}", file=sys.stderr)
 
         try:
-            thread = start_drive_watcher(folder, _on_new, poll_interval=interval, credentials_json=creds, credential_type=credential_type, oauth_token_path=oauth_token)
+            # persist drive watcher config
+            try:
+                root = Path(__file__).resolve().parents[1]
+                cfg = root / ".watcher_state.json"
+                cfg_data = []
+                if cfg.exists():
+                    try:
+                        cfg_data = json.loads(cfg.read_text(encoding="utf-8"))
+                    except Exception:
+                        cfg_data = []
+                cfg_data.append({"type": "drive", "folder_id": folder, "approved_source_id": getattr(args, "approved_source_id", None)})
+                try:
+                    cfg.write_text(json.dumps(cfg_data, indent=2), encoding="utf-8")
+                except Exception:
+                    pass
+            except Exception:
+                pass
+
+            thread = start_drive_watcher(folder, _on_new, poll_interval=interval, credentials_json=creds, credential_type=credential_type, oauth_token_path=oauth_token, state_path=getattr(args, "state_path", None), approved_source_id=getattr(args, "approved_source_id", None))
             print("Drive watcher started. Press Ctrl-C to stop.")
             try:
                 while True:

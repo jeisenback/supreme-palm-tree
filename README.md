@@ -86,4 +86,23 @@ PYTHONPATH=. python -m agents.agents_cli role operations --json-file data/ops.js
 PYTHONPATH=. python -m agents.agents_cli role accelerator --json-file data/apps.json
 ```
 
+Watcher: approved_source_id
+---------------------------
+
+The folder and Drive watchers can be started with an approvals guard to avoid
+processing files that aren't linked to an approved scraper source. Use the
+CLI flags `--approved-source-id` when starting `watch` or `watch-drive` to
+require that the provided id exists in the approvals registry (see
+`config/sources-approved.yaml`). Example:
+
+```
+agents-cli watch --path ./inbox --approved-source-id sample_partner
+agents-cli watch-drive --folder-id <FOLDER> --approved-source-id sample_job
+```
+
+When started via the CLI, watchers persist a small operational file
+`.watcher_state.json` at the repository root containing the started watcher
+configs for simple operational visibility.
+
+
 
