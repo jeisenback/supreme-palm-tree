@@ -11,6 +11,25 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Callable, Dict
+import os
+import urllib.parse
+
+# optional observability hooks
+try:  # pragma: no cover - exercised in integration
+    from agents.observability import init_metrics_server, record_job_start, record_job_end
+except Exception:  # pragma: no cover - import-time resilience for tests
+    def init_metrics_server(port: int = 8000) -> None:  # type: ignore
+        return
+
+    def record_job_start(job_name: str) -> float:  # type: ignore
+        import time
+
+        return time.time()
+
+    def record_job_end(job_name: str, start_ts: float, success: bool = True) -> None:  # type: ignore
+        return
+import json
+from pathlib import Path
 
 
 @dataclass
@@ -33,10 +52,35 @@ def register_job(name: str, func: Callable[[], None], interval_seconds: int) -> 
     If a job with the same name exists it will be replaced.
     """
     _JOBS[name] = Job(name=name, func=func, interval_seconds=interval_seconds)
+    try:
+        _save_state()
+    except Exception:
+        # best-effort persistence; do not break registration on failure
+        pass
 
+
+def schedule_one_off(name: str, func: Callable[[], None], delay_seconds: int) -> None:
+    """Schedule a one-off job that runs after `delay_seconds` and then unregisters itself.
+
+    The job name should be unique. The wrapper will unregister the job after running.
+    """
+    def _wrapper() -> None:
+        try:
+            func()
+        finally:
+            try:
+                unregister_job(name)
+            except Exception:
+                pass
+
+    register_job(name, _wrapper, interval_seconds=delay_seconds)
 
 def unregister_job(name: str) -> None:
     _JOBS.pop(name, None)
+    try:
+        _save_state()
+    except Exception:
+        pass
 
 
 def list_jobs() -> dict:
@@ -61,8 +105,14 @@ def _job_runner(poll_interval: float = 1.0) -> None:
 def _run_job_safe(job: Job) -> None:
     try:
         print(f"[{datetime.utcnow().isoformat()}] Running job: {job.name}")
+        start_ts = record_job_start(job.name)
         job.func()
+        record_job_end(job.name, start_ts, success=True)
     except Exception as exc:  # pragma: no cover - defensive
+        try:
+            record_job_end(job.name, start_ts, success=False)
+        except Exception:
+            pass
         print(f"Job {job.name} failed: {exc}")
 
 
@@ -73,7 +123,143 @@ def start(poll_interval: float = 1.0) -> None:
         return
     _stop_event = threading.Event()
     _runner_thread = threading.Thread(target=_job_runner, args=(poll_interval,), daemon=True)
+    # Attempt to restore persisted jobs (best-effort)
+    try:
+        _load_state()
+    except Exception:
+        print("No persisted scheduler state loaded")
+    # Optionally start metrics server if env var set
+    try:
+        port = int(os.environ.get("SCHEDULER_METRICS_PORT", "0") or 0)
+        if port:
+            init_metrics_server(port)
+    except Exception:
+        pass
     _runner_thread.start()
+
+
+# --- Persistence helpers (simple PoC using JSON) --------------------------
+
+
+def _state_path() -> Path:
+    # store state at repository root as .scheduler_state.json
+    root = Path(__file__).resolve().parents[1]
+    return root / ".scheduler_state.json"
+
+
+def _save_state() -> None:
+    data = [
+        {"name": j.name, "interval_seconds": j.interval_seconds, "last_run": j.last_run}
+        for j in _JOBS.values()
+    ]
+    path = _state_path()
+    try:
+        path.write_text(json.dumps(data, indent=2))
+    except Exception:
+        # best-effort; ignore errors
+        pass
+
+
+def _load_state() -> None:
+    path = _state_path()
+    if not path.exists():
+        return
+    try:
+        raw = path.read_text()
+        data = json.loads(raw)
+    except Exception:
+        return
+    for item in data:
+        name = item.get("name")
+        interval = int(item.get("interval_seconds", 0))
+        if name and name not in _JOBS:
+            factory = _KNOWN_JOB_FACTORIES.get(name)
+            if factory:
+                register_job(name, factory, interval)
+            else:
+                print(f"Persisted job '{name}' found but no factory available; skipping")
+
+
+# --- Known job implementations (moved from register_default_jobs inner scope) ---
+
+
+def _scrape_all_impl() -> None:
+    try:  # pragma: no cover - integration glue
+        from ingest.scrapers.scraper_registry import list_sources
+        from ingest.scrapers import EventScraper, JobScraper, PartnerScraper
+        from ingest.scrapers.integrate import integrate_scraped_item
+        from ingest.scrapers import approvals as approvals_mod
+
+        sources = list_sources()
+        parser_map = {
+            "event": EventScraper,
+            "job": JobScraper,
+            "partner": PartnerScraper,
+        }
+        for s in sources:
+            parser = s.get("parser")
+            cls = parser_map.get(parser)
+            if not cls:
+                print(f"No parser for {parser} (source {s.get('id')})")
+                continue
+            sid = s.get("id")
+            approval = approvals_mod.get_approval(sid)
+            if not approval:
+                print(f"Skipping unapproved source {sid}")
+                continue
+
+            # enforce allowed_paths if present
+            allowed_paths = approval.get("allowed_paths")
+            if allowed_paths:
+                try:
+                    parsed = urllib.parse.urlparse(s.get("url") or "")
+                    path = parsed.path or "/"
+                    if isinstance(allowed_paths, str):
+                        allowed_list = [allowed_paths]
+                    else:
+                        allowed_list = list(allowed_paths)
+                    if not any(path.startswith(ap) for ap in allowed_list):
+                        print(f"URL path {path} not allowed for source {sid}; skipping")
+                        continue
+                except Exception:
+                    print(f"Failed to validate allowed_paths for {sid}; skipping")
+                    continue
+
+            # pick rate limit from approval metadata if available
+            rl = approval.get("rate_limit")
+            try:
+                rate_limit_seconds = float(rl) if rl is not None else 0
+            except Exception:
+                rate_limit_seconds = 0
+
+            try:
+                scr = cls(rate_limit_seconds=rate_limit_seconds, respect_robots=False)
+                item = scr.scrape(s.get("url"), s.get("selectors", {}))
+                integrate_scraped_item(item, sid)
+            except Exception as e:  # pragma: no cover - runtime integration
+                print(f"Error scraping {sid}: {e}")
+    except Exception:
+        print("scrape_all_impl: dependencies not available; skipping")
+
+
+def _generate_agenda_impl() -> None:
+    try:  # pragma: no cover - integration glue
+        from agents.skills.president import generate_agenda_with_llm
+        from ingest.storage import store_conversion
+        from datetime import date
+
+        notes = {"title": "Scheduled Agenda", "date": str(date.today()), "summary": "Auto-generated agenda."}
+        md = generate_agenda_with_llm(notes)
+        store_conversion(md, {"source": "scheduler"}, {}, "agenda_scheduled", "out")
+    except Exception:
+        print("generate_agenda_impl: dependencies not available; skipping")
+
+
+# mapping of known persisted job names to functions
+_KNOWN_JOB_FACTORIES: Dict[str, Callable[[], None]] = {
+    "scrape_all_sources": _scrape_all_impl,
+    "generate_weekly_agenda": _generate_agenda_impl,
+}
 
 
 def stop() -> None:
@@ -115,18 +301,51 @@ def register_default_jobs() -> None:
                 "job": JobScraper,
                 "partner": PartnerScraper,
             }
+            from ingest.scrapers import approvals as approvals_mod
+
             for s in sources:
                 parser = s.get("parser")
                 cls = parser_map.get(parser)
                 if not cls:
                     print(f"No parser for {parser} (source {s.get('id')})")
                     continue
+
+                sid = s.get("id")
+                approval = approvals_mod.get_approval(sid)
+                if not approval:
+                    print(f"Skipping unapproved source {sid}")
+                    continue
+
+                # enforce allowed_paths
+                allowed_paths = approval.get("allowed_paths")
+                if allowed_paths:
+                    try:
+                        parsed = urllib.parse.urlparse(s.get("url") or "")
+                        path = parsed.path or "/"
+                        if isinstance(allowed_paths, str):
+                            allowed_list = [allowed_paths]
+                        else:
+                            allowed_list = list(allowed_paths)
+                        if not any(path.startswith(ap) for ap in allowed_list):
+                            print(f"URL path {path} not allowed for source {sid}; skipping")
+                            continue
+                    except Exception:
+                        print(f"Failed to validate allowed_paths for {sid}; skipping")
+                        continue
+
+                # rate limit from approval
+                rl = approval.get("rate_limit")
                 try:
-                    scr = cls(rate_limit_seconds=0, respect_robots=False)
+                    rate_limit_seconds = float(rl) if rl is not None else 0
+                except Exception:
+                    rate_limit_seconds = 0
+
+                try:
+                    scr = cls(rate_limit_seconds=rate_limit_seconds, respect_robots=False)
                     item = scr.scrape(s.get("url"), s.get("selectors", {}))
-                    integrate_scraped_item(item, s.get("id"))
+                    integrate_scraped_item(item, sid)
                 except Exception as e:  # pragma: no cover - runtime integration
-                    print(f"Error scraping {s.get('id')}: {e}")
+                    print(f"Error scraping {sid}: {e}")
 
         def _generate_agenda() -> None:
             notes = {"title": "Scheduled Agenda", "date": str(date.today()), "summary": "Auto-generated agenda."}
