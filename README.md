@@ -59,3 +59,50 @@ Or generate using a project + stem (looks for `<project>/converted/<stem>.json`)
 python generate_cli.py -t email_template.md --project etn east_tn_business_plan_2025 -o out/email.md
 ```
 
+Role agents
+-----------
+
+This repository includes PoC role agents to help board officers and staff. Invoke them via the `agents-cli` entrypoint:
+
+Examples:
+
+```bash
+# Fundraising plan from inline CSV
+PYTHONPATH=. python -m agents.agents_cli role fundraising --csv "donor,amount\nAlice,100\nBob,50\n"
+
+# Membership insights from a file
+PYTHONPATH=. python -m agents.agents_cli role membership --csv-file data/members.csv
+
+# Draft communications from JSON
+PYTHONPATH=. python -m agents.agents_cli role communications --json-file data/ctx.json
+
+# Professional development plan
+PYTHONPATH=. python -m agents.agents_cli role professional_development --json-file data/skills.json
+
+# Operations checklist
+PYTHONPATH=. python -m agents.agents_cli role operations --json-file data/ops.json
+
+# Accelerator plan
+PYTHONPATH=. python -m agents.agents_cli role accelerator --json-file data/apps.json
+```
+
+Watcher: approved_source_id
+---------------------------
+
+The folder and Drive watchers can be started with an approvals guard to avoid
+processing files that aren't linked to an approved scraper source. Use the
+CLI flags `--approved-source-id` when starting `watch` or `watch-drive` to
+require that the provided id exists in the approvals registry (see
+`config/sources-approved.yaml`). Example:
+
+```
+agents-cli watch --path ./inbox --approved-source-id sample_partner
+agents-cli watch-drive --folder-id <FOLDER> --approved-source-id sample_job
+```
+
+When started via the CLI, watchers persist a small operational file
+`.watcher_state.json` at the repository root containing the started watcher
+configs for simple operational visibility.
+
+
+
