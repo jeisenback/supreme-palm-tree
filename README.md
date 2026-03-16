@@ -59,3 +59,31 @@ Or generate using a project + stem (looks for `<project>/converted/<stem>.json`)
 python generate_cli.py -t email_template.md --project etn east_tn_business_plan_2025 -o out/email.md
 ```
 
+Role agents
+-----------
+
+This repository includes PoC role agents to help board officers and staff. Invoke them via the `agents-cli` entrypoint:
+
+Examples:
+
+```bash
+# Fundraising plan from inline CSV
+PYTHONPATH=. python -m agents.agents_cli role fundraising --csv "donor,amount\nAlice,100\nBob,50\n"
+
+# Membership insights from a file
+PYTHONPATH=. python -m agents.agents_cli role membership --csv-file data/members.csv
+
+# Draft communications from JSON
+PYTHONPATH=. python -m agents.agents_cli role communications --json-file data/ctx.json
+
+# Professional development plan
+PYTHONPATH=. python -m agents.agents_cli role professional_development --json-file data/skills.json
+
+# Operations checklist
+PYTHONPATH=. python -m agents.agents_cli role operations --json-file data/ops.json
+
+# Accelerator plan
+PYTHONPATH=. python -m agents.agents_cli role accelerator --json-file data/apps.json
+```
+
+
