@@ -38,6 +38,11 @@ class Job:
     func: Callable[[], None]
     interval_seconds: int
     last_run: float = field(default=0.0)
+    # retry configuration
+    retries: int = field(default=0)
+    retry_backoff_seconds: int = field(default=0)
+    # runtime state
+    retry_attempts: int = field(default=0)
 
 
 _JOBS: Dict[str, Job] = {}
@@ -46,12 +51,24 @@ _runner_thread: threading.Thread | None = None
 _stop_event: threading.Event | None = None
 
 
-def register_job(name: str, func: Callable[[], None], interval_seconds: int) -> None:
+def register_job(
+    name: str,
+    func: Callable[[], None],
+    interval_seconds: int,
+    retries: int = 0,
+    retry_backoff_seconds: int = 0,
+) -> None:
     """Register a job to run approximately every `interval_seconds`.
 
     If a job with the same name exists it will be replaced.
     """
-    _JOBS[name] = Job(name=name, func=func, interval_seconds=interval_seconds)
+    _JOBS[name] = Job(
+        name=name,
+        func=func,
+        interval_seconds=interval_seconds,
+        retries=retries,
+        retry_backoff_seconds=retry_backoff_seconds,
+    )
     try:
         _save_state()
     except Exception:
@@ -84,7 +101,16 @@ def unregister_job(name: str) -> None:
 
 
 def list_jobs() -> dict:
-    return {n: (j.interval_seconds, j.last_run) for n, j in _JOBS.items()}
+    return {
+        n: (
+            j.interval_seconds,
+            j.last_run,
+            j.retries,
+            j.retry_backoff_seconds,
+            j.retry_attempts,
+        )
+        for n, j in _JOBS.items()
+    }
 
 
 def _job_runner(poll_interval: float = 1.0) -> None:
@@ -107,6 +133,12 @@ def _run_job_safe(job: Job) -> None:
         print(f"[{datetime.utcnow().isoformat()}] Running job: {job.name}")
         start_ts = record_job_start(job.name)
         job.func()
+        # reset retry attempts on success
+        job.retry_attempts = 0
+        try:
+            _save_state()
+        except Exception:
+            pass
         record_job_end(job.name, start_ts, success=True)
     except Exception as exc:  # pragma: no cover - defensive
         try:
@@ -114,6 +146,27 @@ def _run_job_safe(job: Job) -> None:
         except Exception:
             pass
         print(f"Job {job.name} failed: {exc}")
+        # schedule retry if configured
+        try:
+            job.retry_attempts = (job.retry_attempts or 0) + 1
+            try:
+                _save_state()
+            except Exception:
+                pass
+            if job.retries and job.retry_attempts <= job.retries:
+                backoff = int(job.retry_backoff_seconds or 0) * job.retry_attempts
+                def _delayed_retry(j: Job, delay: int) -> None:
+                    try:
+                        time.sleep(delay)
+                        _run_job_safe(j)
+                    except Exception:
+                        pass
+
+                threading.Thread(target=_delayed_retry, args=(job, backoff), daemon=True).start()
+            else:
+                print(f"Job {job.name} exhausted retries ({job.retry_attempts}/{job.retries})")
+        except Exception:
+            pass
 
 
 def start(poll_interval: float = 1.0) -> None:
@@ -148,10 +201,18 @@ def _state_path() -> Path:
 
 
 def _save_state() -> None:
-    data = [
-        {"name": j.name, "interval_seconds": j.interval_seconds, "last_run": j.last_run}
-        for j in _JOBS.values()
-    ]
+    data = []
+    for j in _JOBS.values():
+        data.append(
+            {
+                "name": j.name,
+                "interval_seconds": j.interval_seconds,
+                "last_run": j.last_run,
+                "retries": j.retries,
+                "retry_backoff_seconds": j.retry_backoff_seconds,
+                "retry_attempts": j.retry_attempts,
+            }
+        )
     path = _state_path()
     try:
         path.write_text(json.dumps(data, indent=2))
@@ -175,7 +236,15 @@ def _load_state() -> None:
         if name and name not in _JOBS:
             factory = _KNOWN_JOB_FACTORIES.get(name)
             if factory:
-                register_job(name, factory, interval)
+                # restore retry config if present
+                retries = int(item.get("retries", 0) or 0)
+                backoff = int(item.get("retry_backoff_seconds", 0) or 0)
+                register_job(name, factory, interval, retries=retries, retry_backoff_seconds=backoff)
+                # restore runtime state
+                job = _JOBS.get(name)
+                if job is not None:
+                    job.last_run = float(item.get("last_run", 0) or 0)
+                    job.retry_attempts = int(item.get("retry_attempts", 0) or 0)
             else:
                 print(f"Persisted job '{name}' found but no factory available; skipping")
 
