@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Callable, Dict
 import os
+import urllib.parse
 
 # optional observability hooks
 try:  # pragma: no cover - exercised in integration
@@ -187,6 +188,7 @@ def _scrape_all_impl() -> None:
         from ingest.scrapers.scraper_registry import list_sources
         from ingest.scrapers import EventScraper, JobScraper, PartnerScraper
         from ingest.scrapers.integrate import integrate_scraped_item
+        from ingest.scrapers import approvals as approvals_mod
 
         sources = list_sources()
         parser_map = {
@@ -200,12 +202,42 @@ def _scrape_all_impl() -> None:
             if not cls:
                 print(f"No parser for {parser} (source {s.get('id')})")
                 continue
+            sid = s.get("id")
+            approval = approvals_mod.get_approval(sid)
+            if not approval:
+                print(f"Skipping unapproved source {sid}")
+                continue
+
+            # enforce allowed_paths if present
+            allowed_paths = approval.get("allowed_paths")
+            if allowed_paths:
+                try:
+                    parsed = urllib.parse.urlparse(s.get("url") or "")
+                    path = parsed.path or "/"
+                    if isinstance(allowed_paths, str):
+                        allowed_list = [allowed_paths]
+                    else:
+                        allowed_list = list(allowed_paths)
+                    if not any(path.startswith(ap) for ap in allowed_list):
+                        print(f"URL path {path} not allowed for source {sid}; skipping")
+                        continue
+                except Exception:
+                    print(f"Failed to validate allowed_paths for {sid}; skipping")
+                    continue
+
+            # pick rate limit from approval metadata if available
+            rl = approval.get("rate_limit")
             try:
-                scr = cls(rate_limit_seconds=0, respect_robots=False)
+                rate_limit_seconds = float(rl) if rl is not None else 0
+            except Exception:
+                rate_limit_seconds = 0
+
+            try:
+                scr = cls(rate_limit_seconds=rate_limit_seconds, respect_robots=False)
                 item = scr.scrape(s.get("url"), s.get("selectors", {}))
-                integrate_scraped_item(item, s.get("id"))
+                integrate_scraped_item(item, sid)
             except Exception as e:  # pragma: no cover - runtime integration
-                print(f"Error scraping {s.get('id')}: {e}")
+                print(f"Error scraping {sid}: {e}")
     except Exception:
         print("scrape_all_impl: dependencies not available; skipping")
 
@@ -269,18 +301,51 @@ def register_default_jobs() -> None:
                 "job": JobScraper,
                 "partner": PartnerScraper,
             }
+            from ingest.scrapers import approvals as approvals_mod
+
             for s in sources:
                 parser = s.get("parser")
                 cls = parser_map.get(parser)
                 if not cls:
                     print(f"No parser for {parser} (source {s.get('id')})")
                     continue
+
+                sid = s.get("id")
+                approval = approvals_mod.get_approval(sid)
+                if not approval:
+                    print(f"Skipping unapproved source {sid}")
+                    continue
+
+                # enforce allowed_paths
+                allowed_paths = approval.get("allowed_paths")
+                if allowed_paths:
+                    try:
+                        parsed = urllib.parse.urlparse(s.get("url") or "")
+                        path = parsed.path or "/"
+                        if isinstance(allowed_paths, str):
+                            allowed_list = [allowed_paths]
+                        else:
+                            allowed_list = list(allowed_paths)
+                        if not any(path.startswith(ap) for ap in allowed_list):
+                            print(f"URL path {path} not allowed for source {sid}; skipping")
+                            continue
+                    except Exception:
+                        print(f"Failed to validate allowed_paths for {sid}; skipping")
+                        continue
+
+                # rate limit from approval
+                rl = approval.get("rate_limit")
                 try:
-                    scr = cls(rate_limit_seconds=0, respect_robots=False)
+                    rate_limit_seconds = float(rl) if rl is not None else 0
+                except Exception:
+                    rate_limit_seconds = 0
+
+                try:
+                    scr = cls(rate_limit_seconds=rate_limit_seconds, respect_robots=False)
                     item = scr.scrape(s.get("url"), s.get("selectors", {}))
-                    integrate_scraped_item(item, s.get("id"))
+                    integrate_scraped_item(item, sid)
                 except Exception as e:  # pragma: no cover - runtime integration
-                    print(f"Error scraping {s.get('id')}: {e}")
+                    print(f"Error scraping {sid}: {e}")
 
         def _generate_agenda() -> None:
             notes = {"title": "Scheduled Agenda", "date": str(date.today()), "summary": "Auto-generated agenda."}
