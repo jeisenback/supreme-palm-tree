@@ -30,6 +30,8 @@ except Exception:  # pragma: no cover - import-time resilience for tests
         return
 import json
 from pathlib import Path
+import sqlite3
+from typing import Any
 try:  # optional APScheduler integration
     from apscheduler.schedulers.background import BackgroundScheduler
     from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
@@ -66,6 +68,7 @@ def register_job(
     interval_seconds: int,
     retries: int = 0,
     retry_backoff_seconds: int = 0,
+    skip_persist: bool = False,
 ) -> None:
     """Register a job to run approximately every `interval_seconds`.
 
@@ -99,11 +102,12 @@ def register_job(
             )
     except Exception:
         pass
-    try:
-        _save_state()
-    except Exception:
-        # best-effort persistence; do not break registration on failure
-        pass
+    if not skip_persist:
+        try:
+            _save_state()
+        except Exception:
+            # best-effort persistence; do not break registration on failure
+            pass
 
 
 def schedule_one_off(name: str, func: Callable[[], None], delay_seconds: int) -> None:
@@ -289,6 +293,69 @@ def _state_path() -> Path:
     return root / ".scheduler_state.json"
 
 
+def _db_path() -> Path:
+    root = Path(__file__).resolve().parents[1]
+    return root / ".scheduler_jobs.db"
+
+
+def _ensure_db() -> None:
+    p = _db_path()
+    try:
+        conn = sqlite3.connect(str(p))
+        cur = conn.cursor()
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS job_state (
+                name TEXT PRIMARY KEY,
+                last_run REAL,
+                retry_attempts INTEGER
+            )
+            """
+        )
+        conn.commit()
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+
+def _db_set_state(name: str, last_run: float, retry_attempts: int) -> None:
+    p = _db_path()
+    try:
+        conn = sqlite3.connect(str(p))
+        cur = conn.cursor()
+        cur.execute(
+            "INSERT OR REPLACE INTO job_state (name, last_run, retry_attempts) VALUES (?, ?, ?)",
+            (name, float(last_run or 0), int(retry_attempts or 0)),
+        )
+        conn.commit()
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+
+def _db_get_all() -> dict[str, dict[str, Any]]:
+    p = _db_path()
+    out: dict[str, dict[str, Any]] = {}
+    if not p.exists():
+        return out
+    try:
+        conn = sqlite3.connect(str(p))
+        cur = conn.cursor()
+        cur.execute("SELECT name, last_run, retry_attempts FROM job_state")
+        for name, last_run, retry_attempts in cur.fetchall():
+            out[name] = {"last_run": float(last_run or 0), "retry_attempts": int(retry_attempts or 0)}
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
+    return out
+
+
 def _save_state() -> None:
     data = []
     for j in _JOBS.values():
@@ -307,6 +374,14 @@ def _save_state() -> None:
         path.write_text(json.dumps(data, indent=2))
     except Exception:
         # best-effort; ignore errors
+        pass
+    # Also persist runtime state into SQLite when APScheduler is available
+    try:
+        if _HAS_APSCHEDULER:
+            _ensure_db()
+            for j in _JOBS.values():
+                _db_set_state(j.name, j.last_run, j.retry_attempts)
+    except Exception:
         pass
 
 
@@ -328,10 +403,21 @@ def _load_state() -> None:
                 # restore retry config if present
                 retries = int(item.get("retries", 0) or 0)
                 backoff = int(item.get("retry_backoff_seconds", 0) or 0)
-                register_job(name, factory, interval, retries=retries, retry_backoff_seconds=backoff)
-                # restore runtime state
+                register_job(name, factory, interval, retries=retries, retry_backoff_seconds=backoff, skip_persist=True)
+                # restore runtime state from DB if available, else from JSON
                 job = _JOBS.get(name)
                 if job is not None:
+                    # prefer DB state when APScheduler is used
+                    try:
+                        if _HAS_APSCHEDULER:
+                            db_rows = _db_get_all()
+                            row = db_rows.get(name)
+                            if row is not None:
+                                job.last_run = float(row.get("last_run", 0) or 0)
+                                job.retry_attempts = int(row.get("retry_attempts", 0) or 0)
+                                continue
+                    except Exception:
+                        pass
                     job.last_run = float(item.get("last_run", 0) or 0)
                     job.retry_attempts = int(item.get("retry_attempts", 0) or 0)
             else:
