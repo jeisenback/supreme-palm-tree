@@ -50,13 +50,84 @@ def cmd_approve_add(source_id: str, meta: Optional[str] = None) -> int:
     try:
         metadata = None
         if meta:
-            metadata = json.loads(meta)
+            # accept either JSON string or dict passed directly
+            if isinstance(meta, str):
+                metadata = json.loads(meta)
+            elif isinstance(meta, dict):
+                metadata = meta
+            else:
+                metadata = None
         approvals.approve_source(source_id, metadata)
         print(f"Approved source: {source_id}")
         return 0
     except Exception as e:
         print(f"Failed to approve source {source_id}: {e}", file=sys.stderr)
         return 10
+
+
+def cmd_approve_update(source_id: str, meta: Optional[str] = None) -> int:
+    try:
+        metadata = {}
+        if meta:
+            metadata = json.loads(meta)
+        from ingest.scrapers.approvals import update_approval
+
+        update_approval(source_id, metadata)
+        print(f"Updated approval for source: {source_id}")
+        return 0
+    except Exception as e:
+        print(f"Failed to update approval {source_id}: {e}", file=sys.stderr)
+        return 18
+
+
+def cmd_approve_remove_field(source_id: str, field: str) -> int:
+    try:
+        from ingest.scrapers.approvals import remove_approval_field
+
+        remove_approval_field(source_id, field)
+        print(f"Removed field '{field}' from approval {source_id}")
+        return 0
+    except Exception as e:
+        print(f"Failed to remove field {field} from {source_id}: {e}", file=sys.stderr)
+        return 19
+
+
+def cmd_scrape_source(source_id: str) -> int:
+    try:
+        from ingest.scrapers.scraper_registry import get_source
+        from ingest.scrapers import EventScraper, JobScraper, PartnerScraper, approvals as approvals_mod
+        from ingest.scrapers.integrate import integrate_scraped_item
+
+        s = get_source(source_id)
+        if not s:
+            print(f"No source registered with id {source_id}", file=sys.stderr)
+            return 13
+
+        approval = approvals_mod.get_approval(source_id)
+        if not approval:
+            print(f"Source {source_id} is not approved for scraping", file=sys.stderr)
+            return 14
+
+        parser_map = {"event": EventScraper, "job": JobScraper, "partner": PartnerScraper}
+        cls = parser_map.get(s.get("parser"))
+        if not cls:
+            print(f"No parser for {s.get('parser')} (source {source_id})", file=sys.stderr)
+            return 15
+
+        rl = approval.get("rate_limit")
+        try:
+            rate_limit_seconds = float(rl) if rl is not None else 0
+        except Exception:
+            rate_limit_seconds = 0
+
+        scr = cls(rate_limit_seconds=rate_limit_seconds, respect_robots=False)
+        item = scr.scrape(s.get("url"), s.get("selectors", {}))
+        integrate_scraped_item(item, source_id)
+        print(f"Scraped and integrated source {source_id}")
+        return 0
+    except Exception as e:
+        print(f"Failed to scrape source {source_id}: {e}", file=sys.stderr)
+        return 16
 
 
 def cmd_approve_revoke(source_id: str) -> int:
@@ -122,15 +193,31 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_watch_drive.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
     p_watch_drive.add_argument("--state-path", required=False, help="Path to persist seen Drive file ids (default: out/drive_seen.json)")
 
+    p_scrape = sub.add_parser("scrape", help="Run a one-off scrape for a registered source id (enforces approvals)")
+    p_scrape.add_argument("--source-id", required=True, help="Registered source id to scrape")
+
     p_approve = sub.add_parser("approve", help="Manage approvals for scraper sources")
     p_approve_sub = p_approve.add_subparsers(dest="approve_cmd")
 
     p_approve_add = p_approve_sub.add_parser("add", help="Approve a source id for scraping")
     p_approve_add.add_argument("source_id", help="Unique source id to approve")
     p_approve_add.add_argument("--meta", required=False, help="Optional JSON metadata for the source")
+    p_approve_add.add_argument("--allowed-paths", required=False, help="Comma-separated allowed path prefixes for this source")
+    p_approve_add.add_argument("--rate-limit", required=False, type=float, help="Per-source rate limit in seconds")
+    p_approve_add.add_argument("--contact", required=False, help="Contact email/person responsible")
+    p_approve_add.add_argument("--notes", required=False, help="Free-text notes about approval")
+    p_approve_add.add_argument("--approved-by", required=False, help="Who approved this source")
 
     p_approve_revoke = p_approve_sub.add_parser("revoke", help="Revoke an approved source")
     p_approve_revoke.add_argument("source_id", help="Unique source id to revoke")
+
+    p_approve_update = p_approve_sub.add_parser("update", help="Update metadata for an approved source")
+    p_approve_update.add_argument("source_id", help="Unique source id to update")
+    p_approve_update.add_argument("--meta", required=False, help="JSON metadata to merge/update for the source")
+
+    p_approve_remove = p_approve_sub.add_parser("remove-field", help="Remove a metadata field from an approval")
+    p_approve_remove.add_argument("source_id", help="Unique source id")
+    p_approve_remove.add_argument("field", help="Metadata field name to remove")
 
     p_approve_list = p_approve_sub.add_parser("list", help="List approved sources")
 
@@ -314,11 +401,57 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     if args.cmd == "approve":
         if args.approve_cmd == "add":
-            return cmd_approve_add(args.source_id, getattr(args, "meta", None))
+            # Build metadata from flags if provided
+            meta_obj = None
+            if getattr(args, "meta", None):
+                # try several tolerant parsers for CLI convenience
+                import ast
+
+                s = args.meta
+                parsed = None
+                try:
+                    parsed = json.loads(s)
+                except Exception:
+                    try:
+                        parsed = ast.literal_eval(s)
+                    except Exception:
+                        try:
+                            parsed = json.loads(s.replace("'", '"'))
+                        except Exception:
+                            print("Invalid JSON provided to --meta", file=sys.stderr)
+                            return 17
+                meta_obj = parsed
+            if meta_obj is None:
+                meta_obj = {}
+            if getattr(args, "allowed_paths", None):
+                meta_obj["allowed_paths"] = [p.strip() for p in args.allowed_paths.split(",") if p.strip()]
+            if getattr(args, "rate_limit", None) is not None:
+                meta_obj["rate_limit"] = float(args.rate_limit)
+            if getattr(args, "contact", None):
+                meta_obj["contact"] = args.contact
+            if getattr(args, "notes", None):
+                meta_obj["notes"] = args.notes
+            if getattr(args, "approved_by", None):
+                meta_obj["approved_by"] = args.approved_by
+
+            # If no metadata collected, pass None to keep previous behavior
+            metadata_arg = meta_obj if meta_obj else None
+            return cmd_approve_add(args.source_id, metadata_arg)
+        if args.approve_cmd == "update":
+            return cmd_approve_update(args.source_id, getattr(args, "meta", None))
+        if args.approve_cmd == "remove-field":
+            return cmd_approve_remove_field(args.source_id, args.field)
         if args.approve_cmd == "revoke":
             return cmd_approve_revoke(args.source_id)
         if args.approve_cmd == "list":
             return cmd_approve_list()
+    if args.cmd == "scrape":
+        # run a one-off scrape for a registered source id (enforces approvals)
+        sid = getattr(args, "source_id", None)
+        if not sid:
+            print("Provide --source-id", file=sys.stderr)
+            return 18
+        return cmd_scrape_source(sid)
     if args.cmd == "weekly-update":
         from agents.weekly_update import create_draft, list_pending, publish_update
 
@@ -339,8 +472,6 @@ def main(argv: Optional[list[str]] = None) -> int:
                 if not items:
                     print("No pending drafts.")
                     return 0
-                import json
-
                 for it in items:
                     print(json.dumps(it, ensure_ascii=False))
                 return 0
@@ -412,8 +543,6 @@ def main(argv: Optional[list[str]] = None) -> int:
         if args.role_cmd == "communications":
             ctx = None
             if getattr(args, "json", None):
-                import json
-
                 ctx = json.loads(args.json)
             elif getattr(args, "json_file", None):
                 import pathlib, json
@@ -428,8 +557,6 @@ def main(argv: Optional[list[str]] = None) -> int:
             if getattr(args, "subject", None) and getattr(args, "audience", None):
                 try:
                     camp = generate_email_campaign(args.subject, args.audience)
-                    import json
-
                     print(json.dumps(camp, ensure_ascii=False, indent=2))
                     return 0
                 except Exception as e:
@@ -448,8 +575,6 @@ def main(argv: Optional[list[str]] = None) -> int:
         if args.role_cmd == "professional_development":
             mapping = None
             if getattr(args, "json", None):
-                import json
-
                 mapping = json.loads(args.json)
             elif getattr(args, "json_file", None):
                 import pathlib, json
@@ -472,8 +597,6 @@ def main(argv: Optional[list[str]] = None) -> int:
         if args.role_cmd == "operations":
             ctx = None
             if getattr(args, "json", None):
-                import json
-
                 ctx = json.loads(args.json)
             elif getattr(args, "json_file", None):
                 import pathlib, json
@@ -496,8 +619,6 @@ def main(argv: Optional[list[str]] = None) -> int:
         if args.role_cmd == "accelerator":
             apps = None
             if getattr(args, "json", None):
-                import json
-
                 apps = json.loads(args.json)
             elif getattr(args, "json_file", None):
                 import pathlib, json
