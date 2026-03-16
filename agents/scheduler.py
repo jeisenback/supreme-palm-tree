@@ -30,6 +30,15 @@ except Exception:  # pragma: no cover - import-time resilience for tests
         return
 import json
 from pathlib import Path
+try:  # optional APScheduler integration
+    from apscheduler.schedulers.background import BackgroundScheduler
+    from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+    _HAS_APSCHEDULER = True
+except Exception:
+    _HAS_APSCHEDULER = False
+
+# APScheduler instance (optional)
+_apscheduler: "BackgroundScheduler" | None = None
 
 
 @dataclass
@@ -69,6 +78,27 @@ def register_job(
         retries=retries,
         retry_backoff_seconds=retry_backoff_seconds,
     )
+    # If APScheduler is available and running, also schedule the job there.
+    try:
+        global _apscheduler
+        if _HAS_APSCHEDULER and _apscheduler is not None:
+            # remove existing APScheduler job if present
+            try:
+                _apscheduler.remove_job(name)
+            except Exception:
+                pass
+
+            # schedule a dispatcher that will call into our runtime job table
+            _apscheduler.add_job(
+                _apscheduler_dispatch,
+                "interval",
+                seconds=interval_seconds,
+                args=[name],
+                id=name,
+                replace_existing=True,
+            )
+    except Exception:
+        pass
     try:
         _save_state()
     except Exception:
@@ -96,6 +126,13 @@ def unregister_job(name: str) -> None:
     _JOBS.pop(name, None)
     try:
         _save_state()
+    except Exception:
+        pass
+    # also remove from APScheduler if present
+    try:
+        global _apscheduler
+        if _HAS_APSCHEDULER and _apscheduler is not None:
+            _apscheduler.remove_job(name)
     except Exception:
         pass
 
@@ -126,6 +163,20 @@ def _job_runner(poll_interval: float = 1.0) -> None:
                 # never let one job crash the loop
                 print(f"Error scheduling job {job.name}")
         _stop_event.wait(poll_interval)
+
+
+def _apscheduler_dispatch(job_name: str) -> None:
+    """Dispatcher used by APScheduler jobs to call our runtime job runner.
+
+    APScheduler persists job schedule and will import this module path; the
+    dispatcher looks up the live Job object in `_JOBS` and invokes
+    `_run_job_safe` to preserve retry semantics.
+    """
+    job = _JOBS.get(job_name)
+    if job is None:
+        return
+    # run in a separate thread to avoid blocking APScheduler worker
+    threading.Thread(target=_run_job_safe, args=(job,), daemon=True).start()
 
 
 def _run_job_safe(job: Job) -> None:
@@ -171,24 +222,62 @@ def _run_job_safe(job: Job) -> None:
 
 def start(poll_interval: float = 1.0) -> None:
     """Start the scheduler background thread."""
-    global _runner_thread, _stop_event
+    global _runner_thread, _stop_event, _apscheduler
     if _runner_thread and _runner_thread.is_alive():
         return
-    _stop_event = threading.Event()
-    _runner_thread = threading.Thread(target=_job_runner, args=(poll_interval,), daemon=True)
-    # Attempt to restore persisted jobs (best-effort)
-    try:
-        _load_state()
-    except Exception:
-        print("No persisted scheduler state loaded")
-    # Optionally start metrics server if env var set
-    try:
-        port = int(os.environ.get("SCHEDULER_METRICS_PORT", "0") or 0)
-        if port:
-            init_metrics_server(port)
-    except Exception:
-        pass
-    _runner_thread.start()
+
+    # If APScheduler is available, prefer it with an SQLAlchemy jobstore.
+    if _HAS_APSCHEDULER:
+        try:
+            root = Path(__file__).resolve().parents[1]
+            db_path = root / ".scheduler_jobs.db"
+            jobstore = SQLAlchemyJobStore(url=f"sqlite:///{db_path}")
+            _apscheduler = BackgroundScheduler(jobstores={"default": jobstore})
+            _apscheduler.start()
+            # restore persisted jobs into memory state and ensure APScheduler has them
+            try:
+                _load_state()
+            except Exception:
+                print("No persisted scheduler state loaded")
+            # ensure APScheduler has entries for current _JOBS
+            for name, job in list(_JOBS.items()):
+                try:
+                    # remove existing then add with current interval
+                    try:
+                        _apscheduler.remove_job(name)
+                    except Exception:
+                        pass
+                    _apscheduler.add_job(
+                        _apscheduler_dispatch,
+                        "interval",
+                        seconds=job.interval_seconds,
+                        args=[name],
+                        id=name,
+                        replace_existing=True,
+                    )
+                except Exception:
+                    pass
+        except Exception:
+            # fall back to in-process runner
+            _apscheduler = None
+
+    # Start in-process runner for environments without APScheduler
+    if not _HAS_APSCHEDULER or _apscheduler is None:
+        _stop_event = threading.Event()
+        _runner_thread = threading.Thread(target=_job_runner, args=(poll_interval,), daemon=True)
+        # Attempt to restore persisted jobs (best-effort)
+        try:
+            _load_state()
+        except Exception:
+            print("No persisted scheduler state loaded")
+        # Optionally start metrics server if env var set
+        try:
+            port = int(os.environ.get("SCHEDULER_METRICS_PORT", "0") or 0)
+            if port:
+                init_metrics_server(port)
+        except Exception:
+            pass
+        _runner_thread.start()
 
 
 # --- Persistence helpers (simple PoC using JSON) --------------------------
@@ -333,7 +422,13 @@ _KNOWN_JOB_FACTORIES: Dict[str, Callable[[], None]] = {
 
 def stop() -> None:
     """Stop the scheduler background thread and wait for it to finish."""
-    global _runner_thread, _stop_event
+    global _runner_thread, _stop_event, _apscheduler
+    if _apscheduler is not None:
+        try:
+            _apscheduler.shutdown(wait=False)
+        except Exception:
+            pass
+        _apscheduler = None
     if _stop_event:
         _stop_event.set()
     if _runner_thread:
