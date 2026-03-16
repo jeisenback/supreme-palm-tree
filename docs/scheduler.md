@@ -73,3 +73,17 @@ Notes and recommendations
   or environment variables provided by the host.
 - For long-running or production workloads, replace the in-process scheduler
   with a more robust job runner and add monitoring/alerting.
+
+APScheduler + SQLAlchemy jobstore (optional)
+------------------------------------------
+- To persist scheduled jobs across restarts, the project includes an optional
+  APScheduler-backed production scheduler at `agents/scheduler_prod.py`.
+- Install the dependencies in `requirements.txt` (APScheduler + SQLAlchemy).
+- Example usage with a SQLite jobstore:
+
+```bash
+python -c "from agents.scheduler_prod import ProductionScheduler; sched = ProductionScheduler(jobstore_url='sqlite:///./scheduler_jobs.sqlite'); sched.start();"
+```
+
+- For a production-grade database, provide a PostgreSQL or MySQL URL and ensure
+  the database is backed up and secured. See APScheduler docs for migration notes.
