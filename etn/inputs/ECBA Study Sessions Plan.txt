@@ -1,0 +1,148 @@
+﻿Preparing to Study
+Preparing to Study
+* Sleep - Maintain a sleep schedule
+* Exercise - 2.5 hours of cardio, 2 days of strength training each week
+* Hydration - Keep water with you while studying
+* Nutrition - Fruits, seeds, oatmeal, green tea, dark chocolate
+* Put your phone away 1 hour before bed
+* Use the pomodoro method for study sessions - 25 minutes focus time, 5 minutes break, 4 repetitions
+   * After 4 repetitions, extend breaks to 15 minutes
+
+
+How to Take Notes
+* Cornell notes
+   * Notes section: Capture the gist of what you’ve learned and the important details in your own words
+   * Cue section: 
+      * Used simultaneously or after you take your notes
+      * Add questions that will help your organize or remember the material
+      * Can help you identify what you still need to study more
+   * Summary section: 
+      * Share what you learned in no more than three sentences
+      * Write this while the information’s still fresh in your mind
+      * Start your next study session by reviewing this area
+  
+
+How to Study
+* It’s better to spend 10 minutes every evening reviewing information than it is to spend a long time in a single study session.
+* Test yourself from memory each study session
+   * Retrieval practice - Write it out
+      * Write or sketch everything you can remember from memory
+      * Put the information in your own words
+      * Come up with your own examples
+      * Make connections to your own life
+      * Finish by reviewing the course materials and seeing what you got right
+      * Use flashcards
+      * Create concept maps
+      * Provide concrete examples
+* Dual coding - Combine visuals with words
+   * Sketch your notes
+* Interleave topics - Alternate study of three topics in the same subject area to create space for forgetting and remembering
+* Elaboration - Works best with prior knowledge
+   * Ask “how” or “why” questions
+   * Explain concepts to yourself
+   * Explain how concepts are similar and how they’re different
+Teaching
+* Follow the ARCS motivational model for content delivery
+   * Attention: Capture learners’ interest and engage them
+      * Start with a surprising scenario: Present a failed project and ask learners to guess what went wrong. Reveal that the root cause was poor requirements or unclear stakeholder needs.
+      * Use an interactive poll: Which of these is not a business analyst’s responsibility?
+      * Incorporate multimedia: Short videos showing analysts in action, dashboard that illustrates how insights drive decisions.
+      * Tell a story: A narrative about a company that transformed through good analysis.
+   * Relevance: Make the learning material meaningful and applicable to learners’ lives
+      * Tie concepts to real-world roles: Show how business analysis skills apply to project management, product ownership, operations, etc.
+      * Use industry examples: Demonstrate how BA techniques (Like SWOT, process mapping, user stories) show up in everyday business decisions.
+      * Let learners personalize tasks: Invite them to choose a company or domain they care about and apply BA tools to it.
+      * Connect to future opportunities: Highlight career paths, certifications and the growing demand for analytical thinking.
+   * Confidence: Build learners’ belief in their ability to succeed
+      * Start with small wins: Begin with simple tasks like identifying stakeholders or drafting a basic problem statement.
+      * Provide guided practice: Use templates, step-by-step walkthroughs and worked examples before asking them to do it independently.
+      * Offer clear success criteria: Rubrics for user stories, process maps or requirement statements help learners know what “good” looks like.
+      * Encourage peer collaboration: Group activities reduce pressure and let learners learn from each other.
+   * Satisfaction: Ensure learners feel a sense of accomplishment and reward from their learning experience
+      * Authentic application: End the lesson with a mini-project where learners analyze a real or simulated business problem using the skills they just learned.
+* ARCS in action:
+   * Attention - Open with a case study of a multimillion-dollar project failure caused by unclear requirements.
+   * Relevance - Connect the case to personal workplace experiences.
+   * Confidence - Teach a simple technique like writing a problem statement and let learners practice with a template.
+   * Satisfaction - Have learners share their statements, give feedback and reflect on how this skill could prevent the kind of failure shown at the start of the lesson.
+ 
+Five-Month Delivery Format
+Sessions Timeline
+* Session 1 - April
+* Session 2 - May
+* Session 3 - June
+* Session 4 - July
+* Session 5 - August
+The ECBA’s Nine Domains
+1. Understanding Business Analysis
+2. Mindset for Effective Business Analysis
+3. Implementing Business Analysis
+4. Change
+5. Need
+6. Solution
+7. Stakeholder
+8. Value
+9. Context
+Session 1 - Foundations & Core Concepts
+Topics
+* Understanding Business Analysis
+   * What BA is
+   * Role in enabling change
+   * The BACCM
+   * Assessing value
+   * Any other additional items
+* Mindset for Effective Business Analysis
+   * BA mindset
+   * Values
+   * Principles
+   * Foundational competencies
+Case Study
+* Analyze a fictional organization and identify:
+   * Business problems
+   * Stakeholders involved
+   * Where BA provides value
+* Apply the BACCM to frame the situation
+Session 2 - Applying BA in Practice
+Topics
+* Implementing Business Analysis
+   * Roles
+   * Approaches
+   * Organizational factors
+   * Requirements vs. designs
+* Context - How environment, constraints and ecosystems shape BA work
+Case Study
+* Determine the most appropriate BA approach for a new project scenario
+* Assess how organizational context affects the approach
+Session 3 - Change & Needs
+Topics
+* Change
+   * Understanding change drivers
+   * Assessing impact
+   * Preparing for transition
+* Need
+   * Identifying business needs
+   * Root-cause analysis
+   * Problem definition
+Case Study
+* Perform a current-state assessment
+* Identify and articulate the true business need vs. stakeholder wants
+Session 4 - Requirements, Solutions & Stakeholders
+Topics
+* Solution
+   * Defining solution options
+   * Assessing potential value
+* Stakeholder
+   * Identifying, analyzing and engaging stakeholders
+Case Study
+* Create a stakeholder map
+* Develop solution options and evaluate them using value, feasibility and risk criteria
+Session 5 - Value & Exam Readiness
+Topics
+* Value
+   * Assessing outcomes
+   * Measuring value
+   * Recommending actions to increase solution value
+* Integrated review of all nine domains based on sample ECBA exam scenario questions
+Case Study
+* Post-implementation scenario: Evaluate whether a delivered solution achieved intended outcomes
+* Recommend improvements based on value assessment

@@ -1,0 +1,366 @@
+ECBA Case Study Series — Writing & Style Guide
+Facilitator reference | Based on IIBA East Tennessee Chapter Style Guide
+
+--- DOCUMENT GUIDE ---
+What this is:   Writing and formatting standards for all TrailBlaze ECBA case study documents, derived from the IIBA East Tennessee Chapter Style Guide. Use this when building Sessions 2–5 materials or reviewing existing documents for consistency.
+Who it's for:   Facilitator and any contributors building or editing session materials.
+When to use it: Before writing new content; as a checklist when reviewing existing documents.
+Restricted:     No — safe to share with any contributor.
+--- END GUIDE ---
+
+---
+
+FOUNDATION — IIBA VOICE PRINCIPLES
+
+All ECBA case study documents are IIBA-aligned materials. The four IIBA voice principles apply to everything produced in this series.
+
+HUMAN
+Write with a member-first perspective. Participant-facing documents use second person throughout.
+  - Use: "your stakeholder list," "you'll apply the BACCM," "your group decides"
+  - Avoid: "the participant will," "students should," "candidates must"
+Facilitator-facing documents use imperative (direct, collegial, no passive voice).
+  - Use: "pause here," "call on one person per group," "hold Solution blank"
+  - Avoid: "it is recommended that the facilitator," "the facilitator should consider"
+
+OPEN
+Write plainly. ECBA concepts are precise — the explanation around them should not be.
+  - Define every acronym on first use in each document (BACCM, RTM, RACI, BA, ECBA)
+  - Never assume the reader has read another document in the set
+  - Use short sentences for instructions. Use longer sentences only for rationale or context.
+  - Avoid: "it is important to note that," "in order to," "as mentioned previously"
+
+PROFESSIONAL
+Every document should be accurate, complete, and internally consistent.
+  - Exam questions must have exactly one defensible best answer
+  - Rationale must explain why the correct answer is right AND why each distractor is wrong
+  - Session timing must add up correctly across the run-of-show table and per-slide cues
+  - All TrailBlaze figures must be consistent across files (18% booking decline, 40 contracted guides, etc.)
+
+EXPERTISE
+Content celebrates practical application, not recall. Every concept is anchored to TrailBlaze.
+  - Lead with the TrailBlaze anchor, then introduce the ECBA term — not the other way around
+  - Exam tips are written as diagnostic insight, not rules: explain why the concept trips people up
+  - Homework deliverables should build from in-session work, not start from scratch
+
+---
+CONTENT PILLARS
+
+The East TN Chapter organizes content into four pillars. Each document in the ECBA series maps to one primary pillar. Understanding the pillar helps set tone, depth, and format.
+
+EDUCATIONAL
+  Purpose:     Enhance knowledge of Business Analysis; provide practical insights, tools, techniques, and research.
+  Series use:  Primary pillar for all session slides, practice questions, handouts, and facilitator materials.
+  Tone signal: Authoritative and clear. Lead with practical application, not theory. Anchor every concept to TrailBlaze.
+  Examples from this series:
+    - Session slide decks (concepts + TrailBlaze anchors)
+    - Practice questions (checkpoint, practice round, homework)
+    - Onboarding handout (study habits, ECBA exam overview)
+    - Facilitator reference notes (instructor quotes, application guidance)
+
+PROMOTIONAL
+  Purpose:     Promote chapter events, study groups, webinars, certifications, and membership.
+  Series use:  Session 0 onboarding packet; pre-session communications sent to participants.
+  Tone signal: Engaging and action-oriented. Keep it compelling. Make the ask clear.
+  Examples from this series:
+    - Invitation copy for each session
+    - Session reminder messages
+    - SME recruitment outreach
+
+ENGAGEMENT
+  Purpose:     Light-hearted, interactive content designed to generate responses — polls, quizzes, open questions.
+  Series use:  End-of-session survey; practice round reveal moments; stretch questions at the close of Session B.
+  Tone signal: Conversational and warm. Low stakes. Invite participation; never pressure it.
+  Examples from this series:
+    - Session Survey Template
+    - Stretch questions in Session B Slides
+    - Practice round reveal and discussion
+
+COMMUNITY
+  Purpose:     Celebrate achievements, recognize volunteers, share member testimonials, mark chapter milestones.
+  Series use:  Post-series wrap-up; certification announcements; shout-outs for participants who complete homework or earn certifications.
+  Tone signal: Warm, proud, personal. Use "we" and "us." Recognize effort as much as outcome.
+  Examples from this series:
+    - Session share-out acknowledgments
+    - Any post-series certification announcement copy
+
+---
+LANGUAGE STANDARDS
+
+ECBA DOMAIN FRAMING
+Frame all exercises, debrief language, and question rationale through ECBA domain names.
+BABOK Knowledge Area names are supporting context, not the primary label.
+
+  Use first:     "Understanding Business Analysis domain"
+  Use second:    "BABOK Ch. 2 — Key Concepts (§2.1–2.4)"
+
+  Never use both in the same sentence. Introduce domain, then reference chapter as a secondary pointer.
+
+EXAM LANGUAGE
+  - Questions: scenario-based, present tense, 4 options (A–D), one best answer
+  - Distractors: plausible but wrong for a clear reason — never trick questions
+  - Rationale: explain the right answer first, then address at least two distractors explicitly
+  - Stem format: one scenario sentence + one question. Avoid multi-part stems.
+  - Difficulty calibration: checkpoint questions test recognition; practice and homework questions test application
+
+TRAILBLAZE LANGUAGE
+  Roles only — never use character names in any participant or facilitator document.
+    Approved:   CEO, Head of Operations, Marketing Lead, Finance Director, Lead Guide Representative, Weekend Traveler, Legal/Compliance
+    Banned:     Any named character (first or last name)
+
+  Tense conventions:
+    Present tense:   active TrailBlaze situation within the current session reveal
+    Past tense:      established facts from a prior session reveal
+    Future tense:    deliberate open questions the BA has not yet resolved
+
+  Key figures — use consistently:
+    - Weekend booking decline: 18% over two quarters
+    - Staff (full-time): 12
+    - Contracted guides: approximately 40
+    - Session 5 booking increase (post-pilot): stated in Session 5 reveal only — do not use in Sessions 1–4
+
+  Adventure metaphor — use sparingly and consistently:
+    - Route vs. destination: approach vs. outcome
+    - Base camp: foundation work (BACCM, stakeholder map, problem statement)
+    - Summit: the confirmed need or value outcome
+    - Wrong mountain: solving the wrong problem
+    - Trail: the BA process or change pathway
+  Limit to one metaphor per slide or exercise block. Do not mix metaphors mid-paragraph.
+
+---
+
+WORD CHOICE & SYNTAX
+
+This section exists because most content produced with AI assistance sounds like it. The patterns below are reliable signals. Avoid them.
+
+BANNED WORDS AND PHRASES
+These appear constantly in AI outputs. None of them add meaning. Cut them.
+
+  "leverage"              → use, apply, draw on
+  "utilize"               → use
+  "ensure"                → confirm, check, make sure — or rewrite the sentence to name the action
+  "foster"                → build, develop, create
+  "delve into"            → look at, work through, examine
+  "comprehensive"         → drop it, or say exactly what's included
+  "robust"                → drop it. If it's robust, show it
+  "seamless"              → drop it
+  "streamline"            → simplify, cut, consolidate — or say what step is removed
+  "in order to"           → to
+  "it is important to note that" → drop the phrase; state the point
+  "it is worth mentioning" → drop the phrase; state the point
+  "this allows us to"     → rewrite: say what happens next
+  "as mentioned previously" → drop it; if it matters, restate it plainly
+  "moving forward"        → drop it; state what happens next
+  "in conclusion"         → drop it; write the conclusion
+  "at the end of the day" → drop it
+  "going forward"         → drop it
+  "holistic"              → drop it. Name what's included
+  "innovative"            → drop it. Describe what's new and why it matters
+  "actionable"            → drop it. Write the action
+
+SENTENCE STRUCTURE RULES
+
+  1. Subject before verb. Every sentence.
+     Avoid:  "Participants are given the opportunity to examine..."
+     Write:  "Participants examine..."
+
+  2. Active voice. Passive voice signals hesitation or vagueness.
+     Avoid:  "The rubric is designed to be used as a learning tool."
+     Write:  "The rubric is a learning tool. Use it that way."
+
+  3. One idea per sentence in instructions. Two is the limit.
+     Avoid:  "When working through the exercise, participants should consider the stakeholder map they built
+              in the previous session, while also keeping in mind the BACCM elements discussed earlier, and
+              connecting these to the current problem statement."
+     Write:  "Pull out your stakeholder map from Session 1. Look for gaps between the BACCM elements and
+              the current problem statement."
+
+  4. No throat-clearing at the start of a sentence.
+     Avoid:  "It should be noted that the ECBA exam tests application, not recall."
+     Write:  "The ECBA exam tests application, not recall."
+
+  5. No hollow symmetry. "Not only X, but also Y" and triplet lists ("X, Y, and Z") signal padding.
+     If all three items in a list are saying the same thing at different zoom levels, cut two.
+
+  6. Numbers anchor vague claims. Use them.
+     Avoid:  "Participants will practice multiple exam-style questions."
+     Write:  "Participants answer 4 timed MCQs at the end of every Session A."
+
+  7. Specificity replaces adjectives.
+     Avoid:  "A robust set of facilitator materials has been developed."
+     Write:  "Session 1 includes a facilitator script, answer key, reference notes, and SME prep guide."
+
+PATTERNS THAT FLAG AI ORIGIN
+
+  Announcing the structure before delivering it:
+     Avoid:  "This section will provide an overview of the key principles..."
+     Write:  The section. Skip the announcement.
+
+  Symmetric setup-payoff with no real tension:
+     Avoid:  "While theory is important, practice is equally essential."
+     Write:  Make a claim. Back it with a specific example.
+
+  Vague authority:
+     Avoid:  "Research shows that spaced repetition improves retention."
+     Write:  "Spaced repetition is why homework MCQs are due before the next session, not the night of."
+
+  Escalating synonyms:
+     Avoid:  "Participants will explore, examine, and analyze the case study."
+     Write:  One verb. The right one.
+
+  Passive problem statements:
+     Avoid:  "Gaps in stakeholder alignment were identified."
+     Write:  "The BA found that the CEO and Head of Operations disagreed on root cause."
+
+TONE CALIBRATION
+
+  These documents are written for working professionals who already have jobs and are spending
+  their own time on this. Respect that. Do not:
+  - Over-explain things they already know
+  - Use urgency language ("now more than ever," "in today's landscape")
+  - Use aspirational filler ("unlock your potential," "on your journey")
+
+  The voice is collegial and direct. A sharp facilitator talking to a capable room.
+  Say the thing. Trust the reader to follow.
+
+---
+
+FORMATTING STANDARDS
+
+DOCUMENT GUIDE BLOCK
+Every document in the set opens with a Document Guide block immediately after the title.
+Format (copy exactly — spacing and dashes are part of the standard):
+
+  --- DOCUMENT GUIDE ---
+  What this is:   [one sentence]
+  Who it's for:   [audience]
+  When to use it: [timing or context]
+  Restricted:     [Yes — reason | No]
+  --- END GUIDE ---
+
+  Omit the Restricted line only if the document has no distribution constraint.
+
+FACILITATOR CUES
+Any line that is facilitator-only instruction (not participant-visible content) must be tagged:
+  [FACILITATOR: text]
+
+Use for: checkpoint prompts, timing notes, "hold blank" instructions, share-out guidance.
+Do not use for: slide content, exercise instructions, exam tips, rubric criteria.
+
+SLIDE HEADER FORMAT
+  Slide [number] — [Title] [start time — duration]
+  Example: Slide 7 — The BACCM [0:22 — 6 min]
+
+  Appendix slides use a letter: Appendix A
+
+  No "13a" or "14a" numbering — insertions get a full sequential number.
+
+TIMING
+  - Run-of-show table at the top of every slide deck
+  - Per-slide timing cue on every slide header
+  - Total time across all slides must equal the declared session duration
+  - Checkpoints are included in the preceding slide's time allocation, not counted separately
+
+RUBRIC
+  The rubric for each session lives in the participant Workshop Handout for that session.
+  Slide decks reference the handout ("Rubric: see Workshop_Handout.md") — they do not repeat it.
+
+SECTION SEPARATORS
+  Use --- (three dashes) between major sections.
+  Do not use === or *** as separators.
+
+EMPHASIS
+  Bold (**text**) for key terms on first use in a document.
+  Italics (*text*) for session-gated reveal labels and exam tips.
+  Inline code (`text`) for file names and file paths only.
+  Do not use bold for general emphasis or decoration.
+
+---
+
+DISTRIBUTION AND RESTRICTION RULES
+
+Restricted — facilitator only (never distribute to participants):
+  - ECBA_CaseStudy_Plan.md
+  - TrailBlaze_MasterContext.md
+  - All files in Facilitator/
+  - Session-gated reference files before their reveal date (RTM_Sample, Stakeholders_Detailed, UserStories)
+
+Safe to distribute from Session 1 onward:
+  - Session0_Onboarding_Handout.md
+  - OnePager_MicroExpeditions.md
+  - Personas.md
+  - Workshop_Handout.md (the session-specific version)
+  - Templates/ (all)
+  - Session1_PracticeQuestions.md — homework questions only (Homework 1–6)
+
+Session-gated (distribute only at or after the indicated session):
+  - UserStories.md — Session 3
+  - RTM_Sample.md — Session 4
+  - Stakeholders_Detailed.md — Session 4
+
+---
+
+VISUAL STANDARDS
+
+TYPOGRAPHY
+  These standards apply when producing slide decks, handouts, or graphics in PowerPoint, Google Slides, or Canva.
+
+  Headings and graphics:   Roboto Condensed
+  Body copy:               IBM Plex Sans
+
+  Both fonts are available free via Google Fonts. Use consistently across all produced materials.
+  In markdown/text documents, heading hierarchy (# ## ###) substitutes for font size differentiation.
+
+BRAND COLORS
+  Use East TN Chapter brand colors for any designed materials (slides, handouts, social posts).
+
+  Primary orange   HEX #DB5D00   RGB 219, 93, 0      CMYK 10, 76, 100, 1
+  Dark teal        HEX #002E38   RGB 0, 46, 56        CMYK 94, 66, 57, 58
+  Mid teal         HEX #00758C   RGB 0, 117, 140      CMYK 89, 42, 35, 7
+  Light gray-teal  HEX #C6D0D0   RGB 198, 208, 208    CMYK 22, 11, 15, 0
+
+  Usage guidance:
+    - Primary orange: calls to action, key term highlights, section dividers
+    - Dark teal: primary background option, headers, high-contrast text blocks
+    - Mid teal: secondary headers, supporting graphics, accent elements
+    - Light gray-teal: backgrounds, table fills, secondary text blocks
+    - Do not use colors outside this palette for chapter-branded materials
+
+IMAGERY
+  - Compositions: contemporary, clean, crisp, professional
+  - Colors: strong, positive, bright — consistent with the brand palette above
+  - Photography: select images that represent your chapter or region (East Tennessee context preferred)
+  - Rights: use only images with signed photo releases or purchased stock image rights
+  - Resolution: minimum 72 dpi for web; 300 dpi for print
+  - Adventure-themed imagery (trails, mountains, team navigation) is appropriate for this series
+    provided it meets the rights and quality standards above
+
+---
+
+AUDIENCE PERSONAS
+
+The East TN Chapter serves two distinct audiences. Design all content with both in mind.
+
+EXISTING MEMBERS — Re-engagement target
+  Age:                  30–55
+  Experience:           Mid-to-senior level
+  Education:            Bachelor's degree or higher
+  Employment:           Full-time; various industries
+  Pain points:          Disconnection from the chapter; unclear career advancement path; time constraints
+  Goals:                Stay current with BA trends; find career growth opportunities; access continuing education
+  Engagement style:     Prefer structured learning; engage when content is directly tied to career benefit;
+                        prefer targeted or exclusive sessions
+  Design implication:   Session A and B formats serve this audience. Content should feel selected and substantive,
+                        not generic. Treat their time as the scarce resource it is.
+
+POTENTIAL MEMBERS — Recruitment target
+  Age:                  22–40
+  Experience:           Entry-level professionals; recent graduates
+  Education:            Recent graduates or early-career professionals; various industries
+  Pain points:          Uncertain how to enter BA; unaware of IIBA's value; overwhelmed by career transition;
+                        limited access to mentors
+  Goals:                Clear pathways to BA roles; affordable training; networking; practical guidance
+  Engagement style:     Prefer beginner-friendly content; respond well to real-world case studies and success
+                        stories; engage via social media and virtual meetups
+  Design implication:   The TrailBlaze case study is purpose-built for this audience. Exercises should feel
+                        immediately applicable. Avoid jargon-heavy framing in participant materials.
+                        Session 0 and Workshop Handouts are first impressions — design them accordingly.
