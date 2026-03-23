@@ -11,7 +11,6 @@ import streamlit as st
 
 from shared import (
     SESSIONS,
-    MONTH_SESSION_MAP,
     find_variants,
     load_master_context,
     find_documents,
