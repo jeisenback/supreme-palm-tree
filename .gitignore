@@ -3,3 +3,10 @@ __pycache__/
 
 # Virtual environment
 .venv/
+.gstack/
+
+# Runtime files
+.scheduler_jobs.db
+.scheduler_state.json
+streamlit.log
+streamlit.pid
