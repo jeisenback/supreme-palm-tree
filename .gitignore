@@ -10,3 +10,15 @@ __pycache__/
 .scheduler_state.json
 streamlit.log
 streamlit.pid
+
+# Large media files
+etn/inputs/*.mp4
+etn/inputs/*.m4a
+etn/inputs/**/*.mp4
+etn/inputs/**/*.m4a
+etn/inputs/**/*.pptx
+etn/inputs/**/*.docx
+etn/inputs/**/*.xlsx
+etn/inputs/**/*.pdf
+etn/inputs/**/*.vsdx
+etn/inputs/**/*.lnk
