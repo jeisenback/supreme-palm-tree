@@ -230,8 +230,35 @@ def _render_session_lifecycle_panel(selected_variant):
 
     if live is None:
         st.markdown("#### Session: Not Started")
-        if st.button("Go Live", type="primary", key="go_live_btn"):
-            slide_deck = find_slide_deck(selected_variant) if selected_variant else None
+
+        # Pre-session readiness checklist — gates Go Live (#52)
+        # Runs inline on every render (no caching — this is a pre-flight, not a hot path)
+        slide_deck = find_slide_deck(selected_variant) if selected_variant else None
+        csv_ok = CSV_PATH.exists()
+        master_ok = bool(load_master_context(selected_variant))
+        logged_in_ok = bool(st.session_state.get("logged_in"))
+        all_ok = all([logged_in_ok, slide_deck is not None, csv_ok, master_ok])
+
+        with st.status(
+            "All checks passed — ready to go live" if all_ok else "Some checks failed — resolve before going live",
+            state="complete" if all_ok else "error",
+            expanded=not all_ok,
+        ):
+            st.write("✅ Facilitator logged in" if logged_in_ok else "❌ Facilitator not logged in")
+            st.write(
+                f"✅ Slide deck found: {slide_deck.name}"
+                if slide_deck else "❌ Slide deck not found in variant folder"
+            )
+            st.write(
+                "✅ Events CSV present"
+                if csv_ok else "❌ Events CSV missing (etn/outputs/iiba_events_parsed.csv)"
+            )
+            st.write(
+                "✅ Case study context loaded"
+                if master_ok else "❌ Case study master context not found in variant folder"
+            )
+
+        if st.button("Go Live", type="primary", key="go_live_btn", disabled=not all_ok):
             write_live_session({
                 "session_id": str(uuid.uuid4()),
                 "slide_idx": 0,
