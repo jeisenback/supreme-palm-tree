@@ -33,6 +33,7 @@ NOTES_PATH = Path("etn/outputs/facilitator_notes.csv")
 SESSION_PATH = Path("etn/outputs/facilitator_session.json")
 LIVE_SESSION_PATH = Path("etn/outputs/session_live.json")
 ATTENDEES_DIR = Path("etn/outputs/attendees")
+SESSIONS_OVERRIDE_PATH = Path("etn/outputs/sessions.json")
 
 
 def save_persistent_session(name: str, token: str, expires_iso: str):
@@ -64,7 +65,10 @@ def read_live_session():
         return None
     try:
         return json.loads(LIVE_SESSION_PATH.read_text(encoding="utf-8"))
-    except Exception:
+    except Exception as e:
+        # File exists but is unreadable or malformed — surface this so it isn't
+        # silently mistaken for "session not started".
+        st.warning(f"session_live.json exists but could not be read ({e}). The file may be corrupt.")
         return None
 
 
@@ -77,12 +81,60 @@ def read_attendees() -> list:
     if not ATTENDEES_DIR.exists():
         return []
     attendees = []
+    errors = 0
     for f in sorted(ATTENDEES_DIR.glob("*.json")):
         try:
             attendees.append(json.loads(f.read_text(encoding="utf-8")))
         except Exception:
-            pass
+            errors += 1
+    if errors:
+        st.warning(f"{errors} attendee file(s) could not be read and were skipped.")
     return attendees
+
+
+def load_sessions_override() -> dict:
+    """Return session overrides from sessions.json (keyed by str session number), or {}."""
+    if not SESSIONS_OVERRIDE_PATH.exists():
+        return {}
+    try:
+        return json.loads(SESSIONS_OVERRIDE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def save_sessions_override(overrides: dict):
+    SESSIONS_OVERRIDE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    SESSIONS_OVERRIDE_PATH.write_text(json.dumps(overrides, indent=2), encoding="utf-8")
+
+
+def _call_llm(prompt: str, system: str = "") -> str:
+    """Call Anthropic /v1/messages; returns text or an error string."""
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return "Error: ANTHROPIC_API_KEY environment variable is not set."
+    headers = {
+        "x-api-key": api_key,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+    }
+    body: dict = {
+        "model": "claude-sonnet-4-6",
+        "max_tokens": 2048,
+        "messages": [{"role": "user", "content": prompt}],
+    }
+    if system:
+        body["system"] = system
+    try:
+        resp = requests.post(
+            "https://api.anthropic.com/v1/messages",
+            headers=headers,
+            json=body,
+            timeout=30,
+        )
+        resp.raise_for_status()
+        return resp.json()["content"][0]["text"]
+    except Exception as e:
+        return f"Error calling LLM: {e}"
 
 
 def exchange_code_for_token(code: str, client_id: str, client_secret: str, redirect_uri: str):
@@ -207,7 +259,11 @@ def render_participant_view():
     live = read_live_session()
 
     if live is None:
-        st.info("Waiting for facilitator to start the session...")
+        if LIVE_SESSION_PATH.exists():
+            # File exists but read_live_session returned None → corrupt/unreadable
+            st.error("Session file exists but could not be read. Please ask your facilitator to reset the session.")
+        else:
+            st.info("Waiting for facilitator to start the session...")
         # Browser-level poll — no Streamlit flicker
         components.html('<meta http-equiv="refresh" content="5">', height=0)
         return
@@ -407,6 +463,145 @@ def _render_session_lifecycle_panel(selected_variant):
     st.markdown("---")
 
 
+def _render_content_authoring(session_num: int, selected_variant):
+    """Content authoring module — sessions editor, AI draft generator, slide upload (#55)."""
+    st.subheader("Content Authoring")
+    tab_editor, tab_ai, tab_upload = st.tabs(
+        ["Sessions Editor", "AI Draft Generator", "Slide Upload"]
+    )
+
+    # ── Sessions Editor ──────────────────────────────────────────────────────────
+    with tab_editor:
+        st.markdown(
+            "Edit session content. Changes are saved to `etn/outputs/sessions.json` "
+            "and override the defaults in `shared.py`."
+        )
+        overrides = load_sessions_override()
+        # Load current values: override → SESSIONS fallback
+        base = dict(SESSIONS.get(session_num, {}))
+        current = dict(overrides.get(str(session_num), base))
+
+        title = st.text_input("Title", value=current.get("title", ""), key="edit_title")
+        agenda_raw = st.text_area(
+            "Agenda (one item per line)",
+            value="\n".join(current.get("agenda", [])),
+            height=120,
+            key="edit_agenda",
+        )
+        homework = st.text_input("Homework", value=current.get("homework", ""), key="edit_hw")
+        prompts_raw = st.text_area(
+            "Discussion prompts (one per line)",
+            value="\n".join(current.get("prompts", [])),
+            height=80,
+            key="edit_prompts",
+        )
+
+        st.markdown("**Practice questions** (JSON list — each has `q`, `choices`, `a`)")
+        pq_default = json.dumps(current.get("practice_questions", []), indent=2)
+        pq_raw = st.text_area("Practice questions JSON", value=pq_default, height=160, key="edit_pq")
+
+        if st.button("Save session content", key="save_session_content"):
+            try:
+                pq_parsed = json.loads(pq_raw)
+            except Exception as e:
+                st.error(f"Practice questions JSON is invalid: {e}")
+                return
+            updated = {
+                "title": title,
+                "agenda": [l.strip() for l in agenda_raw.splitlines() if l.strip()],
+                "homework": homework,
+                "prompts": [l.strip() for l in prompts_raw.splitlines() if l.strip()],
+                "practice_questions": pq_parsed,
+            }
+            overrides[str(session_num)] = updated
+            save_sessions_override(overrides)
+            st.success(f"Session {session_num} saved to sessions.json.")
+
+        if overrides.get(str(session_num)):
+            if st.button("Reset to defaults", key="reset_session_content"):
+                overrides.pop(str(session_num), None)
+                save_sessions_override(overrides)
+                st.success("Reset to shared.py defaults.")
+                st.rerun()
+
+    # ── AI Draft Generator ────────────────────────────────────────────────────────
+    with tab_ai:
+        st.markdown(
+            "Generate slide deck content using AI. Describe your topic and the output "
+            "will be formatted for `parse_slides` (Slide N headers)."
+        )
+        topic = st.text_input(
+            "Topic / objective",
+            placeholder="e.g. 'BACCM core concepts for ECBA exam prep, Session 1'",
+            key="ai_topic",
+        )
+        num_slides = st.slider("Number of slides", 3, 20, 8, key="ai_num_slides")
+        audience = st.selectbox(
+            "Audience level", ["Beginner", "Intermediate", "Advanced"], key="ai_audience"
+        )
+
+        if st.button("Generate draft", key="ai_generate", disabled=not topic.strip()):
+            system_prompt = (
+                "You are a content author creating training slides for a professional "
+                "development study session. Output ONLY the slide content in markdown format. "
+                "Use 'Slide N — Title' headers (e.g. 'Slide 1 — Introduction'). "
+                "Each slide should have body content and optionally a [FACILITATOR: note] block. "
+                "No preamble, no explanation — just the slides."
+            )
+            user_prompt = (
+                f"Create {num_slides} slides on: {topic.strip()}\n"
+                f"Audience: {audience} level. "
+                "Each slide: title, 3-5 bullet points, optional facilitator note."
+            )
+            with st.spinner("Generating..."):
+                result = _call_llm(user_prompt, system=system_prompt)
+            st.session_state["_ai_draft"] = result
+
+        draft = st.session_state.get("_ai_draft", "")
+        if draft:
+            edited = st.text_area(
+                "Generated draft (edit before saving)",
+                value=draft,
+                height=400,
+                key="ai_draft_edit",
+            )
+            filename = st.text_input(
+                "Save as filename",
+                value="slides_draft.md",
+                key="ai_save_filename",
+            )
+            if selected_variant and st.button("Save to variant folder", key="ai_save_draft"):
+                dest = Path(selected_variant) / filename
+                dest.write_text(edited, encoding="utf-8")
+                st.success(f"Saved to {dest}")
+                find_slide_deck.clear()
+                find_documents.clear()
+
+    # ── Slide Upload ──────────────────────────────────────────────────────────────
+    with tab_upload:
+        st.markdown("Upload a `.md` or `.txt` slide deck file to replace the current deck in the selected variant folder.")
+        if not selected_variant:
+            st.warning("Select a case study variant first.")
+        else:
+            uploaded = st.file_uploader(
+                "Choose slide deck file",
+                type=["md", "txt"],
+                key="slide_upload_file",
+            )
+            if uploaded is not None:
+                dest_name = st.text_input(
+                    "Save as filename",
+                    value=uploaded.name,
+                    key="slide_upload_dest",
+                )
+                if st.button("Upload and save", key="slide_upload_save"):
+                    dest = Path(selected_variant) / dest_name
+                    dest.write_bytes(uploaded.getvalue())
+                    st.success(f"Saved to {dest}")
+                    find_slide_deck.clear()
+                    find_documents.clear()
+
+
 def main():
     st.set_page_config(page_title="ECBA Study Session", layout="wide")
 
@@ -555,7 +750,7 @@ def main():
 
         event_choice = st.selectbox("Select event", titles)
 
-        STEPS = ["Overview", "Discussion prompts", "Notes", "Actions", "Complete", "Case Study"]
+        STEPS = ["Overview", "Discussion prompts", "Notes", "Actions", "Complete", "Case Study", "Content"]
         st.sidebar.markdown("---")
         step = st.sidebar.radio("Step", STEPS, key="radio_step")
 
@@ -670,7 +865,10 @@ def main():
                     and _live.get("slide_idx") != idx
                 ):
                     _live["slide_idx"] = idx
-                    write_live_session(_live)
+                    try:
+                        write_live_session(_live)
+                    except Exception as _e:
+                        st.warning(f"Could not sync slide to participants: {_e}")
 
                 if presenter_param and presenter_param.lower() in ("1", "true", "yes"):
                     st.markdown(
@@ -964,6 +1162,10 @@ def main():
         session_num = int(session_selected.split()[1])
 
     session = SESSIONS.get(session_num)
+    # Apply session content overrides from sessions.json if present (#55)
+    _session_overrides = load_sessions_override()
+    if str(session_num) in _session_overrides:
+        session = _session_overrides[str(session_num)]
 
     st.markdown("---")
     st.subheader(session["title"])
@@ -1081,6 +1283,12 @@ def main():
             if st.button("Finalize"):
                 save_note(event_choice, facilitator, step, "Finalized", completed=completed)
                 st.success("Session finalized")
+
+    if step == "Content":
+        if not st.session_state.get("logged_in"):
+            st.info("Please log in to access content authoring.")
+        else:
+            _render_content_authoring(session_num, selected_variant)
 
     st.sidebar.markdown("---")
     st.sidebar.markdown(
