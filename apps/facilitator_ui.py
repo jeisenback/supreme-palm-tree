@@ -728,7 +728,7 @@ def main():
                 )
 
             st.markdown("---")
-            st.markdown("Or use the fallback local login:")
+            st.markdown("Or sign in with a local account:")
             login_name = st.text_input("Facilitator name")
             login_pass = st.text_input("Password", type="password")
             remember = st.checkbox("Remember me (7 days)")
@@ -785,7 +785,7 @@ def main():
 
     preview_path = find_preview_file(selected_variant)
     preview_text = read_preview(preview_path)
-    with st.expander("Variant preview (Plan / README)"):
+    with st.expander("Variant overview"):
         if preview_path:
             st.markdown(f"**Preview file:** {preview_path.name}")
             st.markdown(preview_text)
@@ -820,7 +820,7 @@ def main():
         except Exception:
             open_path = None
 
-    with st.expander("Documents (click to open)"):
+    with st.expander("Documents"):
         if docs:
             for p in docs:
                 rel = str(p).replace("\\", "/")
