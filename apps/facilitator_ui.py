@@ -146,6 +146,61 @@ def save_note(event_title, facilitator, step, note, completed=False):
         df.to_csv(NOTES_PATH, index=False)
 
 
+def _generate_session_export(live: dict, attendees: list) -> str:
+    """Generate a markdown export string. Snapshot semantics — reads CSV once at call time."""
+    lines = [
+        "# ECBA Study Session — Export",
+        "",
+        f"**Session ID:** {live.get('session_id', '(unknown)')}",
+        f"**Started:** {live.get('started_at', '(unknown)')}",
+        f"**Ended:** {live.get('ended_at', '(unknown)')}",
+        "",
+    ]
+
+    lines.append(f"## Attendance ({len(attendees)} participant{'s' if len(attendees) != 1 else ''})")
+    if attendees:
+        name_counts: dict = {}
+        for a in attendees:
+            n = a.get("name", "?")
+            name_counts[n] = name_counts.get(n, 0) + 1
+        seen: dict = {}
+        for a in attendees:
+            n = a.get("name", "?")
+            seen[n] = seen.get(n, 0) + 1
+            display = f"{n} #{seen[n]}" if name_counts[n] > 1 else n
+            lines.append(f"- {display} (joined {a.get('joined_at', '')})")
+    else:
+        lines.append("_(no participants recorded)_")
+    lines.append("")
+
+    lines.append("## Facilitator Notes")
+    if NOTES_PATH.exists():
+        try:
+            df = pd.read_csv(NOTES_PATH)
+            if df.empty:
+                lines.append("_(no notes recorded)_")
+            else:
+                lines.append("| Event | Facilitator | Step | Note | Completed | Timestamp |")
+                lines.append("|-------|-------------|------|------|-----------|-----------|")
+                for _, row in df.iterrows():
+                    def _cell(v):
+                        return str(v).replace("|", "\\|") if pd.notna(v) else ""
+                    lines.append(
+                        f"| {_cell(row.get('event_title', ''))} "
+                        f"| {_cell(row.get('facilitator', ''))} "
+                        f"| {_cell(row.get('step', ''))} "
+                        f"| {_cell(row.get('note', ''))} "
+                        f"| {_cell(row.get('completed', ''))} "
+                        f"| {_cell(row.get('timestamp', ''))} |"
+                    )
+        except Exception:
+            lines.append("_(error reading notes)_")
+    else:
+        lines.append("_(no notes recorded)_")
+
+    return "\n".join(lines)
+
+
 def render_participant_view():
     """Participant-facing view: waiting / active (name entry + slide) / ended."""
     st.title("ECBA Study Session")
@@ -273,6 +328,25 @@ def _render_session_lifecycle_panel(selected_variant):
 
     if live.get("ended_at"):
         st.markdown(f"#### Session: Ended — {live.get('ended_at', '')}")
+
+        # Post-session export (#53)
+        export_md = st.session_state.get("_export_md")
+        if not export_md:
+            # Fallback: regenerate if session_state was lost (e.g. page refresh)
+            if st.button("Generate Export", key="regen_export_btn"):
+                st.session_state["_export_md"] = _generate_session_export(live, read_attendees())
+                st.session_state["_export_session_id"] = live.get("session_id", "session")[:8]
+                st.rerun()
+        else:
+            session_id_short = st.session_state.get("_export_session_id", "session")
+            st.download_button(
+                "Download Session Export (.md)",
+                data=export_md.encode("utf-8"),
+                file_name=f"session_export_{session_id_short}.md",
+                mime="text/markdown",
+                key="download_export_btn",
+            )
+
         if not st.session_state.get("_reset_confirm"):
             if st.button("Reset Session", key="reset_btn"):
                 st.session_state["_reset_confirm"] = True
@@ -318,9 +392,14 @@ def _render_session_lifecycle_panel(selected_variant):
             st.markdown("**Roster:** " + ", ".join(names))
     with c_actions:
         if st.button("End Session", type="primary", key="end_session_btn"):
-            live["ended_at"] = datetime.datetime.utcnow().isoformat() + "Z"
+            # Snapshot notes + roster at click time, then set ended_at (#53)
+            # Single-writer facilitator: no file locking needed for notes CSV
+            ended_at = datetime.datetime.utcnow().isoformat() + "Z"
+            live["ended_at"] = ended_at
+            export_md = _generate_session_export(live, attendees)
             write_live_session(live)
-            st.success("Session ended.")
+            st.session_state["_export_md"] = export_md
+            st.session_state["_export_session_id"] = live.get("session_id", "session")[:8]
             st.rerun()
 
     # Meta-refresh every 5s for headcount updates (browser-level)
