@@ -263,6 +263,11 @@ def render_participant_view():
             # File exists but read_live_session returned None → corrupt/unreadable
             st.error("Session file exists but could not be read. Please ask your facilitator to reset the session.")
         else:
+            st.caption(
+                "You're in the right place. "
+                "The session hasn't started yet — your slide deck will appear here automatically "
+                "once the facilitator goes live. No need to refresh."
+            )
             st.info("Waiting for facilitator to start the session...")
         # Browser-level poll — no Streamlit flicker
         components.html('<meta http-equiv="refresh" content="5">', height=0)
