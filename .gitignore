@@ -1,0 +1,7 @@
+out/
+__pycache__/
+
+# Runtime session state (not tracked in git)
+etn/outputs/session_live.json
+etn/outputs/attendees/
+etn/outputs/sessions.json
