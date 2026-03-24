@@ -603,9 +603,13 @@ def _render_content_authoring(session_num: int, selected_variant):
 
 
 def main():
-    st.set_page_config(page_title="ECBA Study Session", layout="wide")
+    _is_facilitator = st.query_params.get("facilitator") == "1"
+    st.set_page_config(
+        page_title="ECBA Study Session — Facilitator" if _is_facilitator else "ECBA Study Session",
+        layout="wide",
+    )
 
-    if st.query_params.get("facilitator") != "1":
+    if not _is_facilitator:
         render_participant_view()
         return
 
