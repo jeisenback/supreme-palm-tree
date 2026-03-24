@@ -416,6 +416,42 @@ def main():
 
     st.title("ECBA Study Session — Facilitator")
 
+    # Unified keyboard shortcuts: N/ArrowRight (next), P/ArrowLeft (prev), T (timer toggle) (#54)
+    # Injected via components.html so it runs in the iframe context; uses window.top to reach
+    # the parent document — works because Streamlit serves app + components from the same origin.
+    # Debounced at 150ms to prevent key-repeat storms. Ignores keystrokes while typing in inputs.
+    # Known limitation: N/P trigger window.top.location reload, clearing session_state
+    # (timer running state). Mitigation scoped to Phase 2 (timer state → URL params).
+    _ks_js = """
+    <script>
+    (function() {
+      let _ks_last = 0;
+      const _doc = (window.top || window.parent || window).document;
+      const _win = (window.top || window.parent || window);
+      _doc.addEventListener('keydown', function(e) {
+        const now = Date.now();
+        if (now - _ks_last < 150) return;
+        _ks_last = now;
+        const ae = _doc.activeElement;
+        if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) return;
+        const p = new URLSearchParams(_win.location.search);
+        const cur = parseInt(p.get('slide') || '0');
+        if (e.key === 'ArrowRight' || e.key === 'n') {
+          p.set('slide', String(cur + 1));
+          _win.location.search = p.toString();
+        } else if (e.key === 'ArrowLeft' || e.key === 'p') {
+          p.set('slide', String(Math.max(0, cur - 1)));
+          _win.location.search = p.toString();
+        } else if (e.key === 't') {
+          p.set('timer', p.get('timer') === '1' ? '0' : '1');
+          _win.location.search = p.toString();
+        }
+      });
+    })();
+    </script>
+    """
+    components.html(_ks_js, height=0)
+
     # Ensure facilitator is always defined (guards Notes/Actions/Complete steps)
     facilitator = st.session_state.get("facilitator", "")
 
@@ -557,6 +593,7 @@ def main():
     open_param = params.get("open")
     presenter_param = params.get("presenter")
     slide_param = params.get("slide")
+    timer_param = params.get("timer")
     open_path = None
 
     if not open_param and preview_path:
@@ -728,7 +765,8 @@ def main():
                             st.write("(no notes)")
 
                         st.markdown("---")
-                        st.markdown("**Timer**")
+                        # Timer panel: T key toggles ?timer=1 (show) / ?timer=0 (hide) (#54)
+                        # Always init state so running timer survives hide/show cycles
                         tkey = f"timer_{key_idx}_{safe_open}"
                         if tkey not in st.session_state:
                             st.session_state[tkey] = {
@@ -737,73 +775,77 @@ def main():
                                 "remaining": 0,
                             }
 
-                        minutes = st.number_input(
-                            "Minutes",
-                            min_value=0,
-                            max_value=180,
-                            value=10,
-                            step=1,
-                            key=f"min_{tkey}",
-                        )
-                        if st.button("Start", key=f"start_{tkey}"):
-                            st.session_state[tkey]["running"] = True
-                            st.session_state[tkey]["end"] = (
-                                time.time() + int(minutes) * 60
-                            )
-                            st.session_state[tkey]["remaining"] = int(minutes) * 60
-                            st.rerun()
-                        if st.button("Pause", key=f"pause_{tkey}"):
-                            if (
-                                st.session_state[tkey]["running"]
-                                and st.session_state[tkey]["end"]
-                            ):
-                                st.session_state[tkey]["remaining"] = max(
-                                    0,
-                                    int(st.session_state[tkey]["end"] - time.time()),
-                                )
-                                st.session_state[tkey]["running"] = False
-                                st.session_state[tkey]["end"] = None
-                        if st.button("Reset", key=f"reset_{tkey}"):
-                            st.session_state[tkey] = {
-                                "running": False,
-                                "end": None,
-                                "remaining": int(minutes) * 60,
-                            }
-                            st.rerun()
-
-                        # JS-based timer display — no server-side sleep
-                        if st.session_state[tkey]["running"] and st.session_state[tkey]["end"]:
-                            remaining = int(st.session_state[tkey]["end"] - time.time())
-                            if remaining <= 0:
-                                st.warning("Time's up")
-                                st.session_state[tkey]["running"] = False
-                                st.session_state[tkey]["end"] = None
-                                st.session_state[tkey]["remaining"] = 0
-                            else:
-                                end_ts = int(st.session_state[tkey]["end"] * 1000)
-                                timer_js = f"""
-                                <div id='timer_display' style='font-size:2rem;font-weight:bold'></div>
-                                <script>
-                                (function(){{
-                                  const endMs = {end_ts};
-                                  function update(){{
-                                    const rem = Math.max(0, Math.round((endMs - Date.now()) / 1000));
-                                    const m = String(Math.floor(rem/60)).padStart(2,'0');
-                                    const s = String(rem%60).padStart(2,'0');
-                                    document.getElementById('timer_display').textContent = m+':'+s;
-                                    if(rem > 0) setTimeout(update, 500);
-                                    else document.getElementById('timer_display').style.color='red';
-                                  }}
-                                  update();
-                                }})();
-                                </script>
-                                """
-                                components.html(timer_js, height=60)
+                        if timer_param != "1":
+                            st.caption("Press **T** to show timer")
                         else:
-                            rem = st.session_state[tkey].get("remaining", 0)
-                            mins = rem // 60
-                            secs = rem % 60
-                            st.markdown(f"## {mins:02d}:{secs:02d}")
+                            st.markdown("**Timer** *(press T to hide)*")
+                            minutes = st.number_input(
+                                "Minutes",
+                                min_value=0,
+                                max_value=180,
+                                value=10,
+                                step=1,
+                                key=f"min_{tkey}",
+                            )
+                            if st.button("Start", key=f"start_{tkey}"):
+                                st.session_state[tkey]["running"] = True
+                                st.session_state[tkey]["end"] = (
+                                    time.time() + int(minutes) * 60
+                                )
+                                st.session_state[tkey]["remaining"] = int(minutes) * 60
+                                st.rerun()
+                            if st.button("Pause", key=f"pause_{tkey}"):
+                                if (
+                                    st.session_state[tkey]["running"]
+                                    and st.session_state[tkey]["end"]
+                                ):
+                                    st.session_state[tkey]["remaining"] = max(
+                                        0,
+                                        int(st.session_state[tkey]["end"] - time.time()),
+                                    )
+                                    st.session_state[tkey]["running"] = False
+                                    st.session_state[tkey]["end"] = None
+                            if st.button("Reset", key=f"reset_{tkey}"):
+                                st.session_state[tkey] = {
+                                    "running": False,
+                                    "end": None,
+                                    "remaining": int(minutes) * 60,
+                                }
+                                st.rerun()
+
+                            # JS-based timer display — no server-side sleep
+                            if st.session_state[tkey]["running"] and st.session_state[tkey]["end"]:
+                                remaining = int(st.session_state[tkey]["end"] - time.time())
+                                if remaining <= 0:
+                                    st.warning("Time's up")
+                                    st.session_state[tkey]["running"] = False
+                                    st.session_state[tkey]["end"] = None
+                                    st.session_state[tkey]["remaining"] = 0
+                                else:
+                                    end_ts = int(st.session_state[tkey]["end"] * 1000)
+                                    timer_js = f"""
+                                    <div id='timer_display' style='font-size:2rem;font-weight:bold'></div>
+                                    <script>
+                                    (function(){{
+                                      const endMs = {end_ts};
+                                      function update(){{
+                                        const rem = Math.max(0, Math.round((endMs - Date.now()) / 1000));
+                                        const m = String(Math.floor(rem/60)).padStart(2,'0');
+                                        const s = String(rem%60).padStart(2,'0');
+                                        document.getElementById('timer_display').textContent = m+':'+s;
+                                        if(rem > 0) setTimeout(update, 500);
+                                        else document.getElementById('timer_display').style.color='red';
+                                      }}
+                                      update();
+                                    }})();
+                                    </script>
+                                    """
+                                    components.html(timer_js, height=60)
+                            else:
+                                rem = st.session_state[tkey].get("remaining", 0)
+                                mins = rem // 60
+                                secs = rem % 60
+                                st.markdown(f"## {mins:02d}:{secs:02d}")
 
                         st.markdown("---")
                         st.markdown("Open audience view:")
