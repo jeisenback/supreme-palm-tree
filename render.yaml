@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: ecba-facilitator
+    env: python
+    region: ohio
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run apps/facilitator_ui.py --server.port $PORT --server.address 0.0.0.0
+    healthCheckPath: /_stcore/health
+    autoDeploy: true
+    envVars:
+      # Set these in the Render dashboard — do NOT commit values here
+      - key: FACILITATOR_PASSWORD
+        sync: false
+      # Free tier uses ephemeral storage, so runtime files reset on redeploy/restart.
+      - key: FACILITATOR_DATA_DIR
+        value: etn/outputs
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GITHUB_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+    # NOTE: Render's free tier uses an ephemeral filesystem.
+    # Runtime writes (session_live.json, attendees/, notes CSV) will be lost
+    # whenever the service restarts or redeploys.
+    # If you need persistent runtime state, move this service to a paid plan
+    # and add a Render Disk back to the blueprint.
