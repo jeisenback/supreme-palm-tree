@@ -1,3 +1,4 @@
+import builtins
 import sys
 import types
 import tempfile
@@ -9,8 +10,14 @@ from integrations.gdrive.oauth import run_local_oauth_flow
 
 
 def test_oauth_missing_deps(monkeypatch, tmp_path):
-    # Simulate missing google_auth_oauthlib
-    monkeypatch.delitem(sys.modules, 'google_auth_oauthlib', None)
+    original_import = builtins.__import__
+
+    def fake_import(name, globals=None, locals=None, fromlist=(), level=0):
+        if name == 'google_auth_oauthlib.flow':
+            raise ModuleNotFoundError(name)
+        return original_import(name, globals, locals, fromlist, level)
+
+    monkeypatch.setattr(builtins, '__import__', fake_import)
     with pytest.raises(RuntimeError):
         run_local_oauth_flow(str(tmp_path/'client.json'))
 
