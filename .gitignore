@@ -1,2 +1,6 @@
 out/
 __pycache__/
+
+.env/
+/channels/discord/.env
+/channels/webhook/.env
