@@ -16,3 +16,4 @@ beautifulsoup4>=4.12.2
 apscheduler>=3.10.1
 SQLAlchemy>=1.4
 prometheus_client>=0.16.0
+python-dotenv>=1.0.0
