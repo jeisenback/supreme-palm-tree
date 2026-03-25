@@ -51,20 +51,30 @@ def start_drive_watcher(
             for f in files:
                 fid = f.get("id")
                 name = f.get("name")
-                if fid in seen:
-                    continue
-                seen[fid] = {"id": fid, "name": name, "modifiedTime": f.get("modifiedTime")}
-                # persist seen map
-                try:
-                    _save_seen(state_fp, seen)
-                except Exception:
-                    pass
+                new_mtime = f.get("modifiedTime")
+
+                existing = seen.get(fid)
+                # If we have seen it before and modifiedTime unchanged, skip
+                if existing:
+                    existing_mtime = existing.get("modifiedTime")
+                    if new_mtime and existing_mtime == new_mtime:
+                        continue
+                    # otherwise treat as changed and re-download
+
+                # update seen map now (will be saved after successful download)
                 # download file
                 local = None
                 try:
                     local = Path(tmpdir) / name
                     client.download_file(fid, str(local))
                     callback(str(local))
+                    # mark seen with latest metadata
+                    seen[fid] = {"id": fid, "name": name, "modifiedTime": new_mtime}
+                    # persist seen map
+                    try:
+                        _save_seen(state_fp, seen)
+                    except Exception:
+                        pass
                 except Exception:
                     # ignore individual download failures
                     continue
@@ -86,12 +96,17 @@ def _load_seen(fp: Path | str) -> dict:
     try:
         if p.exists():
             data = json.loads(p.read_text(encoding="utf-8"))
-            # data expected as list of dicts
-            d = {}
-            for item in data or []:
-                if isinstance(item, dict) and item.get("id"):
+            if not data:
+                return {}
+            # If file contains a list of dicts with id, return a dict keyed by id
+            if isinstance(data, list) and isinstance(data[0], dict) and data[0].get("id"):
+                d = {}
+                for item in data:
                     d[item["id"]] = item
-            return d
+                return d
+            # If file contains a list of primitive ids (legacy), return a set for compatibility
+            if isinstance(data, list):
+                return set(data)
     except Exception:
         pass
     return {}
@@ -102,7 +117,14 @@ def _save_seen(fp: Path | str, seen_map: dict) -> None:
     try:
         p.parent.mkdir(parents=True, exist_ok=True)
         tmp = p.with_suffix(".tmp")
-        tmp.write_text(json.dumps(list(seen_map.values())), encoding="utf-8")
+        # Accept either a dict of metadata or a set/list of ids
+        if isinstance(seen_map, dict):
+            tmp.write_text(json.dumps(list(seen_map.values())), encoding="utf-8")
+        elif isinstance(seen_map, (set, list)):
+            tmp.write_text(json.dumps(list(seen_map)), encoding="utf-8")
+        else:
+            # fallback: try to serialize
+            tmp.write_text(json.dumps(seen_map), encoding="utf-8")
         tmp.replace(p)
     except Exception:
         pass
