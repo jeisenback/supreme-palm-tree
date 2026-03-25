@@ -41,8 +41,22 @@ pytest -q -m "not integration"
 
 - Blueprint file: `render.yaml`
 - Start command: `streamlit run apps/facilitator_ui.py --server.port $PORT --server.address 0.0.0.0`
+- Health check path: `/_stcore/health`
 - Configure `FACILITATOR_PASSWORD` and optional OAuth/LLM env vars in Render.
-- For persistent runtime files on Render, mount a disk and set `FACILITATOR_DATA_DIR` to the mount path.
+- Runtime state is persisted on a Render Disk mounted at `/var/data`.
+
+Render migration steps:
+
+1. Push this repository and branch to GitHub.
+2. In Render, click New + > Blueprint.
+3. Select the repository and branch with this `render.yaml`.
+4. Confirm service `ecba-facilitator` and create the blueprint.
+5. In Render service settings, set required secret values:
+	- `FACILITATOR_PASSWORD`
+	- `ANTHROPIC_API_KEY` (optional)
+	- `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` (optional)
+6. Trigger a deploy and wait for the health check to pass.
+7. Open the Render URL and validate login + content authoring flow.
 
 ## Legacy ingest utilities
 

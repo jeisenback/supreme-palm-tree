@@ -6,13 +6,19 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: streamlit run apps/facilitator_ui.py --server.port $PORT --server.address 0.0.0.0
+    healthCheckPath: /_stcore/health
+    autoDeploy: true
+    disk:
+      name: facilitator-data
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
       # Set these in the Render dashboard — do NOT commit values here
       - key: FACILITATOR_PASSWORD
         sync: false
       # Set this to your mounted Render Disk path for persistent runtime state
       - key: FACILITATOR_DATA_DIR
-        value: /var/data/ecba
+        value: /var/data
       - key: ANTHROPIC_API_KEY
         sync: false
       - key: GITHUB_CLIENT_ID

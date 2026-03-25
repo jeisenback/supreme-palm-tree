@@ -1530,11 +1530,19 @@ def _render_content_authoring(session_num: int, selected_variant):
         if not selected_variant:
             st.info("Create or select a case study variant first.")
         else:
+            form_nonce = int(st.session_state.get("_scenario_builder_form_nonce", 0))
+            scenario_defaults = st.session_state.get("_scenario_builder_defaults", {})
+
+            def _prime_scenario_form(values):
+                st.session_state["_scenario_builder_defaults"] = values
+                st.session_state["_scenario_builder_form_nonce"] = form_nonce + 1
+
             st.caption(f"Saving into: {selected_variant}")
             scenario_title = st.text_input(
                 "Scenario title",
                 placeholder="Conflicting stakeholder priorities for requirements scope",
-                key="scenario_builder_title",
+                value=scenario_defaults.get("title", ""),
+                key=f"scenario_builder_title_{form_nonce}",
             )
             scenario_focus_area = st.selectbox(
                 "BABOK focus area",
@@ -1567,39 +1575,44 @@ def _render_content_authoring(session_num: int, selected_variant):
                     "Session number",
                     min_value=1,
                     max_value=12,
-                    value=int(session_num),
+                    value=int(scenario_defaults.get("session", int(session_num))),
                     step=1,
-                    key="scenario_builder_session",
+                    key=f"scenario_builder_session_{form_nonce}",
                 )
                 scenario_objective = st.text_input(
                     "Scenario objective",
                     placeholder="Practice analyzing stakeholder needs and constraints",
-                    key="scenario_builder_objective",
+                    value=scenario_defaults.get("objective", ""),
+                    key=f"scenario_builder_objective_{form_nonce}",
                 )
             with scenario_cols[1]:
                 scenario_prompts_raw = st.text_area(
                     "Learner prompts (one per line)",
                     placeholder="What questions would you ask first?\nWhat risks do you see?",
                     height=90,
-                    key="scenario_builder_prompts",
+                    value=scenario_defaults.get("prompts", ""),
+                    key=f"scenario_builder_prompts_{form_nonce}",
                 )
             scenario_situation = st.text_area(
                 "Situation",
                 placeholder="Describe the business event or conflict learners need to respond to.",
                 height=110,
-                key="scenario_builder_situation",
+                value=scenario_defaults.get("situation", ""),
+                key=f"scenario_builder_situation_{form_nonce}",
             )
             scenario_stakeholders_raw = st.text_area(
                 "Scenario stakeholders (one per line)",
                 placeholder="Sponsor\nOperations manager\nFrontline employee",
                 height=100,
-                key="scenario_builder_stakeholders",
+                value=scenario_defaults.get("stakeholders", ""),
+                key=f"scenario_builder_stakeholders_{form_nonce}",
             )
             scenario_constraints_raw = st.text_area(
                 "Scenario constraints (one per line)",
                 placeholder="Budget locked for this quarter\nNo new vendor allowed",
                 height=100,
-                key="scenario_builder_constraints",
+                value=scenario_defaults.get("constraints", ""),
+                key=f"scenario_builder_constraints_{form_nonce}",
             )
             if st.button("Generate scenario draft with AI", key="scenario_builder_generate"):
                 master_context = load_master_context(selected_variant)
@@ -1625,12 +1638,15 @@ def _render_content_authoring(session_num: int, selected_variant):
                         except Exception as exc:
                             st.error(f"Could not parse generated scenario draft: {exc}")
                         else:
-                            st.session_state["scenario_builder_title"] = generated["title"]
-                            st.session_state["scenario_builder_objective"] = generated["objective"]
-                            st.session_state["scenario_builder_situation"] = generated["situation"]
-                            st.session_state["scenario_builder_stakeholders"] = "\n".join(generated["stakeholders"])
-                            st.session_state["scenario_builder_constraints"] = "\n".join(generated["constraints"])
-                            st.session_state["scenario_builder_prompts"] = "\n".join(generated["prompts"])
+                            _prime_scenario_form({
+                                "title": generated["title"],
+                                "session": int(scenario_session),
+                                "objective": generated["objective"],
+                                "situation": generated["situation"],
+                                "stakeholders": "\n".join(generated["stakeholders"]),
+                                "constraints": "\n".join(generated["constraints"]),
+                                "prompts": "\n".join(generated["prompts"]),
+                            })
                             st.success("Scenario draft generated and loaded into the form.")
                             st.rerun()
             scenario_buttons = st.columns(3)
@@ -1646,22 +1662,22 @@ def _render_content_authoring(session_num: int, selected_variant):
                 clear_form = st.button("Clear scenario form", key="scenario_builder_clear")
 
             if clear_form:
-                for field_key in [
-                    "scenario_builder_title",
-                    "scenario_builder_objective",
-                    "scenario_builder_situation",
-                    "scenario_builder_stakeholders",
-                    "scenario_builder_constraints",
-                    "scenario_builder_prompts",
-                    "scenario_builder_editing_path",
-                ]:
-                    st.session_state[field_key] = ""
+                _prime_scenario_form({
+                    "title": "",
+                    "session": int(session_num),
+                    "objective": "",
+                    "situation": "",
+                    "stakeholders": "",
+                    "constraints": "",
+                    "prompts": "",
+                })
+                st.session_state["scenario_builder_editing_path"] = ""
                 st.rerun()
 
             required_scenario_fields = {
-                "Scenario title": scenario_title,
-                "Scenario objective": scenario_objective,
-                "Situation": scenario_situation,
+                "Scenario title": scenario_title or "",
+                "Scenario objective": scenario_objective or "",
+                "Situation": scenario_situation or "",
             }
             missing = [
                 label for label, value in required_scenario_fields.items() if not value.strip()
@@ -1674,13 +1690,13 @@ def _render_content_authoring(session_num: int, selected_variant):
                 else:
                     scenario_kwargs = {
                         "variant_dir": Path(selected_variant),
-                        "title": scenario_title.strip(),
+                        "title": (scenario_title or "").strip(),
                         "session_num": int(scenario_session),
-                        "objective": scenario_objective.strip(),
-                        "situation": scenario_situation.strip(),
-                        "stakeholders": _split_nonempty_lines(scenario_stakeholders_raw),
-                        "constraints": _split_nonempty_lines(scenario_constraints_raw),
-                        "prompts": _split_nonempty_lines(scenario_prompts_raw),
+                        "objective": (scenario_objective or "").strip(),
+                        "situation": (scenario_situation or "").strip(),
+                        "stakeholders": _split_nonempty_lines(scenario_stakeholders_raw or ""),
+                        "constraints": _split_nonempty_lines(scenario_constraints_raw or ""),
+                        "prompts": _split_nonempty_lines(scenario_prompts_raw or ""),
                     }
                     try:
                         if update_existing:
@@ -1717,19 +1733,21 @@ def _render_content_authoring(session_num: int, selected_variant):
                 manage_cols = st.columns(4)
                 with manage_cols[0]:
                     if st.button("Load into form", key="scenario_manager_load"):
-                        st.session_state["scenario_builder_title"] = selected_saved_scenario["title"]
-                        st.session_state["scenario_builder_session"] = int(selected_saved_scenario["session"])
-                        st.session_state["scenario_builder_objective"] = selected_saved_scenario.get("objective", "")
-                        st.session_state["scenario_builder_situation"] = selected_saved_scenario.get("situation", "")
-                        st.session_state["scenario_builder_stakeholders"] = "\n".join(
-                            selected_saved_scenario.get("stakeholders", [])
-                        )
-                        st.session_state["scenario_builder_constraints"] = "\n".join(
-                            selected_saved_scenario.get("constraints", [])
-                        )
-                        st.session_state["scenario_builder_prompts"] = "\n".join(
-                            selected_saved_scenario.get("prompts", [])
-                        )
+                        _prime_scenario_form({
+                            "title": selected_saved_scenario["title"],
+                            "session": int(selected_saved_scenario["session"]),
+                            "objective": selected_saved_scenario.get("objective", ""),
+                            "situation": selected_saved_scenario.get("situation", ""),
+                            "stakeholders": "\n".join(
+                                selected_saved_scenario.get("stakeholders", [])
+                            ),
+                            "constraints": "\n".join(
+                                selected_saved_scenario.get("constraints", [])
+                            ),
+                            "prompts": "\n".join(
+                                selected_saved_scenario.get("prompts", [])
+                            ),
+                        })
                         st.session_state["scenario_builder_editing_path"] = str(
                             selected_saved_scenario["path"]
                         )
