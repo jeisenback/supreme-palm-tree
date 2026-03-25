@@ -8,11 +8,15 @@ import os
 import uuid
 import json
 import urllib.parse
+from pathlib import Path
 
 import requests
 import streamlit as st
 
-SESSION_PATH_CORE = __import__("pathlib").Path("etn/outputs/facilitator_session.json")
+SESSION_PATH_CORE = (
+    Path(os.environ.get("FACILITATOR_DATA_DIR", "etn/outputs")).expanduser()
+    / "facilitator_session.json"
+)
 
 
 # ── Session persistence ────────────────────────────────────────────────────────

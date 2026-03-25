@@ -28,11 +28,12 @@ from shared import (
 )
 
 
-CSV_PATH = Path("etn/outputs/iiba_events_parsed.csv")
-NOTES_PATH = Path("etn/outputs/facilitator_notes.csv")
-LIVE_SESSION_PATH = Path("etn/outputs/session_live.json")
-ATTENDEES_DIR = Path("etn/outputs/attendees")
-SESSIONS_OVERRIDE_PATH = Path("etn/outputs/sessions.json")
+DATA_DIR = Path(os.environ.get("FACILITATOR_DATA_DIR", "etn/outputs")).expanduser()
+CSV_PATH = DATA_DIR / "iiba_events_parsed.csv"
+NOTES_PATH = DATA_DIR / "facilitator_notes.csv"
+LIVE_SESSION_PATH = DATA_DIR / "session_live.json"
+ATTENDEES_DIR = DATA_DIR / "attendees"
+SESSIONS_OVERRIDE_PATH = DATA_DIR / "sessions.json"
 
 
 _DESIGN_CSS = """
@@ -423,7 +424,7 @@ def _render_session_lifecycle_panel(selected_variant):
             )
             st.write(
                 "✅ Events CSV present"
-                if csv_ok else "❌ Events CSV missing (etn/outputs/iiba_events_parsed.csv)"
+                if csv_ok else f"❌ Events CSV missing ({CSV_PATH.as_posix()})"
             )
             st.write(
                 "✅ Case study context loaded"
@@ -578,7 +579,7 @@ def _render_content_authoring(session_num: int, selected_variant):
     # ── Sessions Editor ──────────────────────────────────────────────────────────
     with tab_editor:
         st.markdown(
-            "Edit session content. Changes are saved to `etn/outputs/sessions.json` "
+            f"Edit session content. Changes are saved to `{SESSIONS_OVERRIDE_PATH.as_posix()}` "
             "and override the defaults in `shared.py`."
         )
         overrides = load_sessions_override()
@@ -891,7 +892,7 @@ def main():
 
     events = load_events()
     if events.empty:
-        st.warning("No events found in etn/outputs/iiba_events_parsed.csv — using sample data.")
+        st.warning(f"No events found in {CSV_PATH.as_posix()} — using sample data.")
 
     titles = events.get("title", events.get("Title", events.columns.tolist())).tolist()
     if not titles:

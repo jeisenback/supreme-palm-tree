@@ -10,6 +10,9 @@ services:
       # Set these in the Render dashboard — do NOT commit values here
       - key: FACILITATOR_PASSWORD
         sync: false
+      # Set this to your mounted Render Disk path for persistent runtime state
+      - key: FACILITATOR_DATA_DIR
+        value: /var/data/ecba
       - key: ANTHROPIC_API_KEY
         sync: false
       - key: GITHUB_CLIENT_ID
@@ -17,7 +20,5 @@ services:
       - key: GITHUB_CLIENT_SECRET
         sync: false
     # NOTE: Render's free tier uses an ephemeral filesystem.
-    # Runtime writes (session_live.json, attendees/, notes CSV) will not
-    # persist across deploys or restarts. Upgrade to a paid plan and add
-    # a Render Disk at /var/data if persistence is needed, then update
-    # the path constants in apps/facilitator_ui.py accordingly.
+    # Runtime writes (session_live.json, attendees/, notes CSV) persist only
+    # when a Render Disk is mounted and FACILITATOR_DATA_DIR points to it.
