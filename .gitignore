@@ -1,5 +1,8 @@
 out/
 __pycache__/
+.venv/
+*.pyc
+*.pyo
 
 # Runtime session state (not tracked in git)
 etn/outputs/session_live.json

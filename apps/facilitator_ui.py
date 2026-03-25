@@ -68,13 +68,13 @@ h1, h2, h3 {
   margin: 0 auto;
 }
 
-/* === Primary button: accent green === */
-.stButton > button[kind="primary"] {
+/* === Primary button: accent green (enabled state only) === */
+.stButton > button[kind="primary"]:not(:disabled) {
   background-color: var(--accent-primary) !important;
   border-color: var(--accent-primary) !important;
   transition: background-color 150ms ease, box-shadow 150ms ease;
 }
-.stButton > button[kind="primary"]:hover {
+.stButton > button[kind="primary"]:not(:disabled):hover {
   background-color: #155440 !important;
   box-shadow: 0 2px 6px rgba(30, 107, 82, 0.28);
 }
