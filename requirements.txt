@@ -13,3 +13,5 @@ mammoth>=1.4.19
 html2text>=2020.1.16
 pypdf>=3.0.0
 beautifulsoup4>=4.12.2
+apscheduler>=3.10.1
+SQLAlchemy>=1.4
