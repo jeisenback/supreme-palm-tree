@@ -197,6 +197,47 @@ def _call_llm(prompt: str, system: str = "") -> str:
         return f"Error calling LLM: {e}"
 
 
+def _build_iiba_babok_prompts(
+    topic: str,
+    num_slides: int,
+    audience: str,
+    certification_target: str,
+    focus_area: str,
+    include_exam_tips: bool,
+) -> tuple[str, str]:
+    """Build system/user prompts for IIBA/BABOK-framed slide generation."""
+    system_prompt = (
+        "You are a senior business analysis instructor creating IIBA-aligned training slides. "
+        "Output ONLY slide content in markdown format. "
+        "Use exact headers in this format: 'Slide N — Title' (example: 'Slide 1 — Introduction'). "
+        "Each slide should include 3-5 concise bullets and may include one "
+        "[FACILITATOR: note] block with delivery guidance. "
+        "Frame explanations using BABOK v3 concepts, terminology, and practical BA examples. "
+        "Avoid inventing BABOK quotations or page numbers. "
+        "No preamble, no explanation outside slide content."
+    )
+
+    exam_line = (
+        "Include one brief exam strategy note on relevant slides."
+        if include_exam_tips
+        else "Do not include exam strategy notes unless naturally required by the topic."
+    )
+
+    user_prompt = (
+        f"Create {num_slides} slides on: {topic.strip()}\n"
+        f"Audience: {audience} level.\n"
+        f"Certification target: {certification_target}.\n"
+        f"Primary BABOK focus area: {focus_area}.\n"
+        "Structure guidance:\n"
+        "- Start with learning objectives and why this matters to business outcomes.\n"
+        "- Use IIBA/BABOK framing: include the related knowledge area, tasks, and techniques where applicable.\n"
+        "- Include at least one scenario-based example slide tied to real BA work.\n"
+        "- End with a short recap and 2-3 reflection or practice prompts.\n"
+        f"{exam_line}"
+    )
+    return system_prompt, user_prompt
+
+
 def load_events():
     if CSV_PATH.exists():
         try:
@@ -724,19 +765,38 @@ def _render_content_authoring(session_num: int, selected_variant):
         audience = st.selectbox(
             "Audience level", ["Beginner", "Intermediate", "Advanced"], key="ai_audience"
         )
+        certification_target = st.selectbox(
+            "Certification target",
+            ["ECBA", "CCBA", "CBAP", "General IIBA learning"],
+            key="ai_cert_target",
+        )
+        focus_area = st.selectbox(
+            "BABOK focus area",
+            [
+                "Business Analysis Planning and Monitoring",
+                "Elicitation and Collaboration",
+                "Requirements Life Cycle Management",
+                "Strategy Analysis",
+                "Requirements Analysis and Design Definition",
+                "Solution Evaluation",
+                "BACCM perspectives",
+            ],
+            key="ai_focus_area",
+        )
+        include_exam_tips = st.checkbox(
+            "Include certification exam tips",
+            value=True,
+            key="ai_exam_tips",
+        )
 
         if st.button("Generate draft", key="ai_generate", disabled=not topic.strip()):
-            system_prompt = (
-                "You are a content author creating training slides for a professional "
-                "development study session. Output ONLY the slide content in markdown format. "
-                "Use 'Slide N — Title' headers (e.g. 'Slide 1 — Introduction'). "
-                "Each slide should have body content and optionally a [FACILITATOR: note] block. "
-                "No preamble, no explanation — just the slides."
-            )
-            user_prompt = (
-                f"Create {num_slides} slides on: {topic.strip()}\n"
-                f"Audience: {audience} level. "
-                "Each slide: title, 3-5 bullet points, optional facilitator note."
+            system_prompt, user_prompt = _build_iiba_babok_prompts(
+                topic=topic,
+                num_slides=num_slides,
+                audience=audience,
+                certification_target=certification_target,
+                focus_area=focus_area,
+                include_exam_tips=include_exam_tips,
             )
             with st.spinner("Generating..."):
                 result = _call_llm(user_prompt, system=system_prompt)

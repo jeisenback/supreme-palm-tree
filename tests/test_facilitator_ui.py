@@ -213,6 +213,34 @@ class TestCallLlm:
         assert not result.startswith("Error")
 
 
+class TestPromptBuilder:
+    def test_includes_iiba_babok_structure(self):
+        system_prompt, user_prompt = fui._build_iiba_babok_prompts(
+            topic="Elicitation fundamentals",
+            num_slides=6,
+            audience="Beginner",
+            certification_target="ECBA",
+            focus_area="Elicitation and Collaboration",
+            include_exam_tips=True,
+        )
+        assert "IIBA" in system_prompt
+        assert "BABOK" in system_prompt
+        assert "Certification target: ECBA" in user_prompt
+        assert "Primary BABOK focus area: Elicitation and Collaboration" in user_prompt
+        assert "exam strategy note" in user_prompt
+
+    def test_can_disable_exam_tips(self):
+        _system_prompt, user_prompt = fui._build_iiba_babok_prompts(
+            topic="Strategy analysis",
+            num_slides=5,
+            audience="Intermediate",
+            certification_target="CCBA",
+            focus_area="Strategy Analysis",
+            include_exam_tips=False,
+        )
+        assert "Do not include exam strategy notes" in user_prompt
+
+
 # ---------------------------------------------------------------------------
 # parse_slides smoke test — guards the pre-session readiness check (#50 / TODOS.md)
 # A slide deck that exists but has zero parseable slides would let Go Live proceed
