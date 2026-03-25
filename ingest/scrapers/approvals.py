@@ -59,6 +59,7 @@ def get_approval(source_id: str) -> Optional[Dict[str, Any]]:
             return d
     return None
 
+
 def list_approved() -> List[Dict[str, Any]]:
     return _read()
 
@@ -112,6 +113,7 @@ def remove_approval_field(source_id: str, field: str) -> None:
             break
     if changed:
         _write(data)
+
 
 
 def revoke_source(source_id: str) -> None:
