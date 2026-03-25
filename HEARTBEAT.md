@@ -18,13 +18,13 @@
 
 | Field | Value |
 |-------|-------|
-| Sprint | 3 |
-| Status | **COMPLETE** |
-| Goal | Facilitator UI — session lifecycle, participant sync, content authoring, keyboard shortcuts, post-session export |
-| Started | 2026-03-23 |
-| Target | 2026-04-06 |
-| Active Branch | `feat/facilitator-ui-expansion` |
-| Active Issue | #51 |
+| Sprint | 4 |
+| Status | **IN PROGRESS** |
+| Goal | Chapter portability (chapter_config.yaml) + course package export (ZIP) |
+| Started | 2026-03-24 |
+| Target | 2026-04-07 |
+| Active Branch | `feat/chapter-portability-export` |
+| Active Issue | #58 |
 
 ---
 

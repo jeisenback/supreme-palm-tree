@@ -4,7 +4,6 @@ import re
 import os
 import uuid
 import json
-import requests
 import urllib.parse
 import time
 
@@ -12,6 +11,7 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
+from facilitator_core import render_auth_sidebar
 from shared import (
     SESSIONS,
     MONTH_SESSION_MAP,
@@ -30,34 +30,92 @@ from shared import (
 
 CSV_PATH = Path("etn/outputs/iiba_events_parsed.csv")
 NOTES_PATH = Path("etn/outputs/facilitator_notes.csv")
-SESSION_PATH = Path("etn/outputs/facilitator_session.json")
 LIVE_SESSION_PATH = Path("etn/outputs/session_live.json")
 ATTENDEES_DIR = Path("etn/outputs/attendees")
 SESSIONS_OVERRIDE_PATH = Path("etn/outputs/sessions.json")
 
 
-def save_persistent_session(name: str, token: str, expires_iso: str):
-    SESSION_PATH.parent.mkdir(parents=True, exist_ok=True)
-    payload = {"name": name, "token": token, "expires": expires_iso}
-    SESSION_PATH.write_text(json.dumps(payload), encoding="utf-8")
+_DESIGN_CSS = """
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* === Design Tokens === */
+:root {
+  --bg-page: #F3F4EF;
+  --bg-surface: #FFFFFF;
+  --bg-muted: #ECEDE6;
+  --text-primary: #1F2A1F;
+  --text-secondary: #4D5A4D;
+  --accent-primary: #1E6B52;
+  --accent-secondary: #C16A2A;
+  --status-success: #237A4B;
+  --status-warning: #A66400;
+  --status-danger: #A12A2A;
+  --border-subtle: #D4D8CC;
+}
+
+/* === Base Typography === */
+html, body, [class*="css"] {
+  font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  color: var(--text-primary);
+}
+h1, h2, h3 {
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+
+/* === Slide canvas: focused reading width === */
+.slide-canvas {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* === Primary button: accent green === */
+.stButton > button[kind="primary"] {
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+.stButton > button[kind="primary"]:hover {
+  background-color: #155440 !important;
+  box-shadow: 0 2px 6px rgba(30, 107, 82, 0.28);
+}
+
+/* === Subtle content transitions === */
+.stMarkdown, .element-container {
+  transition: opacity 200ms ease;
+}
+
+/* === Accessibility: visible focus rings === */
+:focus-visible {
+  outline: 2px solid var(--accent-primary) !important;
+  outline-offset: 2px !important;
+}
+.stButton > button:focus-visible,
+.stSelectbox [data-baseweb="select"]:focus-within,
+.stTextInput input:focus-visible,
+.stTextArea textarea:focus-visible {
+  outline: 2px solid var(--accent-primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* === Mobile: participant join in main area === */
+.join-main {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .join-main {
+    display: block;
+  }
+  .join-sidebar-hint {
+    display: none;
+  }
+}
+</style>
+"""
 
 
-def load_persistent_session():
-    if not SESSION_PATH.exists():
-        return None
-    try:
-        data = json.loads(SESSION_PATH.read_text(encoding="utf-8"))
-        return data
-    except Exception:
-        return None
-
-
-def clear_persistent_session():
-    try:
-        if SESSION_PATH.exists():
-            SESSION_PATH.unlink()
-    except Exception:
-        pass
+def _inject_design_css():
+    """Inject design tokens, typography, and accessibility CSS into the Streamlit page."""
+    st.markdown(_DESIGN_CSS, unsafe_allow_html=True)
 
 
 def read_live_session():
@@ -135,29 +193,6 @@ def _call_llm(prompt: str, system: str = "") -> str:
         return resp.json()["content"][0]["text"]
     except Exception as e:
         return f"Error calling LLM: {e}"
-
-
-def exchange_code_for_token(code: str, client_id: str, client_secret: str, redirect_uri: str):
-    url = "https://github.com/login/oauth/access_token"
-    headers = {"Accept": "application/json"}
-    data = {
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "code": code,
-        "redirect_uri": redirect_uri,
-    }
-    resp = requests.post(url, headers=headers, data=data, timeout=10)
-    resp.raise_for_status()
-    j = resp.json()
-    return j.get("access_token")
-
-
-def fetch_github_user(token: str):
-    url = "https://api.github.com/user"
-    headers = {"Authorization": f"token {token}", "Accept": "application/json"}
-    resp = requests.get(url, headers=headers, timeout=10)
-    resp.raise_for_status()
-    return resp.json()
 
 
 def load_events():
@@ -253,6 +288,26 @@ def _generate_session_export(live: dict, attendees: list) -> str:
     return "\n".join(lines)
 
 
+def _do_join(name_trimmed: str):
+    """Write the attendee record and set participant session state."""
+    new_uuid = str(uuid.uuid4())
+    existing = read_attendees()
+    dup_count = sum(1 for a in existing if a.get("name") == name_trimmed)
+    ATTENDEES_DIR.mkdir(parents=True, exist_ok=True)
+    (ATTENDEES_DIR / f"{new_uuid}.json").write_text(
+        json.dumps({
+            "name": name_trimmed,
+            "joined_at": datetime.datetime.utcnow().isoformat() + "Z",
+            "uuid": new_uuid,
+        }),
+        encoding="utf-8",
+    )
+    st.session_state["participant_uuid"] = new_uuid
+    st.session_state["participant_name"] = name_trimmed
+    if dup_count > 0:
+        st.toast(f"Name already in use — you've joined as {name_trimmed} #{dup_count + 1}")
+
+
 def render_participant_view():
     """Participant-facing view: waiting / active (name entry + slide) / ended."""
     st.title("ECBA Study Session")
@@ -282,31 +337,30 @@ def render_participant_view():
     p_name = st.session_state.get("participant_name")
 
     if not p_uuid:
+        # ── Desktop: join form in sidebar ────────────────────────────────────────
         with st.sidebar:
             st.markdown("### Join the session")
-            name_input = st.text_input("Your name", max_chars=50)
-            name_trimmed = (name_input or "").strip()
-            if st.button("Join", disabled=not name_trimmed):
-                new_uuid = str(uuid.uuid4())
-                existing = read_attendees()
-                dup_count = sum(1 for a in existing if a.get("name") == name_trimmed)
-                ATTENDEES_DIR.mkdir(parents=True, exist_ok=True)
-                (ATTENDEES_DIR / f"{new_uuid}.json").write_text(
-                    json.dumps({
-                        "name": name_trimmed,
-                        "joined_at": datetime.datetime.utcnow().isoformat() + "Z",
-                        "uuid": new_uuid,
-                    }),
-                    encoding="utf-8",
-                )
-                st.session_state["participant_uuid"] = new_uuid
-                st.session_state["participant_name"] = name_trimmed
-                if dup_count > 0:
-                    st.toast(
-                        f"Name already in use — you've joined as {name_trimmed} #{dup_count + 1}"
-                    )
+            name_input_sb = st.text_input("Your name", max_chars=50, key="join_name_sidebar")
+            name_trimmed_sb = (name_input_sb or "").strip()
+            if st.button("Join", disabled=not name_trimmed_sb, key="join_btn_sidebar"):
+                _do_join(name_trimmed_sb)
                 st.rerun()
-        st.info("Enter your name in the sidebar to join.")
+
+        # ── Mobile: join form directly in main content area ───────────────────────
+        st.markdown('<div class="join-main">', unsafe_allow_html=True)
+        st.markdown("### Join the session")
+        name_input_main = st.text_input("Your name", max_chars=50, key="join_name_main")
+        name_trimmed_main = (name_input_main or "").strip()
+        if st.button("Join", disabled=not name_trimmed_main, key="join_btn_main"):
+            _do_join(name_trimmed_main)
+            st.rerun()
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Hint visible only on desktop (CSS hides on mobile)
+        st.markdown(
+            '<p class="join-sidebar-hint">Enter your name in the sidebar to join.</p>',
+            unsafe_allow_html=True,
+        )
         return
 
     # Joined — show current slide
@@ -353,7 +407,9 @@ def _render_session_lifecycle_panel(selected_variant):
         csv_ok = CSV_PATH.exists()
         master_ok = bool(load_master_context(selected_variant))
         logged_in_ok = bool(st.session_state.get("logged_in"))
-        all_ok = all([logged_in_ok, slide_deck is not None, csv_ok, master_ok])
+        # Check 5: Verify slide deck has parseable slides (smoke test) — catches malformed .md files
+        slides_ok = bool(parse_slides(slide_deck.read_text(encoding='utf-8'))) if slide_deck else False
+        all_ok = all([logged_in_ok, slide_deck is not None, csv_ok, master_ok, slides_ok])
 
         with st.status(
             "All checks passed — ready to go live" if all_ok else "Some checks failed — resolve before going live",
@@ -372,6 +428,10 @@ def _render_session_lifecycle_panel(selected_variant):
             st.write(
                 "✅ Case study context loaded"
                 if master_ok else "❌ Case study master context not found in variant folder"
+            )
+            st.write(
+                "✅ Slide deck is parseable"
+                if slides_ok else "❌ Slide deck has no parseable slides (malformed .md?)"
             )
 
         if st.button("Go Live", type="primary", key="go_live_btn", disabled=not all_ok):
@@ -413,15 +473,24 @@ def _render_session_lifecycle_panel(selected_variant):
                 st.session_state["_reset_confirm"] = True
                 st.rerun()
         else:
-            st.error("This will delete all attendance and session data.")
+            st.error("This will permanently delete all attendance records and session data.")
+            confirm_text = st.text_input(
+                "Type RESET to confirm",
+                key="reset_confirm_text",
+                placeholder="RESET",
+            )
             c1, c2 = st.columns(2)
             with c1:
-                if st.button("Yes, reset", key="reset_yes"):
+                if st.button(
+                    "Reset", key="reset_yes",
+                    disabled=(confirm_text or "").strip() != "RESET",
+                ):
                     LIVE_SESSION_PATH.unlink(missing_ok=True)
                     if ATTENDEES_DIR.exists():
                         for f in ATTENDEES_DIR.glob("*.json"):
                             f.unlink(missing_ok=True)
                     st.session_state.pop("_reset_confirm", None)
+                    st.session_state.pop("reset_confirm_text", None)
                     st.rerun()
             with c2:
                 if st.button("Cancel", key="reset_cancel"):
@@ -468,6 +537,37 @@ def _render_session_lifecycle_panel(selected_variant):
     st.markdown("---")
 
 
+def _validate_practice_questions(pq_list) -> list:
+    """Validate practice questions structure. Returns list of error strings."""
+    if not isinstance(pq_list, list):
+        return ["must be a JSON array"]
+    errors = []
+    for i, item in enumerate(pq_list):
+        prefix = f"Question {i + 1}"
+        if not isinstance(item, dict):
+            errors.append(f"{prefix}: must be an object {{q, choices, a}}")
+            continue
+        if "q" not in item:
+            errors.append(f"{prefix}: missing 'q' (question text)")
+        elif not isinstance(item["q"], str):
+            errors.append(f"{prefix}: 'q' must be a string")
+        if "choices" not in item:
+            errors.append(f"{prefix}: missing 'choices' (list of options)")
+        elif not isinstance(item["choices"], list) or len(item["choices"]) < 2:
+            errors.append(f"{prefix}: 'choices' must be an array with \u2265 2 items")
+        if "a" not in item:
+            errors.append(f"{prefix}: missing 'a' (correct answer index, 0-based)")
+        elif not isinstance(item["a"], int):
+            errors.append(f"{prefix}: 'a' must be an integer index")
+        elif "choices" in item and isinstance(item["choices"], list):
+            if not (0 <= item["a"] < len(item["choices"])):
+                errors.append(
+                    f"{prefix}: 'a' = {item['a']} is out of range "
+                    f"(valid: 0\u2013{len(item['choices']) - 1})"
+                )
+    return errors
+
+
 def _render_content_authoring(session_num: int, selected_variant):
     """Content authoring module — sessions editor, AI draft generator, slide upload (#55)."""
     st.subheader("Content Authoring")
@@ -501,15 +601,91 @@ def _render_content_authoring(session_num: int, selected_variant):
             key="edit_prompts",
         )
 
-        st.markdown("**Practice questions** (JSON list — each has `q`, `choices`, `a`)")
-        pq_default = json.dumps(current.get("practice_questions", []), indent=2)
-        pq_raw = st.text_area("Practice questions JSON", value=pq_default, height=160, key="edit_pq")
+        # ── Guided Practice Question Form ─────────────────────────────────────────
+        st.markdown("**Practice questions**")
+        # Per-session state key avoids stale data when user switches sessions
+        pq_state_key = f"_pq_guided_list_{session_num}"
+        if pq_state_key not in st.session_state:
+            st.session_state[pq_state_key] = list(current.get("practice_questions", []))
+
+        advanced_mode = st.toggle("Advanced mode (edit raw JSON)", key="pq_advanced_mode")
+
+        if advanced_mode:
+            pq_default = json.dumps(st.session_state[pq_state_key], indent=2)
+            pq_raw = st.text_area(
+                "Practice questions JSON",
+                value=pq_default,
+                height=160,
+                key="edit_pq_raw",
+                help='Each item: {"q": "...", "choices": ["A", "B", "C", "D"], "a": 0}',
+            )
+            try:
+                _pq_preview = json.loads(pq_raw)
+                if isinstance(_pq_preview, list):
+                    st.caption(f"{len(_pq_preview)} question(s) in JSON.")
+            except Exception:
+                st.warning("JSON syntax error — fix before saving.")
+        else:
+            existing_questions = st.session_state[pq_state_key]
+            if existing_questions:
+                for i, q in enumerate(existing_questions):
+                    cols = st.columns([8, 1])
+                    with cols[0]:
+                        choice_lines = "  \n".join(
+                            f"{'✓' if j == q.get('a') else '○'} {c}"
+                            for j, c in enumerate(q.get("choices", []))
+                        )
+                        st.markdown(f"**Q{i + 1}.** {q.get('q', '')}  \n{choice_lines}")
+                    with cols[1]:
+                        if st.button("✕", key=f"pq_del_{i}", help="Remove this question"):
+                            st.session_state[pq_state_key].pop(i)
+                            st.rerun()
+            else:
+                st.caption("No practice questions yet.")
+
+            st.markdown("**Add a question**")
+            with st.form(f"pq_add_form_{session_num}", clear_on_submit=True):
+                stem = st.text_input("Question stem", key="pq_stem")
+                c_cols = st.columns(2)
+                with c_cols[0]:
+                    choice_a = st.text_input("Choice A", key="pq_ca")
+                    choice_b = st.text_input("Choice B", key="pq_cb")
+                with c_cols[1]:
+                    choice_c = st.text_input("Choice C", key="pq_cc")
+                    choice_d = st.text_input("Choice D", key="pq_cd")
+                correct = st.selectbox("Correct answer", ["A", "B", "C", "D"], key="pq_correct")
+                submitted = st.form_submit_button("Add question")
+                if submitted:
+                    choices = [c for c in [choice_a, choice_b, choice_c, choice_d] if c.strip()]
+                    if not stem.strip():
+                        st.error("Question stem is required.")
+                    elif len(choices) < 2:
+                        st.error("Provide at least 2 choices.")
+                    else:
+                        answer_idx = {"A": 0, "B": 1, "C": 2, "D": 3}[correct]
+                        if answer_idx >= len(choices):
+                            answer_idx = 0
+                        st.session_state[pq_state_key].append(
+                            {"q": stem.strip(), "choices": choices, "a": answer_idx}
+                        )
+                        st.rerun()
 
         if st.button("Save session content", key="save_session_content"):
-            try:
-                pq_parsed = json.loads(pq_raw)
-            except Exception as e:
-                st.error(f"Practice questions JSON is invalid: {e}")
+            if advanced_mode:
+                try:
+                    pq_parsed = json.loads(st.session_state.get("edit_pq_raw", "[]"))
+                except Exception as e:
+                    st.error(f"Practice questions JSON is invalid: {e}")
+                    return
+                # Sync back to guided list for consistency
+                st.session_state[pq_state_key] = pq_parsed if isinstance(pq_parsed, list) else []
+            else:
+                pq_parsed = st.session_state[pq_state_key]
+            pq_errors = _validate_practice_questions(pq_parsed)
+            if pq_errors:
+                st.error("Practice questions schema errors — fix before saving:")
+                for err in pq_errors:
+                    st.write(f"- {err}")
                 return
             updated = {
                 "title": title,
@@ -526,6 +702,8 @@ def _render_content_authoring(session_num: int, selected_variant):
             if st.button("Reset to defaults", key="reset_session_content"):
                 overrides.pop(str(session_num), None)
                 save_sessions_override(overrides)
+                # Clear guided-mode cache so it reloads defaults on next render
+                st.session_state.pop(pq_state_key, None)
                 st.success("Reset to shared.py defaults.")
                 st.rerun()
 
@@ -570,21 +748,74 @@ def _render_content_authoring(session_num: int, selected_variant):
                 height=400,
                 key="ai_draft_edit",
             )
-            filename = st.text_input(
-                "Save as filename",
-                value="slides_draft.md",
-                key="ai_save_filename",
-            )
-            if selected_variant and st.button("Save to variant folder", key="ai_save_draft"):
-                dest = Path(selected_variant) / filename
-                dest.write_text(edited, encoding="utf-8")
-                st.success(f"Saved to {dest}")
-                find_slide_deck.clear()
-                find_documents.clear()
+
+            # ── Preview as slides ────────────────────────────────────────────────
+            with st.expander("Preview slides", expanded=False):
+                slides_preview = parse_slides(edited)
+                if slides_preview:
+                    st.caption(f"{len(slides_preview)} slide(s) parsed.")
+                    for s in slides_preview:
+                        slide_title = s.get("title", "(untitled)")
+                        body_lines = (s.get("body") or "").strip().splitlines()
+                        first_line = body_lines[0] if body_lines else "_no content_"
+                        st.markdown(f"**{slide_title}** — {first_line}")
+                else:
+                    st.warning(
+                        "No slides parsed. Check that headers use 'Slide N — Title' format."
+                    )
+
+            # ── Validate ─────────────────────────────────────────────────────────
+            slides_validated = parse_slides(edited)
+            if not slides_validated:
+                st.warning(
+                    "Draft has no parseable slides — fix headers before saving."
+                )
+                save_ok = False
+            else:
+                st.success(f"Validated: {len(slides_validated)} slide(s) ready.")
+                save_ok = True
+
+            # ── Save as draft / Publish ───────────────────────────────────────────
+            if selected_variant and save_ok:
+                col_save, col_pub = st.columns(2)
+                with col_save:
+                    if st.button(
+                        "Save as draft",
+                        key="ai_save_draft",
+                        help="Save to slides_draft.md in the variant folder",
+                    ):
+                        dest = Path(selected_variant) / "slides_draft.md"
+                        dest.write_text(edited, encoding="utf-8")
+                        st.success(f"Draft saved to {dest}")
+                        find_slide_deck.clear()
+                        find_documents.clear()
+                with col_pub:
+                    active_deck = find_slide_deck(selected_variant)
+                    if active_deck:
+                        if st.button(
+                            "Publish to active deck",
+                            key="ai_publish_deck",
+                            type="primary",
+                            help=f"Overwrite {active_deck.name} with this draft",
+                        ):
+                            active_deck.write_text(edited, encoding="utf-8")
+                            st.success(f"Published to {active_deck}")
+                            find_slide_deck.clear()
+                            find_documents.clear()
+                    else:
+                        st.info(
+                            "No active slide deck found in this variant folder. "
+                            "Save as draft first, then rename it to activate."
+                        )
+            elif not selected_variant:
+                st.info("Select a case study variant to enable saving.")
 
     # ── Slide Upload ──────────────────────────────────────────────────────────────
     with tab_upload:
-        st.markdown("Upload a `.md` or `.txt` slide deck file to replace the current deck in the selected variant folder.")
+        st.markdown(
+            "Upload a `.md` or `.txt` slide deck file to replace the current deck "
+            "in the selected variant folder."
+        )
         if not selected_variant:
             st.warning("Select a case study variant first.")
         else:
@@ -599,12 +830,46 @@ def _render_content_authoring(session_num: int, selected_variant):
                     value=uploaded.name,
                     key="slide_upload_dest",
                 )
-                if st.button("Upload and save", key="slide_upload_save"):
-                    dest = Path(selected_variant) / dest_name
-                    dest.write_bytes(uploaded.getvalue())
-                    st.success(f"Saved to {dest}")
-                    find_slide_deck.clear()
-                    find_documents.clear()
+                dest = Path(selected_variant) / dest_name
+                if dest.exists():
+                    existing_text = dest.read_text(encoding="utf-8")
+                    new_text = uploaded.getvalue().decode("utf-8", errors="replace")
+                    existing_lines = existing_text.splitlines()
+                    new_lines = new_text.splitlines()
+                    st.warning(
+                        f"**File already exists.** "
+                        f"Current: {len(existing_lines)} line(s) · "
+                        f"New: {len(new_lines)} line(s)"
+                    )
+                    for i, (old_line, new_line) in enumerate(
+                        zip(existing_lines, new_lines)
+                    ):
+                        if old_line != new_line:
+                            st.caption(
+                                f"First difference at line {i + 1}: "
+                                f"`{old_line[:60]}` → `{new_line[:60]}`"
+                            )
+                            break
+                    backup = st.checkbox(
+                        f"Backup existing file to `{dest_name}.bak` (recommended)",
+                        value=True,
+                        key="slide_upload_backup",
+                    )
+                    if st.button("Confirm replace", key="slide_upload_confirm", type="primary"):
+                        if backup:
+                            bak = dest.with_suffix(dest.suffix + ".bak")
+                            bak.write_text(existing_text, encoding="utf-8")
+                            st.info(f"Backup saved to {bak.name}")
+                        dest.write_bytes(uploaded.getvalue())
+                        st.success(f"Replaced {dest}")
+                        find_slide_deck.clear()
+                        find_documents.clear()
+                else:
+                    if st.button("Upload and save", key="slide_upload_save"):
+                        dest.write_bytes(uploaded.getvalue())
+                        st.success(f"Saved to {dest}")
+                        find_slide_deck.clear()
+                        find_documents.clear()
 
 
 def main():
@@ -613,48 +878,13 @@ def main():
         page_title="ECBA Study Session — Facilitator" if _is_facilitator else "ECBA Study Session",
         layout="wide",
     )
+    _inject_design_css()
 
     if not _is_facilitator:
         render_participant_view()
         return
 
     st.title("ECBA Study Session — Facilitator")
-
-    # Unified keyboard shortcuts: N/ArrowRight (next), P/ArrowLeft (prev), T (timer toggle) (#54)
-    # Injected via components.html so it runs in the iframe context; uses window.top to reach
-    # the parent document — works because Streamlit serves app + components from the same origin.
-    # Debounced at 150ms to prevent key-repeat storms. Ignores keystrokes while typing in inputs.
-    # Known limitation: N/P trigger window.top.location reload, clearing session_state
-    # (timer running state). Mitigation scoped to Phase 2 (timer state → URL params).
-    _ks_js = """
-    <script>
-    (function() {
-      let _ks_last = 0;
-      const _doc = (window.top || window.parent || window).document;
-      const _win = (window.top || window.parent || window);
-      _doc.addEventListener('keydown', function(e) {
-        const now = Date.now();
-        if (now - _ks_last < 150) return;
-        _ks_last = now;
-        const ae = _doc.activeElement;
-        if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) return;
-        const p = new URLSearchParams(_win.location.search);
-        const cur = parseInt(p.get('slide') || '0');
-        if (e.key === 'ArrowRight' || e.key === 'n') {
-          p.set('slide', String(cur + 1));
-          _win.location.search = p.toString();
-        } else if (e.key === 'ArrowLeft' || e.key === 'p') {
-          p.set('slide', String(Math.max(0, cur - 1)));
-          _win.location.search = p.toString();
-        } else if (e.key === 't') {
-          p.set('timer', p.get('timer') === '1' ? '0' : '1');
-          _win.location.search = p.toString();
-        }
-      });
-    })();
-    </script>
-    """
-    components.html(_ks_js, height=0)
 
     # Ensure facilitator is always defined (guards Notes/Actions/Complete steps)
     facilitator = st.session_state.get("facilitator", "")
@@ -667,101 +897,24 @@ def main():
     if not titles:
         titles = ["(no events)"]
 
-    # Attempt to auto-login from persistent session
-    persisted = load_persistent_session()
-    if persisted and not st.session_state.get("logged_in"):
-        try:
-            exp = datetime.datetime.fromisoformat(persisted.get("expires"))
-            if exp > datetime.datetime.utcnow():
-                st.session_state["facilitator"] = persisted.get("name")
-                st.session_state["logged_in"] = True
-                st.session_state["token"] = persisted.get("token")
-                facilitator = st.session_state["facilitator"]
-        except Exception:
-            pass
-
     with st.sidebar:
-        # GitHub OAuth callback handling
-        params = st.query_params
-        if "code" in params and not st.session_state.get("logged_in"):
-            code = params.get("code")
-            client_id = os.environ.get("GITHUB_CLIENT_ID")
-            client_secret = os.environ.get("GITHUB_CLIENT_SECRET")
-            redirect_uri = os.environ.get("OAUTH_REDIRECT_URI", "http://localhost:8501/")
-            if client_id and client_secret:
-                try:
-                    token = exchange_code_for_token(code, client_id, client_secret, redirect_uri)
-                    if token:
-                        user = fetch_github_user(token)
-                        if user:
-                            st.session_state["facilitator"] = user.get("login")
-                            st.session_state["logged_in"] = True
-                            st.session_state["token"] = token
-                            facilitator = st.session_state["facilitator"]
-                            expires = (
-                                datetime.datetime.utcnow() + datetime.timedelta(days=7)
-                            ).isoformat()
-                            save_persistent_session(user.get("login"), token, expires)
-                            st.rerun()
-                except Exception as e:
-                    st.error(f"GitHub OAuth failed: {e}")
-
-        if not st.session_state.get("logged_in"):
-            st.markdown("### Sign in")
-            gh_client = os.environ.get("GITHUB_CLIENT_ID")
-            redirect_uri = os.environ.get("OAUTH_REDIRECT_URI", "http://localhost:8501/")
-            if gh_client:
-                state = uuid.uuid4().hex
-                oauth_params = {
-                    "client_id": gh_client,
-                    "redirect_uri": redirect_uri,
-                    "scope": "read:user",
-                    "state": state,
-                }
-                url = "https://github.com/login/oauth/authorize?" + urllib.parse.urlencode(
-                    oauth_params
-                )
-                st.markdown(f"[Sign in with GitHub]({url})")
-            else:
-                st.info(
-                    "Set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET to enable GitHub OAuth."
-                )
-
-            st.markdown("---")
-            st.markdown("Or sign in with a local account:")
-            login_name = st.text_input("Facilitator name")
-            login_pass = st.text_input("Password", type="password")
-            remember = st.checkbox("Remember me (7 days)")
-            if st.button("Log in"):
-                expected = os.environ.get("FACILITATOR_PASSWORD", "facilitate")
-                if login_pass == expected and login_name:
-                    st.session_state["facilitator"] = login_name
-                    st.session_state["logged_in"] = True
-                    token = uuid.uuid4().hex
-                    st.session_state["token"] = token
-                    if remember:
-                        expires = (
-                            datetime.datetime.utcnow() + datetime.timedelta(days=7)
-                        ).isoformat()
-                        save_persistent_session(login_name, token, expires)
-                    st.rerun()
-                else:
-                    st.error("Invalid name or password")
-        else:
-            facilitator = st.session_state.get("facilitator", "")
-            st.markdown(f"**Logged in as:** {facilitator}")
-            if st.button("Log out"):
-                st.session_state["logged_in"] = False
-                st.session_state["facilitator"] = ""
-                st.session_state.pop("token", None)
-                clear_persistent_session()
-                st.rerun()
-
+        facilitator = render_auth_sidebar()
+        # Update local var in case auto-login ran during sidebar render
+        facilitator = st.session_state.get("facilitator", "")
+        st.markdown("---")
         event_choice = st.selectbox("Select event", titles)
-
-        STEPS = ["Overview", "Discussion prompts", "Notes", "Actions", "Complete", "Case Study", "Content"]
-        st.sidebar.markdown("---")
-        step = st.sidebar.radio("Step", STEPS, key="radio_step")
+        STEPS = ["Overview", "Discussion prompts", "Notes", "Actions", "Complete", "Case Study"]
+        st.markdown("---")
+        # Session status — always visible regardless of scroll position
+        _live_sidebar = read_live_session()
+        if _live_sidebar and not _live_sidebar.get("ended_at"):
+            st.success("Session Live")
+        elif _live_sidebar and _live_sidebar.get("ended_at"):
+            st.warning("Session Ended")
+        else:
+            st.caption("Session not started")
+        st.markdown("---")
+        step = st.radio("Step", STEPS, key="radio_step")
 
     st.header(event_choice)
 
@@ -891,7 +1044,7 @@ def main():
                         st.markdown(rendered, unsafe_allow_html=False)
                         nav1, nav2, nav3 = st.columns([1, 1, 6])
                         with nav1:
-                            if st.button("Prev"):
+                            if st.button("Previous"):
                                 st.session_state[key_idx] = max(
                                     0, st.session_state[key_idx] - 1
                                 )
@@ -1292,12 +1445,6 @@ def main():
             if st.button("Finalize"):
                 save_note(event_choice, facilitator, step, "Finalized", completed=completed)
                 st.success("Session finalized")
-
-    if step == "Content":
-        if not st.session_state.get("logged_in"):
-            st.info("Please log in to access content authoring.")
-        else:
-            _render_content_authoring(session_num, selected_variant)
 
     st.sidebar.markdown("---")
     st.sidebar.markdown(
