@@ -1,6 +1,28 @@
 out/
 __pycache__/
 
+# Local environment and secrets
+.env
+.env.*
+!.env.example
 .env/
 /channels/discord/.env
 /channels/webhook/.env
+.streamlit/secrets.toml
+
+# Local Python environment
+.venv/
+
+# Agent and browser tooling state
+.claude/
+.gstack/
+.playwright-mcp/
+
+# Local session and runtime artifacts
+SESSION.md
+.scheduler_jobs.db
+.scheduler_state.json
+
+# Temporary QA-generated case study data
+etn/ECBA_CaseStudy_qa_scenario_variant/
+
