@@ -4,6 +4,18 @@ __pycache__/
 *.pyc
 *.pyo
 
+# Secrets and local config — never commit
+.env
+.env.*
+
+# Editor / tool caches
+.claude/
+.gstack/
+.playwright-mcp/
+.scheduler_state.json
+.scheduler_jobs.db
+PROJECT_STATE.md
+
 # Runtime session state (not tracked in git)
 etn/outputs/session_live.json
 etn/outputs/attendees/
