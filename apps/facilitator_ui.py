@@ -115,7 +115,7 @@ h1, h2, h3 {
 
 def _inject_design_css():
     """Inject design tokens, typography, and accessibility CSS into the Streamlit page."""
-    st.markdown(_DESIGN_CSS, unsafe_allow_html=True)
+    st.html(_DESIGN_CSS)
 
 
 def read_live_session():
