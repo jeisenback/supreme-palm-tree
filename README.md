@@ -43,7 +43,8 @@ pytest -q -m "not integration"
 - Start command: `streamlit run apps/facilitator_ui.py --server.port $PORT --server.address 0.0.0.0`
 - Health check path: `/_stcore/health`
 - Configure `FACILITATOR_PASSWORD` and optional OAuth/LLM env vars in Render.
-- Runtime state is persisted on a Render Disk mounted at `/var/data`.
+- Free tier uses ephemeral storage. Runtime state in `etn/outputs` is reset on restart or redeploy.
+- If you need persistent state, move to a paid Render plan and attach a disk.
 
 Render migration steps:
 
@@ -57,6 +58,12 @@ Render migration steps:
 	- `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` (optional)
 6. Trigger a deploy and wait for the health check to pass.
 7. Open the Render URL and validate login + content authoring flow.
+
+If you later upgrade off free tier and want persistence:
+
+1. Change the Render service plan to a disk-capable paid tier.
+2. Add a Render Disk and mount it, for example at `/var/data`.
+3. Set `FACILITATOR_DATA_DIR=/var/data`.
 
 ## Legacy ingest utilities
 

@@ -1,22 +1,24 @@
 out/
 __pycache__/
-.venv/
-*.pyc
-*.pyo
 
-# Secrets and local config — never commit
+# Local environment and secrets
 .env
 .env.*
+!.env.example
+.streamlit/secrets.toml
 
-# Editor / tool caches
+# Local Python environment
+.venv/
+
+# Agent and browser tooling state
 .claude/
 .gstack/
 .playwright-mcp/
-.scheduler_state.json
-.scheduler_jobs.db
-PROJECT_STATE.md
 
-# Runtime session state (not tracked in git)
-etn/outputs/session_live.json
-etn/outputs/attendees/
-etn/outputs/sessions.json
+# Local session and runtime artifacts
+SESSION.md
+.scheduler_jobs.db
+.scheduler_state.json
+
+# Temporary QA-generated case study data
+etn/ECBA_CaseStudy_qa_scenario_variant/
