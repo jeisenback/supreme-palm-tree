@@ -241,6 +241,178 @@ class TestPromptBuilder:
         assert "Do not include exam strategy notes" in user_prompt
 
 
+class TestCaseStudyBuilder:
+    def test_slugify_case_study_name(self):
+        assert fui._slugify_case_study_name("Volunteer Hub 2.0!") == "volunteer_hub_2_0"
+        assert fui._slugify_case_study_name("   ") == "new_case_study"
+
+    def test_create_case_study_variant_with_initial_scenario(self, tmp_path):
+        variant_path = fui.create_case_study_variant(
+            base_dir=tmp_path,
+            case_study_name="VolunteerHub donor intake modernization",
+            organization_name="VolunteerHub",
+            industry="Nonprofit technology",
+            summary="A regional nonprofit is struggling with slow donor onboarding.",
+            business_need="Reduce friction in intake and improve retention.",
+            certification_target="ECBA",
+            stakeholders=["Sponsor", "Operations lead"],
+            success_metrics=["Cut intake time by 30%"],
+            constraints=["Budget capped this quarter"],
+            initial_scenario={
+                "title": "Conflicting donor data requirements",
+                "session_num": 1,
+                "objective": "Practice stakeholder analysis",
+                "situation": "Operations and fundraising disagree on required intake fields.",
+                "stakeholders": ["Fundraising manager", "Operations lead"],
+                "constraints": ["CRM cannot change until next release"],
+                "prompts": ["What would you ask first?"],
+            },
+        )
+
+        assert variant_path.name == "ECBA_CaseStudy_volunteerhub_donor_intake_modernization"
+        assert (variant_path / "TrailBlaze_MasterContext.md").exists()
+        assert (variant_path / "ECBA_CaseStudy_Plan.md").exists()
+        assert (variant_path / "slides_draft.md").exists()
+
+        master_context = (variant_path / "TrailBlaze_MasterContext.md").read_text(encoding="utf-8")
+        assert "VolunteerHub donor intake modernization" in master_context
+        assert "Reduce friction in intake and improve retention." in master_context
+
+        scenario_path = variant_path / "scenarios" / "session_1_conflicting_donor_data_requirements.md"
+        assert scenario_path.exists()
+        scenario_index = json.loads((variant_path / "scenarios" / "scenarios.json").read_text(encoding="utf-8"))
+        assert scenario_index[0]["title"] == "Conflicting donor data requirements"
+
+    def test_duplicate_variant_raises(self, tmp_path):
+        fui.create_case_study_variant(
+            base_dir=tmp_path,
+            case_study_name="Alpha",
+            organization_name="Org",
+            industry="Domain",
+            summary="Summary",
+            business_need="Need",
+            certification_target="ECBA",
+            stakeholders=[],
+            success_metrics=[],
+            constraints=[],
+        )
+        with pytest.raises(FileExistsError):
+            fui.create_case_study_variant(
+                base_dir=tmp_path,
+                case_study_name="Alpha",
+                organization_name="Org",
+                industry="Domain",
+                summary="Summary",
+                business_need="Need",
+                certification_target="ECBA",
+                stakeholders=[],
+                success_metrics=[],
+                constraints=[],
+            )
+
+    def test_create_case_study_scenario_updates_index(self, tmp_path):
+        variant_dir = tmp_path / "ECBA_CaseStudy_alpha"
+        variant_dir.mkdir()
+
+        first_path = fui.create_case_study_scenario(
+            variant_dir=variant_dir,
+            title="First scenario",
+            session_num=2,
+            objective="Practice elicitation",
+            situation="A sponsor changes scope late in the quarter.",
+            stakeholders=["Sponsor"],
+            constraints=["No budget increase"],
+            prompts=["What changed?"],
+        )
+        second_path = fui.create_case_study_scenario(
+            variant_dir=variant_dir,
+            title="Second scenario",
+            session_num=1,
+            objective="Practice stakeholder mapping",
+            situation="A cross-functional team disagrees on priorities.",
+            stakeholders=["Ops", "Finance"],
+            constraints=["Two-week deadline"],
+            prompts=["Who is impacted?"],
+        )
+
+        assert first_path.exists()
+        assert second_path.exists()
+        index_entries = json.loads((variant_dir / "scenarios" / "scenarios.json").read_text(encoding="utf-8"))
+        assert [entry["session"] for entry in index_entries] == [1, 2]
+
+        with pytest.raises(FileExistsError):
+            fui.create_case_study_scenario(
+                variant_dir=variant_dir,
+                title="Second scenario",
+                session_num=1,
+                objective="Practice stakeholder mapping",
+                situation="Duplicate scenario name.",
+                stakeholders=[],
+                constraints=[],
+                prompts=[],
+            )
+
+    def test_build_scenario_generation_prompts(self):
+        system_prompt, user_prompt = fui._build_scenario_generation_prompts(
+            case_study_name="VolunteerHub",
+            session_num=3,
+            certification_target="ECBA",
+            focus_area="Elicitation and Collaboration",
+            scenario_style="Stakeholder conflict",
+            master_context="Nonprofit intake modernization with sponsor tension.",
+        )
+        assert "Return ONLY valid JSON" in system_prompt
+        assert "session 3" in user_prompt.lower()
+        assert "Elicitation and Collaboration" in user_prompt
+        assert "Stakeholder conflict" in user_prompt
+
+    def test_parse_generated_scenario_response(self):
+        response = json.dumps(
+            {
+                "title": "Conflicting priorities",
+                "objective": "Practice prioritization",
+                "situation": "Two stakeholders want incompatible scope changes.",
+                "stakeholders": ["Sponsor", "Ops lead"],
+                "constraints": ["Deadline fixed"],
+                "prompts": ["What should happen first?"],
+            }
+        )
+        parsed = fui._parse_generated_scenario_response(response)
+        assert parsed["title"] == "Conflicting priorities"
+        assert parsed["stakeholders"] == ["Sponsor", "Ops lead"]
+        assert parsed["prompts"] == ["What should happen first?"]
+
+    def test_load_session_scenarios_filters_by_session(self, tmp_path):
+        variant_dir = tmp_path / "ECBA_CaseStudy_alpha"
+        variant_dir.mkdir()
+        fui.create_case_study_scenario(
+            variant_dir=variant_dir,
+            title="Session one scenario",
+            session_num=1,
+            objective="Practice stakeholder analysis",
+            situation="A sponsor and analyst disagree on scope.",
+            stakeholders=["Sponsor"],
+            constraints=["Budget cap"],
+            prompts=["Who is affected?"],
+        )
+        fui.create_case_study_scenario(
+            variant_dir=variant_dir,
+            title="Session two scenario",
+            session_num=2,
+            objective="Practice elicitation",
+            situation="Users keep changing requested fields.",
+            stakeholders=["Ops lead"],
+            constraints=["Release date locked"],
+            prompts=["What questions come next?"],
+        )
+
+        session_one = fui.load_session_scenarios(variant_dir, 1)
+        session_two = fui.load_session_scenarios(variant_dir, 2)
+
+        assert [item["title"] for item in session_one] == ["Session one scenario"]
+        assert [item["title"] for item in session_two] == ["Session two scenario"]
+
+
 # ---------------------------------------------------------------------------
 # parse_slides smoke test — guards the pre-session readiness check (#50 / TODOS.md)
 # A slide deck that exists but has zero parseable slides would let Go Live proceed

@@ -30,6 +30,7 @@ from shared import (
 
 
 DATA_DIR = Path(os.environ.get("FACILITATOR_DATA_DIR", "etn/outputs")).expanduser()
+VARIANTS_BASE_DIR = Path("etn")
 CSV_PATH = DATA_DIR / "iiba_events_parsed.csv"
 NOTES_PATH = DATA_DIR / "facilitator_notes.csv"
 LIVE_SESSION_PATH = DATA_DIR / "session_live.json"
@@ -236,6 +237,341 @@ def _build_iiba_babok_prompts(
         f"{exam_line}"
     )
     return system_prompt, user_prompt
+
+
+def _slugify_case_study_name(name: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "_", name.strip().lower()).strip("_")
+    return slug or "new_case_study"
+
+
+def _split_nonempty_lines(raw_text: str) -> list[str]:
+    return [line.strip() for line in raw_text.splitlines() if line.strip()]
+
+
+def _build_case_study_master_context(
+    case_study_name: str,
+    organization_name: str,
+    industry: str,
+    summary: str,
+    business_need: str,
+    stakeholders: list[str],
+    success_metrics: list[str],
+    constraints: list[str],
+) -> str:
+    stakeholder_lines = "\n".join(f"- {item}" for item in stakeholders) or "- TBD"
+    metric_lines = "\n".join(f"- {item}" for item in success_metrics) or "- TBD"
+    constraint_lines = "\n".join(f"- {item}" for item in constraints) or "- TBD"
+    return (
+        f"# {case_study_name} - Master Context\n\n"
+        f"## Organization\n"
+        f"- Name: {organization_name}\n"
+        f"- Industry: {industry}\n\n"
+        f"## Overview\n{summary.strip()}\n\n"
+        f"## Business Need\n{business_need.strip()}\n\n"
+        f"## Key Stakeholders\n{stakeholder_lines}\n\n"
+        f"## Success Metrics\n{metric_lines}\n\n"
+        f"## Constraints\n{constraint_lines}\n\n"
+        "## Facilitator Guidance\n"
+        "- Use this file as the source of truth for scenario prompts and slide examples.\n"
+        "- Keep updates concrete and learner-facing; avoid hidden backstory that students cannot infer.\n"
+    )
+
+
+def _build_case_study_plan(
+    case_study_name: str,
+    certification_target: str,
+    session_count: int,
+) -> str:
+    session_lines = "\n".join(
+        f"- Session {session_num}: define learning objective, key BA technique, and scenario exercise"
+        for session_num in range(1, session_count + 1)
+    )
+    return (
+        f"# {case_study_name} - Plan\n\n"
+        f"## Track\n- Certification target: {certification_target}\n\n"
+        "## Authoring Checklist\n"
+        "- Align each session to one BABOK knowledge area or BACCM perspective.\n"
+        "- Add one scenario exercise per session.\n"
+        "- Keep artifacts in markdown or JSON so the facilitator app can preview them.\n\n"
+        "## Session Outline\n"
+        f"{session_lines}\n"
+    )
+
+
+def _build_case_study_slide_stub(case_study_name: str, business_need: str) -> str:
+    return (
+        f"Slide 1 - {case_study_name} Overview\n"
+        f"- Organization context and challenge summary\n"
+        f"- Primary business need: {business_need.strip()}\n"
+        f"- Why this case matters for ECBA-level analysis\n\n"
+        "Slide 2 - Learner Objectives\n"
+        "- Identify the business problem and stakeholder impacts\n"
+        "- Practice framing requirements and assumptions\n"
+        "- Prepare for scenario-based exam questions\n\n"
+        "Slide 3 - First Scenario Prompt\n"
+        "- Review the scenario brief in the scenarios folder\n"
+        "- Capture open questions, assumptions, and first elicitation steps\n"
+        "[FACILITATOR: ask learners to separate facts from guesses before proposing solutions]\n"
+    )
+
+
+def _build_case_study_scenario_markdown(
+    title: str,
+    session_num: int,
+    objective: str,
+    situation: str,
+    stakeholders: list[str],
+    constraints: list[str],
+    prompts: list[str],
+) -> str:
+    stakeholder_lines = "\n".join(f"- {item}" for item in stakeholders) or "- TBD"
+    constraint_lines = "\n".join(f"- {item}" for item in constraints) or "- TBD"
+    prompt_lines = "\n".join(f"- {item}" for item in prompts) or "- TBD"
+    return (
+        f"# Scenario - Session {session_num}: {title}\n\n"
+        f"## Objective\n{objective.strip()}\n\n"
+        f"## Situation\n{situation.strip()}\n\n"
+        f"## Stakeholders\n{stakeholder_lines}\n\n"
+        f"## Constraints\n{constraint_lines}\n\n"
+        f"## Learner Prompts\n{prompt_lines}\n"
+    )
+
+
+def _update_scenario_index(
+    scenario_dir: Path,
+    scenario_path: Path,
+    title: str,
+    session_num: int,
+    objective: str,
+):
+    index_path = scenario_dir / "scenarios.json"
+    if index_path.exists():
+        try:
+            index_entries = json.loads(index_path.read_text(encoding="utf-8"))
+        except Exception:
+            index_entries = []
+    else:
+        index_entries = []
+    index_entries = [entry for entry in index_entries if entry.get("path") != scenario_path.name]
+    index_entries.append(
+        {
+            "title": title,
+            "session": session_num,
+            "objective": objective,
+            "path": scenario_path.name,
+        }
+    )
+    index_entries.sort(key=lambda entry: (entry.get("session", 0), entry.get("title", "")))
+    index_path.write_text(json.dumps(index_entries, indent=2), encoding="utf-8")
+
+
+def create_case_study_scenario(
+    variant_dir: Path,
+    title: str,
+    session_num: int,
+    objective: str,
+    situation: str,
+    stakeholders: list[str],
+    constraints: list[str],
+    prompts: list[str],
+) -> Path:
+    scenario_dir = Path(variant_dir) / "scenarios"
+    scenario_dir.mkdir(parents=True, exist_ok=True)
+    scenario_filename = f"session_{session_num}_{_slugify_case_study_name(title)}.md"
+    scenario_path = scenario_dir / scenario_filename
+    if scenario_path.exists():
+        raise FileExistsError(f"Scenario already exists: {scenario_path}")
+    scenario_path.write_text(
+        _build_case_study_scenario_markdown(
+            title=title,
+            session_num=session_num,
+            objective=objective,
+            situation=situation,
+            stakeholders=stakeholders,
+            constraints=constraints,
+            prompts=prompts,
+        ),
+        encoding="utf-8",
+    )
+    _update_scenario_index(scenario_dir, scenario_path, title, session_num, objective)
+    return scenario_path
+
+
+def create_case_study_variant(
+    base_dir: Path,
+    case_study_name: str,
+    organization_name: str,
+    industry: str,
+    summary: str,
+    business_need: str,
+    certification_target: str,
+    stakeholders: list[str],
+    success_metrics: list[str],
+    constraints: list[str],
+    initial_scenario: dict | None = None,
+) -> Path:
+    variant_dir = Path(base_dir) / f"ECBA_CaseStudy_{_slugify_case_study_name(case_study_name)}"
+    if variant_dir.exists():
+        raise FileExistsError(f"Case study variant already exists: {variant_dir}")
+    variant_dir.mkdir(parents=True, exist_ok=False)
+    (variant_dir / "TrailBlaze_MasterContext.md").write_text(
+        _build_case_study_master_context(
+            case_study_name=case_study_name,
+            organization_name=organization_name,
+            industry=industry,
+            summary=summary,
+            business_need=business_need,
+            stakeholders=stakeholders,
+            success_metrics=success_metrics,
+            constraints=constraints,
+        ),
+        encoding="utf-8",
+    )
+    (variant_dir / "ECBA_CaseStudy_Plan.md").write_text(
+        _build_case_study_plan(
+            case_study_name=case_study_name,
+            certification_target=certification_target,
+            session_count=5,
+        ),
+        encoding="utf-8",
+    )
+    (variant_dir / "slides_draft.md").write_text(
+        _build_case_study_slide_stub(case_study_name, business_need),
+        encoding="utf-8",
+    )
+    if initial_scenario:
+        create_case_study_scenario(
+            variant_dir=variant_dir,
+            title=initial_scenario["title"],
+            session_num=initial_scenario["session_num"],
+            objective=initial_scenario["objective"],
+            situation=initial_scenario["situation"],
+            stakeholders=initial_scenario["stakeholders"],
+            constraints=initial_scenario["constraints"],
+            prompts=initial_scenario["prompts"],
+        )
+    return variant_dir
+
+
+def _build_scenario_generation_prompts(
+    case_study_name: str,
+    session_num: int,
+    certification_target: str,
+    focus_area: str,
+    scenario_style: str,
+    master_context: str,
+) -> tuple[str, str]:
+    system_prompt = (
+        "You are a senior business analysis instructor generating scenario-based learning content. "
+        "Return ONLY valid JSON with keys: title, objective, situation, stakeholders, constraints, prompts. "
+        "Use arrays of short strings for stakeholders, constraints, and prompts. "
+        "Do not wrap the JSON in markdown fences."
+    )
+    user_prompt = (
+        f"Create a scenario brief for session {session_num} of the case study '{case_study_name}'.\n"
+        f"Certification target: {certification_target}.\n"
+        f"BABOK focus area: {focus_area}.\n"
+        f"Scenario style: {scenario_style}.\n"
+        "Requirements:\n"
+        "- Make the scenario realistic for an early-career BA audience.\n"
+        "- Include a concrete business tension or decision.\n"
+        "- Keep the objective action-oriented and tied to analysis work.\n"
+        "- Provide 3-5 learner prompts that drive discussion or analysis.\n"
+        "- Keep all content consistent with the case-study context below.\n\n"
+        "Case study context:\n"
+        f"{master_context[:6000]}"
+    )
+    return system_prompt, user_prompt
+
+
+def _parse_generated_scenario_response(response_text: str) -> dict:
+    cleaned = response_text.strip()
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
+        cleaned = re.sub(r"\s*```$", "", cleaned)
+    start = cleaned.find("{")
+    end = cleaned.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise ValueError("Model response did not contain a JSON object.")
+    payload = json.loads(cleaned[start : end + 1])
+    return {
+        "title": str(payload.get("title", "")).strip(),
+        "objective": str(payload.get("objective", "")).strip(),
+        "situation": str(payload.get("situation", "")).strip(),
+        "stakeholders": [str(item).strip() for item in payload.get("stakeholders", []) if str(item).strip()],
+        "constraints": [str(item).strip() for item in payload.get("constraints", []) if str(item).strip()],
+        "prompts": [str(item).strip() for item in payload.get("prompts", []) if str(item).strip()],
+    }
+
+
+def _parse_scenario_markdown(raw_text: str) -> dict:
+    parsed = {
+        "title": "",
+        "objective": "",
+        "situation": "",
+        "stakeholders": [],
+        "constraints": [],
+        "prompts": [],
+    }
+    lines = raw_text.splitlines()
+    if lines:
+        parsed["title"] = lines[0].lstrip("# ").strip()
+    matches = re.finditer(
+        r"(?ms)^##\s+(Objective|Situation|Stakeholders|Constraints|Learner Prompts)\n(.*?)(?=^##\s+|\Z)",
+        raw_text,
+    )
+    for match in matches:
+        section = match.group(1)
+        body = match.group(2).strip()
+        if section in {"Stakeholders", "Constraints", "Learner Prompts"}:
+            items = [line[2:].strip() for line in body.splitlines() if line.startswith("- ")]
+            key = "prompts" if section == "Learner Prompts" else section.lower()
+            parsed[key] = items
+        else:
+            parsed[section.lower()] = body
+    return parsed
+
+
+def load_variant_scenarios(variant_dir: Path | None) -> list[dict]:
+    if not variant_dir:
+        return []
+    scenario_dir = Path(variant_dir) / "scenarios"
+    if not scenario_dir.exists():
+        return []
+    index_path = scenario_dir / "scenarios.json"
+    if index_path.exists():
+        try:
+            index_entries = json.loads(index_path.read_text(encoding="utf-8"))
+        except Exception:
+            index_entries = []
+    else:
+        index_entries = []
+    if not index_entries:
+        index_entries = [{"path": path.name} for path in sorted(scenario_dir.glob("*.md"))]
+    scenarios = []
+    for entry in index_entries:
+        scenario_path = scenario_dir / entry.get("path", "")
+        if not scenario_path.exists():
+            continue
+        parsed = _parse_scenario_markdown(scenario_path.read_text(encoding="utf-8"))
+        scenarios.append(
+            {
+                "title": entry.get("title") or parsed.get("title") or scenario_path.stem,
+                "session": int(entry.get("session") or 0),
+                "objective": entry.get("objective") or parsed.get("objective", ""),
+                "situation": parsed.get("situation", ""),
+                "stakeholders": parsed.get("stakeholders", []),
+                "constraints": parsed.get("constraints", []),
+                "prompts": parsed.get("prompts", []),
+                "path": scenario_path,
+            }
+        )
+    scenarios.sort(key=lambda item: (item.get("session", 0), item.get("title", "")))
+    return scenarios
+
+
+def load_session_scenarios(variant_dir: Path | None, session_num: int) -> list[dict]:
+    return [scenario for scenario in load_variant_scenarios(variant_dir) if scenario.get("session") == session_num]
 
 
 def load_events():
@@ -614,8 +950,8 @@ def _validate_practice_questions(pq_list) -> list:
 def _render_content_authoring(session_num: int, selected_variant):
     """Content authoring module — sessions editor, AI draft generator, slide upload (#55)."""
     st.subheader("Content Authoring")
-    tab_editor, tab_ai, tab_upload = st.tabs(
-        ["Sessions Editor", "AI Draft Generator", "Slide Upload"]
+    tab_editor, tab_ai, tab_upload, tab_case_studies = st.tabs(
+        ["Sessions Editor", "AI Draft Generator", "Slide Upload", "Case Studies & Scenarios"]
     )
 
     # ── Sessions Editor ──────────────────────────────────────────────────────────
@@ -810,10 +1146,11 @@ def _render_content_authoring(session_num: int, selected_variant):
                 height=400,
                 key="ai_draft_edit",
             )
+            edited_text = edited or ""
 
             # ── Preview as slides ────────────────────────────────────────────────
             with st.expander("Preview slides", expanded=False):
-                slides_preview = parse_slides(edited)
+                slides_preview = parse_slides(edited_text)
                 if slides_preview:
                     st.caption(f"{len(slides_preview)} slide(s) parsed.")
                     for s in slides_preview:
@@ -827,7 +1164,7 @@ def _render_content_authoring(session_num: int, selected_variant):
                     )
 
             # ── Validate ─────────────────────────────────────────────────────────
-            slides_validated = parse_slides(edited)
+            slides_validated = parse_slides(edited_text)
             if not slides_validated:
                 st.warning(
                     "Draft has no parseable slides — fix headers before saving."
@@ -847,7 +1184,7 @@ def _render_content_authoring(session_num: int, selected_variant):
                         help="Save to slides_draft.md in the variant folder",
                     ):
                         dest = Path(selected_variant) / "slides_draft.md"
-                        dest.write_text(edited, encoding="utf-8")
+                        dest.write_text(edited_text, encoding="utf-8")
                         st.success(f"Draft saved to {dest}")
                         find_slide_deck.clear()
                         find_documents.clear()
@@ -860,7 +1197,7 @@ def _render_content_authoring(session_num: int, selected_variant):
                             type="primary",
                             help=f"Overwrite {active_deck.name} with this draft",
                         ):
-                            active_deck.write_text(edited, encoding="utf-8")
+                            active_deck.write_text(edited_text, encoding="utf-8")
                             st.success(f"Published to {active_deck}")
                             find_slide_deck.clear()
                             find_documents.clear()
@@ -892,7 +1229,7 @@ def _render_content_authoring(session_num: int, selected_variant):
                     value=uploaded.name,
                     key="slide_upload_dest",
                 )
-                dest = Path(selected_variant) / dest_name
+                dest = Path(selected_variant) / (dest_name or uploaded.name)
                 if dest.exists():
                     existing_text = dest.read_text(encoding="utf-8")
                     new_text = uploaded.getvalue().decode("utf-8", errors="replace")
@@ -933,6 +1270,302 @@ def _render_content_authoring(session_num: int, selected_variant):
                         find_slide_deck.clear()
                         find_documents.clear()
 
+    # ── Case Study / Scenario Builder ───────────────────────────────────────────
+    with tab_case_studies:
+        st.markdown(
+            "Create new ECBA case study variants and scenario briefs in the workspace. "
+            "Generated files use the same folder and filename conventions that the facilitator app already scans."
+        )
+
+        st.markdown("**Create a new case study variant**")
+        case_title = st.text_input(
+            "Case study title",
+            placeholder="e.g. VolunteerHub donor intake modernization",
+            key="case_builder_title",
+        )
+        org_cols = st.columns(2)
+        with org_cols[0]:
+            organization_name = st.text_input(
+                "Organization name",
+                placeholder="VolunteerHub",
+                key="case_builder_org",
+            )
+        with org_cols[1]:
+            industry = st.text_input(
+                "Industry / domain",
+                placeholder="Nonprofit technology",
+                key="case_builder_industry",
+            )
+        certification_target = st.selectbox(
+            "Certification track",
+            ["ECBA", "CCBA", "CBAP", "General IIBA learning"],
+            key="case_builder_cert_track",
+        )
+        summary = st.text_area(
+            "Case study overview",
+            placeholder="Describe the organization, the current situation, and what learners should understand.",
+            height=120,
+            key="case_builder_summary",
+        )
+        business_need = st.text_area(
+            "Primary business need",
+            placeholder="What problem is the organization trying to solve?",
+            height=100,
+            key="case_builder_need",
+        )
+        stakeholder_cols = st.columns(3)
+        with stakeholder_cols[0]:
+            stakeholders_raw = st.text_area(
+                "Stakeholders (one per line)",
+                placeholder="Executive sponsor\nOperations lead\nCustomer support manager",
+                height=120,
+                key="case_builder_stakeholders",
+            )
+        with stakeholder_cols[1]:
+            metrics_raw = st.text_area(
+                "Success metrics (one per line)",
+                placeholder="Reduce intake time by 30%\nIncrease donor retention by 10%",
+                height=120,
+                key="case_builder_metrics",
+            )
+        with stakeholder_cols[2]:
+            constraints_raw = st.text_area(
+                "Constraints (one per line)",
+                placeholder="Limited budget\nTwo-month deadline\nLegacy spreadsheet process",
+                height=120,
+                key="case_builder_constraints",
+            )
+
+        st.caption("Optional: seed the new variant with a first scenario brief.")
+        scenario_seed_title = st.text_input(
+            "Initial scenario title",
+            placeholder="Stakeholder conflict over donor data ownership",
+            key="case_builder_seed_title",
+        )
+        seed_cols = st.columns(2)
+        with seed_cols[0]:
+            scenario_seed_session = st.number_input(
+                "Initial scenario session",
+                min_value=1,
+                max_value=12,
+                value=1,
+                step=1,
+                key="case_builder_seed_session",
+            )
+            scenario_seed_objective = st.text_input(
+                "Initial scenario objective",
+                placeholder="Practice stakeholder analysis and elicitation planning",
+                key="case_builder_seed_objective",
+            )
+        with seed_cols[1]:
+            scenario_seed_prompts_raw = st.text_area(
+                "Initial scenario prompts (one per line)",
+                placeholder="What facts do you know?\nWhat assumptions need validation?",
+                height=90,
+                key="case_builder_seed_prompts",
+            )
+        scenario_seed_situation = st.text_area(
+            "Initial scenario situation",
+            placeholder="Describe the trigger event, tension, or business context learners should analyze.",
+            height=100,
+            key="case_builder_seed_situation",
+        )
+
+        if st.button("Create case study variant", key="case_builder_create", type="primary"):
+            required_fields = {
+                "Case study title": case_title,
+                "Organization name": organization_name,
+                "Case study overview": summary,
+                "Primary business need": business_need,
+            }
+            missing = [label for label, value in required_fields.items() if not value.strip()]
+            if missing:
+                st.error("Complete the required fields before creating the variant:")
+                for label in missing:
+                    st.write(f"- {label}")
+            else:
+                stakeholders = _split_nonempty_lines(stakeholders_raw)
+                metrics = _split_nonempty_lines(metrics_raw)
+                constraints = _split_nonempty_lines(constraints_raw)
+                initial_scenario = None
+                if scenario_seed_title.strip():
+                    if not scenario_seed_objective.strip() or not scenario_seed_situation.strip():
+                        st.error(
+                            "If you provide an initial scenario title, also provide its objective and situation."
+                        )
+                        return
+                    initial_scenario = {
+                        "title": scenario_seed_title.strip(),
+                        "session_num": int(scenario_seed_session),
+                        "objective": scenario_seed_objective.strip(),
+                        "situation": scenario_seed_situation.strip(),
+                        "stakeholders": stakeholders,
+                        "constraints": constraints,
+                        "prompts": _split_nonempty_lines(scenario_seed_prompts_raw),
+                    }
+                try:
+                    created_variant = create_case_study_variant(
+                        base_dir=VARIANTS_BASE_DIR,
+                        case_study_name=case_title.strip(),
+                        organization_name=organization_name.strip(),
+                        industry=industry.strip() or "Unspecified domain",
+                        summary=summary.strip(),
+                        business_need=business_need.strip(),
+                        certification_target=certification_target,
+                        stakeholders=stakeholders,
+                        success_metrics=metrics,
+                        constraints=constraints,
+                        initial_scenario=initial_scenario,
+                    )
+                except FileExistsError as exc:
+                    st.error(str(exc))
+                else:
+                    find_variants.clear()
+                    find_documents.clear()
+                    find_preview_file.clear()
+                    find_slide_deck.clear()
+                    st.success(f"Created new variant at {created_variant}")
+                    st.rerun()
+
+        st.markdown("---")
+        st.markdown("**Add a scenario to the selected variant**")
+        if not selected_variant:
+            st.info("Create or select a case study variant first.")
+        else:
+            st.caption(f"Saving into: {selected_variant}")
+            scenario_title = st.text_input(
+                "Scenario title",
+                placeholder="Conflicting stakeholder priorities for requirements scope",
+                key="scenario_builder_title",
+            )
+            scenario_focus_area = st.selectbox(
+                "BABOK focus area",
+                [
+                    "Business Analysis Planning and Monitoring",
+                    "Elicitation and Collaboration",
+                    "Requirements Life Cycle Management",
+                    "Strategy Analysis",
+                    "Requirements Analysis and Design Definition",
+                    "Solution Evaluation",
+                    "BACCM perspectives",
+                ],
+                key="scenario_builder_focus_area",
+            )
+            scenario_style = st.selectbox(
+                "Scenario style",
+                [
+                    "Stakeholder conflict",
+                    "Scope ambiguity",
+                    "Process breakdown",
+                    "Data quality issue",
+                    "Prioritization tradeoff",
+                    "Change readiness",
+                ],
+                key="scenario_builder_style",
+            )
+            scenario_cols = st.columns(2)
+            with scenario_cols[0]:
+                scenario_session = st.number_input(
+                    "Session number",
+                    min_value=1,
+                    max_value=12,
+                    value=int(session_num),
+                    step=1,
+                    key="scenario_builder_session",
+                )
+                scenario_objective = st.text_input(
+                    "Scenario objective",
+                    placeholder="Practice analyzing stakeholder needs and constraints",
+                    key="scenario_builder_objective",
+                )
+            with scenario_cols[1]:
+                scenario_prompts_raw = st.text_area(
+                    "Learner prompts (one per line)",
+                    placeholder="What questions would you ask first?\nWhat risks do you see?",
+                    height=90,
+                    key="scenario_builder_prompts",
+                )
+            scenario_situation = st.text_area(
+                "Situation",
+                placeholder="Describe the business event or conflict learners need to respond to.",
+                height=110,
+                key="scenario_builder_situation",
+            )
+            scenario_stakeholders_raw = st.text_area(
+                "Scenario stakeholders (one per line)",
+                placeholder="Sponsor\nOperations manager\nFrontline employee",
+                height=100,
+                key="scenario_builder_stakeholders",
+            )
+            scenario_constraints_raw = st.text_area(
+                "Scenario constraints (one per line)",
+                placeholder="Budget locked for this quarter\nNo new vendor allowed",
+                height=100,
+                key="scenario_builder_constraints",
+            )
+            if st.button("Generate scenario draft with AI", key="scenario_builder_generate"):
+                master_context = load_master_context(selected_variant)
+                if not master_context:
+                    st.error("This variant does not have a master context file to ground scenario generation.")
+                else:
+                    case_study_name = Path(selected_variant).name.replace("ECBA_CaseStudy_", "").replace("_", " ")
+                    system_prompt, user_prompt = _build_scenario_generation_prompts(
+                        case_study_name=case_study_name,
+                        session_num=int(scenario_session),
+                        certification_target="ECBA",
+                        focus_area=scenario_focus_area,
+                        scenario_style=scenario_style,
+                        master_context=master_context,
+                    )
+                    with st.spinner("Generating scenario draft..."):
+                        response_text = _call_llm(user_prompt, system=system_prompt)
+                    if response_text.startswith("Error"):
+                        st.error(response_text)
+                    else:
+                        try:
+                            generated = _parse_generated_scenario_response(response_text)
+                        except Exception as exc:
+                            st.error(f"Could not parse generated scenario draft: {exc}")
+                        else:
+                            st.session_state["scenario_builder_title"] = generated["title"]
+                            st.session_state["scenario_builder_objective"] = generated["objective"]
+                            st.session_state["scenario_builder_situation"] = generated["situation"]
+                            st.session_state["scenario_builder_stakeholders"] = "\n".join(generated["stakeholders"])
+                            st.session_state["scenario_builder_constraints"] = "\n".join(generated["constraints"])
+                            st.session_state["scenario_builder_prompts"] = "\n".join(generated["prompts"])
+                            st.success("Scenario draft generated and loaded into the form.")
+                            st.rerun()
+            if st.button("Save scenario brief", key="scenario_builder_save"):
+                required_scenario_fields = {
+                    "Scenario title": scenario_title,
+                    "Scenario objective": scenario_objective,
+                    "Situation": scenario_situation,
+                }
+                missing = [
+                    label for label, value in required_scenario_fields.items() if not value.strip()
+                ]
+                if missing:
+                    st.error("Complete the required scenario fields before saving:")
+                    for label in missing:
+                        st.write(f"- {label}")
+                else:
+                    try:
+                        scenario_path = create_case_study_scenario(
+                            variant_dir=Path(selected_variant),
+                            title=scenario_title.strip(),
+                            session_num=int(scenario_session),
+                            objective=scenario_objective.strip(),
+                            situation=scenario_situation.strip(),
+                            stakeholders=_split_nonempty_lines(scenario_stakeholders_raw),
+                            constraints=_split_nonempty_lines(scenario_constraints_raw),
+                            prompts=_split_nonempty_lines(scenario_prompts_raw),
+                        )
+                    except FileExistsError as exc:
+                        st.error(str(exc))
+                    else:
+                        find_documents.clear()
+                        st.success(f"Scenario saved to {scenario_path}")
+
 
 def main():
     _is_facilitator = st.query_params.get("facilitator") == "1"
@@ -955,7 +1588,11 @@ def main():
     if events.empty:
         st.warning(f"No events found in {CSV_PATH.as_posix()} — using sample data.")
 
-    titles = events.get("title", events.get("Title", events.columns.tolist())).tolist()
+    title_series = events.get("title", events.get("Title"))
+    if title_series is None:
+        titles = list(events.columns.tolist())
+    else:
+        titles = title_series.tolist() if hasattr(title_series, "tolist") else list(title_series)
     if not titles:
         titles = ["(no events)"]
 
@@ -1385,11 +2022,23 @@ def main():
     else:
         session_num = int(session_selected.split()[1])
 
-    session = SESSIONS.get(session_num)
+    session = dict(
+        SESSIONS.get(
+            session_num,
+            {
+                "title": f"Session {session_num}",
+                "agenda": [],
+                "homework": "",
+                "prompts": [],
+                "practice_questions": [],
+            },
+        )
+    )
     # Apply session content overrides from sessions.json if present (#55)
     _session_overrides = load_sessions_override()
     if str(session_num) in _session_overrides:
-        session = _session_overrides[str(session_num)]
+        session = dict(_session_overrides[str(session_num)])
+    session_scenarios = load_session_scenarios(selected_variant, session_num)
 
     st.markdown("---")
     st.subheader(session["title"])
@@ -1401,6 +2050,29 @@ def main():
     st.markdown("**Prompts:**")
     for p in session["prompts"]:
         st.write(f"- {p}")
+
+    if session_scenarios:
+        st.markdown("**Scenario briefs:**")
+        for scenario in session_scenarios:
+            with st.expander(scenario["title"], expanded=False):
+                if scenario.get("objective"):
+                    st.markdown(f"**Objective:** {scenario['objective']}")
+                if scenario.get("situation"):
+                    st.markdown("**Situation:**")
+                    st.write(scenario["situation"])
+                if scenario.get("stakeholders"):
+                    st.markdown("**Stakeholders:**")
+                    for stakeholder in scenario["stakeholders"]:
+                        st.write(f"- {stakeholder}")
+                if scenario.get("constraints"):
+                    st.markdown("**Constraints:**")
+                    for constraint in scenario["constraints"]:
+                        st.write(f"- {constraint}")
+                if scenario.get("prompts"):
+                    st.markdown("**Learner prompts:**")
+                    for prompt in scenario["prompts"]:
+                        st.write(f"- {prompt}")
+                st.caption(str(scenario["path"]))
 
     st.markdown("**Practice questions:**")
     for i, q in enumerate(session["practice_questions"]):
@@ -1471,6 +2143,12 @@ def main():
     if step == "Discussion prompts":
         for prompt in session["prompts"]:
             st.write(f"- {prompt}")
+        if session_scenarios:
+            st.markdown("**Scenario prompts for this session:**")
+            for scenario in session_scenarios:
+                st.markdown(f"**{scenario['title']}**")
+                for prompt in scenario.get("prompts", []):
+                    st.write(f"- {prompt}")
 
     if step == "Notes":
         if not st.session_state.get("logged_in"):
