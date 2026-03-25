@@ -19,6 +19,7 @@ from agents.skills.president import generate_agenda_with_llm
 from integrations.gdrive.drive_client import DriveClient
 import json
 from agents import scheduler
+from ingest.scrapers import approvals
 
 
 def cmd_ingest(src: str, out_dir: Optional[str] = None) -> int:
@@ -34,6 +35,43 @@ def cmd_ingest(src: str, out_dir: Optional[str] = None) -> int:
     except Exception as e:
         print(f"Error ingesting {src}: {e}", file=sys.stderr)
         return 2
+
+
+def cmd_approve_add(source_id: str, meta: Optional[str] = None) -> int:
+    try:
+        metadata = None
+        if meta:
+            metadata = json.loads(meta)
+        approvals.approve_source(source_id, metadata)
+        print(f"Approved source: {source_id}")
+        return 0
+    except Exception as e:
+        print(f"Failed to approve source {source_id}: {e}", file=sys.stderr)
+        return 10
+
+
+def cmd_approve_revoke(source_id: str) -> int:
+    try:
+        approvals.revoke_source(source_id)
+        print(f"Revoked approval: {source_id}")
+        return 0
+    except Exception as e:
+        print(f"Failed to revoke source {source_id}: {e}", file=sys.stderr)
+        return 11
+
+
+def cmd_approve_list() -> int:
+    try:
+        items = approvals.list_approved()
+        if not items:
+            print("No approved sources found.")
+            return 0
+        for it in items:
+            print(json.dumps(it, ensure_ascii=False))
+        return 0
+    except Exception as e:
+        print(f"Failed to list approvals: {e}", file=sys.stderr)
+        return 12
 
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -66,6 +104,35 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_watch = sub.add_parser("watch", help="Start folder watcher to trigger ingestion on new files")
     p_watch.add_argument("--path", required=True, help="Directory to watch")
     p_watch.add_argument("--background", action="store_true", help="Run watcher in background (default behavior for CLI is to run until Ctrl-C)")
+
+    p_approve = sub.add_parser("approve", help="Manage approvals for scraper sources")
+    p_approve_sub = p_approve.add_subparsers(dest="approve_cmd")
+
+    p_approve_add = p_approve_sub.add_parser("add", help="Approve a source id for scraping")
+    p_approve_add.add_argument("source_id", help="Unique source id to approve")
+    p_approve_add.add_argument("--meta", required=False, help="Optional JSON metadata for the source")
+
+    p_approve_revoke = p_approve_sub.add_parser("revoke", help="Revoke an approved source")
+    p_approve_revoke.add_argument("source_id", help="Unique source id to revoke")
+
+    p_approve_list = p_approve_sub.add_parser("list", help="List approved sources")
+
+    p_weekly = sub.add_parser("weekly-update", help="Generate weekly board update from notes")
+    p_weekly_sub = p_weekly.add_subparsers(dest="weekly_cmd")
+
+    p_weekly_generate = p_weekly_sub.add_parser("generate", help="Generate a draft weekly update (requires publish to send)")
+    p_weekly_generate.add_argument("--title", required=False, help="Update title (default: Weekly Board Update)")
+    p_weekly_generate.add_argument("--out", required=False, help="Output markdown path (if saving outside pending)")
+    p_weekly_generate.add_argument("--no-llm", action="store_true", help="Do not use LLM for summarization")
+
+    p_weekly_list = p_weekly_sub.add_parser("list-pending", help="List pending drafts awaiting review")
+
+    p_weekly_publish = p_weekly_sub.add_parser("publish", help="Publish a pending draft (human approval)")
+    p_weekly_publish.add_argument("id", help="ID of the pending draft to publish")
+    p_weekly_publish.add_argument("--drive-folder", required=False, help="Drive folder id to upload published update into")
+    p_weekly_publish.add_argument("--credentials", required=False, help="Path to credentials JSON (service account or client secrets)")
+    p_weekly_publish.add_argument("--credential-type", required=False, choices=["service_account", "oauth"], default="service_account")
+    p_weekly_publish.add_argument("--oauth-token", required=False, help="Path to oauth token (if using oauth credential_type)")
 
     args = parser.parse_args(argv)
     if args.cmd == "ingest":
@@ -165,6 +232,58 @@ def main(argv: Optional[list[str]] = None) -> int:
         except Exception as e:
             print(f"Failed to start watcher: {e}", file=sys.stderr)
             return 7
+
+    if args.cmd == "approve":
+        if args.approve_cmd == "add":
+            return cmd_approve_add(args.source_id, getattr(args, "meta", None))
+        if args.approve_cmd == "revoke":
+            return cmd_approve_revoke(args.source_id)
+        if args.approve_cmd == "list":
+            return cmd_approve_list()
+    if args.cmd == "weekly-update":
+        from agents.weekly_update import create_draft, list_pending, publish_update
+
+        if args.weekly_cmd == "generate":
+            title = args.title or "Weekly Board Update"
+            use_llm = not getattr(args, "no_llm", False)
+            try:
+                meta = create_draft(title=title, notes_dir="notes", use_llm=use_llm)
+                print(f"Draft created: id={meta['id']} path={meta['path']}")
+                print("Run 'agents-cli weekly-update list-pending' to view drafts, and 'agents-cli weekly-update publish <id>' to publish.")
+                return 0
+            except Exception as e:
+                print(f"Failed to create draft: {e}", file=sys.stderr)
+                return 21
+        if args.weekly_cmd == "list-pending":
+            try:
+                items = list_pending()
+                if not items:
+                    print("No pending drafts.")
+                    return 0
+                import json
+
+                for it in items:
+                    print(json.dumps(it, ensure_ascii=False))
+                return 0
+            except Exception as e:
+                print(f"Failed to list pending drafts: {e}", file=sys.stderr)
+                return 22
+        if args.weekly_cmd == "publish":
+            uid = args.id
+            drive_folder = getattr(args, "drive_folder", None)
+            creds = getattr(args, "credentials", None)
+            credential_type = getattr(args, "credential_type", "service_account")
+            oauth_token = getattr(args, "oauth_token", None)
+            try:
+                dest = publish_update(uid, drive_folder=drive_folder, credentials_json=creds, credential_type=credential_type, oauth_token_path=oauth_token)
+                if not dest:
+                    print(f"No pending draft with id {uid} found.")
+                    return 23
+                print(f"Published draft to {dest}")
+                return 0
+            except Exception as e:
+                print(f"Failed to publish draft {uid}: {e}", file=sys.stderr)
+                return 24
 
     parser.print_help()
     return 1
