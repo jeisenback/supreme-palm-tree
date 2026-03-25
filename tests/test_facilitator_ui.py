@@ -412,6 +412,64 @@ class TestCaseStudyBuilder:
         assert [item["title"] for item in session_one] == ["Session one scenario"]
         assert [item["title"] for item in session_two] == ["Session two scenario"]
 
+    def test_update_and_delete_case_study_scenario(self, tmp_path):
+        variant_dir = tmp_path / "ECBA_CaseStudy_alpha"
+        variant_dir.mkdir()
+        scenario_path = fui.create_case_study_scenario(
+            variant_dir=variant_dir,
+            title="Original scenario",
+            session_num=2,
+            objective="Practice elicitation",
+            situation="Original situation.",
+            stakeholders=["Sponsor"],
+            constraints=["Budget cap"],
+            prompts=["What changed?"],
+        )
+
+        updated_path = fui.update_case_study_scenario(
+            variant_dir=variant_dir,
+            existing_path=scenario_path,
+            title="Updated scenario",
+            session_num=3,
+            objective="Practice prioritization",
+            situation="Updated situation.",
+            stakeholders=["Sponsor", "Ops lead"],
+            constraints=["No timeline change"],
+            prompts=["What is the tradeoff?"],
+        )
+
+        assert updated_path.name == "session_3_updated_scenario.md"
+        assert updated_path.exists()
+        assert not scenario_path.exists()
+        loaded = fui.load_session_scenarios(variant_dir, 3)
+        assert loaded[0]["title"] == "Updated scenario"
+        assert loaded[0]["prompts"] == ["What is the tradeoff?"]
+
+        fui.delete_case_study_scenario(variant_dir, updated_path)
+        assert not updated_path.exists()
+        assert fui.load_variant_scenarios(variant_dir) == []
+
+    def test_build_scenario_slide_prompts(self):
+        system_prompt, user_prompt = fui._build_scenario_slide_prompts(
+            case_study_name="VolunteerHub",
+            certification_target="ECBA",
+            focus_area="Elicitation and Collaboration",
+            num_slides=7,
+            include_exam_tips=True,
+            scenario={
+                "title": "Conflicting priorities",
+                "objective": "Practice prioritization",
+                "situation": "Two stakeholders want incompatible scope changes.",
+                "stakeholders": ["Sponsor", "Ops lead"],
+                "constraints": ["Deadline fixed"],
+                "prompts": ["What should happen first?"],
+            },
+        )
+        assert "Slide N — Title" in system_prompt
+        assert "Create 7 study slides" in user_prompt
+        assert "Conflicting priorities" in user_prompt
+        assert "exam guidance" in user_prompt.lower()
+
 
 # ---------------------------------------------------------------------------
 # parse_slides smoke test — guards the pre-session readiness check (#50 / TODOS.md)
