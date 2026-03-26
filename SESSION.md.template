@@ -1,0 +1,69 @@
+# Session
+
+> Copy this file to SESSION.md at the start of each session.
+> Fill in Goal before writing any code.
+
+---
+
+## Session Goal
+
+<!-- One sentence: what does success look like at the end of this session? -->
+_TODO: fill in_
+
+## Active Issue
+
+<!-- e.g. #42 — scheduler persistence -->
+Issue: #__
+Branch: `feat/___`
+
+---
+
+## Checklist
+
+- [ ] HEARTBEAT.md read (remote: `git fetch origin develop --quiet && git show origin/develop:HEARTBEAT.md`)
+- [ ] Sprint is ACTIVE; issue confirmed in Sprint Issues table
+- [ ] Issue read completely — acceptance criteria listed below
+- [ ] Test suite passes: `pytest tests/ -m "not integration"`
+- [ ] Branch exists and is clean (`git status`)
+- [ ] SESSION.md Goal section is filled in
+- [ ] Track selected: `[ ] Standard (§2)` / `[ ] Lightweight (§2b)`
+
+## Acceptance Criteria (from issue)
+
+<!-- Copy from `gh issue view N` -->
+- [ ] _AC 1_
+- [ ] _AC 2_
+
+---
+
+## Work Log
+
+<!-- Append entries as you go: timestamp, what you did, what's next -->
+
+| Time | Action | Notes |
+|------|--------|-------|
+| — | session start | — |
+
+---
+
+## Key Decisions
+
+<!-- Decisions made this session that should be promoted to HEARTBEAT sprint notes -->
+- _none yet_
+
+---
+
+## Handoff Notes
+
+<!-- Enough context for a different agent to continue this work -->
+
+**State:** _in-progress / paused / blocked / ready-for-review_
+
+**What's done:**
+- _nothing yet_
+
+**What's next:**
+- _TODO_
+
+**Blockers:**
+- _none_

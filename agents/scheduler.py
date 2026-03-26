@@ -122,6 +122,22 @@ def schedule_one_off(name: str, func: Callable[[], None], delay_seconds: int) ->
 
     register_job(name, _wrapper, interval_seconds=delay_seconds)
 
+def schedule_one_off(name: str, func: Callable[[], None], delay_seconds: int) -> None:
+    """Schedule a one-off job that runs after `delay_seconds` and then unregisters itself.
+
+    The job name should be unique. The wrapper will unregister the job after running.
+    """
+    def _wrapper() -> None:
+        try:
+            func()
+        finally:
+            try:
+                unregister_job(name)
+            except Exception:
+                pass
+
+    register_job(name, _wrapper, interval_seconds=delay_seconds)
+
 def unregister_job(name: str) -> None:
     _JOBS.pop(name, None)
     try:
@@ -396,6 +412,99 @@ def _scrape_all_impl() -> None:
                 integrate_scraped_item(item, sid)
             except Exception as e:  # pragma: no cover - runtime integration
                 print(f"Error scraping {sid}: {e}")
+    except Exception:
+        print("scrape_all_impl: dependencies not available; skipping")
+
+
+def _generate_agenda_impl() -> None:
+    try:  # pragma: no cover - integration glue
+        from agents.skills.president import generate_agenda_with_llm
+        from ingest.storage import store_conversion
+        from datetime import date
+
+        notes = {"title": "Scheduled Agenda", "date": str(date.today()), "summary": "Auto-generated agenda."}
+        md = generate_agenda_with_llm(notes)
+        store_conversion(md, {"source": "scheduler"}, {}, "agenda_scheduled", "out")
+    except Exception:
+        print("generate_agenda_impl: dependencies not available; skipping")
+
+
+# mapping of known persisted job names to functions
+_KNOWN_JOB_FACTORIES: Dict[str, Callable[[], None]] = {
+    "scrape_all_sources": _scrape_all_impl,
+    "generate_weekly_agenda": _generate_agenda_impl,
+}
+
+
+# --- Persistence helpers (simple PoC using JSON) --------------------------
+
+
+def _state_path() -> Path:
+    # store state at repository root as .scheduler_state.json
+    root = Path(__file__).resolve().parents[1]
+    return root / ".scheduler_state.json"
+
+
+def _save_state() -> None:
+    data = [
+        {"name": j.name, "interval_seconds": j.interval_seconds, "last_run": j.last_run}
+        for j in _JOBS.values()
+    ]
+    path = _state_path()
+    try:
+        path.write_text(json.dumps(data, indent=2))
+    except Exception:
+        # best-effort; ignore errors
+        pass
+
+
+def _load_state() -> None:
+    path = _state_path()
+    if not path.exists():
+        return
+    try:
+        raw = path.read_text()
+        data = json.loads(raw)
+    except Exception:
+        return
+    for item in data:
+        name = item.get("name")
+        interval = int(item.get("interval_seconds", 0))
+        if name and name not in _JOBS:
+            factory = _KNOWN_JOB_FACTORIES.get(name)
+            if factory:
+                register_job(name, factory, interval)
+            else:
+                print(f"Persisted job '{name}' found but no factory available; skipping")
+
+
+# --- Known job implementations (moved from register_default_jobs inner scope) ---
+
+
+def _scrape_all_impl() -> None:
+    try:  # pragma: no cover - integration glue
+        from ingest.scrapers.scraper_registry import list_sources
+        from ingest.scrapers import EventScraper, JobScraper, PartnerScraper
+        from ingest.scrapers.integrate import integrate_scraped_item
+
+        sources = list_sources()
+        parser_map = {
+            "event": EventScraper,
+            "job": JobScraper,
+            "partner": PartnerScraper,
+        }
+        for s in sources:
+            parser = s.get("parser")
+            cls = parser_map.get(parser)
+            if not cls:
+                print(f"No parser for {parser} (source {s.get('id')})")
+                continue
+            try:
+                scr = cls(rate_limit_seconds=0, respect_robots=False)
+                item = scr.scrape(s.get("url"), s.get("selectors", {}))
+                integrate_scraped_item(item, s.get("id"))
+            except Exception as e:  # pragma: no cover - runtime integration
+                print(f"Error scraping {s.get('id')}: {e}")
     except Exception:
         print("scrape_all_impl: dependencies not available; skipping")
 
