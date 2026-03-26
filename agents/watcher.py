@@ -6,13 +6,12 @@ call `callback(file_path)` for new files.
 """
 from __future__ import annotations
 
-import os
-import time
-import threading
-from typing import Callable, Optional
-import threading
 import json
+import os
+import threading
+import time
 from pathlib import Path
+from typing import Callable, Optional
 
 def start_drive_watcher(
     folder_id: str,
@@ -38,7 +37,9 @@ def start_drive_watcher(
     import tempfile
 
     state_fp = _state_file_path(state_path)
-    seen = _load_seen(state_fp)
+    _raw_seen = _load_seen(state_fp)
+    # Upgrade legacy set-of-ids to dict so callers can use .get() with metadata
+    seen: dict = {fid: {"id": fid} for fid in _raw_seen} if isinstance(_raw_seen, set) else _raw_seen
 
     def _loop():
         client = DriveClient(credentials_json=credentials_json, folder_id=folder_id, credential_type=credential_type, oauth_token_path=oauth_token_path)
@@ -104,7 +105,7 @@ def _load_seen(fp: Path | str) -> dict:
                 for item in data:
                     d[item["id"]] = item
                 return d
-            # If file contains a list of primitive ids (legacy), return a set for compatibility
+            # Legacy format: list of plain id strings — return as set (preserved for compatibility)
             if isinstance(data, list):
                 return set(data)
     except Exception:

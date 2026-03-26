@@ -11,7 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from src.core.llm_wrapper import LLMWrapper  # noqa: E402
+from agents.llm_adapter import get_adapter_from_env  # noqa: E402
 
 
 DEFAULT_MODEL_ID = "claude-sonnet-4-6"
@@ -65,13 +65,13 @@ def main() -> int:
     payload = json.loads(raw)
     request = ResponderRequest.model_validate(payload)
 
-    model_id = payload.get("model_id") or DEFAULT_MODEL_ID
-    system_prompt = payload.get("system_prompt") or DEFAULT_SYSTEM_PROMPT
+    # system_prompt is intentionally not accepted from the payload to prevent prompt injection
+    system_prompt = DEFAULT_SYSTEM_PROMPT
 
-    wrapper = LLMWrapper(model_id=model_id)
-    response = wrapper.complete(prompt=build_prompt(request, system_prompt))
+    adapter = get_adapter_from_env()
+    response = adapter.generate(build_prompt(request, system_prompt))
 
-    sys.stdout.write(json.dumps({"ok": True, "response": response.content}))
+    sys.stdout.write(json.dumps({"ok": True, "response": response}))
     return 0
 
 
