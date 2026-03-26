@@ -13,6 +13,7 @@ __pycache__/
 # Runtime output / generated data (never commit)
 etn/outputs/
 .playwright-mcp/
+ingest/scrapers/event_pages/
 
 # Runtime files
 .scheduler_jobs.db

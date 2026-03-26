@@ -30,4 +30,4 @@ jobs:
         env:
           PYTHONPATH: .
         run: |
-          pytest -q tests/test_cli_*.py tests/test_skills_*.py
+          python -m pytest -q tests/test_cli_*.py tests/test_skills_*.py
