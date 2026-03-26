@@ -1,0 +1,26 @@
+﻿TrailBlaze Personas
+
+--- DOCUMENT GUIDE ---
+What this is:   Pre-written customer and stakeholder personas for the TrailBlaze case study.
+Who it's for:   Participants and facilitator.
+When to use it: Distribute with Session 1 materials. Participants use these as context during exercises and as a model for the optional Session 1 homework persona exercise. Persona creation is the homework task, not an in-session exercise.
+--- END GUIDE ---
+
+1) Weekend Warrior — "Alex"
+- Age: 29, Occupation: Marketing Specialist
+- Needs: Quick, well‑planned weekend getaways; easy booking; mobile itinerary; low setup time
+- Pain points: Limited weekend time; travel planning friction; uncertainty around guide quality
+- Acceptance signals: completes booking in <5 minutes; downloads itinerary; NPS ≥8 after trip
+
+2) Family Planner — "Maria"
+- Age: 42, Occupation: School Administrator
+- Needs: Safe, family‑friendly options, clear packing list, reliable logistics
+- Pain points: coordinating kids and schedules, concerns about safety/medical needs
+- Acceptance signals: family booking completed; clear pre‑trip checklist received; 0 safety incidents
+
+3) Lead Guide — "Sam"
+- Age: 36, Occupation: Professional Guide
+- Needs: Clear assignment, itinerary, roster, route maps, emergency contacts
+- Pain points: last‑minute changes, unclear responsibilities, payment delays
+- Acceptance signals: acknowledged assignment within 12 hours; compensation on time
+

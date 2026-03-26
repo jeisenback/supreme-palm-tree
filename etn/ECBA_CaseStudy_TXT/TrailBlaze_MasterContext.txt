@@ -1,0 +1,111 @@
+﻿TrailBlaze Adventures — Master Context (Facilitator Only)
+
+--- DOCUMENT GUIDE ---
+What this is:   Full TrailBlaze Adventures story with all 5 session-gated reveals — company background, competing root causes, stakeholder detail, solution options, and pilot results.
+Who it's for:   Facilitator only.
+When to use it: Review before each session to confirm exactly what context to release and when.
+Restricted:     Yes — never share this document with participants at any stage.
+--- END GUIDE ---
+
+
+COMPANY BACKGROUND (available any session)
+
+TrailBlaze Adventures is a mid-sized adventure travel company operating in the eastern US. Founded in 2018, they offer guided outdoor trips ranging from half-day hikes to week-long expeditions. Revenue is split roughly 60% weekend trips, 40% multi-day packages. The company employs 12 full-time staff and contracts approximately 40 guides on a per-trip basis.
+
+
+SESSION 1 REVEAL — Company brief + symptom only
+(What participants receive in the one-pager and scenario brief)
+
+- Weekend trip bookings have declined 18% over the past two quarters
+- The CEO believes the solution is a new booking platform
+- The Head of Operations believes the real issue is guide availability and scheduling
+- Marketing believes it is a brand awareness problem among urban younger demographics
+- The Finance Director has frozen the technology budget pending a business case
+- No BA has been involved yet — leadership is in solution mode
+
+Facilitator note: Do not confirm which diagnosis is correct. The point of Session 1 is that participants must define the need before any solution is valid.
+
+
+SESSION 2 REVEAL — BA engagement begins
+(Drip this into the Session 2 scenario brief)
+
+- Leadership has agreed to bring in a BA before committing budget
+- Stakeholder interviews have been scheduled with: CEO, Head of Ops, Marketing Lead, Finance Director, Lead Guide Representative
+- Initial interview outputs (facilitator can share as elicitation excerpts):
+  - CEO: "We're losing ground to newer platforms. We need a modern booking experience."
+  - Head of Ops: "We turn away 20% of booking requests because guides aren't available on short notice. That's the real problem."
+  - Marketing Lead: "Our brand doesn't show up in search for 'weekend adventure trips.' We're invisible to our target market."
+  - Finance Director: "We need a business case with clear ROI before any investment. I'm not approving another tech project that doesn't pay back."
+  - Lead Guide: "I find out about trips 48 hours before. That's not enough time to prepare properly."
+- Key insight: three different root causes are emerging — product, operations, and marketing. The BA must define scope before recommending an approach.
+
+
+SESSION 3 REVEAL — Elicitation outputs + requirements emerging
+(Use for requirements elicitation exercises)
+
+- BA has completed stakeholder interviews and two workshops
+- Agreed scope: focus on weekend trip booking experience + guide assignment workflow
+- Top elicited needs (not yet requirements — participants convert them):
+  - Customers want to browse and book trips without calling an office
+  - Customers want to know guide credentials before booking
+  - Operations needs 72-hour minimum notice before guide assignment is confirmed
+  - Operations wants a dashboard showing all upcoming trips and guide status
+  - Marketing wants trip listings to be searchable and shareable
+  - Finance requires all payments to be PCI-compliant and refunds to be automated
+- Constraints confirmed:
+  - Team: 1 frontend, 1 backend, 1 QA, 0.5 BA/product
+  - Budget approved for a 10-week MVP build (contingent on business case sign-off)
+  - Existing catalog: 50 trails with contracted partner guides
+  - Guide contracts are seasonal — availability varies by month
+
+
+SESSION 4 REVEAL — Solution options + RTM
+(Use for solution evaluation and traceability exercises)
+
+- Three solution options have been proposed for stakeholder review:
+  1. Enhance the existing website with a self-serve booking flow (low cost, 8 weeks)
+  2. Build a new mobile-first booking platform with guide matching (higher cost, 14 weeks)
+  3. Partner with an existing outdoor booking marketplace (no build, revenue share model)
+- MVP feature set agreed after workshop (participants build RTM from this):
+  - Browse and filter trips by date, difficulty, location
+  - Bookable trip checkout with payment and confirmation email
+  - Guide assignment dashboard (internal ops)
+  - Customer itinerary PDF delivery
+  - Pilot NPS survey
+- NFRs confirmed:
+  - Booking service availability: 99.5% during peak hours
+  - Search performance: results < 500ms at 95th percentile
+  - PCI-compliant payment flow; customer data encrypted at rest
+  - Support 200 concurrent booking sessions during pilot
+- KPIs agreed:
+  - Booking conversion rate
+  - 100 pilot bookings in first 30 days
+  - NPS ≥ 8
+  - On-time departure rate ≥ 95%
+  - Payment success rate ≥ 99%
+  - Guide assignment confirmed < 24 hours before trip
+
+
+SESSION 5 REVEAL — Pilot results + lessons learned
+(Use for BA effectiveness and continuous improvement exercises)
+
+- Pilot ran for 30 days following MVP launch
+- Results:
+  - 87 bookings (target: 100) — missed by 13%
+  - NPS: 8.2 (target met)
+  - On-time departure rate: 91% (target: 95% — missed)
+  - Payment success rate: 99.4% (target met)
+  - Guide assignment < 24 hours: 78% (target not formally measured — gap identified)
+- Root cause of missed targets:
+  - Bookings short: search SEO not optimised at launch; marketing campaign delayed 2 weeks
+  - Departure rate: ops dashboard did not surface same-day changes; guides missed updates
+- Stakeholder satisfaction scores (BA effectiveness measurement):
+  - CEO: 4/5 — "Good progress but we need to move faster on mobile"
+  - Head of Ops: 3/5 — "Dashboard helped but guide comms still broke down"
+  - Marketing Lead: 5/5 — "Finally have a platform we can promote"
+  - Finance Director: 4/5 — "ROI trajectory is positive, want quarterly reviews"
+- Lessons learned (participants identify gaps in BA approach and recommend next steps):
+  - Guide notification workflow was elicited but not prioritised — sequencing error
+  - SEO requirements were in scope but not traced to any sprint — traceability gap
+  - Recommend: post-pilot BA retrospective, updated RTM, refined ops workflow requirements
+

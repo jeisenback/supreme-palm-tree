@@ -1,0 +1,87 @@
+﻿Session 1 — Workshop Handout
+ECBA Domains: Understanding Business Analysis | Mindset for Effective BA
+Duration: 90 minutes
+
+--- DOCUMENT GUIDE ---
+What this is:   Participant exercise sheet for Session 1A — scenario brief, BACCM analysis table, stakeholder exercise, problem statement prompt, share-out rubric, and homework assignment.
+Who it's for:   Every participant in Session 1A.
+When to use it: Distribute at the start of Session 1A, or just before Exercise 1.
+--- END GUIDE ---
+
+Welcome to Session 1. You don’t need prior BA experience to work through this — the exercises are designed for you to figure it out together. That’s the point.
+
+TrailBlaze scenario
+TrailBlaze Adventures is a mid-sized adventure travel company. Weekend trip bookings have declined 18% over the past two quarters. The CEO wants to build a new booking platform. The Head of Operations thinks the real problem is guide availability. Marketing believes it's a brand awareness issue. The Finance Director has frozen the technology budget pending a business case.
+
+Your task in this session: before anyone proposes a solution, define the real problem, understand what is at stake, and identify who needs to be involved. That’s the role of a business analyst (BA) — and it’s what you’ll practice today.
+
+Reference materials
+- OnePager_MicroExpeditions.md — company context, KPIs, risks
+- Personas.md — detailed persona profiles
+- Templates/StakeholderMapTemplate.md — use for Exercise 2
+
+Group setup
+- Groups of 3–4 for all exercises
+- Assign: one scribe, one presenter per group
+
+Exercise 1 — BACCM Analysis (15 minutes)
+The BACCM (Business Analysis Core Concept Model) is the foundational BA framework. It has six interdependent elements: Change, Need, Solution, Stakeholder, Value, and Context. No element stands alone — understanding one requires understanding its relationship to the others.
+
+Complete the BACCM chart for the TrailBlaze scenario. All 6 elements must be TrailBlaze-specific.
+
+Element	Your answer
+Change	
+Need	
+Solution	
+Stakeholder	
+Value	
+Context	
+
+Tip: Fill in Need and Context before attempting Solution. If you cannot define the need clearly, leave Solution blank — that is the correct BA move for now.
+
+Exercise 2 — Stakeholder List (10 minutes)
+Identify at least 6 stakeholders. For each, note:
+- Role
+- Interest level (H/M/L)
+- Influence level (H/M/L)
+- Their stake — what is actually at risk for them?
+
+Exercise 3 — Problem Statement (5 minutes)
+Write a 1–2 sentence problem statement for TrailBlaze:
+- Names who is affected
+- Describes the problem
+- States the measurable impact
+- Does not propose a solution
+
+Draft:
+_____
+_____
+
+Share-out (3–4 minutes per group)
+- BACCM highlights
+- Top 3 stakeholders and their stakes
+- Problem statement
+
+Rubric (12 pts total)
+This is a learning rubric — it tells you what strong BA thinking looks like at this stage, not a final grade.
+- BACCM chart (0–3): all 6 elements, TrailBlaze-specific, NEED does not contain a solution
+- Stakeholder list (0–3): 6+ stakeholders, stake defined (not just role title)
+- Problem statement (0–3): specific, measurable, no solution
+- Presentation clarity (0–3): concise, BA-framed language
+
+Homework (due before Session 2)
+Individual:
+1. Refine and extend your in-session problem statement — add a value statement: one paragraph capturing what solving this problem unlocks for TrailBlaze (revenue, NPS, safety, efficiency). Start from what your group drafted in Exercise 3, not from scratch.
+2. Complete Session1_PracticeQuestions.md — Homework 1 through 6
+3. Read OnePager_MicroExpeditions.md and Personas.md if not completed
+
+Required reading before Session 2:
+- BABOK Guide V3 — Chapter 3: Business Analysis Planning & Monitoring
+- BABOK Guide V3 — Chapter 4: Elicitation & Collaboration
+- Focus on: plan BA approach, plan stakeholder engagement, prepare for elicitation, conduct elicitation
+
+Optional group:
+- Share your revised artifacts in the group channel before Session 2
+- Discuss: "What additional context would you want to gather before recommending an approach?"
+- Persona exercise (optional, connects to Session 2): pick one stakeholder from your list and write a short persona — their goals, what they fear most, how they measure success, and what would make them resist a proposed change. Bring it to Session 2.
+You built something real today. Session 2 picks up where this leaves off.

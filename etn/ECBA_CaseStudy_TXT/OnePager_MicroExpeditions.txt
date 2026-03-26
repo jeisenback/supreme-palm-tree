@@ -1,0 +1,38 @@
+﻿
+TrailBlaze Adventures — Company Brief (Session 1)
+
+--- DOCUMENT GUIDE ---
+What this is:   Lightweight company brief for Session 1 participants — TrailBlaze scenario, current symptoms, and key cast of characters.
+Who it's for:   Participants (Session 1).
+When to use it: Distribute at the start of Session 1, or include with the Session 0 onboarding packet.
+--- END GUIDE ---
+
+
+About TrailBlaze Adventures
+TrailBlaze Adventures is a mid-sized outdoor adventure travel company operating in the eastern US. TrailBlaze offers guided trips ranging from half-day hikes to week-long expeditions, primarily serving urban professionals and small family groups looking for weekend outdoor experiences. The company employs 12 full-time staff and works with approximately 40 contracted guides.
+
+The situation
+Weekend trip bookings have declined 18% over the past two quarters. Leadership has noticed but does not agree on why.
+
+- The CEO believes the company needs a new booking platform to stay competitive.
+- The Head of Operations believes the real issue is guide availability — too many requests are being turned away.
+- The Marketing Lead believes the brand is invisible to the target demographic online.
+- The Finance Director has frozen the technology budget until a business case is presented.
+
+No business analyst has been involved yet. Leadership is already moving toward a solution.
+
+Key stakeholders
+- CEO
+- Head of Operations
+- Marketing Lead
+- Finance Director
+- Lead Guide Representative
+- Alex / Maria — customer personas (see Personas.md)
+
+Your role
+No BA has been assigned yet. That’s you. Your first task is not to fix anything — it’s to understand what is actually happening before anyone commits to a direction.
+
+Your role
+You are the BA. Before anyone spends a dollar or writes a line of code, your job is to define the real problem, understand who is affected and how, and determine what success would actually look like.
+
+
