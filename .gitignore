@@ -5,11 +5,24 @@ __pycache__/
 .venv/
 .gstack/
 
+# Local secrets — never commit .env files
+.env
+.env.*
+!.env.example
+
+# Runtime output / generated data (never commit)
+etn/outputs/
+.playwright-mcp/
+
 # Runtime files
 .scheduler_jobs.db
 .scheduler_state.json
 streamlit.log
 streamlit.pid
+SESSION.md
+
+# QA / generated scenario variants (local only)
+etn/ECBA_CaseStudy_qa_scenario_variant/
 
 # Large media files
 etn/inputs/*.mp4

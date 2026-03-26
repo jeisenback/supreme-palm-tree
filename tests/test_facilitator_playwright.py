@@ -6,6 +6,13 @@ import requests
 
 APP_URL = os.environ.get("FACILITATOR_APP_URL", "http://localhost:8502")
 
+# Skip in CI — requires a running Streamlit server on APP_URL.
+# Set FACILITATOR_APP_URL env var and start the app before running locally.
+pytestmark = pytest.mark.skipif(
+    os.environ.get("CI") == "true" or not os.environ.get("FACILITATOR_APP_URL"),
+    reason="Playwright tests require a running Streamlit server (set FACILITATOR_APP_URL)",
+)
+
 
 def wait_for_app(url: str, timeout: int = 30):
     deadline = time.time() + timeout
