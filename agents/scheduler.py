@@ -126,6 +126,7 @@ def schedule_one_off(name: str, func: Callable[[], None], delay_seconds: int) ->
 
     register_job(name, _wrapper, interval_seconds=delay_seconds)
 
+
 def unregister_job(name: str) -> None:
     _JOBS.pop(name, None)
     try:

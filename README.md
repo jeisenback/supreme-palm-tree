@@ -68,7 +68,7 @@ PYTHONPATH=. python -m ingest.ingest_cli ingest --src etn/
 Templates are plain Markdown (`.md`) files with `{{ key }}` placeholders. Generate from a stored context JSON:
 
 ```bash
-python generate_cli.py -t email_template.md --project etn east_tn_business_plan_2025 -o out/email.md
+pytest -q -m "not integration"
 ```
 
 ### Watcher: approved_source_id
@@ -108,3 +108,47 @@ integrations/    — Google Drive client and OAuth helper
 etn/             — ECBA case study content and curriculum materials
 config/          — Approved sources registry
 ```
+
+## Deployment (Render)
+
+- Blueprint file: `render.yaml`
+- Start command: `streamlit run apps/facilitator_ui.py --server.port $PORT --server.address 0.0.0.0`
+- Health check path: `/_stcore/health`
+- Configure `FACILITATOR_PASSWORD` and optional OAuth/LLM env vars in Render.
+- Free tier uses ephemeral storage. Runtime state in `etn/outputs` is reset on restart or redeploy.
+- If you need persistent state, move to a paid Render plan and attach a disk.
+
+Render migration steps:
+
+1. Push this repository and branch to GitHub.
+2. In Render, click New + > Blueprint.
+3. Select the repository and branch with this `render.yaml`.
+4. Confirm service `ecba-facilitator` and create the blueprint.
+5. In Render service settings, set required secret values:
+	- `FACILITATOR_PASSWORD`
+	- `ANTHROPIC_API_KEY` (optional)
+	- `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` (optional)
+6. Trigger a deploy and wait for the health check to pass.
+7. Open the Render URL and validate login + content authoring flow.
+
+If you later upgrade off free tier and want persistence:
+
+1. Change the Render service plan to a disk-capable paid tier.
+2. Add a Render Disk and mount it, for example at `/var/data`.
+3. Set `FACILITATOR_DATA_DIR=/var/data`.
+
+## Legacy ingest utilities
+
+The repository still includes document conversion and generation helpers under `ingest/`.
+
+- Convert DOCX to Markdown: `python ingest/docx_to_md.py <file.docx>`
+- Generate from templates: `python ingest/generate_cli.py ...`
+
+## Documentation index
+
+- Product and architecture requirements: `REQUIREMENTS.md`
+- UI design system: `DESIGN.md`
+- Facilitator UI design notes: `DESIGN_UI.md`
+- Sprint heartbeat: `HEARTBEAT.md`
+- Active/deferred backlog: `TODOS.md`
+- Project task plan: `TASKS.md`

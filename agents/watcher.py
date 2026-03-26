@@ -52,6 +52,7 @@ def start_drive_watcher(
         except Exception as e:
             raise RuntimeError(f"Approvals check failed: {e}")
 
+
     def _loop():
         client = DriveClient(credentials_json=credentials_json, folder_id=folder_id, credential_type=credential_type, oauth_token_path=oauth_token_path)
         tmpdir = tempfile.mkdtemp(prefix="drivewatch-")

@@ -32,7 +32,7 @@ Provide a modular agent system to help manage the nonprofit's board responsibili
 ## Constraints & Dependencies
 - Base Python dependencies from `requirements.txt`. Additional libraries: `requests`, `beautifulsoup4` (already present), `pytest` for tests, `freezegun` or `responses` for HTTP fixtures, optional `playwright` or `selenium` for JS-heavy scraping.
 - No LLM provider config in repo; Anthropic selected by plan — requires `ANTHROPIC_API_KEY` env var.
-- No CI currently; plan includes GitHub Actions for tests.
+- CI is enabled via GitHub Actions in `.github/workflows/tests.yml`.
 - Platform: development on Windows is supported; code must use `pathlib`.
 
 ## Data & Schema
