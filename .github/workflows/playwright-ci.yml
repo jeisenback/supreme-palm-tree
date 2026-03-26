@@ -44,7 +44,7 @@ PY
 
       - name: Run Playwright tests
         run: |
-          pytest tests/test_facilitator_playwright.py -q
+          python -m pytest tests/test_facilitator_playwright.py -q
 
       - name: Upload streamlit log on failure
         if: failure()
