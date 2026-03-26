@@ -1,24 +1,37 @@
 out/
 __pycache__/
 
-# Local environment and secrets
+# Virtual environment
+.venv/
+.gstack/
+
+# Local secrets — never commit .env files
 .env
 .env.*
 !.env.example
-.streamlit/secrets.toml
 
-# Local Python environment
-.venv/
-
-# Agent and browser tooling state
-.claude/
-.gstack/
+# Runtime output / generated data (never commit)
+etn/outputs/
 .playwright-mcp/
 
-# Local session and runtime artifacts
-SESSION.md
+# Runtime files
 .scheduler_jobs.db
 .scheduler_state.json
+streamlit.log
+streamlit.pid
+SESSION.md
 
-# Temporary QA-generated case study data
+# QA / generated scenario variants (local only)
 etn/ECBA_CaseStudy_qa_scenario_variant/
+
+# Large media files
+etn/inputs/*.mp4
+etn/inputs/*.m4a
+etn/inputs/**/*.mp4
+etn/inputs/**/*.m4a
+etn/inputs/**/*.pptx
+etn/inputs/**/*.docx
+etn/inputs/**/*.xlsx
+etn/inputs/**/*.pdf
+etn/inputs/**/*.vsdx
+etn/inputs/**/*.lnk

@@ -1,0 +1,37 @@
+Session 1 — Facilitator Answers (ECBA: Understanding BA + Mindset)
+
+--- DOCUMENT GUIDE ---
+What this is:   Model answers and scoring guidance for all Session 1 exercises — BACCM chart, stakeholder list, problem statement, and value statement homework.
+Who it's for:   Facilitator only.
+When to use it: Use during share-out to guide feedback; use when reviewing homework submissions before Session 2.
+Restricted:     Yes — do not distribute to participants.
+--- END GUIDE ---
+
+BACCM chart — sample answers for TrailBlaze Session 1 scenario
+- Change: Weekend trip bookings have declined 18%; leadership wants to improve booking volume and customer retention
+- Need: Clarify why bookings are declining before committing to a solution (process gap, product gap, or awareness gap)
+- Solution: TBD — must not be defined until current-state analysis is complete (Session 2+)
+- Stakeholder: CEO, Head of Ops, Marketing Lead, Finance Director, Guides, Customers (weekend travelers)
+- Value: Increased weekend booking revenue, higher NPS, better guide utilization, sustainable growth
+- Context: Competitive adventure travel market; seasonal guide supply; mobile-first customer base; frozen tech budget
+
+Stakeholder list — sample (6+)
+- CEO — High interest, High influence — Stake: revenue and market position
+- Head of Operations — High interest, High influence — Stake: guide availability and logistics
+- Marketing Lead — Medium interest, Medium influence — Stake: brand and conversion
+- Finance Director — Low interest, High influence — Stake: budget approval and ROI
+- Lead Guide — High interest, Medium influence — Stake: workload and compensation
+- Weekend Traveler (customer) — High interest, Low influence — Stake: experience quality and booking ease
+- Legal/Compliance — Low interest, Medium influence — Stake: permits, data privacy
+
+Problem statement — sample
+- "TrailBlaze Adventures has experienced an 18% decline in weekend trip bookings over two quarters, resulting in reduced guide utilization and revenue shortfall. The root cause is unclear; competing hypotheses exist across leadership. Without defining the real need, any solution risks misalignment and wasted investment."
+
+Value statement — sample (part of the combined homework deliverable: participants extend their problem statement to include this)
+- "Resolving the root cause of booking decline will enable TrailBlaze to recover weekend revenue, improve guide retention and utilization, and build a sustainable pipeline for the planned Micro-Expeditions product launch."
+
+Rubric — exemplar expectations (matches Workshop_Handout.md rubric)
+- BACCM chart (0–3): all 6 elements, specific to TrailBlaze, NEED does not contain solution
+- Stakeholder list (0–3): 6+ stakeholders, stake is specific (not just role title)
+- Problem statement (0–3): measurable, avoids proposing solution, identifies impact
+- Presentation clarity (0–3): concise, BA-framed language, confident delivery

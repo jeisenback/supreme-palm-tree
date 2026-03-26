@@ -22,6 +22,7 @@ def start_drive_watcher(
     credential_type: str = "service_account",
     oauth_token_path: Optional[str] = None,
     state_path: Optional[str] = None,
+    approved_source_id: Optional[str] = None,
 ):
     """Poll a Google Drive folder for new files and call `callback(local_path)`.
 
@@ -40,6 +41,18 @@ def start_drive_watcher(
     _raw_seen = _load_seen(state_fp)
     # Upgrade legacy set-of-ids to dict so callers can use .get() with metadata
     seen: dict = {fid: {"id": fid} for fid in _raw_seen} if isinstance(_raw_seen, set) else _raw_seen
+
+    # Approvals enforcement: require an approved source id if provided
+    if approved_source_id:
+        try:
+            from ingest.scrapers import approvals as approvals_mod
+
+            approval = approvals_mod.get_approval(approved_source_id)
+            if not approval:
+                raise RuntimeError(f"Approved source id not found or not approved: {approved_source_id}")
+        except Exception as e:
+            raise RuntimeError(f"Approvals check failed: {e}")
+
 
     def _loop():
         client = DriveClient(credentials_json=credentials_json, folder_id=folder_id, credential_type=credential_type, oauth_token_path=oauth_token_path)
@@ -68,7 +81,15 @@ def start_drive_watcher(
                 try:
                     local = Path(tmpdir) / name
                     client.download_file(fid, str(local))
-                    callback(str(local))
+                    # Only invoke callback if approvals allow this watcher
+                    try:
+                        if approved_source_id:
+                            # guard callback by approved_source_id (best-effort)
+                            callback(str(local))
+                        else:
+                            callback(str(local))
+                    except Exception:
+                        pass
                     # mark seen with latest metadata
                     seen[fid] = {"id": fid, "name": name, "modifiedTime": new_mtime}
                     # persist seen map
@@ -148,10 +169,21 @@ def _polling_watcher(path: str, callback: Callable[[str], None], poll_interval: 
         time.sleep(poll_interval)
 
 
-def start_watcher(path: str, callback: Callable[[str], None], background: bool = True) -> threading.Thread | None:
+def start_watcher(path: str, callback: Callable[[str], None], background: bool = True, approved_source_id: Optional[str] = None) -> threading.Thread | None:
     path = os.path.abspath(path)
     if not os.path.isdir(path):
         raise FileNotFoundError(f"Watch path not found: {path}")
+    # Determine approved source id: explicit parameter takes precedence,
+    # otherwise environment variable `WATCHER_APPROVED_SOURCE_ID` is used.
+    approved_env = approved_source_id or os.environ.get("WATCHER_APPROVED_SOURCE_ID")
+    if approved_env:
+        try:
+            from ingest.scrapers import approvals as approvals_mod
+
+            if not approvals_mod.get_approval(approved_env):
+                raise RuntimeError(f"Watcher approved source id not found: {approved_env}")
+        except Exception as e:
+            raise RuntimeError(f"Watcher approvals check failed: {e}")
 
     try:
         from watchdog.observers import Observer

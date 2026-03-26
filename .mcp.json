@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "discord": {
+      "command": "bun",
+      "args": ["run", "--cwd", "C:/Users/jeise/.claude/plugins/cache/claude-plugins-official/discord/0.0.1", "--shell=bun", "--silent", "start"],
+      "env": {
+        "DISCORD_STATE_DIR": "C:/Users/jeise/.claude/channels/discord"
+      }
+    }
+  }
+}

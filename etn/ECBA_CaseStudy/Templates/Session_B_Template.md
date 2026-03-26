@@ -1,0 +1,95 @@
+# Session B — Case Study Deep Dive Template
+
+--- DOCUMENT GUIDE ---
+What this is:   Standard 60-minute run-of-show template for all 5 Session B deep dives — 5 structured blocks, format table, and facilitator redirect phrases.
+Who it's for:   Facilitator.
+When to use it: Use as the starting point when building each session's Session B materials; customize the exercise block for each session's topic.
+--- END GUIDE ---
+
+**Length:** 60 minutes  
+**When:** Mid-cycle — approximately 2 weeks after Session A  
+**Purpose:** Reinforce Session A concepts through co-facilitated application with an internal SME. The SME brings real-world texture; the facilitator holds the ECBA exam framing.  
+**No new MCQs:** Session B is application and discussion only — no exam prep questions added.
+
+---
+
+## Session Details *(Facilitator fills in)*
+
+| Field | Detail |
+|-------|--------|
+| Session A topic | |
+| SME name / role | |
+| TrailBlaze role SME will play (if any) | |
+| Exercise format for this session | |
+| Stretch question for homework bridge | |
+
+---
+
+## 60-Minute Run of Show
+
+### 1. Warm-Up — 5 min
+Facilitator recaps 3 key points from Session A — verbal or whiteboard, no slides needed.
+
+Prompts:
+- "What concept clicked from Session A?"
+- "What question is still open for you?"
+- Bridge: "Today [SME name] is going to help us go deeper on [session topic]."
+
+---
+
+### 2. SME Framing — 10 min
+SME shares:
+- Brief background: 1–2 real projects, 2–3 minutes max
+- One moment where the Session A concept mattered in their real work
+- How they would approach the TrailBlaze situation based on that experience
+
+> **Facilitator note:** Keep SME from diving into full project history. Use *"How does that connect to what [TrailBlaze character] is dealing with?"* to redirect if needed.
+
+---
+
+### 3. Co-Facilitated Deep Dive — 30 min
+*(Session-specific — see Session B entry in ECBA_CaseStudy_Plan.md)*
+
+General structure:
+- Group receives a new TrailBlaze prompt (a deeper cut of existing context — no new reveals beyond the current session gate)
+- SME participates actively: comments on approach, asks probing questions, plays a character if applicable
+- Facilitator holds the ECBA frame: connects what the SME says back to domain language
+
+**Active formats (varies by session):**
+
+| Format | Description | Used in |
+|--------|-------------|---------|
+| **Mock interview round** | SME plays a TrailBlaze stakeholder; group practices elicitation | Session 2B |
+| **BACCM live workshop** | SME and group apply BACCM to a messy ambiguous prompt | Session 1B |
+| **Requirements conversion** | Group converts raw needs; SME challenges vague language in real time | Session 3B |
+| **Solution challenge** | Group presents options; SME pushes back as a real executive would | Session 4B |
+| **Post-pilot retrospective** | SME shares a real deployment miss; group maps it to TrailBlaze results | Session 5B |
+
+---
+
+### 4. Debrief + Q&A — 10 min
+Open floor for group questions to the SME — real work only.
+
+Suggested anchors:
+- "What's something you wish you had done differently on that project?"
+- "How do working BAs approach [session topic] differently than the textbook suggests?"
+- "What does 'good' actually look like on a real engagement?"
+
+---
+
+### 5. Homework Bridge — 5 min
+SME poses the session's stretch question.
+
+> *This is not an additional MCQ assignment — it is a reflective prompt that enriches the existing homework. Participants bring their answer to the next Session A share-out.*
+
+Facilitator closes: "Bring your answer to [stretch question] to the [Session X+1] share-out."
+
+---
+
+## Facilitator Notes
+- Brief SME in advance using `Facilitator/Session_B_SME_Prep_Guide.md` — send it 5–7 days out
+- SME does not need to know ECBA — refer to domains/KAs only if the SME raises them naturally
+- The goal is not to teach through the SME — it is to make the case study feel real
+- If the SME goes off-script: *"Can you connect that to what TrailBlaze is facing right now?"*
+- If the SME gives away too much context: *"Let's hold that — the group gets that reveal in Session [X]"*
+- 60 minutes is intentionally short; do not add content to fill time

@@ -1,0 +1,24 @@
+﻿Stakeholders — Detailed
+
+--- DOCUMENT GUIDE ---
+What this is:   Full stakeholder analysis table for TrailBlaze — roles, interest and influence levels, engagement approaches, and decision rights.
+Who it's for:   Facilitator reference until Session 4; participants build their own version in Sessions 1–3 and compare against this in Session 4.
+When to use it: Facilitator uses for prep in Sessions 1–3. Distribute to participants in Session 4.
+Restricted:     Yes — do not distribute before Session 4.
+--- END GUIDE ---
+
+Reveal progressively: cast names available from Session 1 brief; full analysis distributed in Session 4.
+
+Role	Interest	Influence	Engagement Approach	Decision Rights
+CEO (Sponsor)	High	High	Weekly update, approvals	Final scope and budget approval
+Head of Operations	High	High	Weekly ops sync during pilot	Guide assignment & logistics
+Lead Guide Representative	High	Medium	Monthly feedback, included in pilot planning	Operational feasibility input
+Marketing Lead	Medium	Medium	Weekly marketing sync, provide promo assets	Pilot promotion budget approval
+Customers	High	Low	Surveys, pilot communications	Provide acceptance feedback
+Finance Director	Low	High	Budget reviews, milestone signoffs	Approves pilot costs and pricing
+Legal/Compliance	Low	Medium	Policy review for permits/data	Approves contract & permit language
+
+Engagement templates
+- Weekly update email (template) — who, agenda, expected decisions
+- Ops readiness checklist — owner, items, completion signoff
+
