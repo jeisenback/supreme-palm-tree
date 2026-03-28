@@ -1,2 +1,7 @@
 out/
 __pycache__/
+.venv/
+*.pyc
+.scheduler_jobs.db
+.scheduler_state.json
+SESSION.md

@@ -12,6 +12,7 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
+from brand import BRAND_CSS
 from shared import (
     SESSIONS,
     MONTH_SESSION_MAP,
@@ -119,6 +120,7 @@ def save_note(event_title, facilitator, step, note, completed=False):
 
 def main():
     st.set_page_config(page_title="ECBA Study Session — Facilitator", layout="wide")
+    st.html(BRAND_CSS)
     st.title("ECBA Study Session — Facilitator")
 
     # Ensure facilitator is always defined (guards Notes/Actions/Complete steps)
@@ -188,12 +190,11 @@ def main():
                 )
                 st.markdown(f"[Sign in with GitHub]({url})")
             else:
-                st.info(
-                    "Set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET to enable GitHub OAuth."
-                )
+                pass  # GitHub OAuth not configured; local login available below
 
-            st.markdown("---")
-            st.markdown("Or use the fallback local login:")
+            if gh_client:
+                st.markdown("---")
+                st.markdown("Or use the local login:")
             login_name = st.text_input("Facilitator name")
             login_pass = st.text_input("Password", type="password")
             remember = st.checkbox("Remember me (7 days)")
@@ -240,8 +241,7 @@ def main():
         sel = st.sidebar.selectbox("Case study variant", variant_names, index=0)
         selected_variant = variants[variant_names.index(sel)]
 
-    st.sidebar.markdown("**Variant folder:**")
-    st.sidebar.write(str(selected_variant) if selected_variant is not None else "(none)")
+    # Variant folder path intentionally not shown to avoid leaking internal structure
 
     master_text = load_master_context(selected_variant)
 
