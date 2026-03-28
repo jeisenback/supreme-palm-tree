@@ -2,8 +2,10 @@
 
 import re
 import urllib.parse
+import warnings
 from pathlib import Path
 
+import yaml
 import streamlit as st
 
 
@@ -18,118 +20,35 @@ MONTH_SESSION_MAP = {
 }
 
 
-# ── Session content ───────────────────────────────────────────────────────────
+# ── Session content — loaded from etn/ECBA_CaseStudy/sessions/session_N.yaml ─
 
-SESSIONS = {
-    1: {
-        "title": "Session 1 — Foundations & Core Concepts",
-        "agenda": [
-            "ARCS cold open (10 min)",
-            "Concepts: BA mindset, BACCM (25 min)",
-            "Guided application: BACCM exercise (8 min)",
-            "Group exercise: Stakeholder identification + problem statement (25 min)",
-            "Practice round: 4 timed MCQs (8 min)",
-        ],
-        "homework": "Refine problem statement; 6 exam MCQs",
-        "prompts": [
-            "What went well?",
-            "What assumptions did you make?",
-            "Trace each requirement to a measurable criterion.",
-        ],
-        "practice_questions": [
-            {
-                "q": "Which BACCM element identifies who benefits from a change?",
-                "choices": ["Change", "Need", "Stakeholder", "Solution"],
-                "a": 2,
-            },
-            {
-                "q": "A good problem statement should be:",
-                "choices": ["Vague and broad", "Measurable and specific", "Solution-oriented", "Optional"],
-                "a": 1,
-            },
-        ],
-    },
-    2: {
-        "title": "Session 2 — Planning, Elicitation & Context",
-        "agenda": [
-            "Homework share-out (10 min)",
-            "Concepts: BA planning & elicitation (25 min)",
-            "Group exercise: BA approach (20 min)",
-        ],
-        "homework": "Draft BA approach recommendation; 6 exam MCQs",
-        "prompts": [
-            "Which stakeholders to engage first?",
-            "What elicitation techniques suit this stakeholder?",
-        ],
-        "practice_questions": [
-            {
-                "q": "Which elicitation technique is best for detailed requirements?",
-                "choices": ["Survey", "Interview", "Observation", "Brainstorming"],
-                "a": 1,
-            }
-        ],
-    },
-    3: {
-        "title": "Session 3 — Change, Need & Requirements Lifecycle",
-        "agenda": [
-            "Current/future-state framing",
-            "Convert raw needs to requirements",
-            "RTM basics",
-        ],
-        "homework": "Convert 3 raw needs into requirements; 6 MCQs",
-        "prompts": [
-            "How would you verify this requirement?",
-            "Who owns this requirement?",
-        ],
-        "practice_questions": [
-            {
-                "q": "A testable requirement should be:",
-                "choices": ["Ambiguous", "Measurable", "Open-ended", "Opinion-based"],
-                "a": 1,
-            }
-        ],
-    },
-    4: {
-        "title": "Session 4 — Solution, Stakeholder & Requirements Analysis",
-        "agenda": [
-            "RADD concepts",
-            "Solution options analysis",
-            "RTM linking",
-        ],
-        "homework": "Write recommendation with 3 traced requirements; 6 MCQs",
-        "prompts": [
-            "Which option best traces to the RTM?",
-            "What are the NFR risks?",
-        ],
-        "practice_questions": [
-            {
-                "q": "Which is an NFR?",
-                "choices": ["Booking flow", "Performance < 500ms", "Checkout label", "Hero image"],
-                "a": 1,
-            }
-        ],
-    },
-    5: {
-        "title": "Session 5 — Value, Review & Exam Readiness",
-        "agenda": [
-            "Pilot results reveal",
-            "Post-pilot KPI analysis",
-            "Exam simulation",
-        ],
-        "homework": "KPI analysis; integrated exam practice",
-        "prompts": [
-            "Which requirements failed to trace to outcomes?",
-            "What sequencing errors occurred?",
-        ],
-        "practice_questions": [
-            {
-                "q": "Pilot target was 100 bookings; actual was 87. This is a:",
-                "choices": ["Success", "Missed target (13%)", "Irrelevant", "Partial fulfillment"],
-                "a": 1,
-            }
-        ],
-    },
-}
+_SESSIONS_DIR = Path(__file__).parent.parent / "etn" / "ECBA_CaseStudy" / "sessions"
+
+
+def _load_sessions() -> dict:
+    """Load all session_N.yaml files and return {session_id: session_dict}.
+
+    Falls back gracefully: missing or malformed files produce a warning and
+    an empty entry so callers never receive a KeyError on valid session IDs.
+    """
+    sessions = {}
+    for n in range(1, 6):
+        yaml_path = _SESSIONS_DIR / f"session_{n}.yaml"
+        if not yaml_path.exists():
+            warnings.warn(f"Session YAML not found: {yaml_path}", stacklevel=2)
+            sessions[n] = {}
+            continue
+        try:
+            with open(yaml_path, encoding="utf-8") as fh:
+                data = yaml.safe_load(fh)
+            sessions[n] = data or {}
+        except Exception as exc:
+            warnings.warn(f"Failed to load {yaml_path}: {exc}", stacklevel=2)
+            sessions[n] = {}
+    return sessions
+
+
+SESSIONS: dict = _load_sessions()
 
 
 # ── Cached I/O functions ──────────────────────────────────────────────────────

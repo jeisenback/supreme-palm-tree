@@ -1,0 +1,21 @@
+title: "Session 4 — Solution, Stakeholder & Requirements Analysis"
+
+agenda:
+  - "RADD concepts"
+  - "Solution options analysis"
+  - "RTM linking"
+
+homework: "Write recommendation with 3 traced requirements; 6 MCQs"
+
+prompts:
+  - "Which option best traces to the RTM?"
+  - "What are the NFR risks?"
+
+practice_questions:
+  - q: "Which is an NFR?"
+    choices:
+      - "Booking flow"
+      - "Performance < 500ms"
+      - "Checkout label"
+      - "Hero image"
+    a: 1

@@ -1,0 +1,21 @@
+title: "Session 3 — Change, Need & Requirements Lifecycle"
+
+agenda:
+  - "Current/future-state framing"
+  - "Convert raw needs to requirements"
+  - "RTM basics"
+
+homework: "Convert 3 raw needs into requirements; 6 MCQs"
+
+prompts:
+  - "How would you verify this requirement?"
+  - "Who owns this requirement?"
+
+practice_questions:
+  - q: "A testable requirement should be:"
+    choices:
+      - "Ambiguous"
+      - "Measurable"
+      - "Open-ended"
+      - "Opinion-based"
+    a: 1
