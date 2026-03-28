@@ -1,0 +1,48 @@
+Session [#] — End-of-Session Survey
+
+--- DOCUMENT GUIDE ---
+What this is:   Anonymous end-of-session feedback form — 5 questions, 2 minutes, covering confidence, clarity, pace, and session design.
+Who it's for:   Participants at the close of every Session A.
+When to use it: Distribute in the final 2 minutes of each Session A. Facilitator reviews before the next session and adjusts accordingly.
+--- END GUIDE ---
+
+Estimated time: 2 minutes. Anonymous. Results used to improve the next session.
+
+1. How confident do you feel about the concepts covered today?
+   [ ] 1 — Not confident at all
+   [ ] 2 — Slightly confident
+   [ ] 3 — Somewhat confident
+   [ ] 4 — Confident
+   [ ] 5 — Very confident
+
+2. Which concept felt least clear? (pick one or write in)
+   [ ] BACCM
+   [ ] BA Mindset / values / principles
+   [ ] Stakeholder analysis
+   [ ] Requirements vs. Designs
+   [ ] Problem statement writing
+   [ ] Other: _______________
+
+3. How useful was the TrailBlaze scenario for understanding the concepts?
+   [ ] 1 — Not useful
+   [ ] 2 — Slightly useful
+   [ ] 3 — Neutral
+   [ ] 4 — Useful
+   [ ] 5 — Very useful
+
+4. What one thing would you change about today's session?
+   _______________________________________________
+
+5. How prepared do you feel to complete the homework?
+   [ ] 1 — Not prepared
+   [ ] 2 — Slightly prepared
+   [ ] 3 — Somewhat prepared
+   [ ] 4 — Prepared
+   [ ] 5 — Fully prepared
+
+Facilitator use only — review before next session:
+- Average confidence score: ___
+- Most cited unclear concept: ___
+- Homework readiness average: ___
+- Top suggested improvement: ___
+- Adjustments to make for Session [#+1]: ___

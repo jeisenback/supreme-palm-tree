@@ -1,0 +1,1490 @@
+WEBVTT
+
+1
+00:03:01.640 --> 00:03:04.199
+David Thomson: Hey? Good evening. Thanks for joining. Can you hear me? Okay.
+
+2
+00:03:07.620 --> 00:03:08.300
+Simon Garwood: It's.
+
+3
+00:03:08.700 --> 00:03:10.060
+David Thomson: Oh, hey, good evening.
+
+4
+00:03:10.340 --> 00:03:11.899
+David Thomson: Yeah. So sometimes.
+
+5
+00:03:12.770 --> 00:03:21.450
+David Thomson: these sessions take a little bit for people to join this time of evening. But we are recording it. So I'm I'm
+
+6
+00:03:22.050 --> 00:03:23.760
+David Thomson: I think I'll give it another
+
+7
+00:03:24.120 --> 00:03:26.069
+David Thomson: couple of minutes before we start.
+
+8
+00:03:26.430 --> 00:03:30.150
+David Thomson: If that's okay. And now we'll get going.
+
+9
+00:03:38.410 --> 00:03:40.090
+David Thomson: I'm gonna share my screen.
+
+10
+00:03:40.600 --> 00:03:43.400
+David Thomson: I've got a new. I've got a new laptop, and
+
+11
+00:03:44.180 --> 00:03:50.069
+David Thomson: to configure it, I haven't done a done a session with this one yet, so hopefully everything will work out here.
+
+12
+00:03:56.330 --> 00:03:57.889
+David Thomson: Can you see my screen.
+
+13
+00:04:00.970 --> 00:04:02.609
+Simon Garwood: Yeah, can see that.
+
+14
+00:04:02.610 --> 00:04:03.230
+David Thomson: Have some.
+
+15
+00:04:03.640 --> 00:04:07.160
+David Thomson: Yeah, there's a Powerpoint right there.
+
+16
+00:04:08.870 --> 00:04:10.610
+David Thomson: Alright, fantastic!
+
+17
+00:04:38.710 --> 00:04:39.610
+David Thomson: All right.
+
+18
+00:04:51.550 --> 00:04:52.820
+David Thomson: Give it one more minute.
+
+19
+00:04:54.530 --> 00:04:55.370
+David Thomson: Get caught.
+
+20
+00:04:56.260 --> 00:05:00.469
+David Thomson: Might just be the 3 of us for a little bit, but people will will come in, I'm sure.
+
+21
+00:05:11.290 --> 00:05:15.640
+David Thomson: Alright. Well, let's let's get going. Because this could take
+
+22
+00:05:16.364 --> 00:05:18.800
+David Thomson: mostly I've done this one a few times.
+
+23
+00:05:19.444 --> 00:05:22.759
+David Thomson: So welcome to this is Iba, East Tennessee
+
+24
+00:05:23.709 --> 00:05:30.900
+David Thomson: Monthly study session. We haven't done one since February, but we're gonna try to get back on the
+
+25
+00:05:31.460 --> 00:05:32.680
+David Thomson: on the monthly
+
+26
+00:05:33.748 --> 00:05:40.031
+David Thomson: monthly cadence for these. But this particular one backed by popular demand, is
+
+27
+00:05:40.590 --> 00:05:43.710
+David Thomson: the business analysis certification, overview.
+
+28
+00:05:43.860 --> 00:05:49.500
+David Thomson: And I'm glad to do this one. This is the one I really enjoy.
+
+29
+00:05:50.304 --> 00:05:54.980
+David Thomson: You know. Talking about business analysis, certification.
+
+30
+00:05:55.721 --> 00:05:58.490
+David Thomson: My name is David Thompson, the
+
+31
+00:05:58.610 --> 00:06:03.419
+David Thomson: we've got some certifications from Iba, the Cbap.
+
+32
+00:06:04.060 --> 00:06:13.759
+David Thomson: of course, and a Cpoa, which is a certified product owner, analysis Aac, and also have some scrum alliance certifications as well.
+
+33
+00:06:15.030 --> 00:06:21.579
+David Thomson: But yeah. So what we'll do tonight is to use my some slides I put together
+
+34
+00:06:21.680 --> 00:06:23.259
+David Thomson: to kind of talk through some
+
+35
+00:06:24.250 --> 00:06:30.639
+David Thomson: some things about about the business analysis, certification as well as
+
+36
+00:06:30.790 --> 00:06:42.689
+David Thomson: an overview of some study techniques and tips. Some things I've learned along the way and gotten feedback from a lot of folks on on their thoughts as well. So collection of
+
+37
+00:06:42.890 --> 00:06:59.220
+David Thomson: of tips and tricks on studying things, to study the the structure of the core business analysis certification exams, we're going to focus tonight on Iba's core core certification exams. So we'll talk about some of the other ones. There's some good information in here.
+
+38
+00:07:01.900 --> 00:07:04.919
+David Thomson: So with that, let's get started.
+
+39
+00:07:06.590 --> 00:07:07.360
+David Thomson: Let's see.
+
+40
+00:07:09.260 --> 00:07:15.728
+David Thomson: I'll just click it this way. I'm having trouble with this slideshow. So I'll just go through the slides this way.
+
+41
+00:07:16.150 --> 00:07:22.931
+David Thomson: So here's a this is, I love this graphic they have at Iba. I found when I was updating this presentation.
+
+42
+00:07:23.490 --> 00:07:33.419
+David Thomson: why get certified in business analysis? And, as you can see, this is like a a mixing board or something with for Sounder, and they've they've changed the names on it. And I really like this
+
+43
+00:07:34.025 --> 00:07:44.710
+David Thomson: this graphic where it says you're turning everything up to the maximum, you know, business analysis, certification, or any certification in particular, and professional certifications
+
+44
+00:07:44.810 --> 00:07:50.689
+David Thomson: really become your calling card. I remember years ago I
+
+45
+00:07:51.050 --> 00:08:00.455
+David Thomson: I I learned a lot about this particular. This is long time ago I learned a lot about this particular software program. I I knew I knew it in and out, and
+
+46
+00:08:00.980 --> 00:08:27.999
+David Thomson: and I was talking to one of my coworkers. I said maybe we should get certified in this, you know. It'll be really good, he said, why do we need to get certified? I was like, Yeah, you're right. Just a lot of time and expense and everything. So I never got certified until I moved on from that job and got into consulting. And and my my manager and the consulting company said, We need you to go get your certifications. And I said, Oh, you know, we don't have to get certified, do we? And he said, Yeah, Yeah, you do. We?
+
+47
+00:08:28.090 --> 00:08:37.549
+David Thomson: We you know. Go visit clients, and we tell them we're gonna bring you in to do work for them. And having a certification shows that you know your stuff.
+
+48
+00:08:37.869 --> 00:08:54.970
+David Thomson: You know. Sometimes, you know, people get certifications, and that, you know, maybe they don't really know their stuff, but that certainly helps them to say, oh, yes, they've been through. They've studied, they've been through the test. They've got the experience. So so they're certified, and it helps you meet your customers needs or your company's needs.
+
+49
+00:08:55.265 --> 00:09:16.279
+David Thomson: You know better. You learn more. There's some really some other good benefits of certification. This is from Iba's Global state of business analysis report from 2022. I looked for a newer version of this, but I don't see one. I don't think there's a newer version of this this particular one. But this is about the benefits of certification. I love this graphic because it talks about
+
+50
+00:09:16.510 --> 00:09:20.749
+David Thomson: one of the big things is a higher confidence at work, you know, when you know
+
+51
+00:09:21.076 --> 00:09:50.390
+David Thomson: we know your domain, you know, you know business analysis. You know what the bad box says about things. You know the bad box is its own world. You know things that the way they're documented the bad box isn't really totally the way things work in a real world that we're in and work in. But it it does help you give a more confidence of work. I I can attest to that. It helps your skills up skills. If you get a 1 of the other certifications like product owner analysis or agile analysis.
+
+52
+00:09:50.794 --> 00:09:58.395
+David Thomson: Some people use it to help find a new job. If you are shopping for a job, you know that that is something that,
+
+53
+00:09:59.170 --> 00:10:10.640
+David Thomson: you know, a lot of people look for, you know they I've seen that on, you know, on job postings before that they would like you to have some sort of you know, business analysis, certification. If you're looking for a PA job.
+
+54
+00:10:10.850 --> 00:10:21.960
+David Thomson: So that's that's something salary increase, apparently apparently salary increase. You know, I I remember when I got my Cbap, I was so proud of myself, and I thought for some reason I would get
+
+55
+00:10:22.511 --> 00:10:37.978
+David Thomson: a huge salary increase I didn't. But you know your mileage may vary with with your company. I worked so hard on that, and I was quite disappointed when I didn't get a big raise for getting my cpap. But
+
+56
+00:10:38.670 --> 00:10:54.019
+David Thomson: But anyway, that that goes that could change at your at your work. Who knows but that's that is something some people do see. You get better salary, promotion. Maybe these are just some things that people have ranked as benefits of certification.
+
+57
+00:10:55.410 --> 00:11:02.879
+David Thomson: and then there's another graphic I liked from the same report about how how quickly, did you see the benefits of that
+
+58
+00:11:03.927 --> 00:11:17.689
+David Thomson: and you know a lot of people experienced an immediate or one to 6 month improvement and and seeing those benefits after getting the certifications. And it also says that 92% of the folks that responded to the survey
+
+59
+00:11:17.870 --> 00:11:31.019
+David Thomson: recommend getting certifications for career development. So there's some good things. It's it does make it worth the time. And, believe me, you know, getting a product, I mean a business analysis. Certification is
+
+60
+00:11:31.410 --> 00:11:49.429
+David Thomson: is a huge time commitment. And so not only that a big financial commitment as well, and we'll talk about some of that first.st we are, Iiba, you know we're the Iba of East Tennessee. But do want to mention there are other business analysis certifications that are really important.
+
+61
+00:11:50.036 --> 00:11:53.580
+David Thomson: I wanted to specifically mention the Pmis
+
+62
+00:11:54.140 --> 00:11:58.797
+David Thomson: Pmi Pba. I know a couple of folks that have have gotten this one.
+
+63
+00:11:59.880 --> 00:12:21.050
+David Thomson: and it's a really really great certification. It doesn't necessarily follow our Babak but you know some of the same concepts are there. And really, you know, this would be recommended for someone who is interested in more of a project management focus. Maybe they're on a project management career path, and maybe they think Well, I'm a PA now, but someday I want to do project management.
+
+64
+00:12:21.280 --> 00:12:24.319
+David Thomson: Why, you would want to do that I have no idea, but
+
+65
+00:12:24.620 --> 00:12:34.500
+David Thomson: but that's just a little joke I have. But but nevertheless the Pmi has a good certification. You can see the cost of it. You know, it's a
+
+66
+00:12:34.610 --> 00:12:42.170
+David Thomson: you know. It's 240 min test. That is a big big test, you know.
+
+67
+00:12:42.430 --> 00:12:48.690
+David Thomson: before our commitment on the on the duration of the test. You don't have to take the entire time
+
+68
+00:12:49.110 --> 00:13:03.069
+David Thomson: to do that, of course, but there are 200 questions. So it's a it's a big big bunch of questions on that. It's also a very expensive one. You know, if you're not a member of Pmi. You can see they make it just
+
+69
+00:13:03.625 --> 00:13:17.439
+David Thomson: just a dollar a dollar less if you're a Pmi member. Because you buy your Pmi membership and you pay for the exam, and it costs you $554 versus 555, if you're a non-member. But if you're getting a Pmi certification for
+
+70
+00:13:17.560 --> 00:13:20.030
+David Thomson: for professional business analysis.
+
+71
+00:13:20.510 --> 00:13:22.909
+David Thomson: Why not be a member of Pmi? So
+
+72
+00:13:23.748 --> 00:13:30.990
+David Thomson: there's a prep course I found online@pmtraining.com. It's a 90 day access online course. It's 348, which is pretty
+
+73
+00:13:31.170 --> 00:13:37.459
+David Thomson: pretty low price as compared to some of the Iba prep courses that you'll see. I'll talk about later.
+
+74
+00:13:38.470 --> 00:13:39.080
+David Thomson: But
+
+75
+00:13:39.830 --> 00:13:51.681
+David Thomson: we're we're great partners with Pmi. We we do. For example, we have something, I think, coming up this year I'm no longer on. I'm the past president of East Tennessee, Iiba. But
+
+76
+00:13:52.570 --> 00:14:05.440
+David Thomson: talking to some of my colleagues. They are planning a a joint session with our local Pmi chapter as well. So look for that to come on announcements. But we would do a lot of of
+
+77
+00:14:05.660 --> 00:14:21.569
+David Thomson: sessions with Pmi. We've done several in the past few years with with our Iba chapter, but that's something to consider. Now let's get into iiva certification. So there's 3 core Iiva business analysis certifications. The 1st is the Ecba that's entry level.
+
+78
+00:14:22.148 --> 00:14:36.540
+David Thomson: Ccba is a certificate of capability in business analysis. And then there's Cbap. It is the certified business analysis professional. And you can kind of see it if if you remember, like the the medals
+
+79
+00:14:36.540 --> 00:14:55.140
+David Thomson: in at the Olympics. You know the bronze medal for the Ecba essentially oops. Here I am editing my my presentation like a bronze level for the Ecba, which is a great certification. We'll talk a little bit more about that. Ccba is kind of the silver level, and the gold is the Cpap
+
+80
+00:14:55.775 --> 00:14:58.960
+David Thomson: every one of these tests gets progressively
+
+81
+00:14:59.320 --> 00:15:13.060
+David Thomson: harder, requires more experience, and costs a little bit more. But we'll go over those. So these are these are ones we're really, primarily going to focus on in this presentation. There are other Iba certifications you probably saw on the cover sheet.
+
+82
+00:15:13.200 --> 00:15:23.159
+David Thomson: I I happen to have 2 of them. I have the Cpoa, which is the product ownership, analysis, certification, and the agile analysis certification.
+
+83
+00:15:23.440 --> 00:15:39.169
+David Thomson: Maybe someday, I'll do the business data and analytics. I'm not not really think about taking the cyber security analysis certification. But these are those other certifications from Iba that they offer. I'll give you a little bit information about those as well.
+
+84
+00:15:40.161 --> 00:15:51.969
+David Thomson: Comparing the Iba course. By the way, if you have any questions, please speak up. There's no problem. There, I I sometimes miss, if you raise your hand or something, but please feel free to speak up. If there are any questions
+
+85
+00:15:53.700 --> 00:16:01.916
+David Thomson: and I and I, and let me know if I talk too fast, because I've I've done this this session a few times, and sometimes I talk fast.
+
+86
+00:16:02.340 --> 00:16:16.799
+David Thomson: but anyways, going back to comparing the the requirements for each level of certification. You can see here the Ucba. You don't really have to be a BA. You don't have to demonstrate any work. History being a BA, you don't have to take any professional development.
+
+87
+00:16:17.475 --> 00:16:28.400
+David Thomson: You don't have to have any experience. You know. The exam is pretty simple to 1 h. 50 multiple choice questions.
+
+88
+00:16:28.570 --> 00:16:31.840
+David Thomson: So you know, it's pretty straight ahead. Somebody can get
+
+89
+00:16:32.582 --> 00:16:36.950
+David Thomson: somebody can get certified with just a minimal amount of training, which is.
+
+90
+00:16:37.190 --> 00:16:53.240
+David Thomson: you know, kind of a good or bad thing, too, when you think about it. You know, just because someone has a Ecba. It, you know, doesn't necessarily mean they have a work history of being a BA or any experience or any professional development. So something to think about.
+
+91
+00:16:54.284 --> 00:17:02.239
+David Thomson: Ccpa, that requires 3,750 h of work, history, and
+
+92
+00:17:02.300 --> 00:17:24.589
+David Thomson: and thing. With these work histories. You you can't just say I have 3,750 h you have to. You have to show what projects you worked on and what knowledge areas according to the back. You know what different knowledge areas in the back. And you have to, you know, have references to they they want you who your project manager or your manager was during that
+
+93
+00:17:24.881 --> 00:17:38.959
+David Thomson: and they want their email. They may or may not call them I I was lucky, and nobody called me because I was worried. It might get audited. But when they did that, I mean I was straight ahead. Luckily, when I was working on my Cbap.
+
+94
+00:17:39.040 --> 00:17:42.809
+David Thomson: I had worked for the same company for over 10 years. So I had.
+
+95
+00:17:43.180 --> 00:17:44.450
+David Thomson: I had them
+
+96
+00:17:44.860 --> 00:18:06.961
+David Thomson: emails that I could reference that you know, from past projects and stuff to help me illustrate that I I had spent that amount of time working on those kind of projects. So that was good. The Ccpa. You know. They want you to have 2 or 3 years experience or more. The exam. They give you 3 h to complete it. There are 130 multiple choice questions and scenarios.
+
+97
+00:18:07.740 --> 00:18:14.570
+David Thomson: the Cbap is a little bit different. Obviously more hours more professional development needed before you take that and
+
+98
+00:18:15.520 --> 00:18:17.959
+David Thomson: and then experience 5 or more years.
+
+99
+00:18:18.310 --> 00:18:30.730
+David Thomson: 3 and a half hour duration, and then 120 multiple choice questions. There are fewer questions, but there are case studies which you could have a case study which you have to read, and then there's several questions off of that?
+
+100
+00:18:31.200 --> 00:18:32.360
+David Thomson: Any questions?
+
+101
+00:18:35.880 --> 00:18:44.669
+David Thomson: Alright, keep going. So that's the that's the core requirements. That's the requirements for the core certifications. Here's a little difference on the costs.
+
+102
+00:18:45.575 --> 00:18:49.390
+David Thomson: Always, I say, the Iaba membership
+
+103
+00:18:49.520 --> 00:18:52.480
+David Thomson: $139 a year is worth it.
+
+104
+00:18:53.120 --> 00:19:08.950
+David Thomson: even if you're not getting certified, of course, because you have access to everything that you know with Iba the knowledge knowledge articles they have. Everything is great that you can do with Iba. But they really make it worth your while if you're planning on getting certified. So you can see
+
+105
+00:19:09.560 --> 00:19:14.940
+David Thomson: the difference in the fee for member versus non-member. For each of these
+
+106
+00:19:15.732 --> 00:19:18.617
+David Thomson: is covered by your Iba membership. So
+
+107
+00:19:19.210 --> 00:19:39.789
+David Thomson: and you know, joining Iba and paying the exam fee makes it easy. So, Ecba, there's no application fee, because there's really no application, no detailed application like the others. So you can see the costs here. I won't read through all of them but 1 1 note that, though, is if you're planning to take the
+
+108
+00:19:40.040 --> 00:19:49.469
+David Thomson: the Ecb. Exam. Is changing in July, I'll talk a little bit more about that. But if you take it now, and you ref, and you would or fail it.
+
+109
+00:19:49.853 --> 00:20:10.680
+David Thomson: They would. They'll give. You can basically take it for free through July 18.th If you had, you could retake it for free, if they fail it between now and July 18.th Then they're changing the exam. So I think that's when that when that ends. So check the Iba's website. If you're interested in taking Ecpa. But you need to do it within the next month before the exam change, if you want to take advantage of that.
+
+110
+00:20:11.290 --> 00:20:14.769
+David Thomson: But yeah, here are the costs. You can see the significantly
+
+111
+00:20:15.180 --> 00:20:20.280
+David Thomson: more expensive as you get in the Ccpa. And Cpap.
+
+112
+00:20:21.990 --> 00:20:29.850
+David Thomson: So yeah, so it's a big commitment. If your company pays for it great, but if you have to shell it out of your pocket yourself, then.
+
+113
+00:20:30.532 --> 00:20:38.939
+David Thomson: It's you know. You'd want to make sure you pass it. So you don't have to spend, you know, 300 or $450 to retake the test.
+
+114
+00:20:39.120 --> 00:20:40.930
+David Thomson: So it's worth it spending the time.
+
+115
+00:20:41.429 --> 00:20:52.629
+David Thomson: Here's just a quick, you know, we talked about those other specialized certifications from Iba. None of those have an application fee. And then they're the fees are pretty straightforward for all of them.
+
+116
+00:20:53.290 --> 00:21:03.920
+David Thomson: You pick the one you want to do they do charge, you know, if you have to obviously retake the exam. Knock on wood. I've never had to retake one So
+
+117
+00:21:04.240 --> 00:21:05.346
+David Thomson: I always.
+
+118
+00:21:06.110 --> 00:21:18.039
+David Thomson: I'm afraid, to have to explain to my wife why I have to spend, you know. So I study so hard. When I'm taking these exams. But yeah, here's the. Here's the cost of all those not bad at all. It's a good.
+
+119
+00:21:18.160 --> 00:21:20.570
+David Thomson: It's a good certification to get
+
+120
+00:21:22.870 --> 00:21:39.240
+David Thomson: alright. So here's here's what I talk about, the little more details about the Ecba and the rest of them. Ecba we talked before people that are ready developed their business analysis skills. So you get the certification. They don't don't necessarily mean that you have to have
+
+121
+00:21:39.660 --> 00:21:42.400
+David Thomson: have good experience and and
+
+122
+00:21:42.900 --> 00:21:51.389
+David Thomson: and being a business analyst to get that certification. So formerly you had to get 21 h. They've made the Ecba progressively easier.
+
+123
+00:21:53.100 --> 00:21:57.604
+David Thomson: Over time. So like, I said, they are changing the
+
+124
+00:21:59.843 --> 00:22:04.840
+David Thomson: well, as of April 26, th and forgive me. That was April 26th of last year.
+
+125
+00:22:05.580 --> 00:22:20.960
+David Thomson: They streamlined the process. They made it easier for you to to get to the Ecpa. But they're changing Ecpa again with a new test. So something to keep in mind. If you're planning to take the Ecpa. Decide whether you're going to take it before or after. July 20.th
+
+126
+00:22:22.740 --> 00:22:25.020
+David Thomson: I think it's July 21st next month.
+
+127
+00:22:25.470 --> 00:22:28.990
+David Thomson: So all right? And
+
+128
+00:22:29.150 --> 00:22:35.870
+David Thomson: because, by the way, for Ecba, if you if you look at Iba's website about the Ecba certification.
+
+129
+00:22:35.980 --> 00:22:41.640
+David Thomson: they have 2 different guides based on whether you're gonna take it before or after. July 20.th
+
+130
+00:22:44.010 --> 00:22:51.779
+David Thomson: Ccpa. You know the Ccpa. You know. 2 or 3. We talked about 2 or 3 years of practical business analysis experience in here.
+
+131
+00:22:52.272 --> 00:22:55.099
+David Thomson: Here's where you kind of break down the work history.
+
+132
+00:22:55.670 --> 00:23:05.760
+David Thomson: It has to be within the last 7 years, you know. I told you before, when I was putting in my application for taking the Cbap I was plugging things into my
+
+133
+00:23:06.050 --> 00:23:31.719
+David Thomson: into my application, and they weren't taken because I was putting things, you know, that were were longer. And Cbap is like, 10 years. I think. Yeah, Cbap is 10 years. I was plugging things in. There were over 10 years, and it wasn't counting them because they weren't within a certain time. But with their, you know the knowledge areas in the in the has to have to align with a certain number of hours. So same same with the Cbap.
+
+134
+00:23:31.990 --> 00:23:34.630
+David Thomson: So there's the application fees again
+
+135
+00:23:35.110 --> 00:23:38.750
+David Thomson: and the duration. As I said, the Iva membership makes it
+
+136
+00:23:39.160 --> 00:23:42.960
+David Thomson: worthwhile to save money on those on those expenses. So
+
+137
+00:23:44.022 --> 00:23:50.310
+David Thomson: and again over over 5 years of practical experience is is really good for a cpap.
+
+138
+00:23:51.040 --> 00:23:52.839
+David Thomson: And again, the
+
+139
+00:23:53.340 --> 00:24:00.359
+David Thomson: there are fewer questions on the Cbap. But, like I said, you have to read through case studies, and believe me, the case studies are not easy.
+
+140
+00:24:00.948 --> 00:24:10.020
+David Thomson: That was something I I sweated over when I was taking the cbet was the case study. So the Ccba. Doesn't have the
+
+141
+00:24:10.810 --> 00:24:14.850
+David Thomson: doesn't have the Think case studies. So
+
+142
+00:24:16.426 --> 00:24:22.830
+David Thomson: so here's oh, it's beginning July 21, st here is the new updated exam.
+
+143
+00:24:23.000 --> 00:24:47.479
+David Thomson: Guide for the Ecba. So this is just the Ecba. So these are the topics that it covers, and you can see understanding. Business analysis is a big part of that. So you know. Make sure, when you're preparing for that. There's there's a preparation guide and their books to help you studying for Ecba. But this is about where the questions fall and the percentage wise. So
+
+144
+00:24:48.635 --> 00:24:53.000
+David Thomson: you know, definitely on the core concept model. And more of the
+
+145
+00:24:53.300 --> 00:25:03.550
+David Thomson: you know the overall view of what of what? The back has not not getting into the details of the different knowledge areas or the techniques. You'll notice.
+
+146
+00:25:04.743 --> 00:25:08.909
+David Thomson: The knowledge errors for the Ccba and Steve App.
+
+147
+00:25:09.130 --> 00:25:17.550
+David Thomson: I'm pretty sure this is still correct. They change sometimes. You'll see different different percentages from different person. But you can see, as you can see.
+
+148
+00:25:17.670 --> 00:25:20.890
+David Thomson: what I like to tell people for Ccba and Cbap.
+
+149
+00:25:21.020 --> 00:25:29.460
+David Thomson: you really want to study this knowledge area for requirements, analysis and design definition, that is, that is a big part of that.
+
+150
+00:25:29.994 --> 00:25:41.599
+David Thomson: Also. You know definitely, you can see the differences between like illustration and collaboration is really high for Ccba, where it's not so high for the Cpap.
+
+151
+00:25:41.820 --> 00:25:42.610
+David Thomson: So,
+
+152
+00:25:43.540 --> 00:25:55.849
+David Thomson: Cbap, you'll you'll talk a lot more about techniques. And you know, techniques as they apply to the different knowledge areas and definitely, solution, evaluation is a big one for Cbap as opposed to Ccba.
+
+153
+00:25:55.960 --> 00:26:04.099
+David Thomson: You'll notice when they're when you have prep courses. A lot of them are are for CC Ccba and Cbap.
+
+154
+00:26:04.200 --> 00:26:22.342
+David Thomson: In fact, I took a prep course. We'll talk a little bit more about prep courses, but you know my my course was Ccba and Cbap, and out of the like 6 or 8 people in the class. Only one of them was planning to take the Ccba. And we're like, Well, why don't you just do the Cbap, you know it's
+
+155
+00:26:23.460 --> 00:26:32.460
+David Thomson: you know you're studying this, anyway. Might as well just take the CC. Bay. But you'll see that a lot. In fact, this is A. This is a book that I.
+
+156
+00:26:32.880 --> 00:26:47.439
+David Thomson: Yeah, I I'm you know. I I recommend watermark because they help me with all my BA studies except for product owner analysis, which they don't have a product. Owner analysis prep course, but or a study exam.
+
+157
+00:26:47.570 --> 00:26:50.769
+David Thomson: at least they. The last time I looked, I did. But
+
+158
+00:26:51.480 --> 00:27:19.879
+David Thomson: yeah, definitely. The Cbap certification Guide is a big big help to get prepared. Obviously, the Babak, if you're a member of Iiba, you get a Pdf version of the Babak, and definitely the Babak. You'll see in my prep. You definitely want to use the Babak I also want to get. If you. There are other guides out there. I recommend the watermark. They don't pay me. There's other materials like their flashcards and their study tables.
+
+159
+00:27:20.020 --> 00:27:23.920
+David Thomson: As you get into them you'll realize that those are valuable tools.
+
+160
+00:27:24.798 --> 00:27:31.402
+David Thomson: Cc, watermark also has different study exams like I was mentioning.
+
+161
+00:27:32.090 --> 00:27:41.200
+David Thomson: they you subscribe to them, you know I like I was recommended to a colleague. Who's studying for the Ecpa. 30 days.
+
+162
+00:27:42.328 --> 00:27:53.980
+David Thomson: access to the study exams. These are exam simulations and study study guides for specifically for those exams. It's it's worthwhile investment. So I
+
+163
+00:27:54.650 --> 00:28:18.029
+David Thomson: I repurchased these several times. Oh, well, 2 or 3 times as I was preparing for my cbap, because I kept rescheduling my exam, I was waiting and waiting as life was going on. So these are great, great way to prepare. The costs are a little bit more. First, st you can see I just changed it. Ccba is $99
+
+164
+00:28:18.210 --> 00:28:20.990
+David Thomson: for not 30 days access. So
+
+165
+00:28:21.190 --> 00:28:31.310
+David Thomson: it's a another investment. Same with CC Cbap. It's a same cost. But watermark is. I use watermark, and I really got
+
+166
+00:28:31.960 --> 00:28:35.000
+David Thomson: value out of that. So might check that out. If you're interested.
+
+167
+00:28:35.530 --> 00:28:41.240
+David Thomson: I'll definitely use leveraging practice exams as always, a part of my
+
+168
+00:28:41.370 --> 00:28:44.120
+David Thomson: my prep. Of course, like I said when I did the
+
+169
+00:28:45.370 --> 00:28:48.140
+David Thomson: product owner analysis, there wasn't a practice exam.
+
+170
+00:28:48.916 --> 00:28:54.350
+David Thomson: Here's a sample timeline I would recommend. If you're planning to take the Ecpa. And the 1st thing is
+
+171
+00:28:54.786 --> 00:28:58.830
+David Thomson: I always say, take give yourself one to 2 weeks to read
+
+172
+00:28:58.990 --> 00:29:08.110
+David Thomson: the Babak cover to cover and really read it. Not just skim it, but just read through it. You don't have to memorize it, but just read through it, and then spend time on the
+
+173
+00:29:08.543 --> 00:29:16.309
+David Thomson: the business analysis key concepts and and go over the knowledge areas because even though they specifically focus on all of the knowledge areas.
+
+174
+00:29:16.650 --> 00:29:26.130
+David Thomson: It does give you great context and it and it's good to to go through them and have a really good understanding. Of those.
+
+175
+00:29:26.310 --> 00:29:27.250
+David Thomson: you know. I think
+
+176
+00:29:27.420 --> 00:29:35.520
+David Thomson: I always have said that 12 weeks to prepare for the Ecba. It should get you well prepared to take and pass that test.
+
+177
+00:29:35.930 --> 00:29:40.569
+David Thomson: So but you know, I always say, read the Babak cover to cover for sure.
+
+178
+00:29:41.345 --> 00:29:46.510
+David Thomson: Now for for the Ccba or Cbap.
+
+179
+00:29:46.730 --> 00:29:54.549
+David Thomson: Very similar you can see how I broke it down into really digging in to each of the the knowledge areas.
+
+180
+00:29:55.265 --> 00:29:56.495
+David Thomson: And also
+
+181
+00:29:57.651 --> 00:30:10.429
+David Thomson: the techniques spending a week on techniques or 50 techniques. Learn you don't have to learn them all inside and out, but just have an understanding of what they are at the high level at the very least, and some of them really knowing the details. And
+
+182
+00:30:10.580 --> 00:30:12.989
+David Thomson: there's a lot of good information there
+
+183
+00:30:13.436 --> 00:30:26.619
+David Thomson: spending time doing focus practice exams those practice exams taking them and figuring out great thing about at least I don't know about the other online exams. So I like, I said I had good good luck with the watermark exams.
+
+184
+00:30:26.730 --> 00:30:33.009
+David Thomson: But they tell you what you're what you missed, what you maybe not be doing so good in and they
+
+185
+00:30:33.704 --> 00:30:40.729
+David Thomson: allow you to take a test that focuses on that area. So I think the 1st time I took my Cbap
+
+186
+00:30:40.810 --> 00:31:04.093
+David Thomson: prep. Exam on the watermark just to test my knowledge, and I just gone through a boot camp or not boot camp, but a a 4 day course to prep for it. I guess I guess you call it Boot Camp. But I took my 1st exam, and I got like a 50 or a 60. I was really disappointed. The the prep. Exams are a lot more harder than a lot harder than
+
+187
+00:31:04.510 --> 00:31:10.149
+David Thomson: Then the exam itself. They really helped you to prepare help you to prepare. So
+
+188
+00:31:11.938 --> 00:31:20.400
+David Thomson: but yeah, practice exams, reviews going back and going back. And I'd say, 15 weeks of focus. And this is focus is not just casually.
+
+189
+00:31:20.590 --> 00:31:22.909
+David Thomson: you know. Get to it. What I was doing is
+
+190
+00:31:23.100 --> 00:31:29.420
+David Thomson: I was. I was getting to work an hour early, and I was reading the Babak and
+
+191
+00:31:29.570 --> 00:31:31.840
+David Thomson: taking test exams to do that
+
+192
+00:31:32.050 --> 00:31:34.699
+David Thomson: to prepare. So it's worth the extra effort.
+
+193
+00:31:35.321 --> 00:31:40.559
+David Thomson: Like I mentioned. I I did a a certification prep class.
+
+194
+00:31:41.155 --> 00:31:44.274
+David Thomson: If you go to this link, and
+
+195
+00:31:45.300 --> 00:31:52.090
+David Thomson: we should be able to provide you these these slides in Pdf format. I'm not sure if they're going to put them on the website or
+
+196
+00:31:52.838 --> 00:31:56.011
+David Thomson: or send them around. But nevertheless,
+
+197
+00:31:57.100 --> 00:32:10.169
+David Thomson: the this is I. I would definitely don't take a certification course unless they're one of Iba's and endorsed providers. Because, there's some scams out there. You know.
+
+198
+00:32:10.560 --> 00:32:20.096
+David Thomson: Be aware of classes that aren't Ib endorse. They'll make big promises. And you know, there's no substitute. Cramming is not
+
+199
+00:32:20.700 --> 00:32:25.199
+David Thomson: you know, not really a substitute. Youtube videos are not a substitute. So
+
+200
+00:32:25.717 --> 00:32:32.312
+David Thomson: there are different options, you know, different expenses. I'll I'll break down some of those expenses as well.
+
+201
+00:32:32.770 --> 00:32:42.220
+David Thomson: yeah, here's a few benefits of the certification prep class, their intense focus. The instructors typically have had
+
+202
+00:32:42.570 --> 00:33:11.990
+David Thomson: multiple students going through that. They've heard feedback. They they know exactly what to prepare on you can. You can have specific case studies to practice on. They do a deep dive. Financial calculations, particularly if you're taking the Cbap is something that this gives you an opportunity to get. I'm I'm not so good in math. I always need excel. And so understanding financial calculations.
+
+203
+00:33:12.916 --> 00:33:21.879
+David Thomson: For example, or I or Roi calculations and figuring all that out. Something that this helped me with understanding those
+
+204
+00:33:22.390 --> 00:33:25.050
+David Thomson: and a lot of times the fees
+
+205
+00:33:25.670 --> 00:33:29.750
+David Thomson: include things like you know, some support materials.
+
+206
+00:33:30.130 --> 00:33:33.099
+David Thomson: So it's worthwhile checking out prep classes.
+
+207
+00:33:34.305 --> 00:33:36.930
+David Thomson: Here's the sample costs of prep classes.
+
+208
+00:33:37.405 --> 00:33:42.500
+David Thomson: A few places to take. Take a look at. Simply excuse me, simply learn
+
+209
+00:33:43.580 --> 00:34:02.980
+David Thomson: though, when I checked their costs were $873 for like a 8 or 16 week online. Depending on how many days a week? And 8 73 adaptive U.S.A, they have a special. I think they have a special all the time
+
+210
+00:34:03.456 --> 00:34:12.239
+David Thomson: for for training. When I was looking to do a A. Prep class, it was down to me between adaptive us and watermark learning
+
+211
+00:34:12.727 --> 00:34:38.102
+David Thomson: and I have to be honest with you. Adaptive was just really aggressive, and were telling me why they were better than watermark, and and how less expensive they were, and so that helped me decide to go with watermark. So, and I'm glad I did. Watermark was a significant higher investment for me, but it was certainly worth it. I had 4 days online which fulfilled my
+
+212
+00:34:38.820 --> 00:34:45.370
+David Thomson: my classroom learning requirement for the Cbap as well, and really help me
+
+213
+00:34:45.850 --> 00:34:49.879
+David Thomson: prepare. It was definitely more expensive, but it was worth it for me.
+
+214
+00:34:50.170 --> 00:34:54.630
+David Thomson: Your mileage may vary, though, of course. So up to you, okay.
+
+215
+00:34:55.000 --> 00:35:08.390
+David Thomson: talking about this practice exams, I probably should put this a little earlier because I was talking about the practice exams a little bit ago. But all of these companies provide practice exams, watermark, which is what we're seeing, the sample of
+
+216
+00:35:08.990 --> 00:35:16.310
+David Thomson: Udemy. I'm not pronounce that. But exam labs. These are some all listed here that I found Cbet practice exams, for
+
+217
+00:35:16.740 --> 00:35:22.459
+David Thomson: they may have Ecpa but not not 100% sure on all of them.
+
+218
+00:35:22.610 --> 00:35:28.410
+David Thomson: But here's an example. This is why I like these. Here's an example, you know. This is one I got wrong.
+
+219
+00:35:28.895 --> 00:35:48.759
+David Thomson: You read the read the thing screen. Susan is a business analyst, developed screen, mock up for key stakeholders, showing fields from a data model, which is the following is true. And I thought, Oh, I see, definitely. And I said, this is potentially correct. But you know, here's why it's not correct. And here's why this is a better solution.
+
+220
+00:35:49.010 --> 00:36:05.040
+David Thomson: This is gold to me. This shows me like, Oh, okay, I I understand. You know I learned from this that you're not picking the 1st one. You have to really think about what the answer is you have to, you know. And so I knew right away. It tells you we're in a bad Oc. To find
+
+221
+00:36:05.150 --> 00:36:19.709
+David Thomson: this, and what what table to find this is in in watermarks. Study guide, of course. But this was certainly super helpful for me, you know. So this is, you know what you get with a practice exam. So think, really, think about that. If you're
+
+222
+00:36:19.860 --> 00:36:23.080
+David Thomson: if you're planning on to taking that.
+
+223
+00:36:24.750 --> 00:36:42.154
+David Thomson: Okay, so here, here's the fun part, the certification application process. This is just for Ccba and Cbap. Ecba doesn't require the application, like I said before, but you can go to click on this link, and it'll take you to
+
+224
+00:36:43.650 --> 00:37:09.879
+David Thomson: It'll take you to the application process. But yeah, I tell people is, Hey, if you're PA, and you think one day, or Pm. Or whatever you think, you one day want to take a certification document what you're working on, especially if you move from company to company or project to project. If you're a consultant or something over the over a few years, you know, you need to be able to refer back to what you worked on
+
+225
+00:37:09.950 --> 00:37:26.169
+David Thomson: and who you worked with at at some time, you know, because it does want to know who your project manager or manager was. but you know, there's a template that is available from Iba's website to to help you track your your knowledge areas like a excel spreadsheet.
+
+226
+00:37:26.699 --> 00:37:29.879
+David Thomson: Also keep track of any of the training that you've had.
+
+227
+00:37:30.000 --> 00:37:35.469
+David Thomson: Now, that's a that's a key coming to something like this where we're training on a topic.
+
+228
+00:37:36.017 --> 00:37:42.679
+David Thomson: If there's a Cbap in there, ask ask whoever's given the the the talk
+
+229
+00:37:43.272 --> 00:37:57.640
+David Thomson: for you know, if it's a session study session such as this, ask them to provide you with continuing Ed credit, they'll you'll be able to leverage that if a Cpap is training then then you're you know.
+
+230
+00:37:57.910 --> 00:38:02.570
+David Thomson: and and they're talking about iba a Babak
+
+231
+00:38:02.690 --> 00:38:06.190
+David Thomson: topics, then you should should be able to get credit for that. So
+
+232
+00:38:06.625 --> 00:38:17.240
+David Thomson: if you're not a member of Iba yet, you know it'll save you the exam fees, but it's also a great way to to find what's going on in the world. I tell somebody, if you're ever bored and can't sleep, there's probably an Iba
+
+233
+00:38:17.330 --> 00:38:37.009
+David Thomson: chapter meeting going on somewhere in the world. Or you just need to brush up on certain skill. A lot of the chapters have really great things. A lot of them have study sessions, too, that we're focusing on getting people through a certification. So something to think about. Fill out the application. Pay the application fee schedule your exam once you're approved.
+
+234
+00:38:40.165 --> 00:38:43.144
+David Thomson: here's some quick studying strategies.
+
+235
+00:38:43.920 --> 00:38:55.530
+David Thomson: you know. Figure out a pace that works best best for your your life, you know. I said I'd get to work an hour early. That doesn't work for everybody. I'm a morning person, so that that worked out for me that helped me out.
+
+236
+00:38:56.065 --> 00:39:04.940
+David Thomson: Don't rush, don't. It's good idea to put something on the calendar and start working towards that goal. But if you're not ready reschedule it.
+
+237
+00:39:05.050 --> 00:39:15.809
+David Thomson: you know. I had to reschedule mine several times. I I got a new job. I moved. I bought a house, you know all that stuff was happening while I was trying to prepare for my cpap.
+
+238
+00:39:16.235 --> 00:39:25.700
+David Thomson: And I've said this before. If you heard me talk about the topic I I got down to when you, when you get approved to take the the Ccba and Cbap
+
+239
+00:39:26.010 --> 00:39:31.100
+David Thomson: or Cbep, you have one year for approval, and if you don't
+
+240
+00:39:31.310 --> 00:39:38.349
+David Thomson: take the exam within that one year you have to reapply, and you have to repay your application fee.
+
+241
+00:39:38.500 --> 00:39:41.400
+David Thomson: So I was down to the last day
+
+242
+00:39:41.510 --> 00:39:46.099
+David Thomson: that I could take and pass the exam, or else I was gonna have to reapply.
+
+243
+00:39:46.300 --> 00:39:57.669
+David Thomson: And that wasn't gonna be a good conversation to have with my wife. Why, I had to spend that money at Christmas time. No, no less. And so yeah. But I that said
+
+244
+00:39:58.178 --> 00:40:04.441
+David Thomson: I kept Kevin to push it off and reschedule it till I was really focused and ready. So
+
+245
+00:40:05.370 --> 00:40:12.170
+David Thomson: you know, I did all that study and those timelines I suggest. But I did it more spread out.
+
+246
+00:40:12.540 --> 00:40:20.690
+David Thomson: anyway. But take advantage of anything, really study the techniques, the 50 techniques, especially the Ccba and Cbap.
+
+247
+00:40:20.830 --> 00:40:29.000
+David Thomson: And really, there's intense focus of the practice exams. If you get the practice exams that really helps out really helps out. So
+
+248
+00:40:30.090 --> 00:40:30.960
+David Thomson: let's see.
+
+249
+00:40:32.240 --> 00:40:39.639
+David Thomson: So those are good. Some good strategies. Also. Find some folks to study with, you know. Usually there are
+
+250
+00:40:40.198 --> 00:41:00.241
+David Thomson: iba chapters or people you work with that are that are, you know, having study sessions or someone's like, you know. I want to take that, too. I I know a couple of people that are planning to take the Cbap this year, and you know, I've had people reach out to me to help me help me study. I want to review some things with you. I'm glad to help
+
+251
+00:41:00.630 --> 00:41:15.919
+David Thomson: and it's always good for me to brush up as well. You know more. I teach classes like this, and and especially the ones about the knowledge, different knowledge areas of the Iba or different topics. It just helps me as a business analyst myself.
+
+252
+00:41:16.050 --> 00:41:19.899
+David Thomson: So I'm glad to to teach and share my knowledge. That's
+
+253
+00:41:20.220 --> 00:41:38.179
+David Thomson: I really love that there are some mnemonics that you'll find on the web, and especially if you take. I don't know about the other company. But I know watermark has these mnemonics to help you help you learn. You know different different things that will help you with your exam. Here's 1 about the
+
+254
+00:41:38.630 --> 00:41:44.300
+David Thomson: different attributes they have a mnemonic to bring over for that. So
+
+255
+00:41:44.970 --> 00:41:47.420
+David Thomson: it's fun things that I hope you remember.
+
+256
+00:41:48.500 --> 00:41:58.360
+David Thomson: your local chapter and other chapters. Like, I said before, there's usually someone on a daily basis having some sort of study or some kind of topic to help review, but
+
+257
+00:41:58.590 --> 00:42:02.039
+David Thomson: definitely reach out. To those who have taken the exam. They'll be able to give you.
+
+258
+00:42:03.920 --> 00:42:05.580
+David Thomson: Give you some ideas as well.
+
+259
+00:42:06.550 --> 00:42:07.960
+David Thomson: I suggest
+
+260
+00:42:08.730 --> 00:42:17.090
+David Thomson: no shortcuts. Don't try to cram. Really. Take your time. Really. Read the Babak people say, you know, I try to read this before I go to bed, and I fall asleep.
+
+261
+00:42:17.280 --> 00:42:36.070
+David Thomson: Yeah, the Babak is the sure cure for insomnia. So really wake up and sit at your desk with a bright light on, and and try to focus on it, that's what, and don't try to consume the whole thing. It's not a buffet. It's 1 meal at a time with the Babak for sure.
+
+262
+00:42:36.593 --> 00:42:45.710
+David Thomson: Yeah, there's a con joining Iba with the Pdf version like I mentioned. If you get you get when you're a Iba member of the Bab of the Babak
+
+263
+00:42:45.820 --> 00:42:55.439
+David Thomson: you control. FII love. I bring the back up all the time on my desktop and control F to find whatever I'm looking for, you know. That's great.
+
+264
+00:42:55.760 --> 00:42:56.560
+David Thomson: Oh.
+
+265
+00:42:56.920 --> 00:43:20.739
+David Thomson: really, if you're studying for Ccba or Cbap, learn The Inputs tasks and outputs of each knowledge area. And if you've looked through the Babak. You know what those are, really, internalize them, remember them and understand them definitely. Understand that the techniques, not just what they are, but when you would use them, read through the Babak, it'll tell you.
+
+266
+00:43:21.330 --> 00:43:26.480
+David Thomson: It'll tell you for this knowledge area what some of the techniques you will use.
+
+267
+00:43:26.790 --> 00:43:28.789
+David Thomson: for example, and that's a good one
+
+268
+00:43:29.211 --> 00:43:43.400
+David Thomson: obviously prep classes. And any of those things like the study tables or the flashcards, or whatever you can get your hands on are really good. If you have linkedin premium, it's been a while since I've looked at these. But Jamie champagne, she's like a
+
+269
+00:43:43.956 --> 00:43:52.269
+David Thomson: you know. Kind of celebrity. BA, she does a lot of teaching on business analysis. But she's got some exam prep. Videos.
+
+270
+00:43:52.390 --> 00:44:14.620
+David Thomson: So one of the things she talks about, though, is a lot of memorization, and that just didn't work for me, memorizing things and writing things down as you're starting the exam. Yeah, that didn't quite work for me, but I did find her tips helpful. I reviewed those before I took the Cbap. So it's been a few years, though I'm sure those are probably still out there. But you might want to check
+
+271
+00:44:15.370 --> 00:44:20.549
+David Thomson: the Iba website has blueprints for all the exams, too, and that's good. And
+
+272
+00:44:21.040 --> 00:44:22.165
+David Thomson: one thing, my
+
+273
+00:44:23.280 --> 00:44:37.580
+David Thomson: my my instructor, when I took my prep class talked about, was, listen to classical music. They said, it's the Mozart effect. You don't necessarily have to have to listen to classical. But listen to something helps you. Listen to music kind of helps your brain. That's something
+
+274
+00:44:37.760 --> 00:44:40.110
+David Thomson: I wanted to throw in there, and
+
+275
+00:44:40.240 --> 00:44:43.521
+David Thomson: it it worked for me. So there we go.
+
+276
+00:44:44.750 --> 00:44:51.510
+David Thomson: Here's just a very rough idea of what a certification exam, looks like, have you ever taken an online certification?
+
+277
+00:44:52.115 --> 00:44:59.269
+David Thomson: That's that's kind of what it looks like. And if you're in person, you know, at A at a exam
+
+278
+00:44:59.650 --> 00:45:01.420
+David Thomson: exam company. You know
+
+279
+00:45:02.050 --> 00:45:24.755
+David Thomson: that you'll have a screen, your computer screen and you'll you'll see it very similar to this neat thing about, is it? You'll you'll be able to select which, and there'll be a question, and there'll be an answer, and you have a navigation. You can go back and forth if you need to, you can flag certain questions, and when I took my cbo I I flagged a ton of questions that I wasn't quite sure of. And as I got further into it, I
+
+280
+00:45:25.900 --> 00:45:38.838
+David Thomson: I was like, okay, I know what that was, and I went back and checked them. And then some of them I was just like, I'm gonna at the end of my exam. I'm gonna spend as much time as I can. And I didn't take up the whole time, but I came close to it
+
+281
+00:45:39.330 --> 00:45:41.830
+David Thomson: And you know to.
+
+282
+00:45:42.010 --> 00:45:49.077
+David Thomson: But I did that by flagging the questions I wasn't comfortable with. So oh, so there's that
+
+283
+00:45:50.350 --> 00:45:56.059
+David Thomson: Here's where we talk about prep before they actually taking the exam the test time. I'm a morning person.
+
+284
+00:45:56.260 --> 00:46:01.910
+David Thomson: and and the morning worked best for me, so I knew.
+
+285
+00:46:02.240 --> 00:46:12.600
+David Thomson: You know. I told you I got down to the last day, and when I was scheduling the exam. I realized, you know, it was going to be the following week, but it was the last day I was able to take the test.
+
+286
+00:46:13.145 --> 00:46:23.109
+David Thomson: I. I realized that where I wanted to take this test, and the time I wanted to take it at was not available where I live in Knoxville
+
+287
+00:46:23.320 --> 00:46:29.400
+David Thomson: the local place was not, didn't have a slot for me at that time, and I was like, What am I gonna do?
+
+288
+00:46:29.660 --> 00:46:39.850
+David Thomson: So I took the end up, taking the exam in the Asheville, North Carolina, which is about hour and a half, 2 h. Drive from here 2 h plus drive, I think.
+
+289
+00:46:40.271 --> 00:46:59.700
+David Thomson: From here, and I went the night before I stayed in a hotel, and I you know I studied the night before just final prep. The night before. I went in the next morning and took the test, but I wanted to take it in the morning, because I'm a morning person, so I knew if I took it in the afternoon. No, I would be
+
+290
+00:47:00.020 --> 00:47:01.549
+David Thomson: might not be able to get through it.
+
+291
+00:47:01.910 --> 00:47:06.899
+David Thomson: So ecpa is an exam. It's an exam that you
+
+292
+00:47:07.230 --> 00:47:17.160
+David Thomson: have to take online. There's no, you can't go to a local place to take it. So when you take a online exam, it's really specific about what you do.
+
+293
+00:47:18.018 --> 00:47:27.580
+David Thomson: You have to be in a room that basically has nothing in it. And you know, it's like a empty conference room with nothing, no whiteboards or something. Everything covered up
+
+294
+00:47:28.170 --> 00:47:32.359
+David Thomson: really tough. I luckily we have like a screen and porch
+
+295
+00:47:33.030 --> 00:47:35.910
+David Thomson: and when I took my
+
+296
+00:47:36.515 --> 00:47:38.989
+David Thomson: my agile analysis and my
+
+297
+00:47:39.558 --> 00:47:50.740
+David Thomson: product owner analysis, I I did out there. We just have a couch and a table essentially out there. And that's there was nothing out there. They made me hold my
+
+298
+00:47:50.820 --> 00:48:09.819
+David Thomson: my laptop so that they could view with the camera under the table that I was I was using and all around the room to make sure that there was nothing that I was using for notes or anything like that. So it's kind of a pain to be honest. You know, you have to have a webcam and speakers. You have to have a stable
+
+299
+00:48:10.567 --> 00:48:12.390
+David Thomson: stable Internet connection.
+
+300
+00:48:12.700 --> 00:48:18.460
+David Thomson: That's that's good. If you drop your connection. That could be very, very tough.
+
+301
+00:48:18.510 --> 00:48:43.960
+David Thomson: So I heard one person say they they were reading through the questions, and they're reading them to themselves. But they were moving their lips. So they were reading the questions, and they said, Stop, what are you doing? Who are you talking to? And they said, I'm not talking to anybody. I'm just reading these questions, they said, well, stop moving your lips. So that's something to think about when you're taking an online exam, but I definitely recommend going to a testing center for Ccba or Cbap.
+
+302
+00:48:44.260 --> 00:48:53.490
+David Thomson: you know they have. This is this is really what these look like. If you've never been to one before, it's like there's somebody in the middle to monitor you. You go into this quiet room.
+
+303
+00:48:53.590 --> 00:49:07.069
+David Thomson: and you sit at a cube is very much like what I I had when I took my my Cvap in Nashville, North Carolina, very similar to this only thing was there were people taking that, you know. You see, I
+
+304
+00:49:07.490 --> 00:49:24.457
+David Thomson: oh, I didn't mention it here. Oh, distractions from others! When I was in there taking my Cbab. There were people that had like an open book exam. And they had these huge binders. There were like 4 or 5 people in there taking it. And they kept opening these huge binders. That was distracting. But
+
+305
+00:49:25.010 --> 00:49:34.319
+David Thomson: but I I got through it. But yeah, you have to go there. You have to obviously schedule a time you have to check in. They can give you a break if you need it. You know
+
+306
+00:49:34.600 --> 00:49:44.909
+David Thomson: you can't have anything. They can either give you a whiteboard or one sheet of paper to write notes down, especially if you're doing. If you're doing the Cbap and some financial calculations that's good to have.
+
+307
+00:49:45.523 --> 00:49:52.810
+David Thomson: There are lots of locations to do that, but they're they have different rules. So definitely look into that planning to do that.
+
+308
+00:49:53.410 --> 00:50:02.970
+David Thomson: Alright. Here's some exam tips, not the study tips. These are exam tips. Yeah, like I said before schedule the time that works best for you. Plenty of rest.
+
+309
+00:50:03.378 --> 00:50:10.350
+David Thomson: I I threw my tip in there. Consider taking the test out of town. If you want to focus the final hours. I didn't necessarily
+
+310
+00:50:10.360 --> 00:50:33.149
+David Thomson: plan that. And just it was funny. Because my wife said, Why are you going to Asheville? And why can't I go. And I was like, because I'm going to study the whole time. There's no fun. It's just gonna study. And then I'm gonna get up the next morning and take the exam, and then I'm coming back home so it was no vacation for me, and and you know, going going out of town to do that. It was totally focused on on taking the exam. But
+
+311
+00:50:33.578 --> 00:50:41.210
+David Thomson: definitely with the case studies, take your time. If you're doing a Cbap, take your time. Read through the case studies like I said, I sweated a lot about these case studies.
+
+312
+00:50:41.659 --> 00:50:45.249
+David Thomson: Take your time on them. There are multiple questions per case study
+
+313
+00:50:45.866 --> 00:51:02.460
+David Thomson: and here's another thing. If you think you know the right answer, it may not be you have to think about. I've told. I told this to someone else. It's like you have to have a Babak hat to put on when you take the the certification exams. You know we live in a world where
+
+314
+00:51:02.780 --> 00:51:07.940
+David Thomson: you know things aren't completely by the book, by the Babak, you know, when we do business analysis
+
+315
+00:51:08.530 --> 00:51:14.679
+David Thomson: and don't think about what's what you think is right. Think about what the bad box says is right. When you're taking these exams.
+
+316
+00:51:14.850 --> 00:51:18.419
+David Thomson: you could live in the real world on your job. But when you're taking the exams
+
+317
+00:51:18.690 --> 00:51:21.990
+David Thomson: definitely live in the Babak world for that time,
+
+318
+00:51:23.680 --> 00:51:46.530
+David Thomson: use all the time you need for the exam, too. That's a big one. Don't stick with questions. If you don't like, keep focusing on one question, flag it and move on. That's a good one. Go with your 1st instinct. If you're unable to decide that that's something that someone told me. It's like, Hey, usually your 1st instinct is right. If you're not 100% sure, flag it and come back to it. But go with your 1st instinct.
+
+319
+00:51:47.154 --> 00:51:56.410
+David Thomson: If you can take a break, take a break, and you know sometimes you need to step out, use the restroom, get a drink of water or something, you know it's it's worth it.
+
+320
+00:51:58.000 --> 00:52:05.349
+David Thomson: Don't get too nervous. Have fun. Well, that's easy to say I was sweating bullets but but still
+
+321
+00:52:06.780 --> 00:52:20.999
+David Thomson: make it fun, though as much as possible. It's fun if when you click it, and it says you pass. That's fun, but don't get discouraged. Keep going and doing your best. I got discouraged in mine. Honestly, I was like. Oh, gosh!
+
+322
+00:52:21.170 --> 00:52:36.339
+David Thomson: How am I gonna explain to my wife that I have to dig this again? I'm gonna have to pay this fee again. She's gonna be mad at me. You know she was. She wouldn't have been. But you know I just was thinking about I was starting to get discouraged because it's like, Oh, man, this wasn't what I thought it was gonna be.
+
+323
+00:52:36.510 --> 00:52:48.440
+David Thomson: But you know, it actually was. And I did really good, actually did above average, it tells you if you do, above average, below average or average. And I did above average on mine. So I was like, All right, yeah, I was so happy after that. But
+
+324
+00:52:48.660 --> 00:52:50.139
+David Thomson: but don't get discouraged.
+
+325
+00:52:51.470 --> 00:52:57.230
+David Thomson: Here's some useful links. These are mostly to the certification handbooks, and to some of these.
+
+326
+00:52:58.504 --> 00:53:05.650
+David Thomson: this is about the proctored exams and and then the rest of these are are some of those places with the
+
+327
+00:53:06.587 --> 00:53:13.010
+David Thomson: With the links to study, or whatever. So these are good. These are good to have for sure.
+
+328
+00:53:15.010 --> 00:53:18.112
+David Thomson: Yeah. And so yeah, with that.
+
+329
+00:53:19.180 --> 00:53:26.240
+David Thomson: any questions. Or do you guys have any tips, or if you've heard about, or if you've taken any certification exams, you want to share.
+
+330
+00:53:35.200 --> 00:53:36.260
+Chiebonam Maduemem: I have a question.
+
+331
+00:53:36.260 --> 00:53:37.280
+David Thomson: Yes, please.
+
+332
+00:53:37.830 --> 00:53:42.730
+Chiebonam Maduemem: And so I wanted to ask if we get the results. Immediately after the exam.
+
+333
+00:53:44.980 --> 00:53:49.670
+David Thomson: Yeah, you do get the. If I heard your question correctly, I'm sorry. A little trouble hearing. But
+
+334
+00:53:51.180 --> 00:53:55.689
+David Thomson: are you? Are you asking if you get the results immediately after taking the exam.
+
+335
+00:53:56.170 --> 00:53:56.700
+Chiebonam Maduemem: Yes.
+
+336
+00:53:56.700 --> 00:54:15.900
+David Thomson: Yes, that's absolutely true. Yes, you. When you're done with your questions, you've answered all the questions you kind of. You submit the exam. Let's see if I have that graphic. You you in the test essentially, and it takes a couple of minutes oh, not a minute, but several seconds at least and then it'll come back, and it'll say
+
+337
+00:54:16.220 --> 00:54:19.039
+David Thomson: congratulations. You passed something to that effect.
+
+338
+00:54:19.490 --> 00:54:22.556
+David Thomson: And so yeah, so it's
+
+339
+00:54:23.970 --> 00:54:28.176
+David Thomson: I don't honestly don't know what it says. When you fail it's like, knock on fail one, but
+
+340
+00:54:29.278 --> 00:54:32.331
+David Thomson: I imagine it's probably similar. But
+
+341
+00:54:33.357 --> 00:54:38.819
+David Thomson: sorry you failed. You could take, retake it, or whatever, but at least with the Cpap. I'll say this
+
+342
+00:54:39.020 --> 00:54:50.689
+David Thomson: later on. Iba. They sent me a congratulation email, of course. Thank you. Congratulations for passing. And then they gave me a rundown of how I did on the on the test. They didn't go by question by question.
+
+343
+00:54:51.400 --> 00:55:10.789
+David Thomson: You never will know. Remember the questions you had. But they tell you by knowledge area or by exam topics. You know, in very general, whether you did below average or above average, you know, that's 1 thing. That's the feedback you get. But that's later. But yeah, immediately you'll find out whether you passed or not.
+
+344
+00:55:11.980 --> 00:55:13.760
+David Thomson: Great question. Yeah. Great question.
+
+345
+00:55:13.760 --> 00:55:14.520
+Chiebonam Maduemem: Okay.
+
+346
+00:55:15.760 --> 00:55:19.129
+David Thomson: Couple of quick things just really before the end we end here.
+
+347
+00:55:19.520 --> 00:55:31.520
+David Thomson: you know, if you looked at the back, have been a business for a while. You're familiar with these 6 knowledge areas. These are the keys. This is really primarily what you're tested on. And the Ccba and Cbap exams.
+
+348
+00:55:31.650 --> 00:55:34.080
+David Thomson: So it's good to understand what these are.
+
+349
+00:55:34.719 --> 00:55:40.170
+David Thomson: Also, the the business analysis core concept model is the is the big one.
+
+350
+00:55:40.644 --> 00:55:51.995
+David Thomson: You know. That's a good one to to make sure, you know. And then knowing the perspectives, that's something that's important I found on the Cbap, knowing the different perspectives.
+
+351
+00:55:52.540 --> 00:55:55.509
+David Thomson: and then finally, knowing the techniques.
+
+352
+00:55:55.650 --> 00:55:56.690
+Chiebonam Maduemem: So.
+
+353
+00:55:56.980 --> 00:56:00.890
+David Thomson: We have a with East Tennessee. I've done a
+
+354
+00:56:01.190 --> 00:56:03.341
+David Thomson: if you can believe it. We did a
+
+355
+00:56:03.980 --> 00:56:14.369
+David Thomson: a a study set 1 h study session, where we covered all of the 50 techniques. And that was very we did. We skimmed every one of them. So the next time.
+
+356
+00:56:14.470 --> 00:56:42.520
+David Thomson: instead of skimming through. We we did 2 sessions. And still that wasn't enough. So the last time we did this topic on on the Babba all 50 techniques, we spent an hour, 3 separate, 1 h sessions to go over all the 50 techniques. So but definitely, no understanding these and have a good good foundation on the 50 techniques that are in Chapter 10 of the Babak is important.
+
+357
+00:56:43.240 --> 00:56:47.579
+David Thomson: That's that's all extra I wanted to share. But that's that. That'll be included in your
+
+358
+00:56:48.461 --> 00:56:54.510
+David Thomson: the Pdf. That they send you. I think they're sending a Pdf. They may send a Pdf. Or they may send you a link to
+
+359
+00:56:54.800 --> 00:56:58.980
+David Thomson: to either this video or to to the slides themselves. So
+
+360
+00:56:59.540 --> 00:57:01.059
+David Thomson: I'll have to check with the
+
+361
+00:57:01.730 --> 00:57:05.559
+David Thomson: with the team about that to see how they how they'll distribute that, but
+
+362
+00:57:05.810 --> 00:57:08.058
+David Thomson: I'm really glad you all could join
+
+363
+00:57:08.570 --> 00:57:11.329
+David Thomson: and I hope you hope you learned a little bit.
+
+364
+00:57:11.560 --> 00:57:14.739
+David Thomson: and you know I'm certainly glad to
+
+365
+00:57:15.150 --> 00:57:18.119
+David Thomson: to be able to share with you tonight. So thank you for your time.
+
+366
+00:57:19.080 --> 00:57:19.840
+Chiebonam Maduemem: Thank you.
+
+367
+00:57:19.840 --> 00:57:24.360
+David Thomson: Alright. Hope you guys have a great well, evening or morning. I I see.
+
+368
+00:57:24.938 --> 00:57:29.839
+David Thomson: Simon, you're you're in New Zealand, so probably daytime there, right? So.
+
+369
+00:57:30.880 --> 00:57:31.862
+Simon Garwood: Yep, thank you.
+
+370
+00:57:32.190 --> 00:57:37.930
+David Thomson: Very good. Thanks for thanks for showing showing up and being here for us. Thank you. Have a great evening. Y'all.
+
+371
+00:57:38.630 --> 00:57:39.310
+Chiebonam Maduemem: Thank you.
+
+372
+00:57:39.310 --> 00:57:39.960
+David Thomson: Thank you.
+

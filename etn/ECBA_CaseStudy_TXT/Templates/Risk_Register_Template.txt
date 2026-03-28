@@ -1,0 +1,13 @@
+﻿Risk Register Template
+
+--- DOCUMENT GUIDE ---
+What this is:   Blank risk register for capturing project risks, likelihood, impact, mitigation actions, owners, and monitoring metrics.
+Who it's for:   Participants.
+When to use it: Session 3 onward.
+--- END GUIDE ---
+
+ID	Risk	Likelihood (L/M/H)	Impact (L/M/H)	Mitigation	Owner	Monitoring Metric
+1						
+
+Instructions: Capture top 5 risks; for each define a measurable monitoring metric.
+

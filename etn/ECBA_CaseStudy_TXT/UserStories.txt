@@ -1,0 +1,35 @@
+﻿User Stories — Micro-Expeditions (MVP)
+
+--- DOCUMENT GUIDE ---
+What this is:   MVP user stories for TrailBlaze's Micro-Expeditions feature — structured with acceptance criteria and story IDs, used as model requirement outputs.
+Who it's for:   Facilitator reference until Session 3; participants receive them in Session 3 as the model answer when converting raw needs into requirements.
+When to use it: Session 3 onward.
+Restricted:     Yes — facilitator reference only until Session 3.
+--- END GUIDE ---
+
+Session reveal: Session 3 (elicitation outputs) and Session 4 (requirements to RTM).
+
+Epic: Book a Micro-Expedition
+
+US-01: As a customer, I want to search available Micro‑Expeditions by date and difficulty so that I can find a suitable weekend trip.
+- Acceptance: Search returns matching trips within 500ms; filters persist during session.
+
+US-02: As a customer, I want to view trip details (itinerary, gear list, guide bio) so I can decide whether to book.
+- Acceptance: Trip detail page shows itinerary, guide bio, cancellation policy, price breakdown.
+
+US-03: As a customer, I want to book a trip and pay securely so that I receive a confirmation and itinerary PDF.
+- Acceptance: Payment succeeds via primary gateway; confirmation email + PDF delivered within 5 minutes; booking in ops dashboard.
+
+US-04: As an ops user, I want to see all confirmed bookings in a dashboard with guide assignment status so I can manage logistics.
+- Acceptance: New booking appears in dashboard within 60s; unassigned bookings flagged.
+
+US-05: As a guide, I want to receive assignment notifications with roster and contact details so I can prepare.
+- Acceptance: Guide receives email + optional SMS within 12 hours of assignment.
+
+Non‑functional examples
+- NFR-01: The booking flow must be PCI‑compliant (verified by test payment in sandbox).
+- NFR-02: Search latency must be <500ms 95th percentile.
+
+Extension/backlog ideas (post‑MVP)
+- Custom Trip Builder, Mobile offline itinerary, Photo add‑on delivery.
+

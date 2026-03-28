@@ -13,6 +13,11 @@ mammoth>=1.4.19
 html2text>=2020.1.16
 pypdf>=3.0.0
 beautifulsoup4>=4.12.2
+
+# AI content generation
+python-frontmatter>=1.1.0
+
+# Scheduling
 apscheduler>=3.10.1
 SQLAlchemy>=1.4
 prometheus_client>=0.16.0

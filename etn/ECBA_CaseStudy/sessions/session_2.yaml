@@ -1,0 +1,21 @@
+title: "Session 2 — Planning, Elicitation & Context"
+
+agenda:
+  - "Homework share-out (10 min)"
+  - "Concepts: BA planning & elicitation (25 min)"
+  - "Group exercise: BA approach (20 min)"
+
+homework: "Draft BA approach recommendation; 6 exam MCQs"
+
+prompts:
+  - "Which stakeholders to engage first?"
+  - "What elicitation techniques suit this stakeholder?"
+
+practice_questions:
+  - q: "Which elicitation technique is best for detailed requirements?"
+    choices:
+      - "Survey"
+      - "Interview"
+      - "Observation"
+      - "Brainstorming"
+    a: 1

@@ -1,0 +1,21 @@
+title: "Session 5 — Value, Review & Exam Readiness"
+
+agenda:
+  - "Pilot results reveal"
+  - "Post-pilot KPI analysis"
+  - "Exam simulation"
+
+homework: "KPI analysis; integrated exam practice"
+
+prompts:
+  - "Which requirements failed to trace to outcomes?"
+  - "What sequencing errors occurred?"
+
+practice_questions:
+  - q: "Pilot target was 100 bookings; actual was 87. This is a:"
+    choices:
+      - "Success"
+      - "Missed target (13%)"
+      - "Irrelevant"
+      - "Partial fulfillment"
+    a: 1

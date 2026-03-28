@@ -1,0 +1,80 @@
+Session 1 — Facilitator Script (timed)
+ECBA Domains: Understanding Business Analysis | Mindset for Effective BA
+Total: 90 minutes (single integrated session)
+
+--- DOCUMENT GUIDE ---
+What this is:   Timed word-for-word facilitator script for Session 1A — talking points, transitions, and responses to common participant questions.
+Who it's for:   Facilitator only.
+When to use it: Review the night before Session 1A; use as a guide during final prep or live in the session if needed.
+Restricted:     Yes — do not share with participants.
+--- END GUIDE ---
+
+Pre-session setup
+- Share or print: Workshop_Handout.md, Templates/Stakeholder_Map_Template.md
+- Display Slide 1 as participants arrive
+- Have answer sheet ready: Session1_Facilitator_Answers.md
+
+0:00–0:10 — ARCS Opener (Slide 4)
+- Read mountain gear company / GPS tracker scenario aloud (2 min)
+- Ask: "What went wrong here? Why?" — take 2–3 responses (2 min)
+- Transition: "TrailBlaze is about to make the same mistake — leadership is already talking about a new platform." (1 min)
+- Ask: "What should a BA do first?" — take 1–2 responses (1 min)
+- Say: "Today we define the problem before we ever touch a solution." (30 sec)
+- Reveal SATISFACTION beat: "By the end, you'll have a BACCM chart, stakeholder list, and problem statement." (30 sec)
+
+0:10–0:35 — Concepts with TrailBlaze anchors (Slides 5–11)
+- Slide 5 (What is BA): 4 min — pause at TrailBlaze anchor; ask "Who is playing this role at TrailBlaze right now?"
+- Slide 6 (Mindset): 4 min — pause; ask "Which mindset value is most needed at TrailBlaze right now?"
+- Slide 7 (BACCM): 5 min — read all 6 elements; drill mnemonic with group
+  - CHECKPOINT 1: ask Checkpoint 1 question (Session1_PracticeQuestions.md); vote, reveal, discuss (2 min)
+- Slide 8 (BACCM applied): 7 min — class guided fill-in; hold SOLUTION blank intentionally; ask "Why can't we fill in the solution yet?"
+- Slides 9–11 (Req vs Design, Stakeholders, Problem Statements): 5 min — move at pace; flag exam tips
+  - CHECKPOINT 2: ask Checkpoint 2 question (Session1_PracticeQuestions.md); vote, reveal, discuss (2 min)
+
+0:35–0:50 — Guided application recap
+- Return to Slide 8 BACCM chart; call on 3 different participants to fill in one element each
+- Confirm the class has a working BACCM before breaking into groups
+- Distribute handout if not already done
+
+0:50–1:15 — Group Exercise (Slide 12)
+- Split into groups of 3–4; assign scribe and presenter
+- Circulate and prompt:
+  - "What is the actual need — is 'more bookings' a need or a desired outcome?"
+  - "Who loses most if this problem isn't solved?"
+  - "What context is making this urgent right now?"
+- 3 min warning at 22 min; 1 min warning at 24 min
+- Watch for NEED/SOLUTION conflation — redirect before groups get too far
+
+1:10–1:20 — Share-out (Slide 13)
+- Each group: 3–4 min
+- Give 1 "what worked" + 1 "sharpen this" per group
+- Common issues to flag: solution buried in problem statement, vague stakeholder stakes, missing context in BACCM
+
+1:20–1:28 — Practice Round (Slide 13a)
+- Display Practice 1–4 from Session1_PracticeQuestions.md one at a time
+- 2 min per question: 1 min individual, 30 sec vote/discuss, 30 sec reveal rationale
+- After each: ask "Why is [wrong option] not the right answer?" — explaining distractors is the most exam-useful habit
+- Tip: if time is short, do 2 questions and assign the other 2 as homework
+
+1:28–1:30 — Homework + Close (Slide 14)
+- Walk through homework assignments (1 min)
+- Preview Session 2 TrailBlaze arc (30 sec)
+- Close: "You now have the foundation. Next session we start planning how to actually approach solving it."
+- Distribute or share survey link: Templates/Session_Survey_Template.md (Slide 14a) — complete before leaving
+
+Post-session (facilitator)
+- Review survey results before Session 2
+- Note: average confidence score, most cited unclear concept, homework readiness
+- Adjust Session 2 ARCS bridge or concept depth based on results
+
+Facilitator prompts
+- "What is the real need — is 'more bookings' a need, or a solution?"
+- "Who loses most if TrailBlaze does nothing?"
+- "What context is driving this — competitive pressure, seasonality, internal friction?"
+- "Your stakeholder has a stake — not just a role. What is actually at risk for them?"
+
+Common coaching notes
+- Push teams to define NEED clearly before touching SOLUTION in the BACCM
+- Problem statements must be measurable ("bookings declined 18%" not "bookings are low")
+- Value statements connect to business outcomes, not features
+- Encourage beginner BAs: "Getting this right is what separates good BAs from order-takers"

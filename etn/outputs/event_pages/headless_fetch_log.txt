@@ -1,0 +1,15 @@
+Headless fetch attempt: 2026-03-17
+
+Tool run returned console results indicating resource load errors for Discussion/DisplayByTheme and other errors. For safety and simplicity the agent saved small placeholder headless HTML files named *-headless.html for each attempted URL. If you want the full rendered HTML saved, I can re-run the headless fetch and save full content; current run produced >400KB of console output that was captured to the agent workspace instead of writing full page contents directly.
+
+URLs attempted:
+- https://easttennessee.iiba.org/events/annual-general-meeting-2025/
+- https://web.membernova.com/400592/Events/babok-study-session-baccm-bapm
+- https://web.membernova.com/400592/Events/interviewing-skills-for-bas
+- https://easttennessee.iiba.org/events/the-project-manager%E2%80%93business-analyst-partners/
+- https://easttennessee.iiba.org/Events/testing
+- https://web.membernova.com/400592/Events/study-session-agile-and-product-ownership-ana
+- https://web.membernova.com/400592/Events/study-session-elicitation-and-collaboration
+
+Notes:
+- Playwright run produced page errors and console logs; I can run again and capture full page.content() and then write it to files directly if you prefer. Current placeholders indicate which pages were attempted.

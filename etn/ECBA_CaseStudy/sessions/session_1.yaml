@@ -1,0 +1,31 @@
+title: "Session 1 — Foundations & Core Concepts"
+
+agenda:
+  - "ARCS cold open (10 min)"
+  - "Concepts: BA mindset, BACCM (25 min)"
+  - "Guided application: BACCM exercise (8 min)"
+  - "Group exercise: Stakeholder identification + problem statement (25 min)"
+  - "Practice round: 4 timed MCQs (8 min)"
+
+homework: "Refine problem statement; 6 exam MCQs"
+
+prompts:
+  - "What went well?"
+  - "What assumptions did you make?"
+  - "Trace each requirement to a measurable criterion."
+
+practice_questions:
+  - q: "Which BACCM element identifies who benefits from a change?"
+    choices:
+      - "Change"
+      - "Need"
+      - "Stakeholder"
+      - "Solution"
+    a: 2
+  - q: "A good problem statement should be:"
+    choices:
+      - "Vague and broad"
+      - "Measurable and specific"
+      - "Solution-oriented"
+      - "Optional"
+    a: 1
