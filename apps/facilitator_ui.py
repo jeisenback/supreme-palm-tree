@@ -13,6 +13,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from brand import BRAND_CSS
+from frontmatter_utils import read_frontmatter
 from shared import (
     SESSIONS,
     MONTH_SESSION_MAP,
@@ -55,6 +56,18 @@ def clear_persistent_session():
             SESSION_PATH.unlink()
     except Exception:
         pass
+
+
+_PROJECT_ROOT = Path(__file__).parent.parent
+_PANEL_EVENT_DIR = _PROJECT_ROOT / "etn" / "templates" / "panel_event"
+
+
+def _is_published(path: Path) -> bool:
+    """Return True if file is published or has no frontmatter (legacy file)."""
+    meta, _ = read_frontmatter(path)
+    if not meta:
+        return True  # no frontmatter → legacy file, show it
+    return meta.get("status") not in ("draft", "template")
 
 
 def exchange_code_for_token(code: str, client_id: str, client_secret: str, redirect_uri: str):
@@ -119,9 +132,11 @@ def save_note(event_title, facilitator, step, note, completed=False):
 
 
 def main():
-    st.set_page_config(page_title="ECBA Study Session — Facilitator", layout="wide")
+    is_panel = st.query_params.get("mode", "") == "panel"
+    page_title = "Panel Event — Facilitator" if is_panel else "ECBA Study Session — Facilitator"
+    st.set_page_config(page_title=page_title, layout="wide")
     st.html(BRAND_CSS)
-    st.title("ECBA Study Session — Facilitator")
+    st.title(page_title)
 
     # Ensure facilitator is always defined (guards Notes/Actions/Complete steps)
     facilitator = st.session_state.get("facilitator", "")
@@ -225,7 +240,10 @@ def main():
 
         event_choice = st.selectbox("Select event", titles)
 
-        STEPS = ["Overview", "Discussion prompts", "Notes", "Actions", "Complete", "Case Study"]
+        if is_panel:
+            STEPS = ["Run of Show", "Panelist Briefing", "Q&A Cues", "Notes", "Actions", "Complete"]
+        else:
+            STEPS = ["Overview", "Discussion prompts", "Notes", "Actions", "Complete", "Case Study"]
         st.sidebar.markdown("---")
         step = st.sidebar.radio("Step", STEPS, key="radio_step")
 
@@ -255,6 +273,16 @@ def main():
             st.info("No plan or README found to preview in this variant folder.")
 
     docs = find_documents(selected_variant)
+
+    # Panel mode: supplement with panel event templates
+    if is_panel:
+        panel_docs = sorted(_PANEL_EVENT_DIR.glob("*.md")) if _PANEL_EVENT_DIR.exists() else []
+        docs = panel_docs + [d for d in docs if d not in panel_docs]
+
+    # Published-only filter: hide draft/template files in facilitator view
+    show_published_only = st.sidebar.checkbox("Published only", value=True, key="pub_filter")
+    if show_published_only:
+        docs = [d for d in docs if _is_published(d)]
     params = st.query_params
     open_param = params.get("open")
     presenter_param = params.get("presenter")
@@ -264,6 +292,13 @@ def main():
     if not open_param and preview_path:
         open_path = preview_path
         open_param = str(preview_path)
+
+    # Panel mode: auto-open moderator script if no file is selected
+    if is_panel and not open_param:
+        ms = _PANEL_EVENT_DIR / "moderator_script.md"
+        if ms.exists():
+            open_path = ms
+            open_param = str(ms)
     if open_param:
         try:
             possible = Path(urllib.parse.unquote(open_param))
@@ -614,30 +649,31 @@ def main():
 
     session = SESSIONS.get(session_num)
 
-    st.markdown("---")
-    st.subheader(session["title"])
-    st.markdown("**Agenda:**")
-    for item in session["agenda"]:
-        st.write(f"- {item}")
-    st.markdown("**Homework:**")
-    st.write(session["homework"])
-    st.markdown("**Prompts:**")
-    for p in session["prompts"]:
-        st.write(f"- {p}")
+    if not is_panel:
+        st.markdown("---")
+        st.subheader(session["title"])
+        st.markdown("**Agenda:**")
+        for item in session["agenda"]:
+            st.write(f"- {item}")
+        st.markdown("**Homework:**")
+        st.write(session["homework"])
+        st.markdown("**Prompts:**")
+        for p in session["prompts"]:
+            st.write(f"- {p}")
 
-    st.markdown("**Practice questions:**")
-    for i, q in enumerate(session["practice_questions"]):
-        st.write(f"{i+1}. {q['q']}")
-        choice = st.radio(f"Question {i+1}", q["choices"], key=f"q_{session_num}_{i}")
-        if st.button(f"Check answer {i+1}", key=f"check_{session_num}_{i}"):
-            correct = q["choices"][q["a"]]
-            if choice == correct:
-                st.success("Correct")
-            else:
-                st.error(f"Incorrect — correct answer: {correct}")
+        st.markdown("**Practice questions:**")
+        for i, q in enumerate(session["practice_questions"]):
+            st.write(f"{i+1}. {q['q']}")
+            choice = st.radio(f"Question {i+1}", q["choices"], key=f"q_{session_num}_{i}")
+            if st.button(f"Check answer {i+1}", key=f"check_{session_num}_{i}"):
+                correct = q["choices"][q["a"]]
+                if choice == correct:
+                    st.success("Correct")
+                else:
+                    st.error(f"Incorrect — correct answer: {correct}")
 
-    # Case study gating UI
-    if step == "Case Study":
+    # Case study gating UI (ECBA mode only)
+    if not is_panel and step == "Case Study":
         st.subheader("Case Study — TrailBlaze Master Context (facilitator only)")
         if not master_text:
             st.warning("TrailBlaze_MasterContext.md not found in etn/ECBA_CaseStudy/")
@@ -686,14 +722,45 @@ def main():
 
     st.subheader(step)
 
-    if step == "Overview":
-        st.write("Follow the event summary, goals, and desired outcomes.")
-        if st.button("Start discussion"):
-            st.rerun()
+    if not is_panel:
+        if step == "Overview":
+            st.write("Follow the event summary, goals, and desired outcomes.")
+            if st.button("Start discussion"):
+                st.rerun()
 
-    if step == "Discussion prompts":
-        for prompt in session["prompts"]:
-            st.write(f"- {prompt}")
+        if step == "Discussion prompts":
+            for prompt in session["prompts"]:
+                st.write(f"- {prompt}")
+
+    if is_panel:
+        if step == "Run of Show":
+            st.markdown("Use the **Moderator Script** (loaded above) as your run-of-show. "
+                        "Open the document viewer to follow along.")
+            st.info("Tip: open the moderator_script.md document above for the full timed script.")
+
+        if step == "Panelist Briefing":
+            st.markdown("### Pre-event panelist checklist")
+            items = [
+                "Confirm attendance and A/V setup (send day-of reminder)",
+                "Share audience description and key themes",
+                "Review moderator question bank with panelists",
+                "Confirm recording consent",
+                "Set expectations: 90-second answer target, moderator may redirect",
+            ]
+            for item in items:
+                st.checkbox(item, key=f"panbrief_{item[:20]}")
+
+        if step == "Q&A Cues":
+            st.markdown("### Audience Q&A facilitation cues")
+            cues = [
+                "**Volume down:** 'Let me bring in someone with a different angle on that…'",
+                "**Volume up:** 'Can you say more about that? That's something this audience deals with.'",
+                "**Bridge:** 'That connects to what [other panelist] said — do you agree?'",
+                "**Wrap a tangent:** 'That's a great thread — let's take that offline. Back to the main question…'",
+                "**Time signal:** 'We have time for two more questions…'",
+            ]
+            for cue in cues:
+                st.markdown(f"- {cue}")
 
     if step == "Notes":
         if not st.session_state.get("logged_in"):
