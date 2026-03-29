@@ -10,6 +10,12 @@ from pathlib import Path
 import streamlit as st
 
 from brand import BRAND_CSS
+
+try:
+    from learner_tracking import get_board_metrics, _DEFAULT_DB as _LEARNER_DB
+    _LEARNER_AVAILABLE = True
+except ImportError:
+    _LEARNER_AVAILABLE = False
 from shared import (
     SESSIONS,
     find_variants,
@@ -22,6 +28,33 @@ from shared import (
 
 # ── Session months for timeline display ──────────────────────────────────────
 SESSION_MONTHS = {1: "April", 2: "May", 3: "June", 4: "July", 5: "August"}
+
+
+# ── Outcomes helper ───────────────────────────────────────────────────────────
+
+def _outcomes_section():
+    """Show aggregate learner metrics. Silent no-op if db doesn't exist yet."""
+    if not _LEARNER_AVAILABLE:
+        return
+    db = _LEARNER_DB
+    if not Path(db).exists():
+        return
+
+    try:
+        m = get_board_metrics(db)
+    except Exception:
+        return
+
+    if m["total_members"] == 0:
+        return
+
+    st.markdown('<div class="section-header">Program Outcomes</div>', unsafe_allow_html=True)
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Members enrolled", m["total_members"])
+    col2.metric("Attendance rate", f"{m['avg_attendance_rate']:.0%}")
+    col3.metric("Homework rate", f"{m['homework_completion_rate']:.0%}")
+    col4.metric("Avg readiness", f"{m['avg_readiness_score']}/100")
+    st.caption("Source: attendance records — updated after each session")
 
 
 # ── App ───────────────────────────────────────────────────────────────────────
@@ -56,7 +89,10 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # ── Section 2: Curriculum Timeline ───────────────────────────────────────
+    # ── Section 2: Program Outcomes (learner metrics) ────────────────────────
+    _outcomes_section()
+
+    # ── Section 3: Curriculum Timeline ───────────────────────────────────────
     st.markdown('<div class="section-header">The Program</div>', unsafe_allow_html=True)
 
     cols = st.columns(5)
@@ -84,7 +120,7 @@ def main():
                 for prompt in session["prompts"]:
                     st.write(f"- {prompt}")
 
-    # ── Section 3: Sample Slides ──────────────────────────────────────────────
+    # ── Section 4: Sample Slides ──────────────────────────────────────────────
     st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-header">A Glimpse Inside</div>', unsafe_allow_html=True
@@ -138,7 +174,7 @@ def main():
                     unsafe_allow_html=True,
                 )
 
-    # ── Section 4: Interactive Practice MCQ ──────────────────────────────────
+    # ── Section 5: Interactive Practice MCQ ──────────────────────────────────
     st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-header">Try It Yourself</div>', unsafe_allow_html=True
@@ -175,7 +211,7 @@ def main():
                 "or are impacted by a change."
             )
 
-    # ── Section 5: TrailBlaze Case Study ──────────────────────────────────────
+    # ── Section 6: TrailBlaze Case Study ──────────────────────────────────────
     st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
 
     tb_col, stat_col = st.columns([3, 2])
@@ -207,7 +243,7 @@ def main():
             unsafe_allow_html=True,
         )
 
-    # ── Section 6: Document Browser ──────────────────────────────────────────
+    # ── Section 7: Document Browser ──────────────────────────────────────────
     st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-header">Explore All Materials</div>',
