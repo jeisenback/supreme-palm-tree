@@ -1,0 +1,6 @@
+date,session_id,session_type,member_email,member_name,attended,homework_submitted
+2026-04-01,1,ecba_session,alex.morgan@example.com,Alex Morgan,TRUE,FALSE
+2026-04-01,1,ecba_session,jamie.lee@example.com,Jamie Lee,TRUE,FALSE
+2026-04-01,1,ecba_session,taylor.smith@example.com,Taylor Smith,TRUE,FALSE
+2026-04-01,1,ecba_session,casey.jones@example.com,Casey Jones,FALSE,FALSE
+2026-04-01,1,ecba_session,robin.wu@example.com,Robin Wu,TRUE,FALSE

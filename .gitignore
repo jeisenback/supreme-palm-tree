@@ -23,3 +23,8 @@ SESSION.md
 
 # Temporary QA-generated case study data
 etn/ECBA_CaseStudy_qa_scenario_variant/
+
+# Learner tracking — SQLite database and real attendance CSVs contain PII
+data/learner_records.db
+data/attendance/*.csv
+!data/attendance/attendance_template.csv
