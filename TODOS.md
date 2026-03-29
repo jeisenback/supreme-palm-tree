@@ -1,6 +1,6 @@
 # TODOS
 
-Last updated: 2026-03-29 (Dynamic Style Guide Rule Extraction shipped)
+Last updated: 2026-03-29 (Cross-Session Learner Tracking shipped)
 
 ---
 
@@ -29,19 +29,8 @@ Last updated: 2026-03-29 (Dynamic Style Guide Rule Extraction shipped)
 
 ---
 
-### Cross-Session Learner Tracking
-
-**What:** Attendance data model + learner dashboard showing: sessions attended per member, homework submitted, estimated ECBA exam readiness score.
-
-**Why:** Enables the chapter to demonstrate measurable outcomes for board reporting, IIBA chapter metrics, and the 2026 Pilot Outcomes Summary (Q4 deliverable per roadmap).
-
-**Pros:** High value for board; enables AI coaching whisper (Phase 2 from CEO plan); feeds into 2027 scaling decisions.
-
-**Cons:** Requires schema design with PII implications (names + attendance records = sensitive). Needs a data model decision: SQLite vs CSV vs JSON.
-
-**Context:** Attendance CSV export per session is already in the Consolidated Plan ops checklist (`data/attendance/YYYYMMDD_session.csv`). This TODO ingests those CSVs into a persistent learner record. Start with: ingest script → SQLite → dashboard in `board_showcase.py` or new `apps/learner_dashboard.py`. Deferred from Sprint 4 due to schema design requirement.
-
-**Depends on:** Sprint 5 published content + attendance CSV export flow. | **Effort:** L (human) → M (~45min CC) | **Priority:** P2
+### ~~Cross-Session Learner Tracking~~ ✓ SHIPPED 2026-03-29
+**Status:** Done. `apps/learner_tracking.py` (SQLite ingest + queries), `apps/learner_dashboard.py` (Streamlit: Cohort Overview / Individual Progress / Heatmap), `data/attendance/` (CSV schema, PII notice, sample data), 30 tests.
 
 ---
 
