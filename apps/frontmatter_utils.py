@@ -140,3 +140,69 @@ def scan_content_library(base_dir: Path) -> list[dict]:
             "last_modified": str(metadata.get("last_modified", "")),
         })
     return results
+
+
+# ---------------------------------------------------------------------------
+# Dynamic style rule parser
+# ---------------------------------------------------------------------------
+
+def parse_style_rules(style_guide_path: Path) -> list:
+    """Parse machine-readable style rules from ECBA_Style_Guide.md.
+
+    Looks for a fenced ```yaml block after the '## MACHINE-READABLE STYLE RULES'
+    heading and returns a list of raw dicts. Callers (content_types.py) convert
+    these dicts into StyleRule instances.
+
+    Returns [] on any error (missing file, missing section, invalid YAML).
+    Guarantees forward compatibility: unknown keys in each rule dict are silently
+    ignored by the caller.
+
+    Expected dict keys:
+        name        str  — required
+        message     str  — required
+        max_count   int  — optional upper bound
+        min_count   int  — optional lower bound
+        pattern     str  — optional regex string
+    """
+    import re
+    try:
+        import yaml
+    except ImportError:
+        return []
+
+    style_guide_path = Path(style_guide_path)
+    if not style_guide_path.exists():
+        return []
+
+    try:
+        text = style_guide_path.read_text(encoding="utf-8")
+    except OSError:
+        return []
+
+    # Find the section heading then the first ```yaml ... ``` fence after it.
+    section_marker = "## MACHINE-READABLE STYLE RULES"
+    section_start = text.find(section_marker)
+    if section_start == -1:
+        return []
+
+    after_section = text[section_start:]
+    fence_match = re.search(r"```yaml\s*\n(.*?)```", after_section, re.DOTALL)
+    if not fence_match:
+        return []
+
+    yaml_block = fence_match.group(1)
+    try:
+        rules = yaml.safe_load(yaml_block)
+    except yaml.YAMLError:
+        return []
+
+    if not isinstance(rules, list):
+        return []
+
+    # Validate minimum shape — must have name and message.
+    valid = []
+    for rule in rules:
+        if isinstance(rule, dict) and rule.get("name") and rule.get("message"):
+            valid.append(rule)
+
+    return valid

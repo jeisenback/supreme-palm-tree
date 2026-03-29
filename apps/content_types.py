@@ -1,8 +1,13 @@
 """
 Content type registry and style rules for IIBA ETN curriculum platform.
-Pure data module — no imports. Safe to import from tests without Streamlit.
+No Streamlit imports — safe to use in tests and non-UI contexts.
+Style rules are loaded dynamically from ECBA_Style_Guide.md at startup (P2);
+falls back to hardcoded defaults if the file or section is missing.
 """
 
+from pathlib import Path
+
+_STYLE_GUIDE_PATH = Path(__file__).parent.parent / "etn" / "ECBA_CaseStudy" / "Facilitator" / "ECBA_Style_Guide.md"
 
 # ---------------------------------------------------------------------------
 # Content type registry
@@ -97,8 +102,9 @@ class StyleRule:
         return isinstance(other, StyleRule) and self.name == other.name
 
 
-# Sprint 5: 4 hard-coded rules. Dynamic extraction from ECBA_Style_Guide.md is P2 (TODOS.md).
-STYLE_RULES = [
+# Hardcoded defaults — used when ECBA_Style_Guide.md is absent or its
+# ## MACHINE-READABLE STYLE RULES section is removed/malformed.
+_HARDCODED_STYLE_RULES = [
     StyleRule(
         "max_bullets_per_slide",
         max_count=5,
@@ -121,3 +127,28 @@ STYLE_RULES = [
         message="Session has {count} slides (expected 3–15)",
     ),
 ]
+
+
+def _load_style_rules() -> list:
+    """Return StyleRule list from ECBA_Style_Guide.md, or hardcoded fallback."""
+    try:
+        from frontmatter_utils import parse_style_rules as _parse
+        raw = _parse(_STYLE_GUIDE_PATH)
+        if raw:
+            return [
+                StyleRule(
+                    r["name"],
+                    max_count=r.get("max_count"),
+                    min_count=r.get("min_count"),
+                    pattern=r.get("pattern"),
+                    message=r["message"],
+                )
+                for r in raw
+            ]
+    except Exception:
+        pass
+    return list(_HARDCODED_STYLE_RULES)
+
+
+STYLE_RULES = _load_style_rules()
+

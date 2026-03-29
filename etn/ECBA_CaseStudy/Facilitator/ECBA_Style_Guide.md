@@ -364,3 +364,33 @@ POTENTIAL MEMBERS — Recruitment target
   Design implication:   The TrailBlaze case study is purpose-built for this audience. Exercises should feel
                         immediately applicable. Avoid jargon-heavy framing in participant materials.
                         Session 0 and Workshop Handouts are first impressions — design them accordingly.
+
+---
+
+## MACHINE-READABLE STYLE RULES
+
+These rules are parsed by apps/content_types.py at startup.
+Edit rule values here to update content quality checks without touching code.
+
+Format rules: each item requires `name` and `message`.
+Optional: `max_count` (upper bound), `min_count` (lower bound), `pattern` (regex that must be present).
+
+```yaml
+# style-rules-v1
+- name: max_bullets_per_slide
+  max_count: 5
+  message: "Slide {n} has {count} bullets (max 5)"
+
+- name: required_learning_objective
+  pattern: "^## Learning Objective"
+  message: "Missing '## Learning Objective' header"
+
+- name: facilitator_cue_format
+  pattern: "\\[FACILITATOR:"
+  message: "Facilitator cue on line {n} should use [FACILITATOR: ...] format"
+
+- name: slide_count_range
+  min_count: 3
+  max_count: 15
+  message: "Session has {count} slides (expected 3–15)"
+```
