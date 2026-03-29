@@ -1,23 +1,15 @@
 # TODOS
 
-Last updated: 2026-03-28 (from /plan-eng-review — Sprint 5 Curriculum Platform)
+Last updated: 2026-03-29 (Dynamic Style Guide Rule Extraction shipped)
 
 ---
 
 ## P2
 
-### Dynamic Style Guide Rule Extraction
-**What:** Build a parser that reads style rule definitions from `etn/ECBA_CaseStudy/Facilitator/ECBA_Style_Guide.md` and returns a `StyleRule` list — replacing the 4 hard-coded rules in `apps/content_types.py`.
+### ~~Dynamic Style Guide Rule Extraction~~ ✓ SHIPPED 2026-03-29
+**What:** ~~Build a parser that reads style rule definitions from `etn/ECBA_CaseStudy/Facilitator/ECBA_Style_Guide.md` and returns a `StyleRule` list — replacing the 4 hard-coded rules in `apps/content_types.py`.~~
 
-**Why:** PD lead can update style rules in the style guide doc without a developer touching code. Decouples rule maintenance from deployment.
-
-**Pros:** Single source of truth; non-technical board members can own rule updates.
-
-**Cons:** Requires establishing a stable markdown convention for how rules are expressed in the guide (e.g., a `## Rule:` heading format). Rules must be parseable without ambiguity.
-
-**Context:** Hard-coded rules are in `apps/content_types.py:STYLE_RULES`. Style guide is at `etn/ECBA_CaseStudy/Facilitator/ECBA_Style_Guide.md`. To implement: define a convention like `## Rule: max-bullets | max: 5` in the style guide, write a parser in `apps/frontmatter_utils.py`, update `content_types.py` to call it at startup. Sprint 5 ships hard-coded rules — this makes them dynamic.
-
-**Depends on:** Sprint 5 shipping first. | **Effort:** M (human) → S (~15min CC) | **Priority:** P2
+**Status:** Done. `parse_style_rules()` added to `frontmatter_utils.py`. `## MACHINE-READABLE STYLE RULES` YAML section added to style guide. `content_types.py` calls `_load_style_rules()` at startup with hardcoded fallback.
 
 ---
 
