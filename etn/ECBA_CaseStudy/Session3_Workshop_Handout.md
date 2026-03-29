@@ -1,3 +1,10 @@
+---
+content_type: ecba_session
+session_id: 3
+slot: handout
+status: published
+---
+
 # Session 3 — Workshop Handout
 ## Change, Need & Requirements Lifecycle
 ECBA Domains: Change | Need

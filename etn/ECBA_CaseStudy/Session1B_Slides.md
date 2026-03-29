@@ -1,3 +1,11 @@
+---
+content_type: ecba_session
+session_id: 1
+slot: slides
+status: published
+variant: 1b
+---
+
 Session 1B — BACCM Deep Dive (Slides)
 Format: Co-facilitated case study session with internal SME
 Duration: 60 minutes | Mid-cycle, ~2 weeks after Session 1A

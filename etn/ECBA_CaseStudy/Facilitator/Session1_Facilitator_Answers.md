@@ -1,3 +1,11 @@
+---
+content_type: ecba_session
+label: facilitator_answers
+session_id: 1
+slot: handout
+status: published
+---
+
 Session 1 — Facilitator Answers (ECBA: Understanding BA + Mindset)
 
 --- DOCUMENT GUIDE ---

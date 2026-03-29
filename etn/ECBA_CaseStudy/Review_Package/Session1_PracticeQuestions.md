@@ -1,3 +1,11 @@
+---
+content_type: ecba_session
+label: review_package
+session_id: 1
+slot: practice_questions
+status: published
+---
+
 Session 1 — Practice Questions
 ECBA Domains: Understanding Business Analysis | Mindset for Effective BA
 

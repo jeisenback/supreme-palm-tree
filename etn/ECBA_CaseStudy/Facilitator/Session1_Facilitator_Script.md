@@ -1,3 +1,10 @@
+---
+content_type: ecba_session
+session_id: 1
+slot: facilitator_script
+status: published
+---
+
 Session 1 — Facilitator Script (timed)
 ECBA Domains: Understanding Business Analysis | Mindset for Effective BA
 Total: 90 minutes (single integrated session)

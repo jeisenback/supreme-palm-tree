@@ -1,3 +1,10 @@
+---
+content_type: ecba_session
+session_id: 5
+slot: handout
+status: published
+---
+
 # Session 5 — Workshop Handout
 ## Value, Review & Exam Readiness
 ECBA Domains: Value | Integrated review of all 9 domains

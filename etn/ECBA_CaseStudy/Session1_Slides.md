@@ -1,3 +1,10 @@
+---
+content_type: ecba_session
+session_id: 1
+slot: slides
+status: published
+---
+
 Session 1 — Foundations & Core Concepts (Slides)
 ECBA Domains: Understanding Business Analysis | Mindset for Effective BA
 Duration: 90 minutes

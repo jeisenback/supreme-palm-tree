@@ -1,3 +1,11 @@
+---
+content_type: ecba_session
+label: reference_notes
+session_id: 1
+slot: handout
+status: published
+---
+
 # Session 1 — Facilitator Reference Notes
 
 --- DOCUMENT GUIDE ---
