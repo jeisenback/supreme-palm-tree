@@ -1,3 +1,10 @@
+---
+content_type: ecba_session
+session_id: 0
+slot: handout
+status: published
+---
+
 Session 0 — Onboarding Handout
 
 --- DOCUMENT GUIDE ---

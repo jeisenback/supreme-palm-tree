@@ -1,3 +1,10 @@
+---
+content_type: ecba_session
+session_id: 2
+slot: handout
+status: published
+---
+
 # Session 2 — Workshop Handout
 ## Planning, Elicitation & Context
 ECBA Domains: Implementing Business Analysis | Context

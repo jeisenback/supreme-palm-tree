@@ -1,3 +1,11 @@
+---
+content_type: ecba_session
+label: case_study
+session_id: 3
+slot: handout
+status: published
+---
+
 # TrailBlaze Adventures — Elicitation Outputs (Session 3)
 
 --- DOCUMENT GUIDE ---

@@ -1,3 +1,10 @@
+---
+content_type: ecba_session
+session_id: 4
+slot: handout
+status: published
+---
+
 # Session 4 — Workshop Handout
 ## Solution, Stakeholder & Requirements Analysis
 ECBA Domains: Solution | Stakeholder

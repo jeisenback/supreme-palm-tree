@@ -1,3 +1,11 @@
+---
+content_type: ecba_session
+session_id: 1
+slot: facilitator_script
+status: published
+variant: 1b
+---
+
 # Session B — SME Preparation Guide
 
 --- DOCUMENT GUIDE ---

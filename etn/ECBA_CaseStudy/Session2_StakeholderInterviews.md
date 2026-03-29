@@ -1,3 +1,11 @@
+---
+content_type: ecba_session
+label: case_study
+session_id: 2
+slot: handout
+status: published
+---
+
 # TrailBlaze Adventures — Stakeholder Interview Excerpts (Session 2)
 
 --- DOCUMENT GUIDE ---
