@@ -99,6 +99,7 @@ The repository still includes document conversion and generation helpers under `
 
 - Product and architecture requirements: `REQUIREMENTS.md`
 - UI design system: `DESIGN.md`
+- Curriculum platform design (Sprint 5): `docs/designs/curriculum-platform.md`
 - Active/deferred backlog: `TODOS.md`
 - Project task plan: `TASKS.md`
 - Project state (current sprint, app inventory): `PROJECT_STATE.md`
