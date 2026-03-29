@@ -26,3 +26,15 @@ services:
     # whenever the service restarts or redeploys.
     # If you need persistent runtime state, move this service to a paid plan
     # and add a Render Disk back to the blueprint.
+
+  - type: web
+    name: ecba-board-showcase
+    env: python
+    region: ohio
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run apps/board_showcase.py --server.port $PORT --server.address 0.0.0.0
+    healthCheckPath: /_stcore/health
+    autoDeploy: true
+    # No secrets required — board showcase is fully read-only against checked-in content.
+    # Learner outcomes section silently hides itself when the db is absent.
