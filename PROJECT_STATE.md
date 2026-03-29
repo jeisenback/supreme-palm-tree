@@ -1,18 +1,21 @@
 # Nonprofit Tool — Project State Overview
-**As of 2026-03-24**
+**As of 2026-03-29** (Sprint 5 complete)
 
 ---
 
 ## Executive Summary
 
-The nonprofit_tool is a modular Board Agents Platform for IIBA East Tennessee, combining:
-- **Facilitator UI** (Streamlit) for ECBA study sessions with participant sync & export
+The nonprofit_tool is a modular curriculum and operations platform for IIBA East Tennessee, combining:
+- **Facilitator UI** (`apps/facilitator_ui.py`): live session controls, published-only filter, Panel Mode
+- **Content Studio** (`apps/content_studio.py`): Gap Radar, editor, AI first-draft generator
+- **Board Showcase** (`apps/board_showcase.py`): no-login program presentation with live learner outcomes
+- **Learner Dashboard** (`apps/learner_dashboard.py`): attendance tracking, readiness score, heatmap
 - **Content development** pipeline (ingest, scrapers, templating, generation)
-- **Role agents** for board member workflows (President, Secretary, Treasurer, etc.)
+- **Role agents**: president/secretary/treasurer skills with LLM-safe fallbacks
 
-**Current Sprint:** Sprint 4 (Chapter Portability + Course Package Export), in progress.  
-**Key branch:** `feat/chapter-portability-export`  
-**Est. completion:** 2026-04-07
+**Current Sprint:** Sprint 5 — Complete ✓
+**Key branch:** `main`
+**Next:** P2 CA+Panel YAML migration (blocked on CA content authoring); P3 Hosted Deployment (Content Studio / Learner Dashboard)
 
 ---
 

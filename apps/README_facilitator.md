@@ -1,4 +1,4 @@
-Facilitator UI (Streamlit) — Prototype
+Facilitator UI (Streamlit)
 
 Run locally
 
@@ -9,7 +9,7 @@ source .venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-2. Start the prototype:
+2. Start the app:
 
 ```bash
 streamlit run apps/facilitator_ui.py
@@ -18,6 +18,8 @@ streamlit run apps/facilitator_ui.py
 Notes
 - The app reads `etn/outputs/iiba_events_parsed.csv` if present. If not found it shows sample data.
 - Notes and actions are appended to `etn/outputs/facilitator_notes.csv`.
+- **Published-only filter** (sidebar checkbox, on by default): hides draft and template files from the document selector. Files without frontmatter (legacy) are always shown.
+- **Panel Mode**: add `?mode=panel` to the URL to switch the workflow to a CIO/panel event run-of-show. This loads panel event templates and adjusts the step list to: Run of Show → Panelist Briefing → Q&A Cues → Notes → Actions → Complete.
 
 GitHub OAuth setup
 
@@ -57,13 +59,15 @@ scripts\start_facilitator.bat
 
 Deploy to Render (quick)
 
+Use the `render.yaml` blueprint — it defines both `ecba-facilitator` and `ecba-board-showcase` services. See the main `README.md` for full deployment steps.
+
+Manual deployment (single service):
+
 1. Commit and push this repository to GitHub.
 2. Create a new Web Service on Render and connect your GitHub repo.
-3. Use the following build and start commands (Render will set `$PORT`):
+3. Use the following build and start commands:
 
 - Build command: `pip install -r requirements.txt`
 - Start command: `streamlit run apps/facilitator_ui.py --server.port $PORT --server.address 0.0.0.0`
 
-4. Set an environment variable `STREAMLIT_SERVER_HEADLESS=true` in the Render dashboard to avoid opening a browser on the server.
-
-If you need a managed backend or secure auth, consider a small FastAPI app and host the API on Render, with this frontend calling the API.
+4. Set `FACILITATOR_PASSWORD` and optional `ANTHROPIC_API_KEY`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` in Render environment variables.

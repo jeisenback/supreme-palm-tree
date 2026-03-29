@@ -30,6 +30,7 @@ streamlit run apps/board_showcase.py --server.port 8502
 | Section | Content |
 |---|---|
 | Hero | Program name, tagline, key stats (5 sessions, Apr–Aug, Virtual) |
+| Program Outcomes | Live metrics from attendance records: members enrolled, attendance rate, homework rate, avg readiness score. Hidden automatically if no data has been ingested yet. |
 | The Program | 5-session curriculum timeline — click each session for agenda + prompts |
 | A Glimpse Inside | 3 slide cards from the curriculum (requires variant folder) |
 | Try It Yourself | Interactive practice MCQ with instant feedback |
@@ -88,6 +89,11 @@ apps/
   board_showcase.py       ← this app
   facilitator_ui.py       ← facilitator tool (separate audience)
   shared.py               ← shared utilities (SESSIONS data, file I/O, slide parser)
+  learner_tracking.py     ← attendance DB queries (used by Program Outcomes section)
+
+data/
+  attendance/             ← attendance CSVs (gitignored except sample/)
+  learner_records.db      ← SQLite learner records (gitignored, PII)
 
 .streamlit/
   config.toml             ← IIBA East TN brand theme (orange #DB5D00, navy #002E38)
@@ -96,5 +102,5 @@ scripts/
   start_board_showcase.sh ← startup script
 ```
 
-Both apps import from `apps/shared.py`. Changes to session content or
+All apps import from `apps/shared.py`. Changes to session content or
 utility functions only need to be made in one place.
