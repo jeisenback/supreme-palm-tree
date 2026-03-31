@@ -1,304 +1,432 @@
-# TrailBlaze Adventures — ECBA Case Study Master Plan
+---
+content_type: ecba_series
+slot: program_guide
+status: published
+last_updated: 2026-03-31
+---
+
+# ECBA Certification Study Program — Program Guide
+
+*Single source of truth for facilitators and board.*
+*Supporting documents are linked, not embedded. Read the section relevant to your role and follow links out.*
 
 --- DOCUMENT GUIDE ---
-What this is:   Master planning document for the full 5-session series — session structure, ECBA domain and BABOK coverage, TrailBlaze story arc, file structure, and alignment notes.
-Who it's for:   Facilitator; approvers (read-only).
-When to use it: Reference during series design and before each session prep. Primary guide for building Sessions 2–5 materials.
-Restricted:     Yes — do not share with participants.
---- END GUIDE ---
-
-*All abbreviations used in this document are defined in the Abbreviations section at the end.*
-
-## Overview
-
-### Series Structure
-Five monthly sessions (April–August), each covering a set of ECBA domains and corresponding Business Analysis Body of Knowledge (BABOK) Knowledge Areas (KAs). Each session is framed through the ECBA exam lens (domains) but explicitly maps to BABOK KAs so no content gaps are left. Both lenses are labeled in every session entry.
-
-The ECBA exam tests 9 domains. Those domains do not map one-to-one with BABOK chapters — they reflect a different organizing principle. This series bridges both: participants learn the concepts through BABOK (because that's what they're reading) and practice applying them through domain language (because that's what the exam tests). Every exercise, debrief, and question is framed through domain language first.
-
-The monthly cadence is intentional. Participants are working professionals. One session per month gives them time to do the required reading, complete homework, and let concepts settle before the next layer is added. Compressing the series would break the spaced practice model.
-
-### Before the Series — Session 0
-An onboarding handout is distributed before Session 1: study habits, Cornell notes, retrieval practice, ECBA exam overview, and the full reading schedule. No meeting required.
-
-Session 0 exists because the first 10 minutes of Session 1 should not be spent explaining how the series works. Participants who arrive without context slow down the room. The onboarding handout removes that problem. It also sets the expectation that this is an active learning environment — participants who read it know they will be asked to apply concepts, not just receive them.
-
-### Session A — Core Session (90 minutes)
-Each Session A follows a phase-based run-of-show. The phase tables in the Session Map show activity, purpose, and timing for each session.
-
-The sequence is not arbitrary. Concepts are introduced with a TrailBlaze anchor so participants immediately see the application context, not an abstract definition. Guided application follows immediately — the facilitator works through a partial example with the group before releasing them to work independently. This reduces the "I don't know where to start" failure mode that kills group exercise time.
-
-The group exercise produces a real artifact (BACCM chart, stakeholder list, problem statement, etc.). The share-out makes that work visible to the room, which triggers peer comparison and discussion — a stronger learning signal than facilitator feedback alone.
-
-Checkpoint questions are placed mid-concept, not at the end. Their purpose is to surface misunderstanding before it compounds. If a group answers a checkpoint wrong, the facilitator adjusts before the exercise — not after.
-
-The practice round closes with 4 timed ECBA exam-style multiple choice questions answered individually before group discussion. Individual-first matters: it replicates exam conditions and prevents participants from anchoring on the first confident voice in the group.
-
-The homework deliverable is always an extension of in-session work, not a new task. This keeps the total effort manageable and reinforces that in-session work is worth doing well.
-
-A 2-minute survey closes the loop for facilitator adjustments.
-
-### Session B — SME Deep Dive (60 minutes, mid-cycle)
-Approximately 2 weeks after each Session A, an internal subject matter expert (SME) co-facilitates a TrailBlaze deep dive.
-
-The two-week gap is structural. Session A introduces a concept and gives participants a first attempt at applying it. Two weeks of living with the homework — and the questions it raises — means Session B lands when participants are ready to be challenged on what they think they understood. If Session B were the day after Session A, participants would not have had time to form the misconceptions that Session B is designed to surface.
-
-Session B never introduces new content. The SME's job is to add friction to what the group already has — a stakeholder who gives incomplete answers, an executive who pushes back on a solution recommendation, a retrospec on a real deployment that missed its targets. This simulates what BA work actually feels like: messy inputs, competing priorities, and no clean answer. Participants leave with a more accurate model of what applying the ECBA concept looks like outside a classroom.
-
-The SME is also a network asset. Each Session B ends with a stretch question and a debrief where the SME speaks candidly about their own experience. Participants leave with a contact, not just a concept.
-
-- Same case, no new content — real-world friction layered on top of Session A work.
-- Format varies by session: mock stakeholder interview, live Business Analysis Core Concept Model (BACCM) workshop, requirements conversion, solution challenge, or post-pilot retrospective.
-- Closes with a stretch question that feeds into the next Session A share-out.
-- Template: `Templates/Session_B_Template.md` | SME briefing: `Facilitator/Session_B_SME_Prep_Guide.md`
-
-### The Case Study
-One evolving TrailBlaze Adventures case study runs across all five sessions. Context is revealed progressively — participants only receive what is appropriate for the current session. The full story and all session-gated reveals are in `TrailBlaze_MasterContext.md` (facilitator only).
-
-**Company background:** TrailBlaze Adventures is a mid-sized adventure travel company operating in the eastern United States, founded in 2018. The company runs guided trips ranging from half-day hikes to week-long expeditions. Its customer base centers on urban professionals and small family groups. Twelve full-time staff manage operations; approximately 40 guides work on a contracted, per-trip basis. Revenue splits roughly 60% from weekend trips and 40% from multi-day packages.
-
-**The presenting symptom:** Weekend bookings declined 18% over two consecutive quarters. Leadership identified the problem but not the cause. Before a BA had been engaged, three competing diagnoses had already taken hold:
-
-- **CEO:** The booking platform is outdated — a new customer-facing app will recover revenue.
-- **Head of Operations:** Guide availability and scheduling are the real constraint.
-- **Marketing Lead:** The brand is invisible to target demographics online.
-
-The Finance Director has not offered a diagnosis. The technology budget is frozen pending a business case, which means no solution moves forward until the BA confirms what problem is actually being solved.
-
-Each diagnosis has enough evidence behind it to sound credible. None has been confirmed. Session 1 begins the moment a BA is finally brought in — before any solution has been approved.
-
-**The story arc:** Each session advances the engagement one stage and releases information participants did not have before. Session 2 delivers stakeholder interview data that reframes the problem — participants reconcile what they concluded in Session 1 with what the interviews show. Session 3 completes elicitation: scope is agreed, needs are surfaced, and constraints are on the table. By Session 4, three solution options are in play, the MVP feature set is locked, and Key Performance Indicators (KPIs) are confirmed. Session 5 brings pilot results: 30 days of live data, two missed targets, and traceable gaps in guide notification and Search Engine Optimization (SEO) that the BA had scoped but not prioritized.
-
-The single-case design is deliberate. Real BA engagements do not reset every month — the BA inherits the last conversation, the last artifact, the last unanswered question. This series replicates that continuity. Participants build on their own prior work each session, which means their decisions compound. Session 1 teaches participants to write a problem statement with measurable criteria; that same statement gets stress-tested in Session 3 when they trace requirements back to it. A statement without criteria has nothing to trace to. The gap is visible, and closing it is the work.
-
-Progressive reveal puts participants in the same position a BA occupies at first contact — a symptom, a set of stakeholders, and no confirmed cause. They make decisions with what they have. When Session 2 delivers interview data, participants return to their Session 1 problem statement with something at stake: they can see what they got right, what they assumed, and what they missed. That reflection is built into the design.
+Board:        Read Part 1 (2 min). Link to full board brief and live showcase below.
+Facilitator:  Read Parts 1–4. Part 3 is your session operating guide. Part 4 is your prep checklist.
+PD lead:      Read Parts 1–2 for design rationale. Parts 3 and 5 for content inventory.
+Restricted:   No. Distribute to facilitators, SMEs, and approvers. Not for participants — see Part 5 for what participants receive.
+--- END DOCUMENT GUIDE ---
 
 ---
 
-## TrailBlaze Adventures — Sequential Story Arc
+## Part 1 — Program Overview
+*Board + Facilitator. 2-minute read.*
 
-| Session | Timing | TrailBlaze State | What participants receive |
-|---------|--------|-----------------|---------------------------|
-| **1A** | April | Bookings declining 18%. Leadership has conflicting diagnoses. No BA engaged yet. | Company brief + symptom only (OnePager_MicroExpeditions.md) |
-| **1B** | Mid-April | CEO announces app to the board. Head of Operations signals guide attrition. BA not yet tasked. | New ambiguous prompt (screen only, Session 1 gate — no advance reveal) |
-| **2A** | May | Leadership agrees to bring in a BA. Stakeholder interviews scheduled. Three competing root causes emerging. | Interview excerpts + competing root causes (TrailBlaze_MasterContext.md — Session 2 reveal) |
-| **2B** | Mid-May | BA is in discovery. Stakeholders not yet aligned. Interview data incomplete. | Mock interview — SME plays a TrailBlaze stakeholder live; no new documents distributed |
-| **3A** | June | BA has completed elicitation. Scope agreed: weekend booking + guide assignment workflow. Raw needs surfaced, not yet requirements. | Elicitation outputs + constraints (TrailBlaze_MasterContext.md — Session 3 reveal) |
-| **3B** | Mid-June | Raw needs are on the table. Nothing has been verified or signed off yet. | Requirements conversion prompt — group works their own Session 3A outputs; no new reveal |
-| **4A** | July | Three solution options proposed. MVP feature set agreed. NFRs and KPIs confirmed. | Solution options + MVP feature set + NFRs + KPIs (TrailBlaze_MasterContext.md — Session 4 reveal) |
-| **4B** | Mid-July | Group has a solution recommendation. CEO has not yet approved it. | Solution challenge prompt — SME plays the CEO pushing back; no new reveal |
-| **5A** | August | Pilot ran 30 days. Some targets met, some missed. Traced gaps in guide notification and SEO. | Pilot results with misses + lessons learned (TrailBlaze_MasterContext.md — Session 5 reveal) |
-| **5B** | Mid-August | Pilot debrief underway. Improvement recommendations not yet finalized. | SME shares a real deployment miss; group maps it to TrailBlaze pilot data; no new reveal |
+**What.** A 5-session ECBA certification prep series built around one evolving case study — TrailBlaze Adventures, a guided adventure company with a business problem that unfolds across all five sessions. Each session maps to two or three ECBA exam domains and anchors every concept to the same case so participants build on their own prior work each month.
 
----
+**Who.** IIBA East Tennessee members preparing for the ECBA exam. Working professionals; no prior BA credential required. Designed for monthly commitment alongside a job.
 
-## ARCS Framework
+**Format.** Session A (90 min, facilitator-led) + Session B (60 min, SME co-facilitated) each month, April through August. Total: 10 events.
 
-**ARCS** stands for **Attention → Relevance → Confidence → Satisfaction**. It is a motivational design model developed by John Keller (1987) that structures the opening of each session to answer the learner's implicit questions: *Why should I pay attention? Why does this matter to me? Can I actually do this? Did it pay off?*
+**What participants leave with.** A portfolio artifact set — BACCM chart, stakeholder analysis, problem statement, requirements, solution recommendation with RTM, and a pilot KPI analysis — built across all five sessions from the same case. Plus: ~60 ECBA exam-style practice questions and a study plan for the ECBA exam.
 
-ARCS is a motivational sequence, not a fixed script — adapt the hook to the session topic.
+**Success metrics the board tracks.**
 
-| Element | What it does | Session 1 (cold open) | Sessions 2–5 (warm open) |
-|---------|-------------|----------------------|-------------------------|
-| **Attention** | Hook the group | Real-world failure story analogous to TrailBlaze's situation | Surprising or provocative question drawn from homework share-out |
-| **Relevance** | Connect to what they care about | Direct tie to the TrailBlaze symptom | Link between what they just presented and the new session's concept |
-| **Confidence** | Make them believe they can do it | Template walkthrough — shows the scaffold before the exercise | Acknowledge what the group already built; frame the new skill as a natural next step |
-| **Satisfaction** | Give them a win | Share-out + facilitator feedback | Share-out + improved artifacts from homework |
+| Metric | Target |
+|--------|--------|
+| Attendance per session | >= 8 members |
+| Homework submission rate | >= 60% of attendees |
+| Non-member attendance | >= 2 per session |
+| ECBA exam registrations from cohort | >= 3 by series end |
+| Membership conversions | >= 1 per cohort |
 
-**Session 1 flow:** Cold ARCS open (10 min) → concept instruction
-
-**Sessions 2–5 flow:** Homework share-out (10–15 min) → ARCS bridge (3–5 min connecting what they presented to the new topic) → concept instruction
+**Related documents (link out — do not duplicate).**
+- Board brief (standalone, distributable): [ECBA_Series_Brief.md](ECBA_Series_Brief.md)
+- Operational planning record: [ECBA_CaseStudy_Consolidated_Plan.md](ECBA_CaseStudy_Consolidated_Plan.md)
+- Live board showcase: Board Showcase app (ecba-board-showcase — see render.yaml)
 
 ---
 
-## Alignment Notes
-- TrailBlaze context is revealed progressively — use `TrailBlaze_MasterContext.md` to know exactly what to share and when. Never give participants a reveal ahead of its session gate.
-- ECBA exams test the 9 domains, not the BABOK KAs directly — these are related but not identical. Frame all exercises and debrief language through the domain lens.
-- All session deliverables should use ECBA language (domains first, KA terminology as supporting context).
-- Practice questions follow a 3-tier model: **checkpoint** (mid-concept, 1–2 Qs), **practice round** (end of session, timed Qs), **homework** (between sessions). All are ECBA exam-style multiple choice questions.
-- Session B never advances the TrailBlaze story — it deepens what the group already has. If a prompt references future context, do not use it.
-- The stretch question at the end of each Session B feeds directly into the next Session A share-out. Remind participants of this connection at the close of each Session B.
+## Part 2 — Learning Design Principles
+*Facilitator + PD lead. 5-minute read.*
+
+Six decisions drive every element of this series. Understanding them tells you why something is the way it is — and when you can adapt it safely.
+
+### Principle 1 — Backward design: outcomes first
+We started from the ECBA exam domains and worked backward: *what must a participant be able to do to answer a scenario-based exam question on this domain?* Every exercise is a rehearsal of that capability. When you read the session map, read the **Outcomes** row first — that is the design constraint everything else serves. If an activity doesn't advance at least one outcome, it doesn't belong in the session.
+
+### Principle 2 — Constructive alignment: objectives -> activities -> assessment
+Three layers must stay connected in every session:
+- **Outcome** — what the participant can do after the session (behavioral, testable)
+- **Activity** — the exercise that makes them do it under authentic conditions
+- **Assessment** — the artifact or MCQ that confirms they can do it independently
+
+If you add a concept, add its exercise and checkpoint. If you need to cut time, cut from the guided application (Phase 3) before cutting the group exercise (Phase 4) or the practice round. The practice round has the highest retention return of any phase; cut it last.
+
+### Principle 3 — ARCS motivation framework (Keller, 1987)
+Each session opens with a 4-beat motivational sequence:
+- **Attention** — a real failure story (Session 1: $280K GPS investment that sat in storage)
+- **Relevance** — direct tie to the TrailBlaze case participants are already working
+- **Confidence** — show the scaffold before the exercise (template walkthrough or class example)
+- **Satisfaction** — participants leave with a named artifact they created
+
+Sessions 2–5 use the homework share-out as the ARCS bridge: participants present what they built, then the new session's data reframes it — "Here's what the stakeholder interviews show. Does your Session 1 problem statement hold?" That moment of productive dissonance is the learning event.
+
+### Principle 4 — Spaced practice and retrieval-before-instruction
+Monthly cadence is a structural choice, not a convenience. Participants retrieve their prior session's work in the share-out before new content is introduced. Research shows retrieval practice strengthens retention more than re-reading, and retrieval under new conditions (the session reveal) is stronger than either. Homework is always an extension of in-session work, never a standalone task — so retrieval happens every week, not just session night.
+
+**Why the 2-week Session B gap exists.** Session A introduces a concept and gives a first attempt. Two weeks of working through homework — and the questions it raises — means Session B lands when participants have formed tentative models. Session B then puts those models under real-world pressure from an SME. If Session B ran the day after Session A, participants would have nothing to defend.
+
+### Principle 5 — Progressive reveal: information sequenced to the decision point
+Participants receive only what they need for the current session. This simulates authentic BA conditions — a BA never has all the information before they start work. Each reveal makes prior work visible under new conditions:
+
+| When | What participants receive | What it does to prior work |
+|------|--------------------------|---------------------------|
+| Session 1 | Company brief, symptom, competing diagnoses | First problem statement written with incomplete data |
+| Session 2 | All 5 stakeholder interview excerpts | Problem statement stress-tested against what stakeholders actually said |
+| Session 3 | Elicitation outputs, agreed scope, raw needs | Requirements must be convertible from needs already in scope |
+| Session 4 | 3 solution options, MVP feature set, NFRs, KPIs | RTM must trace to requirements written in Sessions 2–3 |
+| Session 5 | 30-day pilot results, 2 missed targets | Gaps trace to requirements that were scoped but deprioritized |
+
+Never give participants a future reveal. All gates and full story are in [TrailBlaze_MasterContext.md](TrailBlaze_MasterContext.md) — facilitator only.
+
+### Principle 6 — Cognitive load management: scaffold before independence
+Each session follows the same sequence: concept instruction -> class example (guided application) -> group work. The class example is the scaffold that prevents "I don't know where to start" from consuming group exercise time. Without it, groups fail in the first 5 minutes and the facilitator rescues rather than coaches. The BACCM guided exercise in Session 1 (Slide 8) is the canonical example: the class works through a partial TrailBlaze BACCM together before working independently. Holding Solution blank until Need is confirmed is the teaching move — it models the BA discipline participants need to internalize.
 
 ---
 
-## Session Map
+## Part 3 — Session Map
+*Facilitator + PD lead. Your operating guide for each session.*
+*Read your session entry, open the linked files, run the session. The learning design rationale is in Part 2.*
+
+---
+
+### Session 0 — Onboarding (Before April)
+**Format:** Participant handout — no meeting required.
+**Distribute:** [Session0_Onboarding_Handout.md](Session0_Onboarding_Handout.md)
+
+**Purpose.** Participants arrive at Session 1 ready to work. Session 0 sets expectations before Session 1: study habits, Cornell note-taking, ECBA exam structure, full 5-session reading schedule, and a pre-series self-assessment. The first 10 minutes of Session 1A should not be spent explaining how the series works.
 
 ---
 
 ### Session 1 — Foundations & Core Concepts (April)
+**ECBA Domains:** Understanding Business Analysis, Mindset for Effective BA
+**BABOK:** Ch. 1 Introduction + Ch. 2 Key Concepts (§2.1–2.4)
+**Required reading before session:** BABOK Guide V3 — Ch. 1 + Ch. 2 §2.1–2.4
 
-| | |
-|---|---|
-| **ECBA Domains** | Understanding Business Analysis, Mindset for Effective BA |
-| **BABOK Coverage** | Introduction to BA, BACCM, BA mindset, values, principles, foundational competencies, assessing value (tangible vs. intangible, stakeholder-defined success) |
-| **Required Reading** | BABOK Guide V3 — Ch. 1 (Introduction) + Ch. 2 (Key Concepts §2.1–2.4) |
-| **TrailBlaze Reveal** | Company brief + symptom + conflicting leadership diagnoses (no root cause confirmed) |
+**Outcomes.** By the end of this session, participants will be able to:
+1. Define business analysis and the BA's role in enabling organizational change
+2. Apply the BACCM to identify all six elements in a real scenario — and explain why Solution cannot be defined before Need is confirmed
+3. Identify stakeholders by what is at stake for them, not just their role title
+4. Write a problem statement that names who is affected, states measurable impact, and contains no proposed solution
 
-#### Session A — 90 minutes
-| Phase | Activity | Purpose | Time |
-|-------|----------|---------|------|
-| 1 — Open | ARCS cold open | Hook attention using an analogous failure; connect the TrailBlaze symptom to exam relevance; show the session scaffold | 10 min |
-| 2 — Concepts | BA mindset and values, BACCM, foundational competencies, assessing value | Establish the vocabulary and frameworks participants apply immediately in phases 3–4 | 25 min |
-| 3 — Guided application | BACCM class exercise: map TrailBlaze against all six elements | Model the analytical move before asking groups to execute it independently | 8 min |
-| 4 — Group exercise | Stakeholder identification + problem statement with measurable criteria | First owned artifact; problem statement quality compounds through Sessions 2–4 traceability work | 25 min |
-| 5 — Share-out | Group presentations + facilitator feedback | Calibrate the room; surface assumptions to address in Session 2 | 8 min |
-| 6 — Practice round | 4 timed multiple choice questions | Immediate exam-pattern exposure while content is fresh | 8 min |
-| 7 — Close | Homework assign + 2-min survey | Set expectations; collect baseline data on confidence and prior experience | 6 min |
+**TrailBlaze reveal:** Company brief + presenting symptom + conflicting leadership diagnoses. Root cause not confirmed.
+Distribute: [OnePager_MicroExpeditions.md](OnePager_MicroExpeditions.md), [Personas.md](Personas.md), [Workshop_Handout.md](Workshop_Handout.md)
 
-**Checkpoints:** After BACCM slide / After Stakeholders slide
+#### Session 1A — 90 minutes
 
-**Homework:** Refine and extend your in-session problem statement — add a value statement (one paragraph: what does solving this unlock for TrailBlaze?). Complete 6 exam multiple choice questions. Optional: persona exercise.
+| Phase | Activity | Outcomes served | Time |
+|-------|----------|----------------|------|
+| 1 — ARCS open | Read $280K GPS failure story aloud; connect to TrailBlaze; show what participants leave with | Sets stakes; reduces cold-start anxiety | 10 min |
+| 2 — Concepts | BA mindset, BACCM (all 6 elements + mnemonic), assessing value, stakeholder types, problem statement structure | Outcomes 1–4 | 25 min |
+| 3 — Guided application | Class works through TrailBlaze BACCM together — hold Solution blank | Scaffold for Outcome 2 before group independence | 8 min |
+| 4 — Group exercise | BACCM chart + stakeholder list (6+ with named stakes) + problem statement | Primary artifact; problem statement quality compounds through Sessions 2–4 | 25 min |
+| 5 — Share-out | 3–4 min per group; facilitator gives 1 "what worked" + 1 "sharpen this" | Peer comparison; surfaces assumptions that reappear in Session 2 | 8 min |
+| 6 — Practice round | 4 timed MCQs — individual first, then discuss, then reveal with rationale | Exam-pattern exposure while content is fresh | 8 min |
+| 7 — Close | Walk through homework; distribute survey link | — | 6 min |
 
-**Deliverables:** BACCM chart, stakeholder list, problem statement
+**Checkpoints (run both even if behind — most diagnostic moments in the session):**
+- After BACCM slide — 1 MCQ, vote, reveal (2 min)
+- After Stakeholders slide — 1 MCQ, vote, reveal (2 min)
 
-#### Session B — 60 minutes (mid-April)
-**Exercise:** Live BACCM workshop — SME plays themselves as "the BA who just walked into this company." Group works the BACCM against a new ambiguous TrailBlaze prompt with the SME pushing back on easy answers in real time.
+**Common facilitation redirects:**
+- *NEED contains a solution:* "Is 'build a new booking platform' a need, or a route to address the need?"
+- *Stakeholder list has role titles, not stakes:* "What is actually at risk for this person if the problem isn't solved?"
+- *Problem statement contains a solution:* Cover the proposed solution. "What's left — is that still a problem statement?"
 
-**SME Profile:** Someone who has structured messy BA engagements from scratch (e.g., BA, project manager (PM), or consultant)
+**Artifacts:** BACCM chart, stakeholder list, problem statement
+**Homework:** Extend problem statement with a value statement (what does solving it unlock for TrailBlaze?); complete 6 MCQs — [Session1_PracticeQuestions.md](Session1_PracticeQuestions.md)
 
-**Stretch Question:** *"How would you use the BACCM to push back on a solution that leadership has already decided on?"*
+#### Session 1B — 60 minutes (mid-April)
+**Format:** SME co-facilitated live BACCM workshop
+**SME profile:** Someone who has structured a messy BA engagement from scratch (BA, PM, or consultant)
+**Exercise:** SME plays themselves as "the BA who just walked into TrailBlaze." Group works a new ambiguous TrailBlaze prompt with the SME pushing back on easy answers in real time.
+**SME briefing:** [Facilitator/Session_B_SME_Prep_Guide.md](Facilitator/Session_B_SME_Prep_Guide.md)
+**Stretch question for Session 2 share-out:** *"How would you use the BACCM to push back on a solution that leadership has already decided on?"*
+
+**Facilitator files for Session 1:**
+[Session1_Slides.md](Session1_Slides.md) · [Session1B_Slides.md](Session1B_Slides.md) · [Facilitator/Session1_Facilitator_Script.md](Facilitator/Session1_Facilitator_Script.md) · [Facilitator/Session1_Facilitator_Answers.md](Facilitator/Session1_Facilitator_Answers.md) · [Facilitator/Session1_Reference_Notes.md](Facilitator/Session1_Reference_Notes.md)
 
 ---
 
 ### Session 2 — Planning, Elicitation & Context (May)
+**ECBA Domains:** Implementing Business Analysis, Context
+**BABOK:** Ch. 3 (BA Planning & Monitoring) + Ch. 4 (Elicitation & Collaboration)
+**Required reading before session:** BABOK Guide V3 — Ch. 3 + Ch. 4
 
-| | |
-|---|---|
-| **ECBA Domains** | Implementing Business Analysis, Context |
-| **BABOK Coverage** | BA Planning & Monitoring (Ch. 3): BA approach, stakeholder engagement, governance, information management, performance improvements — Elicitation & Collaboration (Ch. 4): prepare, conduct, confirm elicitation; communicate BA information; manage stakeholder collaboration — Implementing BA: roles, approaches, organizational factors, requirements vs. designs |
-| **Required Reading** | BABOK Guide V3 — Ch. 3 (BA Planning & Monitoring) + Ch. 4 (Elicitation & Collaboration) |
-| **TrailBlaze Reveal** | Stakeholder interview excerpts — three competing root causes; BA hired to define approach |
+**Outcomes.** By the end of this session, participants will be able to:
+1. Select a BA approach (agile, plan-driven, or hybrid) for a specific project given its constraints and level of uncertainty
+2. Prioritize stakeholders for engagement by position relative to root causes — not organizational rank
+3. Match elicitation techniques to specific information gaps and stakeholder types, with a stated rationale
+4. Document competing root causes distinguishing evidence-backed diagnoses from asserted-without-data ones
 
-#### Session A — 90 minutes
-| Phase | Activity | Purpose | Time |
-|-------|----------|---------|------|
-| 1 — Open | Homework share-out: problem statements + value statements | Surface quality variation; set up what the interview data reframes | 10 min |
-| 2 — Bridge | ARCS reveal: interview data released; BA hired to define approach | Reframe Session 1 outputs — participants see whether their problem statement holds against stakeholder data | 5 min |
-| 3 — Concepts | BA roles and approaches, organizational factors, requirements vs. designs, elicitation techniques, BA planning | Equip participants to make approach decisions under competing priorities, not follow a template | 25 min |
-| 4 — Guided application | Map elicitation techniques to TrailBlaze stakeholder types; discuss approach selection under conflicting diagnoses | Model the judgment call; competing diagnoses have no single correct elicitation path | 10 min |
-| 5 — Group exercise | Draft BA approach recommendation + stakeholder engagement plan | Owned artifact; feeds the mock stakeholder interview in Session B | 20 min |
-| 6 — Share-out | Group presentations + facilitator feedback | Surface gaps in stakeholder coverage or approach logic before Session B | 8 min |
-| 7 — Practice round | 4 timed multiple choice questions | Requirements vs. designs, BA approach selection, elicitation technique choice, organizational context | 8 min |
-| 8 — Close | Homework assign + 2-min survey | — | 4 min |
+**TrailBlaze reveal:** 5 stakeholder interview excerpts; BA hired to define an approach; three competing root causes visible.
+Distribute at ARCS bridge: [Session2_StakeholderInterviews.md](Session2_StakeholderInterviews.md)
 
-**Checkpoints:** After BA roles + approaches + organizational factors / After Elicitation techniques
+#### Session 2A — 90 minutes
 
-**Homework:** Starting from your in-session elicitation plan notes, draft a one-page BA approach recommendation: which approach, which stakeholders to engage first, and why. Complete 6 exam multiple choice questions.
+| Phase | Activity | Outcomes served | Time |
+|-------|----------|----------------|------|
+| 1 — Share-out | Groups present Session 1 problem statements + value statements | Retrieval before new content; sets up the reframe | 10 min |
+| 2 — ARCS bridge | Release interview excerpts; ask: "Does your Session 1 problem statement hold?" | Productive dissonance — prior work under pressure | 5 min |
+| 3 — Concepts | BA roles and approaches, organizational factors, requirements vs. designs, elicitation techniques, BA planning | Outcomes 1–3 | 25 min |
+| 4 — Guided application | Map elicitation techniques to TrailBlaze stakeholder types; discuss approach selection under competing diagnoses | Scaffold: no single correct elicitation path when root cause is unconfirmed | 10 min |
+| 5 — Group exercise | Root cause analysis (3 causes, evidence rated) + BA approach recommendation + stakeholder engagement priority order | Outcomes 1–4; feeds Session B mock interview | 20 min |
+| 6 — Share-out | 3–4 min per group; challenge any approach without a stated reason | Surfaces gap in approach logic before Session B pressure-tests it | 8 min |
+| 7 — Practice round | 4 timed MCQs: BA approach selection, elicitation technique choice, requirements vs. designs, organizational context | Outcomes 1–3 | 8 min |
+| 8 — Close | Homework assign + survey | — | 4 min |
 
-**Deliverables:** BA approach recommendation, stakeholder engagement plan, elicitation plan for one stakeholder group
+**Checkpoints:**
+- After BA roles + approaches + organizational factors
+- After Elicitation techniques
 
-#### Session B — 60 minutes (mid-May)
-**Exercise:** Mock stakeholder interview round — SME plays the Head of Operations or Marketing Lead, giving deliberately incomplete or conflicting answers. Group practices live elicitation. SME then steps out of character and debriefs on how real interviewees behave when they don't trust the BA.
+**Artifacts:** Root cause analysis, BA approach recommendation, stakeholder engagement plan, elicitation plan for one stakeholder group
+**Homework:** One-page BA approach recommendation (approach type + stakeholder priority order + first structured elicitation activity); complete 6 MCQs
 
-**SME Profile:** Someone who has conducted or been subject to stakeholder interviews under pressure (e.g., BA, project sponsor, or functional manager)
-
-**Stretch Question:** *"How do you document competing root causes without anchoring too early on one?"*
+#### Session 2B — 60 minutes (mid-May)
+**Format:** Mock stakeholder interview round
+**SME profile:** Someone who has conducted or been subject to high-stakes stakeholder interviews (BA, project sponsor, or functional manager)
+**Exercise:** SME plays the Head of Operations or Marketing Lead giving deliberately incomplete or conflicting answers. Group practices live elicitation. SME then steps out of character and debriefs on how real interviewees behave when they don't yet trust the BA.
+**Stretch question:** *"How do you document competing root causes without anchoring too early on one?"*
 
 ---
 
 ### Session 3 — Change, Need & Requirements Lifecycle (June)
+**ECBA Domains:** Change, Need
+**BABOK:** Ch. 6 (Requirements Lifecycle Management) + Ch. 8 (Strategy Analysis)
+**Required reading before session:** BABOK Guide V3 — Ch. 6 + Ch. 8
 
-| | |
-|---|---|
-| **ECBA Domains** | Change, Need |
-| **BABOK Coverage** | Requirements Lifecycle Management (Ch. 6): trace, maintain, prioritize, assess changes, approve requirements — Strategy Analysis (Ch. 8): analyze current state, define future state, assess risk, define change strategy |
-| **Required Reading** | BABOK Guide V3 — Ch. 6 (Requirements Lifecycle Management) + Ch. 8 (Strategy Analysis) |
-| **TrailBlaze Reveal** | Elicitation outputs — raw needs (unconverted), scope agreed, constraints confirmed |
+**Outcomes.** By the end of this session, participants will be able to:
+1. Frame the gap between current state and future state using BA analysis tools
+2. Convert a raw need into a written requirement that is specific, testable, traceable, and stakeholder-owned
+3. Prioritize requirements against agreed scope and constraints
+4. Flag requirements at risk of scope creep or untestable language before sign-off
 
-#### Session A — 90 minutes
-| Phase | Activity | Purpose | Time |
-|-------|----------|---------|------|
-| 1 — Open | Homework share-out: BA approach docs + elicitation plans | Validate or challenge approach choices before moving to requirements work | 10 min |
-| 2 — Bridge | ARCS reveal: elicitation outputs released — raw needs, agreed scope, constraints | Reframe: participants have data — what counts as a requirement, and what stays a need? | 5 min |
-| 3 — Concepts | Current state vs. future state, risk assessment, change strategy; requirements lifecycle — trace, maintain, prioritize, assess changes | Establish the framework that determines whether a requirement survives review | 22 min |
-| 4 — Guided application | Current-state and future-state framing using TrailBlaze interview data | Show how the same data produces different state pictures depending on framing choices | 8 min |
-| 5 — Group exercise | Root cause analysis + convert 3 raw needs to written requirements using lifecycle criteria | Core artifact; requirement quality here determines what Session 4 traceability work looks like | 22 min |
-| 6 — Share-out | Group presentations + facilitator feedback; flag vague language as fuel for Session B | Surface requirements that will not survive scrutiny before the conversion workshop | 8 min |
-| 7 — Practice round | 4 timed multiple choice questions | Traceability, prioritization, change strategy, need vs. solution | 8 min |
-| 8 — Close | Homework assign + 2-min survey | — | 7 min |
+**TrailBlaze reveal:** Elicitation outputs — raw needs (unconverted), agreed scope, confirmed constraints.
+Distribute at ARCS bridge: [Session3_ElicitationOutputs.md](Session3_ElicitationOutputs.md)
 
-**Checkpoints:** After current-state / future-state framing / After requirements lifecycle concepts
+#### Session 3A — 90 minutes
 
-**Homework:** Starting from your in-session raw needs list, convert 3 of them into written requirements using proper BA language. Complete 6 exam multiple choice questions.
+| Phase | Activity | Outcomes served | Time |
+|-------|----------|----------------|------|
+| 1 — Share-out | Groups present BA approach recommendations + elicitation plans | Retrieval; validates approach choices before requirements work begins | 10 min |
+| 2 — ARCS bridge | Release elicitation outputs; ask: "You have raw needs. Which ones are requirements, and which ones aren't yet?" | Creates the framing problem the whole session addresses | 5 min |
+| 3 — Concepts | Current state vs. future state, risk assessment, change strategy; requirements lifecycle — trace, maintain, prioritize, assess changes | Outcomes 1–4 | 22 min |
+| 4 — Guided application | Current-state and future-state framing using TrailBlaze interview data; show how the same data produces different pictures depending on framing | Scaffold: same inputs, different analytical frames, different outputs | 8 min |
+| 5 — Group exercise | Root cause analysis + convert 3 raw needs to written requirements (specific, testable, traceable, owned) | Outcomes 2–4; requirement quality here directly determines Session 4 RTM viability | 22 min |
+| 6 — Share-out | Groups present 1–2 converted requirements; challenge any that cannot be tested | Outcome 4 made visible — vague language is apparent when presented aloud | 8 min |
+| 7 — Practice round | 4 timed MCQs: traceability, prioritization, change strategy, need vs. solution | Outcomes 1–4 | 8 min |
+| 8 — Close | Homework assign + survey | — | 7 min |
 
-**Deliverables:** Current-state summary, root cause analysis, requirements converted from raw needs, change strategy draft
+**Checkpoints:**
+- After current-state / future-state framing
+- After requirements lifecycle concepts
 
-#### Session B — 60 minutes (mid-June)
-**Exercise:** Requirements conversion workshop — group brings their raw needs; SME participates as a senior BA would, challenging vague language, flagging scope creep, asking "how would you verify this?" Focus: what gets lost in translation from raw need to written requirement.
+**Artifacts:** Current-state summary, root cause analysis, requirements converted from raw needs, change strategy draft
+**Homework:** Convert 3 raw needs into written requirements; complete 6 MCQs
 
-**SME Profile:** Someone who has written or reviewed requirements on a real project (e.g., BA, systems analyst, or product owner)
-
-**Stretch Question:** *"How do you get sign-off from a stakeholder who doesn't fully understand the requirements they're approving?"*
+#### Session 3B — 60 minutes (mid-June)
+**Format:** Requirements conversion workshop
+**SME profile:** Someone who has written or reviewed requirements on a real project (BA, systems analyst, or product owner)
+**Exercise:** Group brings their raw needs; SME participates as a senior BA — challenging vague language, flagging scope creep, asking "How would you verify this?" Focus: what gets lost in translation from raw need to written requirement.
+**Stretch question:** *"How do you get sign-off from a stakeholder who doesn't fully understand the requirements they're approving?"*
 
 ---
 
 ### Session 4 — Solution, Stakeholder & Requirements Analysis (July)
+**ECBA Domains:** Solution, Stakeholder
+**BABOK:** Ch. 7 (RADD) + Ch. 9 (Solution Evaluation)
+**Required reading before session:** BABOK Guide V3 — Ch. 7 + Ch. 9
 
-| | |
-|---|---|
-| **ECBA Domains** | Solution, Stakeholder |
-| **BABOK Coverage** | Requirements Analysis & Design Definition — RADD (Ch. 7): specify and model, verify, validate, architecture, design options, recommend solution — Solution Evaluation (Ch. 9): measure performance, assess limitations, recommend improvements |
-| **Required Reading** | BABOK Guide V3 — Ch. 7 (RADD) + Ch. 9 (Solution Evaluation) |
-| **TrailBlaze Reveal** | Three solution options, MVP feature set, NFRs, KPIs |
+**Outcomes.** By the end of this session, participants will be able to:
+1. Analyze solution options against requirements, NFRs, and KPIs to produce a defensible recommendation
+2. Build an RTM linking business goals to features, user stories, and acceptance tests
+3. Distinguish requirements from designs in ECBA exam scenarios
+4. Apply the RADD process (specify, model, verify, validate) to a real solution option
 
-#### Session A — 90 minutes
-| Phase | Activity | Purpose | Time |
-|-------|----------|---------|------|
-| 1 — Open | Homework share-out: converted requirement sets | Surface quality; identify which requirements are strong enough to trace to a solution | 10 min |
-| 2 — Bridge | ARCS reveal: three solution options, MVP feature set, NFRs, KPIs released | Reframe: from "what do we need?" to "which path solves it, and how do we prove it?" | 5 min |
-| 3 — Concepts | RADD — specify and model, verify, validate, design options, solution recommendation; solution evaluation — measure performance, assess limitations, recommend improvements | Equip participants to recommend a solution they can defend on traceability grounds | 23 min |
-| 4 — Guided application | Walk one TrailBlaze requirement through the full RADD process; distinguish requirements from designs | Requirements and designs are not the same — a persistent exam failure point | 10 min |
-| 5 — Group exercise | Solution options analysis + RTM stub linking requirements to the recommended option | Owned artifact; connects requirement work from Sessions 1–3 to a defensible recommendation | 20 min |
-| 6 — Share-out | Group presentations + facilitator feedback; challenge any recommendation unsupported by the RTM | Surface reasoning gaps before the Session B CEO challenge | 8 min |
-| 7 — Practice round | 4 timed multiple choice questions | Solution recommendation, requirements validation, RTM, stakeholder engagement in solution phase | 8 min |
-| 8 — Close | Homework assign + 2-min survey | — | 6 min |
+**TrailBlaze reveal:** 3 solution options, MVP feature set, NFRs, KPIs.
+Distribute at ARCS bridge: [RTM_Sample.md](RTM_Sample.md), [UserStories.md](UserStories.md), [Stakeholders_Detailed.md](Stakeholders_Detailed.md)
 
-**Checkpoints:** After RADD specify-and-model / After solution evaluation concepts
+#### Session 4A — 90 minutes
 
-**Homework:** Starting from your in-session solution options table, write a one-paragraph recommendation with rationale. Link at least 3 requirements to your recommended option in an RTM stub. Complete 6 exam multiple choice questions.
+| Phase | Activity | Outcomes served | Time |
+|-------|----------|----------------|------|
+| 1 — Share-out | Groups present converted requirement sets | Retrieval; identifies which requirements are strong enough to trace to a solution | 10 min |
+| 2 — ARCS bridge | Release solution options, MVP feature set, NFRs, KPIs; ask: "Which path solves the confirmed need — and how would you prove it?" | Reframe from "what is the need?" to "which route, and by what evidence?" | 5 min |
+| 3 — Concepts | RADD — specify, model, verify, validate, design options, solution recommendation; solution evaluation — measure performance, assess limitations | Outcomes 1–4 | 23 min |
+| 4 — Guided application | Walk one TrailBlaze requirement through the full RADD process; explicitly contrast requirement vs. design | Outcome 3 — requirements vs. designs is a persistent ECBA exam failure point | 10 min |
+| 5 — Group exercise | Solution options analysis + RTM stub linking >=3 requirements to the recommended option | Outcomes 1–2; ties all prior requirements work to a defensible recommendation | 20 min |
+| 6 — Share-out | Groups present recommendation; challenge any unsupported by the RTM | Surfaces reasoning gaps before the Session B CEO challenge | 8 min |
+| 7 — Practice round | 4 timed MCQs: solution recommendation, requirements validation, RTM, stakeholder engagement in solution phase | Outcomes 1–4 | 8 min |
+| 8 — Close | Homework assign + survey | — | 6 min |
 
-**Deliverables:** Stakeholder map, solution options analysis with recommendation, RTM draft
+**Checkpoints:**
+- After RADD specify-and-model
+- After solution evaluation concepts
 
-#### Session B — 60 minutes (mid-July)
-**Exercise:** Solution challenge — group presents their recommendation; SME plays the CEO or a real executive analog, pushing back with genuine objections (cost, political reality, timeline, "we already tried that"). Group defends using ECBA language. SME then debriefs on how solution decisions actually get made.
+**Artifacts:** Stakeholder map, solution options analysis with recommendation, RTM draft
+**Homework:** One-paragraph solution recommendation with rationale; RTM stub with >=3 traced requirements; complete 6 MCQs
 
-**SME Profile:** Someone who has presented solution options to executive sponsors or been a decision-maker (e.g., manager, director, or former exec)
-
-**Stretch Question:** *"How do you trace a requirement back to a solution option when the options change late in the process?"*
+#### Session 4B — 60 minutes (mid-July)
+**Format:** Solution challenge
+**SME profile:** Someone who has presented solution options to executive sponsors or been a decision-maker (manager, director, or former exec)
+**Exercise:** Group presents their recommendation; SME plays the CEO or executive analog pushing back (cost, politics, timeline, "we tried that"). Group defends using ECBA language. SME then debriefs on how solution decisions actually get made.
+**Stretch question:** *"How do you trace a requirement back to a solution option when the options change late in the process?"*
 
 ---
 
 ### Session 5 — Value, Review & Exam Readiness (August)
+**ECBA Domains:** Value + integrated review of all 9 domains
+**BABOK:** Full review — no new content. BABOK Guide V3 Ch. 10 (Techniques) for reference + personal notes and homework MCQs from Sessions 1–4.
+**Required reading before session:** Review all personal notes and MCQ homework from Sessions 1–4. BABOK Guide V3 — Ch. 10.
 
-| | |
-|---|---|
-| **ECBA Domains** | Value + integrated review of all 9 domains |
-| **BABOK Coverage** | Full review of all 6 KAs — no new content; consolidation and exam pattern recognition |
-| **Required Reading** | BABOK Guide V3 — Ch. 10 (Techniques reference) + review all personal notes and homework multiple choice questions from Sessions 1–4 |
-| **TrailBlaze Reveal** | Pilot results — some targets missed, gaps traced to guide notification and SEO |
+**Outcomes.** By the end of this session, participants will be able to:
+1. Measure BA effectiveness using pilot KPIs and trace missed targets to specific requirements or sequencing decisions
+2. Apply the Value domain framework to post-pilot analysis
+3. Answer scenario-based ECBA exam questions integrating concepts across all 9 domains
+4. Articulate at least two things the BA should have done differently and trace each to a specific decision in Sessions 1–4
 
-#### Session A — 90 minutes
-| Phase | Activity | Purpose | Time |
-|-------|----------|---------|------|
-| 1 — Open | Homework share-out: solution recommendations + RTM drafts | Surface final artifacts; create stakes before the pilot data arrives | 8 min |
-| 2 — Reveal | ARCS pilot data reveal: 87/100 bookings, two missed KPI targets, traceable gaps in guide notification and SEO | Reframe: the BA scoped this — what was prioritized, what was not, and what did that cost? | 7 min |
-| 3 — Concepts | Value domain: measuring BA outcomes, tangible vs. intangible value, BA effectiveness and performance improvement | Ground the post-pilot analysis in ECBA language before participants apply it | 15 min |
-| 4 — Post-pilot analysis | Map pilot results against KPIs; trace missed targets back to requirements; identify sequencing and traceability errors | Apply all five sessions of accumulated work to a real outcome; evidence required, no single right answer | 18 min |
-| 5 — Extended practice round | 8–10 timed multiple choice questions across all 9 domains | Exam simulation: integrated scenario questions, not topic-specific | 20 min |
-| 6 — Quiz game | Kahoot- or Jeopardy-style team round — 3–5 questions per domain | Lower-stakes calibration; surfaces honest gaps that individual practice hides | 12 min |
-| 7 — Q&A + exam prep | Open Q&A + facilitator walks through exam prep plan | Named concerns addressed; participants leave with a concrete study schedule | 8 min |
+**TrailBlaze reveal:** 30-day pilot results — 87/100 bookings, two missed KPI targets, gaps traceable to guide notification and SEO work that was scoped but not prioritized.
+
+#### Session 5A — 90 minutes
+
+| Phase | Activity | Outcomes served | Time |
+|-------|----------|----------------|------|
+| 1 — Share-out | Groups present solution recommendations + RTM drafts | Retrieval; creates stakes before pilot data lands | 8 min |
+| 2 — Reveal | Release pilot results; ask: "Were these gaps in your RTM? Did you trace them to a requirement?" | Connects Outcome 4 to each group's own prior work — accountability for earlier decisions | 7 min |
+| 3 — Concepts | Value domain: measuring BA outcomes, tangible vs. intangible value, BA effectiveness and performance improvement | Outcomes 1–2 | 15 min |
+| 4 — Post-pilot analysis | Map results against KPIs; trace missed targets back to requirements; identify sequencing errors | Outcomes 1, 2, 4 — no single right answer; evidence required | 18 min |
+| 5 — Extended practice round | 8–10 timed MCQs across all 9 domains — integrated scenarios, not topic-specific | Outcome 3; simulates actual exam conditions | 20 min |
+| 6 — Quiz game | Kahoot- or Jeopardy-style team round — 3–5 questions per ECBA domain | Lower-stakes calibration; surfaces honest gaps that individual practice hides | 12 min |
+| 7 — Q&A + exam prep | Open Q&A; facilitator walks through a concrete study schedule | Named concerns addressed; participants leave with next steps | 8 min |
 | 8 — Close | 2-min survey | — | 2 min |
 
-**Quiz Game:** Kahoot-style or Jeopardy-style team round — categories map to the 9 ECBA domains; 3–5 questions per domain; facilitator uses incorrect answers as teaching moments
+**Artifacts:** KPI analysis write-up, improvement recommendations, integrated exam practice set (take-home)
+**Homework:** KPI analysis; 10–15 integrated MCQs spanning all 9 domains
 
-**Deliverables:** KPI analysis, improvement recommendations, full exam scenario practice set
+#### Session 5B — 60 minutes (mid-August)
+**Format:** Post-pilot retrospective
+**SME profile:** Someone who has been through a post-deployment evaluation (BA, PM, or operations manager)
+**Exercise:** SME shares a real story where some targets were met and others were not. Group maps the SME's story against the TrailBlaze pilot data. Closes with SME reflecting on which ECBA concept mattered most in their career and why.
+**Stretch question:** *"Looking back on a real project, what is one ECBA concept you wish you had understood better before you started?"*
 
-#### Session B — 60 minutes (mid-August)
-**Exercise:** Post-pilot retrospective — SME shares a real story of a deployment where some targets were hit and others missed. Group maps the SME's story against the TrailBlaze pilot data. Closes with SME reflecting on which ECBA concept mattered most in their career and why.
+---
 
-**SME Profile:** Someone who has been through a post-deployment evaluation or lessons-learned process (e.g., BA, PM, or operations manager)
+## Part 4 — Facilitator Operating Guide
+*Facilitator. Your prep checklist for every session.*
 
-**Stretch Question:** *"Looking back on a real project, what is one ECBA concept you wish you had understood better before starting?"*
+### 4 weeks before each session
+- [ ] Confirm SME name, availability, and session format (send [Facilitator/Session_B_SME_Prep_Guide.md](Facilitator/Session_B_SME_Prep_Guide.md))
+- [ ] Read the session's master context reveal in [TrailBlaze_MasterContext.md](TrailBlaze_MasterContext.md) to know what is gated and what is released
+- [ ] Identify your SME fallback (a pre-written commit-prompt exercise using [Templates/Session_B_Template.md](Templates/Session_B_Template.md)) in case SME cancels < 72h
+
+### 1 week before each session
+- [ ] Confirm participant files ready for distribution (see session entry in Part 3 — Distribute row)
+- [ ] Verify Zoom/meeting link and registration count
+- [ ] Prepare survey link from [Templates/Session_Survey_Template.md](Templates/Session_Survey_Template.md)
+- [ ] Review facilitator answer key for the session
+
+### Night before
+- [ ] Read the session's facilitator script start to finish
+- [ ] Load slides; confirm screen share works
+- [ ] Have the survey link ready to paste into chat at close
+- [ ] Set two timer alerts: 3-min group warning, 1-min warning
+
+### Day of
+- [ ] Display Slide 1 as participants arrive
+- [ ] Distribute handout at session start or just before the group exercise — not both
+- [ ] Run both checkpoints even if running behind — they are the most diagnostic moments in the session
+- [ ] Distribute survey link before releasing participants
+
+### Timing recovery
+If running more than 5 minutes behind, cut in this order:
+
+| Cut first | Cut second | Never cut |
+|-----------|-----------|----------|
+| Guided application (Phase 3): 8 -> 4 min | Share-out: cap at 2 min per group | Practice round — highest retention return |
+| Verbal "exam tip" callouts on concept slides | | Group exercise — artifact production |
+| | | Close + homework assignment |
+
+### Post-session
+- [ ] Export survey responses (free-text to a `.txt` file; save to `data/attendance/`)
+- [ ] Note: average confidence score, most-cited unclear concept, homework completion signal
+- [ ] Adjust next session's ARCS bridge depth or guided application time based on results
+
+---
+
+## Part 5 — File Index
+*All audiences. What exists, who receives it, and when.*
+
+### Program-level
+| File | Purpose | Audience |
+|------|---------|----------|
+| **[ECBA_CaseStudy_Plan.md](ECBA_CaseStudy_Plan.md)** | **This document — single source of truth** | Facilitator, PD, board |
+| [ECBA_Series_Brief.md](ECBA_Series_Brief.md) | Standalone board brief — series overview + approval ask | Approvers, board |
+| [ECBA_CaseStudy_Consolidated_Plan.md](ECBA_CaseStudy_Consolidated_Plan.md) | Operational planning — registration fields, stakeholder briefs, agent automation | PD, President, tech |
+| [Review_Package/README.md](Review_Package/README.md) | Minimum file set for content review before approving Sessions 2–5 build | Approvers |
+| [Facilitator/ECBA_Style_Guide.md](Facilitator/ECBA_Style_Guide.md) | Writing standards, brand alignment, banned word list | Facilitator, content authors |
+
+### Distribute before Session 1
+| File | Audience |
+|------|---------|
+| [Session0_Onboarding_Handout.md](Session0_Onboarding_Handout.md) | Participants |
+| [OnePager_MicroExpeditions.md](OnePager_MicroExpeditions.md) | Participants |
+| [Personas.md](Personas.md) | Participants (facilitator discretion) |
+
+### Session 1 — April
+| File | Audience | Gate |
+|------|---------|------|
+| [Session1_Slides.md](Session1_Slides.md) | Facilitator | Session 1A |
+| [Session1B_Slides.md](Session1B_Slides.md) | Facilitator + SME | Session 1B |
+| [Workshop_Handout.md](Workshop_Handout.md) | Participants | Session 1A |
+| [Session1_PracticeQuestions.md](Session1_PracticeQuestions.md) | Facilitator (checkpoints); Participants (homework set) | Session 1A |
+| [Facilitator/Session1_Facilitator_Script.md](Facilitator/Session1_Facilitator_Script.md) | Facilitator only | Session 1A |
+| [Facilitator/Session1_Facilitator_Answers.md](Facilitator/Session1_Facilitator_Answers.md) | Facilitator only | Session 1A |
+| [Facilitator/Session1_Reference_Notes.md](Facilitator/Session1_Reference_Notes.md) | Facilitator only | Session 1A |
+
+### Sessions 2–5 — materials to be built
+| Session | Files needed |
+|---------|-------------|
+| 2A | Session2_Slides.md, Session2_PracticeQuestions.md, Facilitator/Session2_Facilitator_Script.md, Facilitator/Session2_Facilitator_Answers.md |
+| 2B | Run-of-show in Session2_Slides.md; SME prep guide is shared across all sessions |
+| 3–5 | Same file set per session |
+
+See [ECBA_Series_Brief.md](ECBA_Series_Brief.md) for the approval ask to begin the Sessions 2–5 build.
+
+### Case study materials — facilitator-gated
+| File | Session gate | Audience | Notes |
+|------|-------------|---------|-------|
+| [TrailBlaze_MasterContext.md](TrailBlaze_MasterContext.md) | All — read before each session | Facilitator only | **Never distribute.** Contains all 5 gated reveals. |
+| [Session2_StakeholderInterviews.md](Session2_StakeholderInterviews.md) | Session 2 | Participants — distribute at ARCS bridge | |
+| [Session3_ElicitationOutputs.md](Session3_ElicitationOutputs.md) | Session 3 | Participants — distribute at ARCS bridge | |
+| [RTM_Sample.md](RTM_Sample.md) | Session 4 | Participants (workshop artifact) + Facilitator | |
+| [UserStories.md](UserStories.md) | Session 3/4 | Participants (Session 3 model answer); Facilitator reference | |
+| [Stakeholders_Detailed.md](Stakeholders_Detailed.md) | Session 4 | Facilitator reference | |
+
+### Templates
+| File | Used in |
+|------|--------|
+| [Templates/Stakeholder_Map_Template.md](Templates/Stakeholder_Map_Template.md) | Session 1 group exercise |
+| [Templates/BA_Plan_Template.md](Templates/BA_Plan_Template.md) | Session 2 |
+| [Templates/Risk_Register_Template.md](Templates/Risk_Register_Template.md) | Session 3/4 |
+| [Templates/Milestone_Timeline_Template.md](Templates/Milestone_Timeline_Template.md) | Session 2/4 |
+| [Templates/Session_Survey_Template.md](Templates/Session_Survey_Template.md) | Close of every Session A |
+| [Templates/Session_B_Template.md](Templates/Session_B_Template.md) | Every Session B + SME fallback |
+
+### Facilitator resources
+| File | Purpose |
+|------|--------|
+| [Facilitator/Session_B_SME_Prep_Guide.md](Facilitator/Session_B_SME_Prep_Guide.md) | Send to SME 7 days before each Session B |
 
 ---
 
@@ -306,7 +434,7 @@ ARCS is a motivational sequence, not a fixed script — adapt the hook to the se
 
 | Abbreviation | Meaning |
 |---|---|
-| **ARCS** | Attention, Relevance, Confidence, Satisfaction — Keller's motivational design model |
+| **ARCS** | Attention, Relevance, Confidence, Satisfaction — Keller's motivational design model (1987) |
 | **BA** | Business Analyst / Business Analysis |
 | **BABOK** | Business Analysis Body of Knowledge (IIBA, V3) |
 | **BACCM** | Business Analysis Core Concept Model |
@@ -314,8 +442,12 @@ ARCS is a motivational sequence, not a fixed script — adapt the hook to the se
 | **IIBA** | International Institute of Business Analysis |
 | **KA** | Knowledge Area (BABOK term) |
 | **KPI** | Key Performance Indicator |
+| **MCQ** | Multiple Choice Question |
 | **MVP** | Minimum Viable Product |
 | **NFR** | Non-Functional Requirement |
+| **PD** | Professional Development |
 | **RADD** | Requirements Analysis and Design Definition (BABOK Ch. 7) |
 | **RTM** | Requirements Traceability Matrix |
 | **SME** | Subject Matter Expert |
+| **TLO** | Terminal Learning Outcome |
+| **UbD** | Understanding by Design (Wiggins & McTighe) — backward design framework |

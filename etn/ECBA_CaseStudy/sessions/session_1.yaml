@@ -1,18 +1,18 @@
 title: "Session 1 — Foundations & Core Concepts"
 
 agenda:
-  - "ARCS cold open (10 min)"
-  - "Concepts: BA mindset, BACCM (25 min)"
-  - "Guided application: BACCM exercise (8 min)"
-  - "Group exercise: Stakeholder identification + problem statement (25 min)"
-  - "Practice round: 4 timed MCQs (8 min)"
+  - "Opening case: a $280K tech investment nobody used — and the TrailBlaze parallel (10 min)"
+  - "Concepts: BA mindset, BACCM, stakeholders, and problem statements (25 min)"
+  - "Class exercise: apply BACCM to TrailBlaze together — guided (8 min)"
+  - "Group exercise: BACCM chart + stakeholder list + problem statement (25 min)"
+  - "Practice round: 4 ECBA-style exam questions (8 min)"
 
 homework: "Refine problem statement; 6 exam MCQs"
 
 prompts:
-  - "What went well?"
-  - "What assumptions did you make?"
-  - "Trace each requirement to a measurable criterion."
+  - "Why can't we fill in the Solution element until we've confirmed the Need?"
+  - "Which stakeholder at TrailBlaze is being heard the least — and who's most at risk if this problem isn't solved?"
+  - "What makes a problem statement different from a solution statement?"
 
 practice_questions:
   - q: "Which BACCM element identifies who benefits from a change?"

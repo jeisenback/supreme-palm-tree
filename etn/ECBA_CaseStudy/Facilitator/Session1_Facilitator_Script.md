@@ -52,12 +52,12 @@ Pre-session setup
 - 3 min warning at 22 min; 1 min warning at 24 min
 - Watch for NEED/SOLUTION conflation — redirect before groups get too far
 
-1:10–1:20 — Share-out (Slide 13)
+1:15–1:23 — Share-out (Slide 13)
 - Each group: 3–4 min
 - Give 1 "what worked" + 1 "sharpen this" per group
 - Common issues to flag: solution buried in problem statement, vague stakeholder stakes, missing context in BACCM
 
-1:20–1:28 — Practice Round (Slide 13a)
+1:23–1:28 — Practice Round (Slide 14)
 - Display Practice 1–4 from Session1_PracticeQuestions.md one at a time
 - 2 min per question: 1 min individual, 30 sec vote/discuss, 30 sec reveal rationale
 - After each: ask "Why is [wrong option] not the right answer?" — explaining distractors is the most exam-useful habit
